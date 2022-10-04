@@ -1,10 +1,15 @@
-import NavigationBar from "./components/NavigationBar";
+import { Fragment } from "react";
+import HealthContent from "./components/Health/HealthContent";
+import NavigationBar from "./components/UI/NavigationBar";
 
 function App() {
   return (
-    <div>
+    <Fragment>
       <NavigationBar />
-    </div>
+      <main>
+        <HealthContent />
+      </main>
+    </Fragment>
   );
 }
 
