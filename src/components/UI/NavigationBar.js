@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 const NavigationBar = props => {
     return <header>
     <nav className={classes['nav-bar']}>
-        <a href="/" className="logo-link">
-            <img src= "logo.png" className={classes['logo-img']} alt="En Optima Salud official logo"></img>
-        </a>
+        {/* FIXME: Image will not be displayed when page is refreshed */}
+        <Link to="/" className="logo-link">
+            <img src= "logo.png" className={classes['logo-img']} alt="Logo"/>
+        </Link>
         <ul className={classes['ul-nav-options']}>
             {/* NUTRITION */}
             <li className={classes['dropdown']}>
@@ -65,35 +66,35 @@ const NavigationBar = props => {
                     <ul className={classes['ul-dropdown-options']}>
                         {/* FOODS */}
                         <li className={classes['li-dropdown-option']}> 
-                            <a href='/addfood' className={classes['nav-links']}> Add Food </a>
+                            <Link to='/nutrition/foods' className={classes['nav-links']}>Foods</Link>
                         </li>
                         {/* RECIPES */}
                         <li className={classes['li-dropdown-option']}>
-                            <a href='/addrecipe' className={classes['nav-links']}> Add Recipe </a> 
+                            <Link to='/nutrition/recipes' className={classes['nav-links']}>Recipes</Link>
                         </li>
                         {/* DIETS */}
                         <li className={classes['li-dropdown-option']}>
-                            <a href='/adddiet' className={classes['nav-links']}> Add Diet </a>
+                            <Link to='/nutrition/diets' className={classes['nav-links']}>Diets</Link>
                         </li>
                         {/* CHRONIC CONDITIONS */}
                         <li className={classes['li-dropdown-option']}>
-                            <a href='/addchroniccondition' className={classes['nav-links']}> Add Chronic Condition </a>
+                            <Link to='/nutrition/chronicconditions' className={classes['nav-links']}>Chronic Conditions</Link>
                         </li>
                         {/* EXERCISES */}
                         <li className={classes['li-dropdown-option']}> 
-                            <a href='/addexercise' className={classes['nav-links']}> Add Exercise </a>
+                            <Link to='/activities/exercises' className={classes['nav-links']}>Exercises</Link>
                         </li>
                         {/* MUSCLES */}
                         <li className={classes['li-dropdown-option']}>
-                            <a href='/addmuscle' className={classes['nav-links']}> Add Muscle </a> 
+                            <Link to='/activities/muscles' className={classes['nav-links']}>Muscles</Link>
                         </li>
                         {/* EQUIPMENTS */}
                         <li className={classes['li-dropdown-option']}>
-                            <a href='/addequipment' className={classes['nav-links']}> Add Equipment </a>
+                            <Link to='/activities/equipments' className={classes['nav-links']}>Equipments</Link>
                         </li>
                         {/* PHYSICAL CONDITIONS */}
                         <li className={classes['li-dropdown-option']}>
-                            <a href='/addphysicalcondition' className={classes['nav-links']}> Add Physical Condition </a>
+                            <Link to='/activities/physicalconditions' className={classes['nav-links']}>Physical Conditions</Link>
                         </li>
                     </ul>
                 </div>

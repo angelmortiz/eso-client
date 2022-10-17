@@ -26,10 +26,27 @@
     border-radius: 4px;
     
     font-size: 16px;
+}
 
+.add-btn {
+    margin: 0 auto;
+    width: 40%;
+    padding: 8px 6px;
+    background-color: #007E86;
+    border: 0px;
+    border-radius: 4px;
+    color: white;
+    font-size: 14px;
+}
+
+.add-btn:hover,
+.add-btn:active {
+    cursor: pointer;
+    background-color: #028e98;
 }
 
 .submit-btn {
+    margin: 1rem 0;
     padding: 10px 8px;
     background-color: #007E86;
     border: 0px;
