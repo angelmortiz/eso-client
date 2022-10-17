@@ -6,7 +6,7 @@ const NavigationBar = props => {
     <nav className={classes['nav-bar']}>
         {/* FIXME: Image will not be displayed when page is refreshed */}
         <Link to="/" className="logo-link">
-            <img src= "logo.png" className={classes['logo-img']} alt="Logo"/>
+            <img src= "/logo.png" className={classes['logo-img']} alt="Logo"/>
         </Link>
         <ul className={classes['ul-nav-options']}>
             {/* NUTRITION */}
