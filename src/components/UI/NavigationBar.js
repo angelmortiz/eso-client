@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const NavigationBar = props => {
     return <header>
     <nav className={classes['nav-bar']}>
-        {/* FIXME: Image will not be displayed when page is refreshed */}
         <Link to="/" className="logo-link">
             <img src= "/logo.png" className={classes['logo-img']} alt="Logo"/>
         </Link>
@@ -66,35 +65,35 @@ const NavigationBar = props => {
                     <ul className={classes['ul-dropdown-options']}>
                         {/* FOODS */}
                         <li className={classes['li-dropdown-option']}> 
-                            <Link to='/nutrition/add-food' className={classes['nav-links']}>Foods</Link>
+                            <Link to='/nutrition/add-food' className={classes['nav-links']}>Food</Link>
                         </li>
                         {/* RECIPES */}
                         <li className={classes['li-dropdown-option']}>
-                            <Link to='/nutrition/recipes' className={classes['nav-links']}>Recipes</Link>
+                            <Link to='/nutrition/recipes' className={classes['nav-links']}>Recipe</Link>
                         </li>
                         {/* DIETS */}
                         <li className={classes['li-dropdown-option']}>
-                            <Link to='/nutrition/diets' className={classes['nav-links']}>Diets</Link>
+                            <Link to='/nutrition/diets' className={classes['nav-links']}>Diet</Link>
                         </li>
                         {/* CHRONIC CONDITIONS */}
                         <li className={classes['li-dropdown-option']}>
-                            <Link to='/nutrition/chronicconditions' className={classes['nav-links']}>Chronic Conditions</Link>
+                            <Link to='/nutrition/chronicconditions' className={classes['nav-links']}>Chronic Condition</Link>
                         </li>
                         {/* EXERCISES */}
                         <li className={classes['li-dropdown-option']}> 
-                            <Link to='/activities/add-exercise' className={classes['nav-links']}>Exercises</Link>
+                            <Link to='/activities/add-exercise' className={classes['nav-links']}>Exercise</Link>
                         </li>
                         {/* MUSCLES */}
                         <li className={classes['li-dropdown-option']}>
-                            <Link to='/activities/muscles' className={classes['nav-links']}>Muscles</Link>
+                            <Link to='/activities/muscles' className={classes['nav-links']}>Muscle</Link>
                         </li>
                         {/* EQUIPMENTS */}
                         <li className={classes['li-dropdown-option']}>
-                            <Link to='/activities/equipments' className={classes['nav-links']}>Equipments</Link>
+                            <Link to='/activities/equipments' className={classes['nav-links']}>Equipment</Link>
                         </li>
                         {/* PHYSICAL CONDITIONS */}
                         <li className={classes['li-dropdown-option']}>
-                            <Link to='/activities/physicalconditions' className={classes['nav-links']}>Physical Conditions</Link>
+                            <Link to='/activities/physicalconditions' className={classes['nav-links']}>Physical Condition</Link>
                         </li>
                     </ul>
                 </div>

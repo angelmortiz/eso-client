@@ -3,6 +3,7 @@ import healthClasses from '../../HealthContent.module.css';
 const Food = props => {
     return <section className={healthClasses['main-section']}>
         <form className={healthClasses['main-form']}>
+            <h1 className={healthClasses['form-title']}>Add Food</h1>
             {/* FOOD NAME */}
             <label for="food-name" className={healthClasses['text-label']}>Food name:</label>
             <input type="text" id="food-name" name="foodName"

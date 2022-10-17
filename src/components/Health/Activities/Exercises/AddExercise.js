@@ -94,6 +94,8 @@ const Exercise = props => {
     /** Render */
     return <section className={healthClasses['main-section']}>
         <form className={healthClasses['main-form']}>
+            <h1 className={healthClasses['form-title']}>Add Exercise</h1>
+            
             {/* NAME */}
             <label for="exercise-name" className={healthClasses['text-label']}>Name:</label>
             <input type="text" id="exercise-name" name="exerciseName"

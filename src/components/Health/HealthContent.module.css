@@ -15,6 +15,12 @@
     flex-direction: column;
 }
 
+.form-title {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
 .text-label {
     font-size: 18px;
 }
