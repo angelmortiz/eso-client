@@ -66,7 +66,7 @@ const NavigationBar = props => {
                     <ul className={classes['ul-dropdown-options']}>
                         {/* FOODS */}
                         <li className={classes['li-dropdown-option']}> 
-                            <Link to='/nutrition/foods' className={classes['nav-links']}>Foods</Link>
+                            <Link to='/nutrition/add-food' className={classes['nav-links']}>Foods</Link>
                         </li>
                         {/* RECIPES */}
                         <li className={classes['li-dropdown-option']}>
@@ -82,7 +82,7 @@ const NavigationBar = props => {
                         </li>
                         {/* EXERCISES */}
                         <li className={classes['li-dropdown-option']}> 
-                            <Link to='/activities/exercises' className={classes['nav-links']}>Exercises</Link>
+                            <Link to='/activities/add-exercise' className={classes['nav-links']}>Exercises</Link>
                         </li>
                         {/* MUSCLES */}
                         <li className={classes['li-dropdown-option']}>

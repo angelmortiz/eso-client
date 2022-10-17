@@ -1,11 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
-import Exercise from './Activities/Exercises/Exercise';
-import Food from './Nutrition/Foods/Food';
+import AddExercise from './Activities/Exercises/AddExercise';
+import AddFood from './Nutrition/Foods/AddFood';
 
 const HealthContent = props => {
     return <Routes>
-        <Route path="/nutrition/foods" element={<Food/>}/>
-        <Route path="/activities/exercises" element={<Exercise/>}/>
+        <Route path="/nutrition/add-food" element={<AddFood/>}/>
+        <Route path="/activities/add-exercise" element={<AddExercise/>}/>
     </Routes>
 };
 
