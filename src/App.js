@@ -5,10 +5,10 @@ import NavigationBar from "./components/UI/NavigationBar";
 function App() {
   return (
     <Fragment>
-      <NavigationBar />
-      <main>
-        <HealthContent />
-      </main>
+        <NavigationBar />
+        <main>
+          <HealthContent />
+        </main>
     </Fragment>
   );
 }

@@ -1,4 +1,5 @@
 import classes from './NavigationBar.module.css';
+import { Link } from "react-router-dom";
 
 const NavigationBar = props => {
     return <header>
@@ -14,19 +15,19 @@ const NavigationBar = props => {
                     <ul className={classes['ul-dropdown-options']}>
                         {/* FOODS */}
                         <li className={classes['li-dropdown-option']}> 
-                            <a href='/foods' className={classes['nav-links']}> Foods </a>
+                            <Link to='/nutrition/foods' className={classes['nav-links']}>Foods</Link>
                         </li>
                         {/* RECIPES */}
                         <li className={classes['li-dropdown-option']}>
-                            <a href='/recipes' className={classes['nav-links']}> Recipes </a> 
+                            <Link to='/nutrition/recipes' className={classes['nav-links']}>Recipes</Link>
                         </li>
                         {/* DIETS */}
                         <li className={classes['li-dropdown-option']}>
-                            <a href='/diets' className={classes['nav-links']}> Diets </a>
+                            <Link to='/nutrition/diets' className={classes['nav-links']}>Diets</Link>
                         </li>
                         {/* CHRONIC CONDITIONS */}
                         <li className={classes['li-dropdown-option']}>
-                            <a href='/chronicconditions' className={classes['nav-links']}> Chronic Conditions </a>
+                            <Link to='/nutrition/chronicconditions' className={classes['nav-links']}>Chronic Conditions</Link>
                         </li>
                     </ul>
                 </div>
@@ -39,19 +40,19 @@ const NavigationBar = props => {
                     <ul className={classes['ul-dropdown-options']}>
                         {/* EXERCISES */}
                         <li className={classes['li-dropdown-option']}> 
-                            <a href='/exercises' className={classes['nav-links']}> Exercises </a>
+                            <Link to='/activities/exercises' className={classes['nav-links']}>Exercises</Link>
                         </li>
                         {/* MUSCLES */}
                         <li className={classes['li-dropdown-option']}>
-                            <a href='/muscles' className={classes['nav-links']}> Muscles </a> 
+                            <Link to='/activities/muscles' className={classes['nav-links']}>Muscles</Link>
                         </li>
                         {/* EQUIPMENTS */}
                         <li className={classes['li-dropdown-option']}>
-                            <a href='/equipments' className={classes['nav-links']}> Equipments </a>
+                            <Link to='/activities/equipments' className={classes['nav-links']}>Equipments</Link>
                         </li>
                         {/* PHYSICAL CONDITIONS */}
                         <li className={classes['li-dropdown-option']}>
-                            <a href='/physicalconditions' className={classes['nav-links']}> Physical Conditions </a>
+                            <Link to='/activities/physicalconditions' className={classes['nav-links']}>Physical Conditions</Link>
                         </li>
                     </ul>
                 </div>
