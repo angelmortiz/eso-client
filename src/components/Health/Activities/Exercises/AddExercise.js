@@ -1,6 +1,97 @@
+import IncrementalSelect from '../../General/IncrementalSelect';
+import SelectInput from '../../General/SelectInput';
 import healthClasses from '../../HealthContent.module.css';
 
+
 const Exercise = props => {
+    /** Fields Data */
+    const difficultyInfo = {
+        select: {
+            id: "exercise-difficulty",
+            name: "exerciseDifficulty",
+            options: [
+                {value: "", label:"-- Choose difficulty --"},
+                {value: "easy", label:"Easy"},
+                {value: "intermediate", label:"Intermediate"},
+                {value: "advanced", label:"Advanced"},
+            ]
+        }
+    }
+
+    const compoundExerciseInfo = {
+        select: {
+            id: "exercise-compoundExercise",
+            name: "exerciseCompoundExercise",
+            options: [
+                {value: "", label:"-- Choose option --"},
+                {value: "yes", label:"Yes"},
+                {value: "no", label:"No"}
+            ]
+        }
+    }
+
+    const muscles = [
+        // TODO: Pull values from backend
+        {value: "", label:"-- Choose a muscle --"},
+        {value: "quads", label:"Quads"},
+        {value: "hamstrings", label:"Hamstrings"},
+    ];
+
+    const primaryMuscleInfo = {
+        select: {
+            id: "exercise-secondaryMuscle",
+            name: "exerciseSecondaryMuscles",
+            options: muscles
+        }
+    };
+
+    const secondaryMuscleInfo = {
+        select: {
+            id: "exercise-secondaryMuscle",
+            name: "exerciseSecondaryMuscles",
+            options: muscles
+        },
+        button: {
+            id: "add-muscle-btn",
+            label: "Add muscle"
+        }
+    };
+
+    const typesInfo = {
+        select: {
+            id: "exercise-types",
+            name: "exerciseTypes",
+            options: [
+                // TODO: Pull values from backend
+                {value: "", label:"-- Choose a type --"},
+                {value: "hiit", label:"HIIT"},
+                {value: "strength", label:"Strength"},
+            ]
+        },
+        button: {
+            id: "add-type-btn",
+            label: "Add type"
+        }
+    };
+
+    const equipmentsInfo = {
+        select: {
+            id: "exercise-equipments",
+            name: "exerciseEquipments",
+            options: [
+                // TODO: Pull values from backend
+                {value: "", label:"-- Choose an equipment --"},
+                {value: "dumbbells", label:"Dumbbells"},
+                {value: "barbell", label:"Barbell"},
+            ]
+        },
+        button: {
+            id: "add-equipment-btn",
+            label: "Add equipment"
+        }
+    };
+
+    /** Render */
     return <section className={healthClasses['main-section']}>
         <form className={healthClasses['main-form']}>
             {/* NAME */}
@@ -15,58 +106,27 @@ const Exercise = props => {
             
             {/* DIFFICULTY */}
             <label for="exercise-difficulty" className={healthClasses['text-label']}>Difficulty:</label>
-            <select id="exercise-difficulty" name="exerciseDifficulty" className={healthClasses['text-input']}>
-                <option value="">-- Choose difficulty --</option>
-                <option value="easy">Easy</option>
-                <option value="intermediate">Intermediate</option>
-                <option value="advanced">Advanced</option>
-            </select>
+            <SelectInput select={difficultyInfo.select}/>
             
             {/* COMPOUND EXERCISE */}
             <label for="exercise-compoundExercise" className={healthClasses['text-label']}>Compound exercise:</label>
-            <select id="exercise-compoundExercise" name="exerciseCompoundExercise" className={healthClasses['text-input']}>
-                <option value="">-- Choose option --</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
+            <SelectInput select={compoundExerciseInfo.select}/>
             
             {/* MAIN MUSCLE */}
             <label for="exercise-mainMuscle" className={healthClasses['text-label']}>Main muscle:</label>
-            <select id="exercise-mainMuscle" name="exerciseMainMuscle" className={healthClasses['text-input']}>
-                <option value="">-- Choose a muscle --</option>
-                <option value="quads">Quads</option>
-                <option value="hamstrings">Hamstrings</option>
-            </select>
+            <SelectInput select={primaryMuscleInfo.select}/>
 
             {/* SECONDARY MUSCLES */}
             <label for="exercise-secondaryMuscles" className={healthClasses['text-label']}>Secondary muscles:</label>
-            <select id="exercise-secondaryMuscles" name="exerciseSecondaryMuscles" className={healthClasses['text-input']}>
-                <option value="">-- Choose a muscle --</option>
-                <option value="quads">Quads</option>
-                <option value="hamstrings">Hamstrings</option>
-            </select>
-                {/* ADD BUTTON */}
-            <button id="add-muscle-btn" className={healthClasses['add-btn']}>Add muscle</button>
-            
+            <IncrementalSelect info={secondaryMuscleInfo}/>
+
             {/* TYPES */}
             <label for="exercise-types" className={healthClasses['text-label']}>Types:</label>
-            <select id="exercise-types" name="exercisetypes" className={healthClasses['text-input']}>
-                <option value="">-- Choose a type --</option>
-                <option value="hiit">HIIT</option>
-                <option value="strength">Strength</option>
-            </select>
-                {/* ADD BUTTON */}
-            <button id="add-type-btn" className={healthClasses['add-btn']}>Add type</button>
+            <IncrementalSelect info={typesInfo}/>
 
             {/* EQUIPMENTS */}
             <label for="exercise-equipments" className={healthClasses['text-label']}>Equipments:</label>
-            <select id="exercise-equipments" name="exerciseEquipments" className={healthClasses['text-input']}>
-                <option value="">-- Choose an equipment --</option>
-                <option value="hiit">HIIT</option>
-                <option value="strength">Strength</option>
-            </select>
-                {/* ADD BUTTON */}
-            <button id="add-equipment-btn" className={healthClasses['add-btn']}>Add Equipment</button>
+            <IncrementalSelect info={equipmentsInfo}/>
 
             {/* IMAGE */}
             <label for="exercise-image" className={healthClasses['text-label']}>Image:</label>
