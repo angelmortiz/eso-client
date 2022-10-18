@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import healthClasses from '../../HealthContent.module.css';
+import addClasses from '../../General/CSS/AddInfo.module.css';
 import SelectInput from "./SelectInput";
 
 const IncrementalSelect = props => {
@@ -17,7 +17,7 @@ const IncrementalSelect = props => {
         {selectList}
         
         {/* ADD BUTTON */}
-        <button id={info.button.id} className={healthClasses['add-btn']} onClick={addSelect}>
+        <button id={info.button.id} className={addClasses['add-btn']} onClick={addSelect}>
             {info.button.label}</button>
     </Fragment>
 };

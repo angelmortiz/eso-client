@@ -1,6 +1,6 @@
 import IncrementalSelect from '../../General/Selects/IncrementalSelect';
 import SelectInput from '../../General/Selects/SelectInput';
-import healthClasses from '../../HealthContent.module.css';
+import addClasses from '../../General/CSS/AddInfo.module.css';
 
 
 const Exercise = props => {
@@ -92,56 +92,56 @@ const Exercise = props => {
     };
 
     /** Render */
-    return <section className={healthClasses['main-section']}>
-        <form className={healthClasses['main-form']}>
-            <h1 className={healthClasses['form-title']}>Add Exercise</h1>
+    return <section className={addClasses['main-section']}>
+        <form className={addClasses['main-form']}>
+            <h1 className={addClasses['form-title']}>Add Exercise</h1>
             
             {/* NAME */}
-            <label for="exercise-name" className={healthClasses['text-label']}>Name:</label>
+            <label for="exercise-name" className={addClasses['text-label']}>Name:</label>
             <input type="text" id="exercise-name" name="exerciseName"
-                placeholder='Enter the exercise name...' className={healthClasses['text-input']}/>
+                placeholder='Enter the exercise name...' className={addClasses['text-input']}/>
             
             {/* ALTERNATIVE NAME */}
-            <label for="exercise-alternativeName" className={healthClasses['text-label']}>Alternative name:</label>
+            <label for="exercise-alternativeName" className={addClasses['text-label']}>Alternative name:</label>
             <input type="text" id="exercise-alternativeName" name="exerciseAlternativeName"
-                placeholder='Enter an alternative name...'className={healthClasses['text-input']} />
+                placeholder='Enter an alternative name...'className={addClasses['text-input']} />
             
             {/* DIFFICULTY */}
-            <label for="exercise-difficulty" className={healthClasses['text-label']}>Difficulty:</label>
+            <label for="exercise-difficulty" className={addClasses['text-label']}>Difficulty:</label>
             <SelectInput select={difficultyInfo.select}/>
             
             {/* COMPOUND EXERCISE */}
-            <label for="exercise-compoundExercise" className={healthClasses['text-label']}>Compound exercise:</label>
+            <label for="exercise-compoundExercise" className={addClasses['text-label']}>Compound exercise:</label>
             <SelectInput select={compoundExerciseInfo.select}/>
             
             {/* MAIN MUSCLE */}
-            <label for="exercise-mainMuscle" className={healthClasses['text-label']}>Main muscle:</label>
+            <label for="exercise-mainMuscle" className={addClasses['text-label']}>Main muscle:</label>
             <SelectInput select={primaryMuscleInfo.select}/>
 
             {/* SECONDARY MUSCLES */}
-            <label for="exercise-secondaryMuscles" className={healthClasses['text-label']}>Secondary muscles:</label>
+            <label for="exercise-secondaryMuscles" className={addClasses['text-label']}>Secondary muscles:</label>
             <IncrementalSelect info={secondaryMuscleInfo}/>
 
             {/* TYPES */}
-            <label for="exercise-types" className={healthClasses['text-label']}>Types:</label>
+            <label for="exercise-types" className={addClasses['text-label']}>Types:</label>
             <IncrementalSelect info={typesInfo}/>
 
             {/* EQUIPMENTS */}
-            <label for="exercise-equipments" className={healthClasses['text-label']}>Equipments:</label>
+            <label for="exercise-equipments" className={addClasses['text-label']}>Equipments:</label>
             <IncrementalSelect info={equipmentsInfo}/>
 
             {/* IMAGE */}
-            <label for="exercise-image" className={healthClasses['text-label']}>Image:</label>
+            <label for="exercise-image" className={addClasses['text-label']}>Image:</label>
             <input type="text" id="exercise-image" name="exerciseImage"
-                placeholder='Enter the link for the image...' className={healthClasses['text-input']}/>
+                placeholder='Enter the link for the image...' className={addClasses['text-input']}/>
 
             {/* VIDEO */}
-            <label for="exercise-video" className={healthClasses['text-label']}>Video:</label>
+            <label for="exercise-video" className={addClasses['text-label']}>Video:</label>
             <input type="text" id="exercise-video" name="exerciseVideo"
-                placeholder='Enter the link for the video...' className={healthClasses['text-input']}/>
+                placeholder='Enter the link for the video...' className={addClasses['text-input']}/>
 
             {/* SUBMIT BUTTON */}
-            <button type="submit" className={healthClasses['submit-btn']}>Add exercise</button>
+            <button type="submit" className={addClasses['submit-btn']}>Add exercise</button>
         </form>
     </section>
 };

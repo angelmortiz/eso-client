@@ -1,20 +1,20 @@
-import healthClasses from '../../HealthContent.module.css';
+import addClasses from '../../General/CSS/AddInfo.module.css';
 
 const Food = props => {
-    return <section className={healthClasses['main-section']}>
-        <form className={healthClasses['main-form']}>
-            <h1 className={healthClasses['form-title']}>Add Food</h1>
+    return <section className={addClasses['main-section']}>
+        <form className={addClasses['main-form']}>
+            <h1 className={addClasses['form-title']}>Add Food</h1>
             {/* FOOD NAME */}
-            <label for="food-name" className={healthClasses['text-label']}>Food name:</label>
+            <label for="food-name" className={addClasses['text-label']}>Food name:</label>
             <input type="text" id="food-name" name="foodName"
-                placeholder='Enter food name...' className={healthClasses['text-input']}/>
+                placeholder='Enter food name...' className={addClasses['text-input']}/>
             {/* FOOD DESCRIPTION */}
-            <label for="food-description" className={healthClasses['text-label']}>Food description:</label>
+            <label for="food-description" className={addClasses['text-label']}>Food description:</label>
             <input type="text" id="food-description" name="foodDescription"
-                placeholder='Enter food description...'className={healthClasses['text-input']} />
+                placeholder='Enter food description...'className={addClasses['text-input']} />
             
             {/* SUBMIT BUTTON */}
-            <button type="submit" className={healthClasses['submit-btn']}>Add food</button>
+            <button type="submit" className={addClasses['submit-btn']}>Add food</button>
         </form>
     </section>
 };
