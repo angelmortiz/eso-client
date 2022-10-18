@@ -11,10 +11,9 @@
 
 .img {
     background-color: aliceblues;
+    border: 1px solid #007d8649;
     border-radius: 8px;
-    height: 1600;
     width: 200px;
-
 }
 
 .exercise-info {
