@@ -1,5 +1,5 @@
-import IncrementalSelect from '../../General/IncrementalSelect';
-import SelectInput from '../../General/SelectInput';
+import IncrementalSelect from '../../General/Selects/IncrementalSelect';
+import SelectInput from '../../General/Selects/SelectInput';
 import healthClasses from '../../HealthContent.module.css';
 
 

@@ -1,4 +1,4 @@
-import healthClasses from '../HealthContent.module.css';
+import healthClasses from '../../HealthContent.module.css';
 
 const SelectInput = props => {
     const info = props.select;

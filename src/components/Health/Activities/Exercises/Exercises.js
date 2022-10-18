@@ -1,4 +1,4 @@
-import InfoCard from "../../General/InfoCard";
+import InfoCard from "../../General/Cards/InfoCard";
 import classes from "./Exercises.module.css";
 
 const Exercises = props => {
