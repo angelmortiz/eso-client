@@ -1,7 +1,7 @@
-import DetailsInfo from "../../General/DetailsInfo";
+import ExerciseDetails from "../../General/ExerciseDetails";
 
 const FoodDetails = props => {
-    return <DetailsInfo />
+    return <ExerciseDetails />
 };
 
 export default FoodDetails;

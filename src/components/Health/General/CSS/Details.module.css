@@ -1,0 +1,42 @@
+.main-section {
+    width: 35rem;
+    margin: 2rem auto;
+    padding: 1rem 1rem;
+    /* border: 2px solid #007E86; */
+    border-radius: 8px;
+    background-color: rgb(230, 230, 230);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.name {
+    font-size: 40px;
+}
+
+.alternative-name {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.img {
+    border: 1px solid #007d8649;
+    border-radius: 8px;
+    height: 20rem;
+    width: 20rem;
+
+    margin: 1rem 0;
+}
+
+.info-block {
+    margin: 1rem 0;
+}
+
+.label, .value {
+    font-size: 18px;
+}
+
+.label {
+    font-weight: 600;
+}
