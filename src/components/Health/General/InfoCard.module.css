@@ -24,7 +24,6 @@
 
 .names {
     margin-bottom: 1rem;
-
 }
 
 .general-info {
@@ -45,19 +44,21 @@
     margin-left: 10px;
 }
 
-.button {
-    margin: 0.5rem auto 0 auto;
+.link {
     width: 40%;
+    margin: 0.5rem auto 0 auto;
     padding: 8px 6px;
     background-color: #007E86;
     border: 0px;
     border-radius: 4px;
     color: white;
     font-size: 14px;
+    text-decoration: none;
+    text-align: center;
 }
 
-.button:hover,
-.button:active {
+.link:hover,
+.link:active {
     cursor: pointer;
     background-color: #028e98;
 }

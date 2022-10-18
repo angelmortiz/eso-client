@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 import classes from "./InfoCard.module.css"
 
 const InfoCard = props => {
@@ -25,7 +26,9 @@ const InfoCard = props => {
                     </div>
                 </div>
             </div>
-            <button className={classes['button']}>Details</button>
+            <Link to='/activities/exercises/exercise' className={classes['link']}>
+                Details
+            </Link>
         </div>
     </Fragment>
 };
