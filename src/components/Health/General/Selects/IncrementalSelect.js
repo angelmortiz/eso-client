@@ -4,12 +4,13 @@ import SelectInput from "./SelectInput";
 
 const IncrementalSelect = props => {
     const info = props.info;
-    const [selectList, setSelectList] = useState([<SelectInput select={info.select}/>]); //adds the first select
-    
+    const [counter, setCounter] = useState(1);
+    const [selectList, setSelectList] = useState([<SelectInput select={info.select} counter={counter} key={`item_${counter}`}/>]); //adds the first select
     
     const addSelect = event => {
         event.preventDefault();
-        setSelectList(selectList.concat(<SelectInput select={info.select}/>))
+        setCounter(counter => counter + 1);
+        setSelectList(selectList.concat(<SelectInput select={info.select} counter={counter} key={`item_${counter}`}/>));
     }
 
     return <Fragment>

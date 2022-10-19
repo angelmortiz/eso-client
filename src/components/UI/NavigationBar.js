@@ -9,24 +9,24 @@ const NavigationBar = props => {
         </Link>
         <ul className={classes['ul-nav-options']}>
             {/* NUTRITION */}
-            <li className={classes['dropdown']}>
+            <li key="nutrition"className={classes['dropdown']}>
                 <span> Nutrition </span>
                 <div className={classes['dropdown-content']}>
                     <ul className={classes['ul-dropdown-options']}>
                         {/* FOODS */}
-                        <li className={classes['li-dropdown-option']}> 
+                        <li key="foods"className={classes['li-dropdown-option']}> 
                             <Link to='/nutrition/foods' className={classes['nav-links']}>Foods</Link>
                         </li>
                         {/* RECIPES */}
-                        <li className={classes['li-dropdown-option']}>
+                        <li key="recipes"className={classes['li-dropdown-option']}>
                             <Link to='/nutrition/recipes' className={classes['nav-links']}>Recipes</Link>
                         </li>
                         {/* DIETS */}
-                        <li className={classes['li-dropdown-option']}>
+                        <li key="diets"className={classes['li-dropdown-option']}>
                             <Link to='/nutrition/diets' className={classes['nav-links']}>Diets</Link>
                         </li>
                         {/* CHRONIC CONDITIONS */}
-                        <li className={classes['li-dropdown-option']}>
+                        <li key="chronicConditions"className={classes['li-dropdown-option']}>
                             <Link to='/nutrition/chronicconditions' className={classes['nav-links']}>Chronic Conditions</Link>
                         </li>
                     </ul>
@@ -34,24 +34,24 @@ const NavigationBar = props => {
             </li>
 
             {/* ACTIVITIES */}
-            <li className={classes['dropdown']}>
+            <li key="activities"className={classes['dropdown']}>
                 <span> Activities </span>
                 <div className={classes['dropdown-content']}>
                     <ul className={classes['ul-dropdown-options']}>
                         {/* EXERCISES */}
-                        <li className={classes['li-dropdown-option']}> 
+                        <li key="exercises"className={classes['li-dropdown-option']}> 
                             <Link to='/activities/exercises' className={classes['nav-links']}>Exercises</Link>
                         </li>
                         {/* MUSCLES */}
-                        <li className={classes['li-dropdown-option']}>
+                        <li key="muscles"className={classes['li-dropdown-option']}>
                             <Link to='/activities/muscles' className={classes['nav-links']}>Muscles</Link>
                         </li>
                         {/* EQUIPMENTS */}
-                        <li className={classes['li-dropdown-option']}>
+                        <li key="equipments"className={classes['li-dropdown-option']}>
                             <Link to='/activities/equipments' className={classes['nav-links']}>Equipments</Link>
                         </li>
                         {/* PHYSICAL CONDITIONS */}
-                        <li className={classes['li-dropdown-option']}>
+                        <li key="physicalConditions"className={classes['li-dropdown-option']}>
                             <Link to='/activities/physicalconditions' className={classes['nav-links']}>Physical Conditions</Link>
                         </li>
                     </ul>
@@ -59,40 +59,40 @@ const NavigationBar = props => {
             </li>
 
             {/* ADD NEW */}
-            <li className={classes['dropdown']}>
+            <li key="addNew"className={classes['dropdown']}>
                 <span> Add New </span>
                 <div className={classes['dropdown-content']}>
                     <ul className={classes['ul-dropdown-options']}>
                         {/* FOODS */}
-                        <li className={classes['li-dropdown-option']}> 
+                        <li key="addFoods"className={classes['li-dropdown-option']}> 
                             <Link to='/nutrition/add-food' className={classes['nav-links']}>Food</Link>
                         </li>
                         {/* RECIPES */}
-                        <li className={classes['li-dropdown-option']}>
+                        <li key="addRecipes"className={classes['li-dropdown-option']}>
                             <Link to='/nutrition/recipes' className={classes['nav-links']}>Recipe</Link>
                         </li>
                         {/* DIETS */}
-                        <li className={classes['li-dropdown-option']}>
+                        <li key="addDiets"className={classes['li-dropdown-option']}>
                             <Link to='/nutrition/diets' className={classes['nav-links']}>Diet</Link>
                         </li>
                         {/* CHRONIC CONDITIONS */}
-                        <li className={classes['li-dropdown-option']}>
+                        <li key="addChronicConditions"className={classes['li-dropdown-option']}>
                             <Link to='/nutrition/chronicconditions' className={classes['nav-links']}>Chronic Condition</Link>
                         </li>
                         {/* EXERCISES */}
-                        <li className={classes['li-dropdown-option']}> 
+                        <li key="addExercises"className={classes['li-dropdown-option']}> 
                             <Link to='/activities/add-exercise' className={classes['nav-links']}>Exercise</Link>
                         </li>
                         {/* MUSCLES */}
-                        <li className={classes['li-dropdown-option']}>
+                        <li key="addMuscles"className={classes['li-dropdown-option']}>
                             <Link to='/activities/muscles' className={classes['nav-links']}>Muscle</Link>
                         </li>
                         {/* EQUIPMENTS */}
-                        <li className={classes['li-dropdown-option']}>
+                        <li key="addEquipments"className={classes['li-dropdown-option']}>
                             <Link to='/activities/equipments' className={classes['nav-links']}>Equipment</Link>
                         </li>
                         {/* PHYSICAL CONDITIONS */}
-                        <li className={classes['li-dropdown-option']}>
+                        <li key="addPhysicalConditions"className={classes['li-dropdown-option']}>
                             <Link to='/activities/physicalconditions' className={classes['nav-links']}>Physical Condition</Link>
                         </li>
                     </ul>

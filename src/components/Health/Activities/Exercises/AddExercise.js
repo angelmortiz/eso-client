@@ -8,7 +8,7 @@ const Exercise = props => {
     const difficultyInfo = {
         select: {
             id: "exercise-difficulty",
-            name: "exerciseDifficulty",
+            name: "difficulty",
             options: [
                 {value: "", label:"-- Choose difficulty --"},
                 {value: "easy", label:"Easy"},
@@ -21,7 +21,7 @@ const Exercise = props => {
     const compoundExerciseInfo = {
         select: {
             id: "exercise-compoundExercise",
-            name: "exerciseCompoundExercise",
+            name: "compoundExercise",
             options: [
                 {value: "", label:"-- Choose option --"},
                 {value: "yes", label:"Yes"},
@@ -37,10 +37,10 @@ const Exercise = props => {
         {value: "hamstrings", label:"Hamstrings"},
     ];
 
-    const primaryMuscleInfo = {
+    const mainMuscleInfo = {
         select: {
-            id: "exercise-secondaryMuscle",
-            name: "exerciseSecondaryMuscles",
+            id: "exercise-mainMuscle",
+            name: "mainMuscle",
             options: muscles
         }
     };
@@ -48,7 +48,7 @@ const Exercise = props => {
     const secondaryMuscleInfo = {
         select: {
             id: "exercise-secondaryMuscle",
-            name: "exerciseSecondaryMuscles",
+            name: "secondaryMuscles",
             options: muscles
         },
         button: {
@@ -60,7 +60,7 @@ const Exercise = props => {
     const typesInfo = {
         select: {
             id: "exercise-types",
-            name: "exerciseTypes",
+            name: "types",
             options: [
                 // TODO: Pull values from backend
                 {value: "", label:"-- Choose a type --"},
@@ -77,7 +77,7 @@ const Exercise = props => {
     const equipmentsInfo = {
         select: {
             id: "exercise-equipments",
-            name: "exerciseEquipments",
+            name: "equipments",
             options: [
                 // TODO: Pull values from backend
                 {value: "", label:"-- Choose an equipment --"},
@@ -91,57 +91,91 @@ const Exercise = props => {
         }
     };
 
+    /** Functions */
+    const addExercise = (event) => {
+        event.preventDefault();
+        const formVals = getValuesFromForm(event.target.elements);
+        console.log("value: ", formVals);
+    };
+
+    const getValuesFromForm = (elements) => {
+        const values = {};
+
+        values.name = elements.name.value;
+        values.alternativeName = elements.alternativeName.value;
+        values.difficulty = elements.difficulty.value;
+        values.compoundExercise = elements.compoundExercise.value;
+        values.mainMuscle = elements.mainMuscle.value;
+        values.linkToImage = elements.linkToImage.value;
+        values.linkToVideo = elements.linkToVideo.value;
+
+        //multi-select options
+        console.log("elements.secondaryMuscles: ", elements.secondaryMuscles);
+        values.secondaryMuscle = extractMultiOptionValues([...elements.secondaryMuscles]);
+        values.types = extractMultiOptionValues([...elements.types]);
+        values.equipment = extractMultiOptionValues([...elements.equipments]);
+
+        return values;
+    };
+
+    const extractMultiOptionValues = (elements) => {
+        console.log("elements: ", elements);
+        let values = elements.map(element => { return element.value; });
+        values = values.filter(v => v); //removesempty selections
+        return values;
+    };
+
     /** Render */
     return <section className={addClasses['main-section']}>
-        <form className={addClasses['main-form']}>
+        <form id="add-exercise-form"  onSubmit={addExercise} className={addClasses['main-form']}>
             <h1 className={addClasses['form-title']}>Add Exercise</h1>
             
             {/* NAME */}
-            <label for="exercise-name" className={addClasses['text-label']}>Name:</label>
-            <input type="text" id="exercise-name" name="exerciseName"
+            <label htmlFor="exercise-name" className={addClasses['text-label']}>Name:</label>
+            <input type="text" id="exercise-name" name="name"
                 placeholder='Enter the exercise name...' className={addClasses['text-input']}/>
             
             {/* ALTERNATIVE NAME */}
-            <label for="exercise-alternativeName" className={addClasses['text-label']}>Alternative name:</label>
-            <input type="text" id="exercise-alternativeName" name="exerciseAlternativeName"
+            <label htmlFor="exercise-alternativeName" className={addClasses['text-label']}>Alternative name:</label>
+            <input type="text" id="exercise-alternativeName" name="alternativeName"
                 placeholder='Enter an alternative name...'className={addClasses['text-input']} />
             
             {/* DIFFICULTY */}
-            <label for="exercise-difficulty" className={addClasses['text-label']}>Difficulty:</label>
+            <label htmlFor="exercise-difficulty" className={addClasses['text-label']}>Difficulty:</label>
             <SelectInput select={difficultyInfo.select}/>
             
             {/* COMPOUND EXERCISE */}
-            <label for="exercise-compoundExercise" className={addClasses['text-label']}>Compound exercise:</label>
+            <label htmlFor="exercise-compoundExercise" className={addClasses['text-label']}>Compound exercise:</label>
             <SelectInput select={compoundExerciseInfo.select}/>
             
             {/* MAIN MUSCLE */}
-            <label for="exercise-mainMuscle" className={addClasses['text-label']}>Main muscle:</label>
-            <SelectInput select={primaryMuscleInfo.select}/>
+            <label htmlFor="exercise-mainMuscle" className={addClasses['text-label']}>Main muscle:</label>
+            <SelectInput select={mainMuscleInfo.select}/>
 
             {/* SECONDARY MUSCLES */}
-            <label for="exercise-secondaryMuscles" className={addClasses['text-label']}>Secondary muscles:</label>
+            <label htmlFor="exercise-secondaryMuscles" className={addClasses['text-label']}>Secondary muscles:</label>
             <IncrementalSelect info={secondaryMuscleInfo}/>
 
             {/* TYPES */}
-            <label for="exercise-types" className={addClasses['text-label']}>Types:</label>
+            <label htmlFor="exercise-types" className={addClasses['text-label']}>Types:</label>
             <IncrementalSelect info={typesInfo}/>
 
             {/* EQUIPMENTS */}
-            <label for="exercise-equipments" className={addClasses['text-label']}>Equipments:</label>
+            <label htmlFor="exercise-equipments" className={addClasses['text-label']}>Equipments:</label>
             <IncrementalSelect info={equipmentsInfo}/>
 
             {/* IMAGE */}
-            <label for="exercise-image" className={addClasses['text-label']}>Image:</label>
-            <input type="text" id="exercise-image" name="exerciseImage"
+            <label htmlFor="exercise-image" className={addClasses['text-label']}>Image:</label>
+            <input type="text" id="exercise-image" name="linkToImage"
                 placeholder='Enter the link for the image...' className={addClasses['text-input']}/>
 
             {/* VIDEO */}
-            <label for="exercise-video" className={addClasses['text-label']}>Video:</label>
-            <input type="text" id="exercise-video" name="exerciseVideo"
+            <label htmlFor="exercise-video" className={addClasses['text-label']}>Video:</label>
+            <input type="text" id="exercise-video" name="linkToVideo"
                 placeholder='Enter the link for the video...' className={addClasses['text-input']}/>
 
             {/* SUBMIT BUTTON */}
-            <button type="submit" className={addClasses['submit-btn']}>Add exercise</button>
+            <button type="submit" id="add-exercse-btn" className={addClasses['submit-btn']}>Add exercise</button>
         </form>
     </section>
 };

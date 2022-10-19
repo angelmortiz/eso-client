@@ -5,11 +5,11 @@ const Food = props => {
         <form className={addClasses['main-form']}>
             <h1 className={addClasses['form-title']}>Add Food</h1>
             {/* FOOD NAME */}
-            <label for="food-name" className={addClasses['text-label']}>Food name:</label>
+            <label htmlFor="food-name" className={addClasses['text-label']}>Food name:</label>
             <input type="text" id="food-name" name="foodName"
                 placeholder='Enter food name...' className={addClasses['text-input']}/>
             {/* FOOD DESCRIPTION */}
-            <label for="food-description" className={addClasses['text-label']}>Food description:</label>
+            <label htmlFor="food-description" className={addClasses['text-label']}>Food description:</label>
             <input type="text" id="food-description" name="foodDescription"
                 placeholder='Enter food description...'className={addClasses['text-input']} />
             
