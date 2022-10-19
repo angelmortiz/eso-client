@@ -1,6 +1,20 @@
+import { useState } from "react";
+import { useParams } from 'react-router-dom';
+import { fetchExerciseById } from "../../../../util/apis/exercises/exercisesApis"
 import classes from '../../General/CSS/Details.module.css';
 
+
 const ExerciseDetails = props => {
+    const { id } = useParams();
+    const [exercise, setExercise] = useState(null);
+
+    if (!exercise) {
+        fetchExerciseById(id).then(data => { 
+            console.log("Exercise data: ", data);
+            setExercise(data);
+        });
+    }
+
     return <section className={classes['main-section']}>
         {/* NAME */}
         <h1 className={classes['name']}>Squats</h1>

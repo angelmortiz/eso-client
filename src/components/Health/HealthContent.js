@@ -8,7 +8,7 @@ const HealthContent = props => {
     return <Routes>
         <Route path="/nutrition/add-food" element={<AddFood/>}/>
         <Route path="/activities/exercises" element={<Exercises/>}/>
-        <Route path="/activities/exercises/exercise" element={<ExerciseDetails/>}/>
+        <Route path="/activities/exercise/:id" element={<ExerciseDetails/>}/>
         <Route path="/activities/add-exercise" element={<AddExercise/>}/>
     </Routes>
 };

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import classes from "./InfoCard.module.css"
 
 const InfoCard = props => {
+
     return <Fragment>
         <div className={classes['card']}> 
             <img src="/squat.jpg" alt="Squat" className={classes['img']}/>
@@ -26,7 +27,7 @@ const InfoCard = props => {
                     </div>
                 </div>
             </div>
-            <Link to='/activities/exercises/exercise' className={classes['link']}>
+            <Link to={`/activities/exercise/${props.id}`} className={classes['link']}>
                 Details
             </Link>
         </div>
