@@ -110,18 +110,21 @@ const Exercise = props => {
         values.linkToVideo = elements.linkToVideo.value;
 
         //multi-select options
-        console.log("elements.secondaryMuscles: ", elements.secondaryMuscles);
-        values.secondaryMuscle = extractMultiOptionValues([...elements.secondaryMuscles]);
-        values.types = extractMultiOptionValues([...elements.types]);
-        values.equipment = extractMultiOptionValues([...elements.equipments]);
+        values.secondaryMuscle = extractMultiOptionValues(elements.secondaryMuscles);
+        values.types = extractMultiOptionValues(elements.types);
+        values.equipment = extractMultiOptionValues(elements.equipments);
 
         return values;
     };
 
     const extractMultiOptionValues = (elements) => {
-        console.log("elements: ", elements);
+        //if there is only one select dropdown, it adds the HTMLSelectElement to an array before extracting the value.
+        //if there are multiple select dropdowns, converts the RadioNodeList into an array (to later use .map()).
+        elements = Object.prototype.toString.call(elements).includes('HTMLSelectElement') ?
+            [elements] : [...elements];
+        
         let values = elements.map(element => { return element.value; });
-        values = values.filter(v => v); //removesempty selections
+        values = values.filter(v => v); //removes empty selections
         return values;
     };
 
