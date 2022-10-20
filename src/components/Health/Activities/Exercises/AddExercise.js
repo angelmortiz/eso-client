@@ -4,6 +4,11 @@ import addClasses from '../../General/CSS/AddInfo.module.css';
 
 
 const Exercise = props => {
+    //TODO: DELETE ME
+    // const [secondaryMuscleCount, setSecondaryMuscleCount] = useState(1);
+    // const [typesCount, setTypesCount] = useState(1);
+    // const [equipmentsCount, setEquipmentsCount] = useState(1);
+
     /** Fields Data */
     const difficultyInfo = {
         select: {
