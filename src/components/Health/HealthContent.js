@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import AddExercise from './Activities/Exercises/AddExercise';
 import AddMuscle from './Activities/Muscles/AddMuscle';
+import AddEquipment from './Activities/Equipments/AddEquipment';
 import ExerciseDetails from './Activities/Exercises/ExerciseDetails';
 import Exercises from './Activities/Exercises/Exercises';
 import AddFood from './Nutrition/Foods/AddFood';
@@ -14,6 +15,9 @@ const HealthContent = props => {
         {/* <Route path="/activities/muscles" element={<Muscles/>}/>
         <Route path="/activities/muscle/:id" element={<MuscleDetails/>}/> */}
         <Route path="/activities/add-muscle" element={<AddMuscle/>}/>
+        {/* <Route path="/activities/equipments" element={<Equipments/>}/>
+        <Route path="/activities/equipment/:id" element={<EquipmentDetails/>}/> */}
+        <Route path="/activities/add-equipment" element={<AddEquipment/>}/>
 
     </Routes>
 };

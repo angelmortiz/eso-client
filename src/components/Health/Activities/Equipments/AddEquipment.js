@@ -1,21 +1,9 @@
 import IncrementalSelect from '../../General/Selects/IncrementalSelect';
-import SelectInput from '../../General/Selects/SelectInput';
 import addClasses from '../../General/CSS/AddInfo.module.css';
-import { postMuscle } from '../../../../util/apis/muscles/musclesApis';
+import { postEquipment } from '../../../../util/apis/equipments/equipmentsApis';
 
-const AddMuscle = props => {
+const AddEquipment = props => {
     /** Fields Data */
-    const typesInfo = {
-        select: {
-            id: "muscles-type",
-            name: "type",
-            options: [
-                {value: "", label:"-- Choose a type --"},
-                {value: "Big", label:"Big"},
-                {value: "Small", label:"Small"},
-            ]
-        }
-    };
 
     const exercises = [
         // TODO: Pull values from backend
@@ -26,7 +14,7 @@ const AddMuscle = props => {
 
     const exercisesInfo = {
         select: {
-            id: "muscle-exercises",
+            id: "equipment-exercises",
             name: "exercises",
             options: exercises
         },
@@ -37,11 +25,11 @@ const AddMuscle = props => {
     };
 
     /** Functions */
-    const addMuscle = (event) => {
+    const addEquipment = (event) => {
         event.preventDefault();
         const formVals = getValuesFromForm(event.target.elements);
         console.log("value: ", formVals);
-        // postMuscle(formVals).then(data => { 
+        // postEquipment(formVals).then(data => { 
         //     console.log("Response data: ", data);
         // });
     };
@@ -50,7 +38,7 @@ const AddMuscle = props => {
         const values = {};
         values.name = elements.name.value;
         values.alternativeName = elements.alternativeName.value;
-        values.type = elements.type.value;
+        values.description = elements.description.value;
         values.linkToImage = elements.linkToImage.value;
 
         //multi-select options
@@ -72,36 +60,37 @@ const AddMuscle = props => {
 
     /** Render */
     return <section className={addClasses['main-section']}>
-        <form id="add-muscle-form"  onSubmit={addMuscle} className={addClasses['main-form']}>
-            <h1 className={addClasses['form-title']}>Add Muscle</h1>
+        <form id="add-equipment-form"  onSubmit={addEquipment} className={addClasses['main-form']}>
+            <h1 className={addClasses['form-title']}>Add Equipment</h1>
             
             {/* NAME */}
-            <label htmlFor="muscle-name" className={addClasses['text-label']}>Name:</label>
-            <input type="text" id="muscle-name" name="name"
-                placeholder='Enter the muscle name...' className={addClasses['text-input']}/>
+            <label htmlFor="equipment-name" className={addClasses['text-label']}>Name:</label>
+            <input type="text" id="equipment-name" name="name"
+                placeholder='Enter the equipment name...' className={addClasses['text-input']}/>
             
             {/* ALTERNATIVE NAME */}
-            <label htmlFor="muscle-alternativeName" className={addClasses['text-label']}>Alternative name:</label>
-            <input type="text" id="muscle-alternativeName" name="alternativeName"
+            <label htmlFor="equipment-alternativeName" className={addClasses['text-label']}>Alternative name:</label>
+            <input type="text" id="equipment-alternativeName" name="alternativeName"
                 placeholder='Enter an alternative name...'className={addClasses['text-input']} />
             
-            {/* TYPE */}
-            <label htmlFor="muscle-type" className={addClasses['text-label']}>Type:</label>
-            <SelectInput select={typesInfo.select}/>
+            {/* DESCRIPTION */}
+            <label htmlFor="equipment-description" className={addClasses['text-label']}>Description:</label>
+            <input type="text" id="equipment-description" name="description"
+                placeholder='Enter the equipment description...'className={addClasses['text-input']} />
 
             {/* EXERCISES */}
-            <label htmlFor="muscle-exercises" className={addClasses['text-label']}>Exercises:</label>
+            <label htmlFor="equipment-exercises" className={addClasses['text-label']}>Exercises:</label>
             <IncrementalSelect info={exercisesInfo}/>
         
             {/* IMAGE */}
-            <label htmlFor="muscle-image" className={addClasses['text-label']}>Image:</label>
-            <input type="text" id="muscle-image" name="linkToImage"
+            <label htmlFor="equipment-image" className={addClasses['text-label']}>Image:</label>
+            <input type="text" id="equipment-image" name="linkToImage"
                 placeholder='Enter the link for the image...' className={addClasses['text-input']}/>
 
             {/* SUBMIT BUTTON */}
-            <button type="submit" id="add-exercse-btn" className={addClasses['submit-btn']}>Add muscle</button>
+            <button type="submit" id="add-exercse-btn" className={addClasses['submit-btn']}>Add equipment</button>
         </form>
     </section>
 };
 
-export default AddMuscle;
+export default AddEquipment;
