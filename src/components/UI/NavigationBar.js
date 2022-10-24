@@ -93,7 +93,7 @@ const NavigationBar = props => {
                         </li>
                         {/* PHYSICAL CONDITIONS */}
                         <li key="addPhysicalConditions"className={classes['li-dropdown-option']}>
-                            <Link to='/activities/add-physicalConditions' className={classes['nav-links']}>Physical Condition</Link>
+                            <Link to='/activities/add-physicalCondition' className={classes['nav-links']}>Physical Condition</Link>
                         </li>
                     </ul>
                 </div>
