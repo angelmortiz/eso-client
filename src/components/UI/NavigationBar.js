@@ -69,15 +69,15 @@ const NavigationBar = props => {
                         </li>
                         {/* RECIPES */}
                         <li key="addRecipes"className={classes['li-dropdown-option']}>
-                            <Link to='/nutrition/recipes' className={classes['nav-links']}>Recipe</Link>
+                            <Link to='/nutrition/add-recipe' className={classes['nav-links']}>Recipe</Link>
                         </li>
                         {/* DIETS */}
                         <li key="addDiets"className={classes['li-dropdown-option']}>
-                            <Link to='/nutrition/diets' className={classes['nav-links']}>Diet</Link>
+                            <Link to='/nutrition/add-diet' className={classes['nav-links']}>Diet</Link>
                         </li>
                         {/* CHRONIC CONDITIONS */}
                         <li key="addChronicConditions"className={classes['li-dropdown-option']}>
-                            <Link to='/nutrition/chronicconditions' className={classes['nav-links']}>Chronic Condition</Link>
+                            <Link to='/nutrition/add-chronicConditions' className={classes['nav-links']}>Chronic Condition</Link>
                         </li>
                         {/* EXERCISES */}
                         <li key="addExercises"className={classes['li-dropdown-option']}> 
@@ -85,15 +85,15 @@ const NavigationBar = props => {
                         </li>
                         {/* MUSCLES */}
                         <li key="addMuscles"className={classes['li-dropdown-option']}>
-                            <Link to='/activities/muscles' className={classes['nav-links']}>Muscle</Link>
+                            <Link to='/activities/add-muscle' className={classes['nav-links']}>Muscle</Link>
                         </li>
                         {/* EQUIPMENTS */}
                         <li key="addEquipments"className={classes['li-dropdown-option']}>
-                            <Link to='/activities/equipments' className={classes['nav-links']}>Equipment</Link>
+                            <Link to='/activities/add-equipment' className={classes['nav-links']}>Equipment</Link>
                         </li>
                         {/* PHYSICAL CONDITIONS */}
                         <li key="addPhysicalConditions"className={classes['li-dropdown-option']}>
-                            <Link to='/activities/physicalconditions' className={classes['nav-links']}>Physical Condition</Link>
+                            <Link to='/activities/add-physicalConditions' className={classes['nav-links']}>Physical Condition</Link>
                         </li>
                     </ul>
                 </div>

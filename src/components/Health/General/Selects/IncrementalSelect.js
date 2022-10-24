@@ -8,7 +8,6 @@ const IncrementalSelect = props => {
     const [selectList, setSelectList] = useState([]);
 
     useEffect(() => {
-        console.log("useEffect count: ", count);
         setSelectList(s => s.concat(<SelectInput select={info.select} count={count} key={`select_${info.select.name}_${count}`}/>));
     }, [info.select, count]);
     

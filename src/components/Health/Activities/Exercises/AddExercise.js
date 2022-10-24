@@ -1,14 +1,10 @@
 import IncrementalSelect from '../../General/Selects/IncrementalSelect';
 import SelectInput from '../../General/Selects/SelectInput';
 import addClasses from '../../General/CSS/AddInfo.module.css';
+import { postExercise } from '../../../../util/apis/exercises/exercisesApis';
 
 
-const Exercise = props => {
-    //TODO: DELETE ME
-    // const [secondaryMuscleCount, setSecondaryMuscleCount] = useState(1);
-    // const [typesCount, setTypesCount] = useState(1);
-    // const [equipmentsCount, setEquipmentsCount] = useState(1);
-
+const AddExercise = props => {
     /** Fields Data */
     const difficultyInfo = {
         select: {
@@ -16,9 +12,9 @@ const Exercise = props => {
             name: "difficulty",
             options: [
                 {value: "", label:"-- Choose difficulty --"},
-                {value: "easy", label:"Easy"},
-                {value: "intermediate", label:"Intermediate"},
-                {value: "advanced", label:"Advanced"},
+                {value: "Easy", label:"Easy"},
+                {value: "Intermediate", label:"Intermediate"},
+                {value: "Advanced", label:"Advanced"},
             ]
         }
     }
@@ -38,8 +34,8 @@ const Exercise = props => {
     const muscles = [
         // TODO: Pull values from backend
         {value: "", label:"-- Choose a muscle --"},
-        {value: "quads", label:"Quads"},
-        {value: "hamstrings", label:"Hamstrings"},
+        {value: "Quadriceps", label:"Quads"},
+        {value: "Hamstrings", label:"Hamstrings"},
     ];
 
     const mainMuscleInfo = {
@@ -69,8 +65,8 @@ const Exercise = props => {
             options: [
                 // TODO: Pull values from backend
                 {value: "", label:"-- Choose a type --"},
-                {value: "hiit", label:"HIIT"},
-                {value: "strength", label:"Strength"},
+                {value: "HIIT", label:"HIIT"},
+                {value: "Strength", label:"Strength"},
             ]
         },
         button: {
@@ -86,8 +82,8 @@ const Exercise = props => {
             options: [
                 // TODO: Pull values from backend
                 {value: "", label:"-- Choose an equipment --"},
-                {value: "dumbbells", label:"Dumbbells"},
-                {value: "barbell", label:"Barbell"},
+                {value: "Dumbbells", label:"Dumbbells"},
+                {value: "Barbell", label:"Barbell"},
             ]
         },
         button: {
@@ -101,24 +97,25 @@ const Exercise = props => {
         event.preventDefault();
         const formVals = getValuesFromForm(event.target.elements);
         console.log("value: ", formVals);
+        postExercise(formVals).then(data => { 
+            console.log("Response data: ", data);
+        });
     };
 
     const getValuesFromForm = (elements) => {
         const values = {};
-
         values.name = elements.name.value;
         values.alternativeName = elements.alternativeName.value;
         values.difficulty = elements.difficulty.value;
-        values.compoundExercise = elements.compoundExercise.value;
+        values.compoundExercise = elements.compoundExercise.value === 'yes';
         values.mainMuscle = elements.mainMuscle.value;
         values.linkToImage = elements.linkToImage.value;
         values.linkToVideo = elements.linkToVideo.value;
 
         //multi-select options
-        values.secondaryMuscle = extractMultiOptionValues(elements.secondaryMuscles);
+        values.secondaryMuscles = extractMultiOptionValues(elements.secondaryMuscles);
         values.types = extractMultiOptionValues(elements.types);
-        values.equipment = extractMultiOptionValues(elements.equipments);
-
+        values.equipments = extractMultiOptionValues(elements.equipments);
         return values;
     };
 
@@ -130,6 +127,7 @@ const Exercise = props => {
         
         let values = elements.map(element => { return element.value; });
         values = values.filter(v => v); //removes empty selections
+        values = [...new Set(values)]; //removes duplicate values
         return values;
     };
 
@@ -188,4 +186,4 @@ const Exercise = props => {
     </section>
 };
 
-export default Exercise;
+export default AddExercise;

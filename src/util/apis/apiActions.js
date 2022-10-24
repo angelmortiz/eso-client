@@ -10,3 +10,20 @@ export const apiGet = path => {
         }
     );
 }
+
+export const apiPost = (path, body) => {
+    console.log("JSON.stringify(body): ", JSON.stringify(body));
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json',},
+        body: JSON.stringify(body)
+    };
+
+    return fetch(`${API_ADDRESS}${path}`, requestOptions)
+    .then(apiResponse => {
+        return apiResponse.json();
+    })
+    .catch(error => {
+        console.log("An error ocurred while posting information: ", error);
+    });
+}
