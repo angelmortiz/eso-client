@@ -1,10 +1,36 @@
 import IncrementalSelect from '../../General/Selects/IncrementalSelect';
 import SelectInput from '../../General/Selects/SelectInput';
 import addClasses from '../../General/CSS/AddInfo.module.css';
+import { fetchAllExerciseNames } from '../../../../util/apis/exercises/exercisesApis';
+import { useEffect, useState} from 'react';
 import { postMuscle } from '../../../../util/apis/muscles/musclesApis';
 
 const AddMuscle = props => {
     /** Fields Data */
+    const [exercises, setExercises] = useState([])
+
+    useEffect(() => {
+        fetchAllExerciseNames().then(data => { 
+            //adds an empty default option
+            data.unshift({_id: "", name: "-- Choose an exercise --"});
+            setExercises(data);
+        });
+    }, []);
+
+    const exercisesInfo = {
+        select: {
+            id: "muscle-exercises",
+            name: "exercises",
+            value: "_id",
+            label: "name",
+            options: exercises
+        },
+        button: {
+            id: "add-exercise-btn",
+            label: "Add exercise"
+        }
+    };
+
     const typesInfo = {
         select: {
             id: "muscles-type",
@@ -17,33 +43,14 @@ const AddMuscle = props => {
         }
     };
 
-    const exercises = [
-        // TODO: Pull values from backend
-        {value: "", label:"-- Choose an exercise --"},
-        {value: "Squats", label:"Squats"},
-        {value: "Deadlifts", label:"Deadlifts"},
-    ];
-
-    const exercisesInfo = {
-        select: {
-            id: "muscle-exercises",
-            name: "exercises",
-            options: exercises
-        },
-        button: {
-            id: "add-exercise-btn",
-            label: "Add exercise"
-        }
-    };
-
     /** Functions */
     const addMuscle = (event) => {
         event.preventDefault();
         const formVals = getValuesFromForm(event.target.elements);
-        console.log("value: ", formVals);
-        // postMuscle(formVals).then(data => { 
-        //     console.log("Response data: ", data);
-        // });
+
+        postMuscle(formVals).then(data => { 
+            console.log("Response data: ", data);
+        });
     };
 
     const getValuesFromForm = (elements) => {
@@ -67,6 +74,11 @@ const AddMuscle = props => {
         let values = elements.map(element => { return element.value; });
         values = values.filter(v => v); //removes empty selections
         values = [...new Set(values)]; //removes duplicate values
+        //maps values to objects of ids and names (required for backend)
+        values = values.map(id => {
+            const name = exercises.find(exercise => exercise._id === id)?.name;
+            return {exerciseId: id, exerciseName: name};
+        });
         return values;
     };
 
@@ -91,7 +103,9 @@ const AddMuscle = props => {
 
             {/* EXERCISES */}
             <label htmlFor="muscle-exercises" className={addClasses['text-label']}>Exercises:</label>
-            <IncrementalSelect info={exercisesInfo}/>
+            { exercises && exercises.length 
+                ? <IncrementalSelect info={exercisesInfo} />
+                : <img src="/loading.gif" alt="Loading..." className={addClasses['loading-img']}/>}
         
             {/* IMAGE */}
             <label htmlFor="muscle-image" className={addClasses['text-label']}>Image:</label>

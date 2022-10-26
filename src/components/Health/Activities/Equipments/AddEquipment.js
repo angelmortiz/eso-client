@@ -34,10 +34,11 @@ const AddEquipment = props => {
     const addEquipment = (event) => {
         event.preventDefault();
         const formVals = getValuesFromForm(event.target.elements);
-        console.log("value: ", formVals);
-        // postEquipment(formVals).then(data => { 
-        //     console.log("Response data: ", data);
-        // });
+
+        //TODO: Handle errors
+        postEquipment(formVals).then(data => { 
+            console.log("Response data: ", data);
+        });
     };
 
     const getValuesFromForm = (elements) => {
@@ -61,6 +62,11 @@ const AddEquipment = props => {
         let values = elements.map(element => { return element.value; });
         values = values.filter(v => v); //removes empty selections
         values = [...new Set(values)]; //removes duplicate values
+        //maps exercise values to objects of ids and names (required for backend)
+        values = values.map(id => {
+            const name = exercises.find(exercise => exercise._id === id)?.name;
+            return {exerciseId: id, exerciseName: name};
+        });
         return values;
     };
 

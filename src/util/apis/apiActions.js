@@ -12,7 +12,6 @@ export const apiGet = path => {
 }
 
 export const apiPost = (path, body) => {
-    console.log("JSON.stringify(body): ", JSON.stringify(body));
     const requestOptions = {
         method: 'POST',
         headers: {'Content-Type': 'application/json',},
