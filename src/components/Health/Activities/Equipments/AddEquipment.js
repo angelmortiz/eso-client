@@ -6,7 +6,7 @@ import { useEffect, useState} from 'react';
 
 const AddEquipment = props => {
     /** Fields Data */
-    const [exercises, setExercises] = useState([])
+    const [exercises, setExercises] = useState([]);
 
     useEffect(() => {
         fetchAllExerciseNames().then(data => { 

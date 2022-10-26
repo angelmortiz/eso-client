@@ -5,16 +5,20 @@ import SelectInput from "./SelectInput";
 const IncrementalSelect = props => {
     const info = props.info;
     const [count, setCount] = useState(1);
-    const [selectList, setSelectList] = useState([<SelectInput select={info.select} count={count} key={`select_${info.select.name}_${count}`}/>]);
+    const [selectList, setSelectList] = useState([newSelectInput(count)]);
 
     const addSelect = event => {
         event.preventDefault();
         //increases the count and adds a new dropdown to the DOM
         setCount(previousCount => {
             const newCount = previousCount + 1;
-            setSelectList(s => s.concat(<SelectInput select={info.select} count={newCount} key={`select_${info.select.name}_${newCount}`}/>))
+            setSelectList(s => s.concat(newSelectInput(newCount)));
             return newCount;
         });
+    }
+
+    function newSelectInput(newCount) {
+        return <SelectInput select={info.select} count={newCount} key={`select_${info.select.name}_${newCount}`}/>
     }
 
     return <Fragment>

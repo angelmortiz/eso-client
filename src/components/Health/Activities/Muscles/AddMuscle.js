@@ -7,7 +7,7 @@ import { postMuscle } from '../../../../util/apis/muscles/musclesApis';
 
 const AddMuscle = props => {
     /** Fields Data */
-    const [exercises, setExercises] = useState([])
+    const [exercises, setExercises] = useState([]);
 
     useEffect(() => {
         fetchAllExerciseNames().then(data => { 
