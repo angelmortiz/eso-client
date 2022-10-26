@@ -1,21 +1,33 @@
 import IncrementalSelect from '../../General/Selects/IncrementalSelect';
 import addClasses from '../../General/CSS/AddInfo.module.css';
+import { fetchAllExerciseNames } from '../../../../util/apis/exercises/exercisesApis';
 import { postEquipment } from '../../../../util/apis/equipments/equipmentsApis';
+import { useEffect, useState} from 'react';
 
 const AddEquipment = props => {
     /** Fields Data */
+    const [exercises, setExercises] = useState([]);
 
-    const exercises = [
-        // TODO: Pull values from backend
-        {value: "", label:"-- Choose an exercise --"},
-        {value: "Squats", label:"Squats"},
-        {value: "Deadlifts", label:"Deadlifts"},
-    ];
+    useEffect(() => {
+        fetchAllExerciseNames().then(data => { 
+            console.log("Exercises data: ", data);
+            setExercises(data);
+        });
+    }, []);
+
+    // const exercises = [
+    //     // TODO: Pull values from backend
+    //     {value: "", label:"-- Choose an exercise --"},
+    //     {value: "Squats", label:"Squats"},
+    //     {value: "Deadlifts", label:"Deadlifts"},
+    // ];
 
     const exercisesInfo = {
         select: {
             id: "equipment-exercises",
             name: "exercises",
+            valueName: "_id",
+            labelName: "name",
             options: exercises
         },
         button: {

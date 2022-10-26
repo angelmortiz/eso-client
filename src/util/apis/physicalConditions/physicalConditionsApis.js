@@ -1,13 +1,13 @@
 import { apiGet, apiPost } from "../apiActions"
 
-export const fetchAllMuscles = () => {
+export const fetchAllPhysicalConditions = () => {
     return apiGet('/activities/physicalConditions');
 }
 
-export const fetchMuscleById = (id) => {
+export const fetchPhysicalConditionById = (id) => {
     return apiGet(`/activities/physicalCondition/${id}`);
 }
 
-export const postMuscle = (body) => {
+export const postPhysicalCondition = (body) => {
     return apiPost(`/activities/physicalCondition`, body);
 }
