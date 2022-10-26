@@ -62,7 +62,7 @@ const AddEquipment = props => {
         let values = elements.map(element => { return element.value; });
         values = values.filter(v => v); //removes empty selections
         values = [...new Set(values)]; //removes duplicate values
-        //maps exercise values to objects of ids and names (required for backend)
+        //maps values to objects of ids and names (required for backend)
         values = values.map(id => {
             const name = exercises.find(exercise => exercise._id === id)?.name;
             return {exerciseId: id, exerciseName: name};

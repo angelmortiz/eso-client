@@ -4,6 +4,10 @@ export const fetchAllEquipments = () => {
     return apiGet('/activities/equipments');
 }
 
+export const fetchAllEquipmentNames = () => {
+    return apiGet('/activities/equipmentNames');
+}
+
 export const fetchEquipmentById = (id) => {
     return apiGet(`/activities/equipment/${id}`);
 }

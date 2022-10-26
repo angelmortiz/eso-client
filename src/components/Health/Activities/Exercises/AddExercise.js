@@ -2,10 +2,32 @@ import IncrementalSelect from '../../General/Selects/IncrementalSelect';
 import SelectInput from '../../General/Selects/SelectInput';
 import addClasses from '../../General/CSS/AddInfo.module.css';
 import { postExercise } from '../../../../util/apis/exercises/exercisesApis';
+import { useEffect, useState} from 'react';
+import { fetchAllEquipmentNames } from '../../../../util/apis/equipments/equipmentsApis';
+import { fetchAllMuscleNames } from '../../../../util/apis/muscles/musclesApis';
 
 
 const AddExercise = props => {
     /** Fields Data */
+    const [muscles, setMuscles] = useState([]);
+    const [equipments, setEquipments] = useState([]);
+
+    useEffect(() => {
+        fetchAllMuscleNames().then(data => { 
+            //adds an empty default option
+            data.unshift({_id: "", name: "-- Choose a muscle --"});
+            setMuscles(data);
+        });
+    }, []);
+
+    useEffect(() => {
+        fetchAllEquipmentNames().then(data => { 
+            //adds an empty default option
+            data.unshift({_id: "", name: "-- Choose an equipment --"});
+            setEquipments(data);
+        });
+    }, []);
+
     const difficultyInfo = {
         select: {
             id: "exercise-difficulty",
@@ -19,10 +41,10 @@ const AddExercise = props => {
         }
     }
 
-    const compoundExerciseInfo = {
+    const compoundMovementInfo = {
         select: {
-            id: "exercise-compoundExercise",
-            name: "compoundExercise",
+            id: "exercise-compoundMovement",
+            name: "compoundMovement",
             options: [
                 {value: "", label:"-- Choose option --"},
                 {value: "yes", label:"Yes"},
@@ -31,25 +53,22 @@ const AddExercise = props => {
         }
     }
 
-    const muscles = [
-        // TODO: Pull values from backend
-        {value: "", label:"-- Choose a muscle --"},
-        {value: "Quadriceps", label:"Quads"},
-        {value: "Hamstrings", label:"Hamstrings"},
-    ];
-
     const mainMuscleInfo = {
         select: {
             id: "exercise-mainMuscle",
             name: "mainMuscle",
+            value: "_id",
+            label: "name",
             options: muscles
         }
     };
 
-    const secondaryMuscleInfo = {
+    const secondaryMusclesInfo = {
         select: {
             id: "exercise-secondaryMuscle",
             name: "secondaryMuscles",
+            value: "_id",
+            label: "name",
             options: muscles
         },
         button: {
@@ -79,12 +98,9 @@ const AddExercise = props => {
         select: {
             id: "exercise-equipments",
             name: "equipments",
-            options: [
-                // TODO: Pull values from backend
-                {value: "", label:"-- Choose an equipment --"},
-                {value: "Dumbbells", label:"Dumbbells"},
-                {value: "Barbell", label:"Barbell"},
-            ]
+            value: "_id",
+            label: "name",
+            options: equipments
         },
         button: {
             id: "add-equipment-btn",
@@ -107,15 +123,21 @@ const AddExercise = props => {
         values.name = elements.name.value;
         values.alternativeName = elements.alternativeName.value;
         values.difficulty = elements.difficulty.value;
-        values.compoundExercise = elements.compoundExercise.value === 'yes';
-        values.mainMuscle = elements.mainMuscle.value;
+        values.compoundMovement = elements.compoundMovement.value === 'yes';
         values.linkToImage = elements.linkToImage.value;
         values.linkToVideo = elements.linkToVideo.value;
-
+        values.mainMuscle = elements.mainMuscle.value;
+        
         //multi-select options
         values.secondaryMuscles = extractMultiOptionValues(elements.secondaryMuscles);
         values.types = extractMultiOptionValues(elements.types);
         values.equipments = extractMultiOptionValues(elements.equipments);
+
+        //maps the id of each selection to its name
+        values.mainMuscle = mapIdsToNames([values.mainMuscle], muscles, "muscleId", "muscleName")[0];
+        values.secondaryMuscles = mapIdsToNames(values.secondaryMuscles, muscles, "muscleId", "muscleName");
+        values.equipments = mapIdsToNames(values.equipments, equipments, "equipmentId", "equipmentName");
+
         return values;
     };
 
@@ -129,6 +151,14 @@ const AddExercise = props => {
         values = values.filter(v => v); //removes empty selections
         values = [...new Set(values)]; //removes duplicate values
         return values;
+    };
+
+    const mapIdsToNames = (values, mapArr, idProperty, nameProperty) => {
+         //maps values to objects of ids and names (required for backend)
+         return values.map(id => {
+            const name = mapArr.find(arr => arr._id === id)?.name;
+            return {[idProperty]: id, [nameProperty]: name};
+        });
     };
 
     /** Render */
@@ -150,25 +180,31 @@ const AddExercise = props => {
             <label htmlFor="exercise-difficulty" className={addClasses['text-label']}>Difficulty:</label>
             <SelectInput select={difficultyInfo.select}/>
             
-            {/* COMPOUND EXERCISE */}
-            <label htmlFor="exercise-compoundExercise" className={addClasses['text-label']}>Compound exercise:</label>
-            <SelectInput select={compoundExerciseInfo.select}/>
+            {/* COMPOUND MOVEMENT */}
+            <label htmlFor="exercise-compoundMovement" className={addClasses['text-label']}>Compound movement:</label>
+            <SelectInput select={compoundMovementInfo.select}/>
             
             {/* MAIN MUSCLE */}
             <label htmlFor="exercise-mainMuscle" className={addClasses['text-label']}>Main muscle:</label>
-            <SelectInput select={mainMuscleInfo.select}/>
+            { muscles && muscles.length 
+                ? <SelectInput select={mainMuscleInfo.select}/>
+                : <img src="/loading.gif" alt="Loading..." className={addClasses['loading-img']}/>}
 
             {/* SECONDARY MUSCLES */}
             <label htmlFor="exercise-secondaryMuscles" className={addClasses['text-label']}>Secondary muscles:</label>
-            <IncrementalSelect info={secondaryMuscleInfo}/>
-
+            { muscles && muscles.length 
+                ? <IncrementalSelect info={secondaryMusclesInfo}/>
+                : <img src="/loading.gif" alt="Loading..." className={addClasses['loading-img']}/>}
+            
             {/* TYPES */}
             <label htmlFor="exercise-types" className={addClasses['text-label']}>Types:</label>
             <IncrementalSelect info={typesInfo}/>
 
             {/* EQUIPMENTS */}
             <label htmlFor="exercise-equipments" className={addClasses['text-label']}>Equipments:</label>
-            <IncrementalSelect info={equipmentsInfo}/>
+            { equipments && equipments.length 
+                ? <IncrementalSelect info={equipmentsInfo}/>
+                : <img src="/loading.gif" alt="Loading..." className={addClasses['loading-img']}/>}
 
             {/* IMAGE */}
             <label htmlFor="exercise-image" className={addClasses['text-label']}>Image:</label>

@@ -30,9 +30,9 @@ const ExerciseDetails = props => {
                 <text className={classes['label']}>Difficulty: </text>
                 <text className={classes['value']}>Advanced</text>
             </div>
-            {/* COMPOUND EXERCISE */}
+            {/* COMPOUND MOVEMENT */}
             <div className={classes['info-block']}>
-                <text className={classes['label']}>Compound exercise: </text>
+                <text className={classes['label']}>Compound movement: </text>
                 <text className={classes['value']}>Yes</text>
             </div>
             {/* MAIN MUSCLE */}
