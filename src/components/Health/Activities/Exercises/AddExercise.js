@@ -112,7 +112,7 @@ const AddExercise = props => {
     const addExercise = (event) => {
         event.preventDefault();
         const formVals = getValuesFromForm(event.target.elements);
-        console.log("value: ", formVals);
+
         postExercise(formVals).then(data => { 
             console.log("Response data: ", data);
         });

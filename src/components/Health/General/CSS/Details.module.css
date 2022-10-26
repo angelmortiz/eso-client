@@ -34,9 +34,11 @@
 }
 
 .label, .value {
+    display: inline-block;
     font-size: 18px;
 }
 
 .label {
+    margin-right: 10px;
     font-weight: 600;
 }

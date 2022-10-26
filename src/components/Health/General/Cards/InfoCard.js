@@ -14,16 +14,16 @@ const InfoCard = props => {
                 </div>
                 <div className={classes['general-info']}>
                     <div className={classes['info-block']}>
-                        <text className={classes['label']}>Muscle:</text>
-                        <text className={classes['value']}>Quadriceps</text>
+                        <p className={classes['label']}>Muscle:</p>
+                        <p className={classes['value']}>Quadriceps</p>
                     </div>
                     <div className={classes['info-block']}>
-                        <text className={classes['label']}>Equipment:</text>
-                        <text className={classes['value']}>Barbell</text>
+                        <p className={classes['label']}>Equipment:</p>
+                        <p className={classes['value']}>Barbell</p>
                     </div>
                     <div className={classes['info-block']}>
-                        <text className={classes['label']}>Compound:</text>
-                        <text className={classes['value']}>Yes</text>
+                        <p className={classes['label']}>Compound:</p>
+                        <p className={classes['value']}>Yes</p>
                     </div>
                 </div>
             </div>
