@@ -6,28 +6,22 @@ import { useEffect, useState} from 'react';
 
 const AddEquipment = props => {
     /** Fields Data */
-    const [exercises, setExercises] = useState([]);
+    const [exercises, setExercises] = useState([])
 
     useEffect(() => {
         fetchAllExerciseNames().then(data => { 
-            console.log("Exercises data: ", data);
+            //adds an empty default option
+            data.unshift({_id: "", name: "-- Choose an exercise --"});
             setExercises(data);
         });
     }, []);
-
-    // const exercises = [
-    //     // TODO: Pull values from backend
-    //     {value: "", label:"-- Choose an exercise --"},
-    //     {value: "Squats", label:"Squats"},
-    //     {value: "Deadlifts", label:"Deadlifts"},
-    // ];
 
     const exercisesInfo = {
         select: {
             id: "equipment-exercises",
             name: "exercises",
-            valueName: "_id",
-            labelName: "name",
+            value: "_id",
+            label: "name",
             options: exercises
         },
         button: {
@@ -92,8 +86,10 @@ const AddEquipment = props => {
 
             {/* EXERCISES */}
             <label htmlFor="equipment-exercises" className={addClasses['text-label']}>Exercises:</label>
-            <IncrementalSelect info={exercisesInfo}/>
-        
+            { exercises && exercises.length 
+                ? <IncrementalSelect info={exercisesInfo} />
+                : <img src="/loading.gif" alt="Loading..." className={addClasses['loading-img']}/>}
+            
             {/* IMAGE */}
             <label htmlFor="equipment-image" className={addClasses['text-label']}>Image:</label>
             <input type="text" id="equipment-image" name="linkToImage"

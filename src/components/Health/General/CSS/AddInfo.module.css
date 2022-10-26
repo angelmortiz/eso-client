@@ -66,3 +66,9 @@
     cursor: pointer;
     background-color: #028e98;
 }
+
+.loading-img {
+    margin: 1rem auto;
+    height: 20px;
+    width: 20px;
+}

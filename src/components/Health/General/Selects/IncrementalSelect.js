@@ -1,23 +1,20 @@
-import { Fragment, useState, useEffect, useRef } from "react";
+import { Fragment, useState} from "react";
 import addClasses from '../../General/CSS/AddInfo.module.css';
 import SelectInput from "./SelectInput";
 
 const IncrementalSelect = props => {
     const info = props.info;
-    const isMounted = useRef(false);
-
     const [count, setCount] = useState(1);
     const [selectList, setSelectList] = useState([<SelectInput select={info.select} count={count} key={`select_${info.select.name}_${count}`}/>]);
 
-    useEffect(() => {
-        isMounted.current ?
-            setSelectList(s => s.concat(<SelectInput select={info.select} count={count} key={`select_${info.select.name}_${count}`}/>))
-            : isMounted.current = true;
-    }, [info.select, count]);
-    
     const addSelect = event => {
         event.preventDefault();
-        setCount(count + 1);
+        //increases the count and adds a new dropdown to the DOM
+        setCount(previousCount => {
+            const newCount = previousCount + 1;
+            setSelectList(s => s.concat(<SelectInput select={info.select} count={newCount} key={`select_${info.select.name}_${newCount}`}/>))
+            return newCount;
+        });
     }
 
     return <Fragment>
