@@ -10,3 +10,9 @@
 .title {
     grid-column: 1 / -1;
 }
+
+.loading-img {
+    grid-column: 1 / -1;
+    height: 50px;
+    width: 50px;
+}

@@ -14,6 +14,7 @@
     border: 1px solid #007d8649;
     border-radius: 8px;
     width: 200px;
+    height: 200px;
 }
 
 .exercise-info {
@@ -26,9 +27,19 @@
     margin-bottom: 1rem;
 }
 
+.name {
+    font-size: 30px;
+}
+
+.alternative-name {
+    margin-top: 5px;
+    font-size: 18px;
+}
+
 .general-info {
 
 }
+
 
 .info-block {
     margin-top: 5px;
