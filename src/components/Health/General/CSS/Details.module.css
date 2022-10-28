@@ -1,10 +1,13 @@
-.main-section {
+.card {
     width: 35rem;
     margin: 2rem auto;
     padding: 1rem 1rem;
     /* border: 2px solid #007E86; */
     border-radius: 8px;
     background-color: rgb(230, 230, 230);
+}
+
+.main-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,6 +30,14 @@
     width: 20rem;
 
     margin: 1rem 0;
+}
+
+.loading-img {
+    display: block;
+    margin: 1rem auto;
+    grid-column: 1 / -1;
+    height: 50px;
+    width: 50px;
 }
 
 .info-block {
