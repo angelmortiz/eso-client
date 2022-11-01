@@ -98,7 +98,7 @@ const ExerciseDetails = props => {
             {showVideo && <YouTubeEmbed embedId={videoId} className={classes['video']}/>  }
             <hr />
             <div className={classes['bottom-btns-div']}>
-                <Link to={`/activities/exercise/update/${id}`} className={classes['link']}>Update</Link>
+                <Link to={`/activities/update-exercise/${id}`} className={classes['link']}>Update</Link>
                 <button type="button" id="delete-exercise-btn" className={classes['delete-btn']} onClick={openDeleteConfirmationModal}>Delete</button>
             </div>
          </div>

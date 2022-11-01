@@ -5,13 +5,41 @@ import { postExercise } from '../../../../util/apis/exercises/exercisesApis';
 import { useEffect, useState} from 'react';
 import { fetchAllEquipmentNames } from '../../../../util/apis/equipments/equipmentsApis';
 import { fetchAllMuscleNames } from '../../../../util/apis/muscles/musclesApis';
-import { useNavigate } from 'react-router-dom';
+import { useAsyncError, useNavigate, useParams } from 'react-router-dom';
+import { fetchExerciseById } from "../../../../util/apis/exercises/exercisesApis"
 
 
-const AddExercise = props => {
+const UpdateExercise = props => {
+    const { id } = useParams();
     const navigate = useNavigate();
+    const [exercise, setExercise] = useState(null);
     const [muscles, setMuscles] = useState([]);
     const [equipments, setEquipments] = useState([]);
+
+    /** INPUT VALUES*/
+    const [name, setName] = useState("");
+    const [alternativeName, setAlternativeName] = useState("");
+    const [difficulty, setDifficulty] = useState("");
+    const [compoundMovement, setCompoundMovement] = useState("");
+    const [mainMuscle, setMainMuscle] = useState("");
+    /** */
+    
+    useEffect(() => {
+        if (!id) console.log(`Error: exercise id not found in the url.`);
+        fetchExerciseById(id).then(data => { 
+            console.log("Exercise data: ", data);
+            setExercise(data);
+        });
+    }, [id]);
+
+    useEffect(() => {
+        if (!exercise) return;
+        setName(exercise.name);
+        setAlternativeName(exercise.alternativeName);
+        setDifficulty(exercise.difficulty);
+        setCompoundMovement(exercise.compoundMovement ? "yes": "no");
+        setMainMuscle(exercise.mainMuscle?.muscleId);
+    }, [exercise]);
 
     useEffect(() => {
         fetchAllMuscleNames().then(data => { 
@@ -110,17 +138,17 @@ const AddExercise = props => {
     /** [END] FIELDS DATA */
 
     /** Functions */
-    const addExercise = (event) => {
+    const UpdateExercise = (event) => {
         event.preventDefault();
         const formVals = getValuesFromForm(event.target.elements);
-
-        postExercise(formVals).then(response => { 
-            console.log("Response: ", response);
-            if (response.isSuccess) {
-                // TODO: Navigate to the just added exercise id
-                navigate(`/activities/exercises/`);
-            }
-        });
+        console.log("formVals: ", formVals);
+        // postExercise(formVals).then(response => { 
+        //     console.log("Response: ", response);
+        //     if (response.isSuccess) {
+        //         // TODO: Navigate to the just added exercise id
+        //         navigate(`/activities/exercises/`);
+        //     }
+        // });
     };
 
     const getValuesFromForm = (elements) => {
@@ -153,7 +181,7 @@ const AddExercise = props => {
         //if there are multiple select dropdowns, converts the RadioNodeList into an array (to later use .map()).
         elements = Object.prototype.toString.call(elements).includes('HTMLSelectElement') ?
             [elements] : [...elements];
-        
+
         let values = elements.map(element => { return element.value; });
         values = values.filter(v => v); //removes empty selections
         values = [...new Set(values)]; //removes duplicate values
@@ -170,31 +198,35 @@ const AddExercise = props => {
 
     /** Render */
     return <section className={addClasses['main-section']}>
-        <form id="add-exercise-form"  onSubmit={addExercise} className={addClasses['main-form']}>
-            <h1 className={addClasses['form-title']}>Add Exercise</h1>
+        <form id="add-exercise-form"  onSubmit={UpdateExercise} className={addClasses['main-form']}>
+            <h1 className={addClasses['form-title']}>Update Exercise</h1>
             
             {/* NAME */}
             <label htmlFor="exercise-name" className={addClasses['text-label']}>Name:</label>
             <input type="text" id="exercise-name" name="name"
-                placeholder='Enter the exercise name...' className={addClasses['text-input']}/>
+                placeholder='Enter the exercise name...' className={addClasses['text-input']}
+                value={name}
+                onChange={event => setName(event.target.value)}/>
             
             {/* ALTERNATIVE NAME */}
             <label htmlFor="exercise-alternativeName" className={addClasses['text-label']}>Alternative name:</label>
             <input type="text" id="exercise-alternativeName" name="alternativeName"
-                placeholder='Enter an alternative name...'className={addClasses['text-input']} />
-            
+                placeholder='Enter an alternative name...'className={addClasses['text-input']}
+                value={alternativeName}
+                onChange={event => setAlternativeName(event.target.value)}/>
+                
             {/* DIFFICULTY */}
             <label htmlFor="exercise-difficulty" className={addClasses['text-label']}>Difficulty:</label>
-            <SelectInput select={difficultyInfo.select}/>
+            <SelectInput select={difficultyInfo.select} selectedValue={difficulty}/>
             
             {/* COMPOUND MOVEMENT */}
             <label htmlFor="exercise-compoundMovement" className={addClasses['text-label']}>Compound movement:</label>
-            <SelectInput select={compoundMovementInfo.select}/>
+            <SelectInput select={compoundMovementInfo.select} selectedValue={compoundMovement}/>
             
             {/* MAIN MUSCLE */}
             <label htmlFor="exercise-mainMuscle" className={addClasses['text-label']}>Main muscle:</label>
             { muscles && muscles.length 
-                ? <SelectInput select={mainMuscleInfo.select}/>
+                ? <SelectInput select={mainMuscleInfo.select} selectedValue={mainMuscle}/>
                 : <img src="/loading.gif" alt="Loading..." className={addClasses['loading-img']}/>}
 
             {/* SECONDARY MUSCLES */}
@@ -224,9 +256,9 @@ const AddExercise = props => {
                 placeholder='Enter the link for the video...' className={addClasses['text-input']}/>
 
             {/* SUBMIT BUTTON */}
-            <button type="submit" id="add-exercse-btn" className={addClasses['submit-btn']}>Add exercise</button>
+            <button type="submit" id="add-exercse-btn" className={addClasses['submit-btn']}>Update exercise</button>
         </form>
     </section>
 };
 
-export default AddExercise;
+export default UpdateExercise;

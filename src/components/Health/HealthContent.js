@@ -6,6 +6,7 @@ import AddPhysicalCondition from './Activities/PhysicalConditions/AddPhysicalCon
 import ExerciseDetails from './Activities/Exercises/ExerciseDetails';
 import Exercises from './Activities/Exercises/Exercises';
 import AddFood from './Nutrition/Foods/AddFood';
+import UpdateExercise from './Activities/Exercises/UpdateExercise';
 
 const HealthContent = props => {
     return <Routes>
@@ -13,6 +14,7 @@ const HealthContent = props => {
         <Route path="/activities/exercises" element={<Exercises/>}/>
         <Route path="/activities/exercise/:id" element={<ExerciseDetails/>}/>
         <Route path="/activities/add-exercise" element={<AddExercise/>}/>
+        <Route path="/activities/update-exercise/:id" element={<UpdateExercise/>}/>
         {/* <Route path="/activities/muscles" element={<Muscles/>}/>
         <Route path="/activities/muscle/:id" element={<MuscleDetails/>}/> */}
         <Route path="/activities/add-muscle" element={<AddMuscle/>}/>
