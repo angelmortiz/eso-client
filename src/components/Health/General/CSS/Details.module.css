@@ -66,6 +66,12 @@
     cursor: pointer;
 }
 
+.show-btn:hover,
+.show-btn:active {
+    cursor: pointer;
+    background-color: #028e98;
+}
+
 .bottom-btns-div {
     /* background-color: red; */
     margin-top: 1rem;
@@ -87,4 +93,12 @@
     text-decoration: none;
     text-align: center;
     cursor: pointer;
+}
+
+.link:hover,
+.link:active,
+.delete-btn:hover,
+.delete-btn:active {
+    cursor: pointer;
+    background-color: #028e98;
 }

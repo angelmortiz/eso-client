@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { fetchExerciseById } from "../../../../util/apis/exercises/exercisesApis"
 import YouTubeEmbed from "../../../UI/VideosEmbed/YouTubeEmbed";
 import classes from '../../General/CSS/Details.module.css';
+import DeleteConfirmationModal from "../../General/Popups/Delete/DeleteConfirmationModal";
 
 
 const ExerciseDetails = props => {
@@ -11,6 +12,7 @@ const ExerciseDetails = props => {
     const [exercise, setExercise] = useState(null);
     const [videoId, setVideoExercise] = useState(null);
     const [showVideo, setShowVideo] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
     useEffect(() => {
         if (!id) console.log(`Error: exercise id not found in the url.`);
@@ -24,6 +26,21 @@ const ExerciseDetails = props => {
     const toggleShowVideo = (event) => {
         event.preventDefault();
         setShowVideo(!showVideo);
+    };
+
+    const deleteExercise = (event) => {
+        event.preventDefault();
+        setIsDeleteModalOpen(true);
+    };
+
+    const closeDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+    };
+
+    const confirmDeleteExercise = () => {
+        closeDeleteModal();
+        
+        console.log('Deleting exercise...');
     };
 
     return <section className={classes['card']}>
@@ -77,10 +94,12 @@ const ExerciseDetails = props => {
             <hr />
             <div className={classes['bottom-btns-div']}>
                 <Link to={`/activities/exercise/update/${id}`} className={classes['link']}>Update</Link>
-                <button type="button" id="delete-exercise-btn" className={classes['delete-btn']}>Delete</button>
+                <button type="button" id="delete-exercise-btn" className={classes['delete-btn']} onClick={deleteExercise}>Delete</button>
             </div>
          </div>
         }
+        {/* Delete Confirmation Modal */}
+        <DeleteConfirmationModal isModalOpen={isDeleteModalOpen} closeModal={closeDeleteModal} confirmDelete={confirmDeleteExercise} info={exercise}/>
     </section>
     
 };
