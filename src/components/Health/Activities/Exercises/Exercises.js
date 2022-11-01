@@ -8,7 +8,6 @@ const Exercises = props => {
 
     useEffect(() => {
         fetchAllExercises().then(data => { 
-            console.log("data: ", data);
             setExercises(data);
         });
     }, []);
@@ -22,7 +21,7 @@ const Exercises = props => {
     };
 
     return <div className={classes['grid']}>
-        <h1 className={classes['title']}>Exercises</h1>        
+        <h1 className={classes['title']}>Exercises</h1> 
         { exercises && exercises.length 
                 ? addInfoCards()
                 : <img src="/loading.gif" alt="Loading..." className={classes['loading-img']}/>}

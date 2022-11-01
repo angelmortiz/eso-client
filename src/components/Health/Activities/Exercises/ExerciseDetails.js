@@ -1,19 +1,30 @@
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { fetchExerciseById } from "../../../../util/apis/exercises/exercisesApis"
+import YouTubeEmbed from "../../../UI/VideosEmbed/YouTubeEmbed";
 import classes from '../../General/CSS/Details.module.css';
 
 
 const ExerciseDetails = props => {
     const { id } = useParams();
     const [exercise, setExercise] = useState(null);
+    const [videoId, setVideoExercise] = useState(null);
+    const [showVideo, setShowVideo] = useState(false);
 
     useEffect(() => {
         if (!id) console.log(`Error: exercise id not found in the url.`);
         fetchExerciseById(id).then(data => { 
+            const vidId = data.linkToVideo?.substr(16); //extracts the video id from YT link
             setExercise(data);
+            setVideoExercise(vidId);
         });
     }, [id]);
+
+    const toggleShowVideo = (event) => {
+        event.preventDefault();
+        setShowVideo(!showVideo);
+    };
 
     return <section className={classes['card']}>
         { !exercise
@@ -25,8 +36,6 @@ const ExerciseDetails = props => {
             <h2 className={classes['alternative-name']}>{exercise.alternativeName}</h2>
             {/* IMAGE */}
             <img src={exercise.linkToImage} alt={exercise.name} className={classes['img']}/>
-            {/* VIDEO */}
-            <p><strong>&#60;Placeholder for video&#62;</strong></p>
             <div className={classes['general-info']}>
                 {/* DIFFICULTY */}
                 <div className={classes['info-block']}>
@@ -61,6 +70,14 @@ const ExerciseDetails = props => {
                     {/* TODO: Implement logic for multiple options */}
                     <p className={classes['value']}>{exercise.equipments[0]?.equipmentName || "No equipment"}</p>
                 </div>
+            </div>
+            <button type="button" id="show-video-btn" className={classes['show-btn']} onClick={toggleShowVideo}>{showVideo ? "Hide video" : "Show video"}</button>
+            {/* VIDEO */}
+            {showVideo && <YouTubeEmbed embedId={videoId} className={classes['video']}/>  }
+            <hr />
+            <div className={classes['bottom-btns-div']}>
+                <Link to={`/activities/exercise/update/${id}`} className={classes['link']}>Update</Link>
+                <button type="button" id="delete-exercise-btn" className={classes['delete-btn']}>Delete</button>
             </div>
          </div>
         }

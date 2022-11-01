@@ -27,9 +27,7 @@ const InfoCard = props => {
                     </div>
                 </div>
             </div>
-            <Link to={`/activities/exercise/${info._id}`} className={classes['link']}>
-                Details
-            </Link>
+            <Link to={`/activities/exercise/${info._id}`} className={classes['link']}>Details</Link>
         </div>
 };
 

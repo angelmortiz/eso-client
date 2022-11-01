@@ -1,0 +1,6 @@
+.video-responsive iframe {
+  margin-top: 1rem;
+  height: 17rem;
+  width: 30rem;
+  border-radius: 8px;
+}
