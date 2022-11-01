@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
-import { fetchExerciseById } from "../../../../util/apis/exercises/exercisesApis"
+import { deleteExercise, fetchExerciseById } from "../../../../util/apis/exercises/exercisesApis"
 import YouTubeEmbed from "../../../UI/VideosEmbed/YouTubeEmbed";
 import classes from '../../General/CSS/Details.module.css';
 import DeleteConfirmationModal from "../../General/Popups/Delete/DeleteConfirmationModal";
@@ -9,6 +9,7 @@ import DeleteConfirmationModal from "../../General/Popups/Delete/DeleteConfirmat
 
 const ExerciseDetails = props => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [exercise, setExercise] = useState(null);
     const [videoId, setVideoExercise] = useState(null);
     const [showVideo, setShowVideo] = useState(false);
@@ -28,7 +29,7 @@ const ExerciseDetails = props => {
         setShowVideo(!showVideo);
     };
 
-    const deleteExercise = (event) => {
+    const openDeleteConfirmationModal = (event) => {
         event.preventDefault();
         setIsDeleteModalOpen(true);
     };
@@ -39,8 +40,12 @@ const ExerciseDetails = props => {
 
     const confirmDeleteExercise = () => {
         closeDeleteModal();
-        
-        console.log('Deleting exercise...');
+
+        //TODO: Check if exercise was deleted successfully
+        deleteExercise(id).then(response => { 
+            console.log("Response: ", response);
+            navigate("/activities/exercises");
+        });
     };
 
     return <section className={classes['card']}>
@@ -94,7 +99,7 @@ const ExerciseDetails = props => {
             <hr />
             <div className={classes['bottom-btns-div']}>
                 <Link to={`/activities/exercise/update/${id}`} className={classes['link']}>Update</Link>
-                <button type="button" id="delete-exercise-btn" className={classes['delete-btn']} onClick={deleteExercise}>Delete</button>
+                <button type="button" id="delete-exercise-btn" className={classes['delete-btn']} onClick={openDeleteConfirmationModal}>Delete</button>
             </div>
          </div>
         }

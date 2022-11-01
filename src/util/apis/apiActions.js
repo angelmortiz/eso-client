@@ -26,3 +26,17 @@ export const apiPost = (path, body) => {
         console.log("An error ocurred while posting information: ", error);
     });
 }
+
+export const apiDelete = (path) => {
+    const requestOptions = {
+        method: 'DELETE'
+    };
+
+    return fetch(`${API_ADDRESS}${path}`, requestOptions)
+    .then(apiResponse => {
+        return apiResponse.json();
+    })
+    .catch(error => {
+        console.log("An error ocurred while deleting document: ", error);
+    });
+}

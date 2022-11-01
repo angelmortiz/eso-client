@@ -5,12 +5,14 @@ import { postExercise } from '../../../../util/apis/exercises/exercisesApis';
 import { useEffect, useState} from 'react';
 import { fetchAllEquipmentNames } from '../../../../util/apis/equipments/equipmentsApis';
 import { fetchAllMuscleNames } from '../../../../util/apis/muscles/musclesApis';
+import { useNavigate } from 'react-router-dom';
 
 
 const AddExercise = props => {
-    /** Fields Data */
+    const navigate = useNavigate();
     const [muscles, setMuscles] = useState([]);
     const [equipments, setEquipments] = useState([]);
+    
 
     useEffect(() => {
         fetchAllMuscleNames().then(data => { 
@@ -28,6 +30,7 @@ const AddExercise = props => {
         });
     }, []);
 
+    /** FIELDS DATA */
     const difficultyInfo = {
         select: {
             id: "exercise-difficulty",
@@ -107,14 +110,19 @@ const AddExercise = props => {
             label: "Add equipment"
         }
     };
+    /** [END] FIELDS DATA */
 
     /** Functions */
     const addExercise = (event) => {
         event.preventDefault();
         const formVals = getValuesFromForm(event.target.elements);
 
-        postExercise(formVals).then(data => { 
-            console.log("Response data: ", data);
+        postExercise(formVals).then(response => { 
+            console.log("Response: ", response);
+            if (response.isSuccess) {
+                // TODO: Navigate to the just added exercise id
+                navigate(`/activities/exercises/`);
+            }
         });
     };
 
