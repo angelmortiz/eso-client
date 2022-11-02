@@ -8,7 +8,6 @@ import { fetchAllMuscleNames } from '../../../../util/apis/muscles/musclesApis';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchExerciseById } from "../../../../util/apis/exercises/exercisesApis"
 
-
 const UpdateExercise = props => {
     const navigate = useNavigate();
     const { id } = useParams();

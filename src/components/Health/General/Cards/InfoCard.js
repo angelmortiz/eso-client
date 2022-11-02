@@ -22,8 +22,9 @@ const InfoCard = props => {
                         <p className={classes['value']}>{info.equipments[0]?.equipmentName}</p>
                     </div>
                     <div className={classes['info-block']}>
-                        <p className={classes['label']}>Compound:</p>
-                        <p className={classes['value']}>{info.compoundMovement ? 'Yes' : 'No'}</p>
+                        <p className={classes['label']}>Type:</p>
+                        {/* TODO: Handle scenarios where there is more than one equipment */}
+                        <p className={classes['value']}>{info.types[0]}</p>
                     </div>
                 </div>
             </div>
