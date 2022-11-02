@@ -82,7 +82,7 @@ const AddExercise = props => {
             id: "exercise-types",
             name: "types",
             options: [
-                // TODO: Pull values from backend
+                // TODO: Pull values from backend or global variable
                 {value: "", label:"-- Choose a type --"},
                 {value: "HIIT", label:"HIIT"},
                 {value: "Strength", label:"Strength"},
