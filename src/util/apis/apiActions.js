@@ -27,6 +27,22 @@ export const apiPost = (path, body) => {
     });
 }
 
+export const apiPut = (path, body) => {
+    const requestOptions = {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json',},
+        body: JSON.stringify(body)
+    };
+
+    return fetch(`${API_ADDRESS}${path}`, requestOptions)
+    .then(apiResponse => {
+        return apiResponse.json();
+    })
+    .catch(error => {
+        console.log("An error ocurred while updating information: ", error);
+    });
+}
+
 export const apiDelete = (path) => {
     const requestOptions = {
         method: 'DELETE'

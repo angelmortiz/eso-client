@@ -1,7 +1,7 @@
 import IncrementalSelect from '../../General/Selects/IncrementalSelect';
 import SelectInput from '../../General/Selects/SelectInput';
 import addClasses from '../../General/CSS/AddInfo.module.css';
-import { postExercise } from '../../../../util/apis/exercises/exercisesApis';
+import { putExercise } from '../../../../util/apis/exercises/exercisesApis';
 import { useEffect, useState} from 'react';
 import { fetchAllEquipmentNames } from '../../../../util/apis/equipments/equipmentsApis';
 import { fetchAllMuscleNames } from '../../../../util/apis/muscles/musclesApis';
@@ -10,13 +10,13 @@ import { fetchExerciseById } from "../../../../util/apis/exercises/exercisesApis
 
 
 const UpdateExercise = props => {
-    const { id } = useParams();
     const navigate = useNavigate();
+    const { id } = useParams();
     const [exercise, setExercise] = useState(null);
-    const [muscles, setMuscles] = useState([]);
+    const [musclesOptions, setMuscles] = useState([]);
     const [equipmentsOptions, setEquipmentsOptions] = useState([]);
 
-    /** INPUT VALUES*/
+    /** INPUT VALUES */
     const [name, setName] = useState("");
     const [alternativeName, setAlternativeName] = useState("");
     const [difficulty, setDifficulty] = useState("");
@@ -29,14 +29,15 @@ const UpdateExercise = props => {
     const [linkToVideo, setLinkToVideo] = useState("");
     /** */
     
+    //Gets the most updated info from current exercise
     useEffect(() => {
         if (!id) console.log(`Error: exercise id not found in the url.`);
         fetchExerciseById(id).then(data => { 
-            console.log("Exercise data: ", data);
             setExercise(data);
         });
     }, [id]);
 
+    //Sets input values based on the current info fetched from the db
     useEffect(() => {
         if (!exercise) return;
         setName(exercise.name);
@@ -56,6 +57,7 @@ const UpdateExercise = props => {
         return arrObjs.map(obj => obj[propertyName]);
     }
 
+    //Fetches options for muscles and equipments
     useEffect(() => {
         fetchAllMuscleNames().then(data => { 
             //adds an empty default option
@@ -69,6 +71,68 @@ const UpdateExercise = props => {
             setEquipmentsOptions(data);
         });
     }, []);
+
+    /** FUNCTIONS */
+    //runs when update button is clicked
+    const UpdateExercise = (event) => {
+        event.preventDefault();
+        const formVals = getValuesFromForm(event.target.elements);
+        // console.log("formVals: ", formVals);
+
+        putExercise(id, formVals).then(response => { 
+            console.log("Response: ", response);
+            if (response.isSuccess) {
+                //Navigate to the just updated exercise id
+                navigate(`/activities/exercise/${id}`);
+            }
+        });
+    };
+
+    const getValuesFromForm = (elements) => {
+        const values = {};
+        values.id = id;
+        values.name = elements.name.value;
+        values.alternativeName = elements.alternativeName.value;
+        values.difficulty = elements.difficulty.value;
+        values.compoundMovement = elements.compoundMovement.value === 'yes';
+        values.linkToImage = elements.linkToImage.value;
+        values.linkToVideo = elements.linkToVideo.value;
+        values.mainMuscle = elements.mainMuscle.value;
+        
+        //extract values from multi-select options
+        values.secondaryMuscles = extractMultiOptionValues(elements.secondaryMuscles);
+        values.types = extractMultiOptionValues(elements.types);
+        values.equipments = extractMultiOptionValues(elements.equipments);
+
+        //maps the id of each selection to its name (required for the db schema)
+        values.mainMuscle = values.mainMuscle 
+            ? mapIdsToNames([values.mainMuscle], musclesOptions, "muscleId", "muscleName")[0] 
+            : {};
+        values.secondaryMuscles = mapIdsToNames(values.secondaryMuscles, musclesOptions, "muscleId", "muscleName");
+        values.equipments = mapIdsToNames(values.equipments, equipmentsOptions, "equipmentId", "equipmentName");
+
+        return values;
+    };
+
+    const extractMultiOptionValues = (elements) => {
+        //if there is only one select dropdown, it adds the HTMLSelectElement to an array before extracting the value.
+        //if there are multiple select dropdowns, converts the RadioNodeList into an array (to later use .map()).
+        elements = Object.prototype.toString.call(elements).includes('HTMLSelectElement') ?
+            [elements] : [...elements];
+
+        let values = elements.map(element => { return element.value; });
+        values = values.filter(v => v); //removes empty selections
+        values = [...new Set(values)]; //removes duplicate values
+        return values;
+    };
+
+    const mapIdsToNames = (values, mapArr, idProperty, nameProperty) => {
+         //maps values to objects of ids and names (required for backend)
+         return values.map(id => {
+            const name = mapArr.find(arr => arr._id === id)?.name;
+            return {[idProperty]: id, [nameProperty]: name};
+        });
+    };
 
     /** FIELDS DATA */
     const difficultyInfo = {
@@ -102,7 +166,7 @@ const UpdateExercise = props => {
             name: "mainMuscle",
             value: "_id",
             label: "name",
-            options: muscles
+            options: musclesOptions
         }
     };
 
@@ -112,7 +176,7 @@ const UpdateExercise = props => {
             name: "secondaryMuscles",
             value: "_id",
             label: "name",
-            options: muscles
+            options: musclesOptions
         },
         button: {
             id: "add-muscle-btn",
@@ -152,65 +216,6 @@ const UpdateExercise = props => {
     };
     /** [END] FIELDS DATA */
 
-    /** Functions */
-    const UpdateExercise = (event) => {
-        event.preventDefault();
-        const formVals = getValuesFromForm(event.target.elements);
-        console.log("formVals: ", formVals);
-        // postExercise(formVals).then(response => { 
-        //     console.log("Response: ", response);
-        //     if (response.isSuccess) {
-        //         // TODO: Navigate to the just added exercise id
-        //         navigate(`/activities/exercise/${id}`);
-        //     }
-        // });
-    };
-
-    const getValuesFromForm = (elements) => {
-        const values = {};
-        values.name = elements.name.value;
-        values.alternativeName = elements.alternativeName.value;
-        values.difficulty = elements.difficulty.value;
-        values.compoundMovement = elements.compoundMovement.value === 'yes';
-        values.linkToImage = elements.linkToImage.value;
-        values.linkToVideo = elements.linkToVideo.value;
-        values.mainMuscle = elements.mainMuscle.value;
-        
-        //multi-select options
-        values.secondaryMuscles = extractMultiOptionValues(elements.secondaryMuscles);
-        values.types = extractMultiOptionValues(elements.types);
-        values.equipments = extractMultiOptionValues(elements.equipments);
-
-        //maps the id of each selection to its name
-        values.mainMuscle = values.mainMuscle 
-            ? mapIdsToNames([values.mainMuscle], muscles, "muscleId", "muscleName")[0] 
-            : {};
-        values.secondaryMuscles = mapIdsToNames(values.secondaryMuscles, muscles, "muscleId", "muscleName");
-        values.equipments = mapIdsToNames(values.equipments, equipmentsOptions, "equipmentId", "equipmentName");
-
-        return values;
-    };
-
-    const extractMultiOptionValues = (elements) => {
-        //if there is only one select dropdown, it adds the HTMLSelectElement to an array before extracting the value.
-        //if there are multiple select dropdowns, converts the RadioNodeList into an array (to later use .map()).
-        elements = Object.prototype.toString.call(elements).includes('HTMLSelectElement') ?
-            [elements] : [...elements];
-
-        let values = elements.map(element => { return element.value; });
-        values = values.filter(v => v); //removes empty selections
-        values = [...new Set(values)]; //removes duplicate values
-        return values;
-    };
-
-    const mapIdsToNames = (values, mapArr, idProperty, nameProperty) => {
-         //maps values to objects of ids and names (required for backend)
-         return values.map(id => {
-            const name = mapArr.find(arr => arr._id === id)?.name;
-            return {[idProperty]: id, [nameProperty]: name};
-        });
-    };
-
     /** Render */
     return <section className={addClasses['main-section']}>
         <form id="add-exercise-form"  onSubmit={UpdateExercise} className={addClasses['main-form']}>
@@ -240,13 +245,13 @@ const UpdateExercise = props => {
             
             {/* MAIN MUSCLE */}
             <label htmlFor="exercise-mainMuscle" className={addClasses['text-label']}>Main muscle:</label>
-            { muscles && muscles.length 
+            { musclesOptions && musclesOptions.length 
                 ? <SelectInput select={mainMuscleInfo.select} selectedValue={mainMuscle}/>
                 : <img src="/loading.gif" alt="Loading..." className={addClasses['loading-img']}/>}
 
             {/* SECONDARY MUSCLES */}
             <label htmlFor="exercise-secondaryMuscles" className={addClasses['text-label']}>Secondary muscles:</label>
-            { muscles && muscles.length 
+            { musclesOptions && musclesOptions.length 
                 ? <IncrementalSelect info={secondaryMusclesInfo} selectedValues={secondaryMuscles}/>
                 : <img src="/loading.gif" alt="Loading..." className={addClasses['loading-img']}/>}
             
