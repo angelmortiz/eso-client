@@ -1,9 +1,10 @@
-import { Fragment, useState} from "react";
+import { Fragment, useEffect, useState} from "react";
 import addClasses from '../../General/CSS/AddInfo.module.css';
 import SelectInput from "./SelectInput";
 
 const IncrementalSelect = props => {
     const info = props.info;
+    //const selectedValues = props.selectedValues;
     const [count, setCount] = useState(1);
     const [selectList, setSelectList] = useState([newSelectInput(count)]);
 
@@ -17,9 +18,27 @@ const IncrementalSelect = props => {
         });
     }
 
-    function newSelectInput(newCount) {
-        return <SelectInput select={info.select} count={newCount} key={`select_${info.select.name}_${newCount}`}/>
+    function newSelectInput(newCount, value = undefined) {
+        return <SelectInput select={info.select} count={newCount} key={`select_${info.select.name}_${newCount}`} selectedValue={value}/>;
     }
+
+    useEffect(() => {
+        const selectedValues = props.selectedValues;
+        //skips if no selectedValues has been passed from the parent
+        if (!selectedValues || selectedValues.length ===0) { return; }
+
+        const selectedInputs = [];
+        let newCount = 0;
+        //creates an array with the pre-selected elements from db (used for updates)
+        selectedValues.forEach((value, index) => {
+            newCount = index + 1;
+            selectedInputs.push(<SelectInput select={info.select} count={newCount} key={`select_${info.select.name}_${newCount}`} selectedValue={value}/>);
+        });
+
+        setSelectList(selectedInputs);
+        setCount(newCount);
+
+    }, [props.selectedValues, info]);
 
     return <Fragment>
         {/* Displays all the selects, including the selects being added through btn clicked. */}

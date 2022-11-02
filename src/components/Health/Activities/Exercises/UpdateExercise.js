@@ -5,7 +5,7 @@ import { postExercise } from '../../../../util/apis/exercises/exercisesApis';
 import { useEffect, useState} from 'react';
 import { fetchAllEquipmentNames } from '../../../../util/apis/equipments/equipmentsApis';
 import { fetchAllMuscleNames } from '../../../../util/apis/muscles/musclesApis';
-import { useAsyncError, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchExerciseById } from "../../../../util/apis/exercises/exercisesApis"
 
 
@@ -14,7 +14,7 @@ const UpdateExercise = props => {
     const navigate = useNavigate();
     const [exercise, setExercise] = useState(null);
     const [muscles, setMuscles] = useState([]);
-    const [equipments, setEquipments] = useState([]);
+    const [equipmentsOptions, setEquipmentsOptions] = useState([]);
 
     /** INPUT VALUES*/
     const [name, setName] = useState("");
@@ -22,6 +22,11 @@ const UpdateExercise = props => {
     const [difficulty, setDifficulty] = useState("");
     const [compoundMovement, setCompoundMovement] = useState("");
     const [mainMuscle, setMainMuscle] = useState("");
+    const [secondaryMuscles, setSecondaryMuscles] = useState([]);
+    const [equipments, setEquipments] = useState([]);
+    const [types, setTypes] = useState([]);
+    const [linkToImage, setLinkToImage] = useState("");
+    const [linkToVideo, setLinkToVideo] = useState("");
     /** */
     
     useEffect(() => {
@@ -39,7 +44,17 @@ const UpdateExercise = props => {
         setDifficulty(exercise.difficulty);
         setCompoundMovement(exercise.compoundMovement ? "yes": "no");
         setMainMuscle(exercise.mainMuscle?.muscleId);
+        setSecondaryMuscles(extractSelectedValues(exercise.secondaryMuscles, "muscleId"));
+        setEquipments(extractSelectedValues(exercise.equipments, "equipmentId"));
+        setTypes(exercise.types);
+        setLinkToImage(exercise.linkToImage);
+        setLinkToVideo(exercise.linkToVideo);
     }, [exercise]);
+
+
+    const extractSelectedValues = (arrObjs, propertyName) => {
+        return arrObjs.map(obj => obj[propertyName]);
+    }
 
     useEffect(() => {
         fetchAllMuscleNames().then(data => { 
@@ -51,7 +66,7 @@ const UpdateExercise = props => {
         fetchAllEquipmentNames().then(data => { 
             //adds an empty default option
             data.unshift({_id: "", name: "-- Choose an equipment --"});
-            setEquipments(data);
+            setEquipmentsOptions(data);
         });
     }, []);
 
@@ -128,7 +143,7 @@ const UpdateExercise = props => {
             name: "equipments",
             value: "_id",
             label: "name",
-            options: equipments
+            options: equipmentsOptions
         },
         button: {
             id: "add-equipment-btn",
@@ -146,7 +161,7 @@ const UpdateExercise = props => {
         //     console.log("Response: ", response);
         //     if (response.isSuccess) {
         //         // TODO: Navigate to the just added exercise id
-        //         navigate(`/activities/exercises/`);
+        //         navigate(`/activities/exercise/${id}`);
         //     }
         // });
     };
@@ -171,7 +186,7 @@ const UpdateExercise = props => {
             ? mapIdsToNames([values.mainMuscle], muscles, "muscleId", "muscleName")[0] 
             : {};
         values.secondaryMuscles = mapIdsToNames(values.secondaryMuscles, muscles, "muscleId", "muscleName");
-        values.equipments = mapIdsToNames(values.equipments, equipments, "equipmentId", "equipmentName");
+        values.equipments = mapIdsToNames(values.equipments, equipmentsOptions, "equipmentId", "equipmentName");
 
         return values;
     };
@@ -232,28 +247,32 @@ const UpdateExercise = props => {
             {/* SECONDARY MUSCLES */}
             <label htmlFor="exercise-secondaryMuscles" className={addClasses['text-label']}>Secondary muscles:</label>
             { muscles && muscles.length 
-                ? <IncrementalSelect info={secondaryMusclesInfo}/>
+                ? <IncrementalSelect info={secondaryMusclesInfo} selectedValues={secondaryMuscles}/>
                 : <img src="/loading.gif" alt="Loading..." className={addClasses['loading-img']}/>}
             
             {/* TYPES */}
             <label htmlFor="exercise-types" className={addClasses['text-label']}>Types:</label>
-            <IncrementalSelect info={typesInfo}/>
+            <IncrementalSelect info={typesInfo} selectedValues={types}/>
 
             {/* EQUIPMENTS */}
             <label htmlFor="exercise-equipments" className={addClasses['text-label']}>Equipments:</label>
-            { equipments && equipments.length 
-                ? <IncrementalSelect info={equipmentsInfo}/>
+            { equipmentsOptions && equipmentsOptions.length 
+                ? <IncrementalSelect info={equipmentsInfo} selectedValues={equipments}/>
                 : <img src="/loading.gif" alt="Loading..." className={addClasses['loading-img']}/>}
 
             {/* IMAGE */}
             <label htmlFor="exercise-image" className={addClasses['text-label']}>Image:</label>
             <input type="text" id="exercise-image" name="linkToImage"
-                placeholder='Enter the link for the image...' className={addClasses['text-input']}/>
+                placeholder='Enter the link for the image...' className={addClasses['text-input']}
+                value={linkToImage}
+                onChange={event => setLinkToImage(event.target.value)}/>
 
             {/* VIDEO */}
             <label htmlFor="exercise-video" className={addClasses['text-label']}>Video:</label>
             <input type="text" id="exercise-video" name="linkToVideo"
-                placeholder='Enter the link for the video...' className={addClasses['text-input']}/>
+                placeholder='Enter the link for the video...' className={addClasses['text-input']}
+                value={linkToVideo}
+                onChange={event => setLinkToVideo(event.target.value)}/>
 
             {/* SUBMIT BUTTON */}
             <button type="submit" id="add-exercse-btn" className={addClasses['submit-btn']}>Update exercise</button>
