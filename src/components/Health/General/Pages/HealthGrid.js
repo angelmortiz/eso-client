@@ -1,7 +1,7 @@
 import  classes from './Grid.module.css';
 
 const HealthGrid = props => {
-    
+
     return <div className={classes['grid']}>
         <h1 className={classes['title']}>{props.title}</h1>
          
