@@ -86,6 +86,7 @@ const Exercises = props => {
             <button className={classes['show-btn']} onClick={() => setShowFilters(!showFilters)}>
                 {showFilters ? 'Hide filters' : 'Show filters'}
             </button>
+            {showFilters && <hr className={classes['separator']}/>}
             {/* Shows the filters only when the user opens the tray */}
             {   showFilters &&
                 <div className={classes['filters-selects']}> 
@@ -119,6 +120,7 @@ const Exercises = props => {
                     <button className={classes['clear-btn']} onClick={clearFilters}>Clear filters</button>
                 </div>
             }
+            {showFilters && <hr className={`${classes['separator']} ${classes['separator-bottom']}`}/>}
         </section>
         {addInfoCards()}
     </HealthGrid>

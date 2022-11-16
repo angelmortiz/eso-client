@@ -5,11 +5,11 @@ import { useState } from 'react';
 const NavigationBar = props => {
     const [isMenuOpen, setMenuOpen] = useState(false);
 
-    const menuToggle = (event) => {
+    const menuToggle = () => {
         setMenuOpen(!isMenuOpen);
     };
 
-    const closeMenu = (event) => {
+    const closeMenu = () => {
         setMenuOpen(false);
     }
 
