@@ -1,13 +1,24 @@
 import classes from './NavigationBar.module.css';
 import { Link } from "react-router-dom";
+import { useState } from 'react';
 
 const NavigationBar = props => {
+    const [isMenuOpen, setMenuOpen] = useState(false);
+
+    const menuToggle = (event) => {
+        setMenuOpen(!isMenuOpen);
+    };
+
+    const closeMenu = (event) => {
+        setMenuOpen(false);
+    }
+
     return <header>
     <nav className={classes['nav-bar']}>
-        <Link to="/" className="logo-link">
+        <Link to="/" class={classes['logo-link']} onClick={closeMenu}>
             <img src= "/logo.png" className={classes['logo-img']} alt="Logo"/>
         </Link>
-        <ul className={classes['ul-nav-options']}>
+        <ul className={`${classes['ul-nav-options']} ${isMenuOpen ? '' : classes.hidden}`} onClick={closeMenu}>
             {/* NUTRITION */}
             {/* <li key="nutrition"className={classes['dropdown']}>
                 <span> Nutrition </span>
@@ -87,7 +98,12 @@ const NavigationBar = props => {
                 </div>
             </li>
         </ul>
+        <div className={classes["menu-tray"]} onClick={menuToggle}>
+            <svg xmlns="http://www.w3.org/2000/svg" class={classes["menu-icon"]} viewBox="0 0 512 512"><title>Menu</title><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M80 160h352M80 256h352M80 352h352"/></svg>
+        </div>
     </nav>
+
+    {isMenuOpen && <div className={classes['menu-overlay']} onClick={closeMenu}></div>}
     </header>
 }
 
