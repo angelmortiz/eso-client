@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import classes from './DeleteConfirmationModal.module.css';
 
 //modal styles
-const modalStyles = {
+const modalStylesDesktop = {
     content: {
         backgroundColor: 'rgb(242, 242, 242)',
         top: '40vh',
@@ -13,6 +13,23 @@ const modalStyles = {
         border: '1.5px solid #007E86',
         borderRadius: '8px',
     },
+};
+
+const modalStylesPhone = {
+    content: {
+        backgroundColor: 'rgb(242, 242, 242)',
+        top: '30vh',
+        bottom: '30vh',
+        right: '5vw',
+        left: '5vw',
+        border: '1.5px solid #007E86',
+        borderRadius: '8px',
+    },
+};
+
+const getWindowDimensions = () => {
+    const {innerWidth: width, innerHeight: height} = window;
+    return {width, height};
 };
 
 //binds modal to root app element
@@ -39,7 +56,7 @@ const DeleteConfirmationModal = props => {
     return <Modal
         isOpen={isOpen}
         onRequestClose={closeModal}
-        style={modalStyles}>
+        style={getWindowDimensions().width >= 450 ? modalStylesDesktop : modalStylesPhone}>
             <div className={classes['modal-content']}>
                 <h3 className={classes['title']}>⚠️ Are you sure you want to delete this exercise?</h3>
                 <p className={classes['message']}>You are about to delete the exercise: <strong>'{exercise?.name} ({exercise?.alternativeName})'</strong>, with id: <strong>'{exercise?._id}'</strong></p>

@@ -1,6 +1,19 @@
+/*************/
+/** DESKTOP **/
+/*************/
 .video-responsive iframe {
   margin-top: 1rem;
   height: 17rem;
   width: 30rem;
   border-radius: 8px;
+}
+
+/*************/
+/*** PHONE ***/
+/*************/
+@media (max-width: 450px) {
+  .video-responsive iframe {
+    height:10rem;
+    width: 18rem;
+  }
 }

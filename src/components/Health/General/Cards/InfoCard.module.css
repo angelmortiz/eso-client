@@ -1,3 +1,6 @@
+/*************/
+/** DESKTOP **/
+/*************/
 .card {
     margin: 1rem;
     padding: 1rem;
@@ -76,4 +79,24 @@
 .link:active {
     cursor: pointer;
     background-color: #028e98;
+}
+
+/*************/
+/*** PHONE ***/
+/*************/
+@media (max-width: 450px) {
+    .card {
+        width: 18rem;
+    }
+
+    .img {
+        width: 230px;
+        height: 230px;
+    }
+
+    .exercise-info {
+        width: 100%;
+        padding: 0 1rem;
+        margin: 1rem 0;
+    }
 }

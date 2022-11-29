@@ -1,4 +1,5 @@
-const API_ADDRESS = "http://192.168.4.173:3000/api";
+// const API_ADDRESS = "http://192.168.4.173:3000/api";
+const API_ADDRESS = "http://192.168.4.129:3000/api";
 // const API_ADDRESS = "http://localhost:3000/api";
 
 export const apiGet = path => {

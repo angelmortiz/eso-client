@@ -1,3 +1,6 @@
+/*************/
+/** DESKTOP **/
+/*************/
 .card {
     width: 35rem;
     margin: 2rem auto;
@@ -101,4 +104,18 @@
 .delete-btn:active {
     cursor: pointer;
     background-color: #028e98;
+}
+
+/*************/
+/*** PHONE ***/
+/*************/
+@media (max-width: 450px) {
+    .card {
+        width: 80%;
+    }
+
+    .img {
+        height: 16rem;
+        width: 16rem;
+    }
 }

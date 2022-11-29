@@ -5,7 +5,7 @@ const InfoCard = props => {
     const info = props.info;
 
     return <div className={classes['card']}> 
-            <img src={info.linkToImage} alt="Squat" className={classes['img']}/>
+            <img src={info.linkToImage} alt={info.name} className={classes['img']}/>
             <div className={classes['exercise-info']}>
                 <div className={classes['names']}>
                     <h1 className={classes['name']}>{info.name}</h1>
