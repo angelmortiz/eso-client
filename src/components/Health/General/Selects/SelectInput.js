@@ -15,11 +15,14 @@ const SelectInput = props => {
         setSelectValue(props.selectedValue);
     }, [props.selectedValue])
 
-    return <select id={selectId} key={selectId} name={info.name} className={addClasses['text-input']} value={selectValue} onChange={event => setSelectValue(event.target.value)}>
-        {info.options.map((option) => {
-            return <option key={`${option[optionValue]}${count}`} value={option[optionValue]}>{option[optionLabel]}</option>
-        })}
-    </select>
+    return <div className={addClasses['select-content']}>
+        <select id={selectId} key={selectId} name={info.name} className={addClasses['select-input']} value={selectValue} onChange={event => setSelectValue(event.target.value)}>
+            {info.options.map((option) => {
+                return <option key={`${option[optionValue]}${count}`} value={option[optionValue]}>{option[optionLabel]}</option>
+            })}
+        </select>
+        <svg xmlns="http://www.w3.org/2000/svg" className={addClasses['select-arrow']} viewBox="0 0 512 512"><title>Chevron Down</title><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="30" d="M112 184l144 144 144-144"/></svg>
+    </div>
 };
 
 export default SelectInput;

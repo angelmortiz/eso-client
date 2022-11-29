@@ -225,7 +225,7 @@ const UpdateExercise = props => {
                 <div className={addClasses['form-input']}>
                     <label htmlFor="exercise-name" className={addClasses['text-label']}>Name:</label>
                     <input type="text" id="exercise-name" name="name"
-                        placeholder='Enter the exercise name...' className={addClasses['text-input']}
+                        placeholder='Enter the exercise name...' className={addClasses['select-input']}
                         value={name}
                         onChange={event => setName(event.target.value)}/>
                 </div>
@@ -234,7 +234,7 @@ const UpdateExercise = props => {
                 <div className={addClasses['form-input']}>
                     <label htmlFor="exercise-alternativeName" className={addClasses['text-label']}>Alternative name:</label>
                     <input type="text" id="exercise-alternativeName" name="alternativeName"
-                        placeholder='Enter an alternative name...'className={addClasses['text-input']}
+                        placeholder='Enter an alternative name...'className={addClasses['select-input']}
                         value={alternativeName}
                         onChange={event => setAlternativeName(event.target.value)}/>
                 </div>
@@ -244,7 +244,7 @@ const UpdateExercise = props => {
                     <label htmlFor="exercise-difficulty" className={addClasses['text-label']}>Difficulty:</label>
                     <SelectInput select={difficultyInfo.select} selectedValue={difficulty}/>
                 </div>
-                
+
                 {/* COMPOUND MOVEMENT */}
                 <div className={addClasses['form-input']}>
                     <label htmlFor="exercise-compoundMovement" className={addClasses['text-label']}>Compound movement:</label>
@@ -285,7 +285,7 @@ const UpdateExercise = props => {
                 <div className={addClasses['form-input']}>
                     <label htmlFor="exercise-image" className={addClasses['text-label']}>Image:</label>
                     <input type="text" id="exercise-image" name="linkToImage"
-                        placeholder='Enter the link for the image...' className={addClasses['text-input']}
+                        placeholder='Enter the link for the image...' className={addClasses['select-input']}
                         value={linkToImage}
                         onChange={event => setLinkToImage(event.target.value)}/>
                 </div>
@@ -294,7 +294,7 @@ const UpdateExercise = props => {
                 <div className={addClasses['form-input']}>
                     <label htmlFor="exercise-video" className={addClasses['text-label']}>Video:</label>
                     <input type="text" id="exercise-video" name="linkToVideo"
-                        placeholder='Enter the link for the video...' className={addClasses['text-input']}
+                        placeholder='Enter the link for the video...' className={addClasses['select-input']}
                         value={linkToVideo}
                         onChange={event => setLinkToVideo(event.target.value)}/>
                 </div>

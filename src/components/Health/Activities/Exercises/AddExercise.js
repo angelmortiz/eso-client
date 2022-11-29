@@ -176,12 +176,12 @@ const AddExercise = props => {
             {/* NAME */}
             <label htmlFor="exercise-name" className={addClasses['text-label']}>Name:</label>
             <input type="text" id="exercise-name" name="name"
-                placeholder='Enter the exercise name...' className={addClasses['text-input']}/>
+                placeholder='Enter the exercise name...' className={addClasses['select-input']}/>
             
             {/* ALTERNATIVE NAME */}
             <label htmlFor="exercise-alternativeName" className={addClasses['text-label']}>Alternative name:</label>
             <input type="text" id="exercise-alternativeName" name="alternativeName"
-                placeholder='Enter an alternative name...'className={addClasses['text-input']} />
+                placeholder='Enter an alternative name...'className={addClasses['select-input']} />
             
             {/* DIFFICULTY */}
             <label htmlFor="exercise-difficulty" className={addClasses['text-label']}>Difficulty:</label>
@@ -216,12 +216,12 @@ const AddExercise = props => {
             {/* IMAGE */}
             <label htmlFor="exercise-image" className={addClasses['text-label']}>Image:</label>
             <input type="text" id="exercise-image" name="linkToImage"
-                placeholder='Enter the link for the image...' className={addClasses['text-input']}/>
+                placeholder='Enter the link for the image...' className={addClasses['select-input']}/>
 
             {/* VIDEO */}
             <label htmlFor="exercise-video" className={addClasses['text-label']}>Video:</label>
             <input type="text" id="exercise-video" name="linkToVideo"
-                placeholder='Enter the link for the video...' className={addClasses['text-input']}/>
+                placeholder='Enter the link for the video...' className={addClasses['select-input']}/>
 
             {/* SUBMIT BUTTON */}
             <button type="submit" id="add-exercse-btn" className={addClasses['submit-btn']}>Add exercise</button>

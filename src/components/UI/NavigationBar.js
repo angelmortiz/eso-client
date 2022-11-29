@@ -15,7 +15,7 @@ const NavigationBar = props => {
 
     return <header>
     <nav className={classes['nav-bar']}>
-        <Link to="/" class={classes['logo-link']} onClick={closeMenu}>
+        <Link to="/" className={classes['logo-link']} onClick={closeMenu}>
             <img src= "/logo.png" className={classes['logo-img']} alt="Logo"/>
         </Link>
         <ul className={`${classes['ul-nav-options']} ${isMenuOpen ? '' : classes.hidden}`} onClick={closeMenu}>
@@ -46,19 +46,19 @@ const NavigationBar = props => {
                 <div className={classes['dropdown-content']}>
                     <ul className={classes['ul-dropdown-options']}>
                         {/* EXERCISES */}
-                        <li key="exercises"className={classes['li-dropdown-option']}> 
+                        <li key="exercises" className={classes['li-dropdown-option']}> 
                             <Link to='/activities/exercises' className={classes['nav-links']}>Exercises</Link>
                         </li>
                         {/* MUSCLES */}
-                        <li key="muscles"className={classes['li-dropdown-option']}>
+                        <li key="muscles" className={classes['li-dropdown-option']}>
                             <Link to='/activities/muscles' className={classes['nav-links']}>Muscles</Link>
                         </li>
                         {/* EQUIPMENTS */}
-                        <li key="equipments"className={classes['li-dropdown-option']}>
+                        <li key="equipments" className={classes['li-dropdown-option']}>
                             <Link to='/activities/equipments' className={classes['nav-links']}>Equipments</Link>
                         </li>
                         {/* PHYSICAL CONDITIONS */}
-                        <li key="physicalConditions"className={classes['li-dropdown-option']}>
+                        <li key="physicalConditions" className={classes['li-dropdown-option']}>
                             <Link to='/activities/physicalconditions' className={classes['nav-links']}>Physical Conditions</Link>
                         </li>
                     </ul>
@@ -82,16 +82,16 @@ const NavigationBar = props => {
                         <li key="addChronicConditions"className={classes['li-dropdown-option']}>
                             <Link to='/nutrition/add-chronicConditions' className={classes['nav-links']}>Chronic Condition</Link>
                         </li> */}
-                        <li key="addExercises"className={classes['li-dropdown-option']}> 
+                        <li key="addExercises" className={classes['li-dropdown-option']}> 
                             <Link to='/activities/add-exercise' className={classes['nav-links']}>Exercise</Link>
                         </li>
-                        <li key="addMuscles"className={classes['li-dropdown-option']}>
+                        <li key="addMuscles" className={classes['li-dropdown-option']}>
                             <Link to='/activities/add-muscle' className={classes['nav-links']}>Muscle</Link>
                         </li>
-                        <li key="addEquipments"className={classes['li-dropdown-option']}>
+                        <li key="addEquipments" className={classes['li-dropdown-option']}>
                             <Link to='/activities/add-equipment' className={classes['nav-links']}>Equipment</Link>
                         </li>
-                        <li key="addPhysicalConditions"className={classes['li-dropdown-option']}>
+                        <li key="addPhysicalConditions" className={classes['li-dropdown-option']}>
                             <Link to='/activities/add-physicalCondition' className={classes['nav-links']}>Physical Condition</Link>
                         </li>
                     </ul>
@@ -99,7 +99,7 @@ const NavigationBar = props => {
             </li>
         </ul>
         <div className={classes["menu-tray"]} onClick={menuToggle}>
-            <svg xmlns="http://www.w3.org/2000/svg" class={classes["menu-icon"]} viewBox="0 0 512 512"><title>Menu</title><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M80 160h352M80 256h352M80 352h352"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" className={classes["menu-icon"]} viewBox="0 0 512 512"><title>Menu</title><path fill="none" stroke="currentColor" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="32" d="M80 160h352M80 256h352M80 352h352"/></svg>
         </div>
     </nav>
 

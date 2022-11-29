@@ -90,12 +90,12 @@ const AddMuscle = props => {
             {/* NAME */}
             <label htmlFor="muscle-name" className={addClasses['text-label']}>Name:</label>
             <input type="text" id="muscle-name" name="name"
-                placeholder='Enter the muscle name...' className={addClasses['text-input']}/>
+                placeholder='Enter the muscle name...' className={addClasses['select-input']}/>
             
             {/* ALTERNATIVE NAME */}
             <label htmlFor="muscle-alternativeName" className={addClasses['text-label']}>Alternative name:</label>
             <input type="text" id="muscle-alternativeName" name="alternativeName"
-                placeholder='Enter an alternative name...'className={addClasses['text-input']} />
+                placeholder='Enter an alternative name...'className={addClasses['select-input']} />
             
             {/* TYPE */}
             <label htmlFor="muscle-type" className={addClasses['text-label']}>Type:</label>
@@ -110,7 +110,7 @@ const AddMuscle = props => {
             {/* IMAGE */}
             <label htmlFor="muscle-image" className={addClasses['text-label']}>Image:</label>
             <input type="text" id="muscle-image" name="linkToImage"
-                placeholder='Enter the link for the image...' className={addClasses['text-input']}/>
+                placeholder='Enter the link for the image...' className={addClasses['select-input']}/>
 
             {/* SUBMIT BUTTON */}
             <button type="submit" id="add-exercse-btn" className={addClasses['submit-btn']}>Add muscle</button>

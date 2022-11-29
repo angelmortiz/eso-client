@@ -95,12 +95,12 @@ const AddPhysicalCondition = props => {
             {/* NAME */}
             <label htmlFor="physicalCondition-name" className={addClasses['text-label']}>Name:</label>
             <input type="text" id="physicalCondition-name" name="name"
-                placeholder='Enter the physical condition name...' className={addClasses['text-input']}/>
+                placeholder='Enter the physical condition name...' className={addClasses['select-input']}/>
 
             {/* DESCRIPTION */}
             <label htmlFor="physicalCondition-description" className={addClasses['text-label']}>Description:</label>
             <input type="text" id="physicalCondition-description" name="description"
-                placeholder='Enter the physical condition description...'className={addClasses['text-input']} />
+                placeholder='Enter the physical condition description...'className={addClasses['select-input']} />
 
             {/* SYMPTOMS */}
             <label htmlFor="physicalCondition-symptoms" className={addClasses['text-label']}>Symptoms:</label>

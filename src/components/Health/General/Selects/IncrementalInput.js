@@ -18,7 +18,7 @@ const IncrementalInput = props => {
     function newInputElement(newCount) {
         return <input type="text" name={info.input.name} id={`${info.input.id}_${newCount}`}
         key={`input_${info.input.name}_${newCount}`} placeholder={info.input.placeholder} 
-        className={addClasses['text-input']}/>
+        className={addClasses['select-input']}/>
     };
 
     return <Fragment>

@@ -78,17 +78,17 @@ const AddEquipment = props => {
             {/* NAME */}
             <label htmlFor="equipment-name" className={addClasses['text-label']}>Name:</label>
             <input type="text" id="equipment-name" name="name"
-                placeholder='Enter the equipment name...' className={addClasses['text-input']}/>
+                placeholder='Enter the equipment name...' className={addClasses['select-input']}/>
             
             {/* ALTERNATIVE NAME */}
             <label htmlFor="equipment-alternativeName" className={addClasses['text-label']}>Alternative name:</label>
             <input type="text" id="equipment-alternativeName" name="alternativeName"
-                placeholder='Enter an alternative name...'className={addClasses['text-input']} />
+                placeholder='Enter an alternative name...'className={addClasses['select-input']} />
             
             {/* DESCRIPTION */}
             <label htmlFor="equipment-description" className={addClasses['text-label']}>Description:</label>
             <input type="text" id="equipment-description" name="description"
-                placeholder='Enter the equipment description...'className={addClasses['text-input']} />
+                placeholder='Enter the equipment description...'className={addClasses['select-input']} />
 
             {/* EXERCISES */}
             <label htmlFor="equipment-exercises" className={addClasses['text-label']}>Exercises:</label>
@@ -99,7 +99,7 @@ const AddEquipment = props => {
             {/* IMAGE */}
             <label htmlFor="equipment-image" className={addClasses['text-label']}>Image:</label>
             <input type="text" id="equipment-image" name="linkToImage"
-                placeholder='Enter the link for the image...' className={addClasses['text-input']}/>
+                placeholder='Enter the link for the image...' className={addClasses['select-input']}/>
 
             {/* SUBMIT BUTTON */}
             <button type="submit" id="add-exercse-btn" className={addClasses['submit-btn']}>Add equipment</button>
