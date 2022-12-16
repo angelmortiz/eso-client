@@ -38,7 +38,7 @@ const Signup = props => {
                 placeholder='Re-enter password'className={classes['select-input']} />
             
             {/* SUBMIT BUTTON */}
-            <button type="submit" id="signup-user" className={classes['submit-btn']}>Signup</button>
+            <button type="submit" id="signup-user" className={classes['submit-btn']}>Sign Up</button>
         </form>
     </section>
 }
