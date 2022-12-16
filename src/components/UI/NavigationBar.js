@@ -3,22 +3,22 @@ import { Link } from "react-router-dom";
 import { useState } from 'react';
 
 const NavigationBar = props => {
-    const [isMenuOpen, setMenuOpen] = useState(false);
+    const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-    const menuToggle = () => {
-        setMenuOpen(!isMenuOpen);
+    const mobileMenuToggle = () => {
+        setMobileMenuOpen(!isMobileMenuOpen);
     };
 
-    const closeMenu = () => {
-        setMenuOpen(false);
+    const closeMobileMenu = () => {
+        setMobileMenuOpen(false);
     }
 
     return <header>
     <nav className={classes['nav-bar']}>
-        <Link to="/" className={classes['logo-link']} onClick={closeMenu}>
+        <Link to="/" className={classes['logo-link']} onClick={closeMobileMenu}>
             <img src= "/logo.png" className={classes['logo-img']} alt="Logo"/>
         </Link>
-        <ul className={`${classes['ul-nav-options']} ${isMenuOpen ? '' : classes.hidden}`} onClick={closeMenu}>
+        <ul className={`${classes['ul-nav-options']} ${isMobileMenuOpen ? '' : classes.hidden}`} onClick={closeMobileMenu}>
             {/* NUTRITION */}
             {/* <li key="nutrition"className={classes['dropdown']}>
                 <span> Nutrition </span>
@@ -98,12 +98,18 @@ const NavigationBar = props => {
                 </div>
             </li>
         </ul>
-        <div className={classes["menu-tray"]} onClick={menuToggle}>
+        <div className={classes['registration-menu']}>
+            <Link to='/auth/login'>Login</Link>
+            <span> | </span>
+            <Link to='/auth/signup'>Sign up</Link>
+        </div>
+        <div className={classes["menu-tray"]} onClick={mobileMenuToggle}>
             <svg xmlns="http://www.w3.org/2000/svg" className={classes["menu-icon"]} viewBox="0 0 512 512"><title>Menu</title><path fill="none" stroke="currentColor" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="32" d="M80 160h352M80 256h352M80 352h352"/></svg>
         </div>
+
     </nav>
 
-    {isMenuOpen && <div className={classes['menu-overlay']} onClick={closeMenu}></div>}
+    {isMobileMenuOpen && <div className={classes['menu-overlay']} onClick={closeMobileMenu}></div>}
     </header>
 }
 

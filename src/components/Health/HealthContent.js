@@ -8,9 +8,11 @@ import Exercises from './Activities/Exercises/Exercises';
 import AddFood from './Nutrition/Foods/AddFood';
 import UpdateExercise from './Activities/Exercises/UpdateExercise';
 import Muscles from './Activities/Muscles/Muscles';
+import Signup from '../Auth/Signup';
 
 const HealthContent = props => {
     return <Routes>
+        <Route path="/auth/signup" element={<Signup/>}/>
         <Route path="/nutrition/add-food" element={<AddFood/>}/>
         <Route path="/activities/exercises" element={<Exercises/>}/>
         <Route path="/activities/exercise/:id" element={<ExerciseDetails/>}/>

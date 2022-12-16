@@ -23,6 +23,7 @@
     list-style-type: none;
     font-size: 18px;
     font-weight: 400;
+    flex-grow: 1;
 
     display: flex;
     gap: 1rem;
@@ -80,6 +81,9 @@
 .menu-icon {
     height: 45px;
     width: 45px;
+}
+
+.registration-menu {
 }
 
 /*************/
