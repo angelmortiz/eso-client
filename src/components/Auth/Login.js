@@ -1,10 +1,23 @@
+import { login } from '../../util/apis/auth/authApis';
 import classes from '../Health/General/CSS/Form.module.css'
 
 const Login = props => {
     const loginUser = (event) => {
         event.preventDefault();
-        //TODO: add logic to login the user
+        const formVals = getValuesFromForm(event.target.elements);
+
+        console.log('formVals: ', formVals);
+        login(formVals).then(response => {
+            console.log("Response: ", response);
+        });
     }
+
+    const getValuesFromForm = (elements) => {
+        const values = {};
+        values.email = elements.email.value;
+        values.password = elements.password.value;
+        return values;
+    };
 
     return <section className={classes['main-section']}>
         <form id="login-form" onSubmit={loginUser} className={classes['main-form']}>
