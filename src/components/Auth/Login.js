@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { login } from '../../util/apis/auth/authApis';
 import classes from '../Health/General/CSS/Form.module.css'
 
@@ -10,7 +11,7 @@ const Login = props => {
         login(formVals).then(response => {
             console.log("Response: ", response);
         });
-    }
+    };
 
     const getValuesFromForm = (elements) => {
         const values = {};
@@ -36,6 +37,16 @@ const Login = props => {
             {/* SUBMIT BUTTON */}
             <button type="submit" id="login-user" className={classes['submit-btn']}>Login</button>
         </form>
+
+        <Link to='/auth/forgotPassword' className={classes['forgot-password']}>Forgot Password</Link>
+        
+        {/* Division line */}
+        <div className={classes['division']}>
+            <hr className={classes['horizontal-division']}/>
+            &nbsp;&nbsp;or&nbsp;&nbsp;
+            <hr className={classes['horizontal-division']}/>
+        </div>
+        <Link to='/auth/signup' className={classes['submit-btn']}>Sign Up</Link>
     </section>
 }
 

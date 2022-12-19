@@ -9,7 +9,9 @@
     border-radius: 8px;
     background-color: rgb(230, 230, 230);
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .main-form {
@@ -81,6 +83,7 @@
 }
 
 .submit-btn {
+    width: 100%;
     margin: 1rem 0;
     padding: 10px 8px;
     background-color: #007E86;
@@ -88,6 +91,8 @@
     border-radius: 4px;
     color: white;
     font-size: 16px;
+    text-align: center;
+    text-decoration: none;
 }
 
 .submit-btn:hover,
@@ -102,6 +107,20 @@
     width: 20px;
 }
 
+.division {
+    margin: 2rem 0 1rem 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.horizontal-division {
+    width: 45%;
+    height: 1px;
+    background-color: #028e98;
+    border: none;
+}
 /*************/
 /*** PHONE ***/
 /*************/

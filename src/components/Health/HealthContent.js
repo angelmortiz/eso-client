@@ -10,11 +10,13 @@ import UpdateExercise from './Activities/Exercises/UpdateExercise';
 import Muscles from './Activities/Muscles/Muscles';
 import Signup from '../Auth/Signup';
 import Login from '../Auth/Login';
+import ForgotPassword from '../Auth/ForgotPassword';
 
 const HealthContent = props => {
     return <Routes>
         <Route path="/auth/signup" element={<Signup/>}/>
         <Route path="/auth/login" element={<Login/>}/>
+        <Route path="/auth/forgotPassword" element={<ForgotPassword/>}/>
         <Route path="/nutrition/add-food" element={<AddFood/>}/>
         <Route path="/activities/exercises" element={<Exercises/>}/>
         <Route path="/activities/exercise/:id" element={<ExerciseDetails/>}/>
