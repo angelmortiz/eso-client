@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import HomePage from '../UI/HomePage/HomePage';
 import AddExercise from './Activities/Exercises/AddExercise';
 import AddMuscle from './Activities/Muscles/AddMuscle';
 import AddEquipment from './Activities/Equipments/AddEquipment';
@@ -12,8 +13,10 @@ import Signup from '../Auth/Signup';
 import Login from '../Auth/Login';
 import ForgotPassword from '../Auth/ForgotPassword';
 
+
 const HealthContent = props => {
     return <Routes>
+        <Route path="/" element={<HomePage/>}/>
         <Route path="/auth/signup" element={<Signup/>}/>
         <Route path="/auth/login" element={<Login/>}/>
         <Route path="/auth/forgotPassword" element={<ForgotPassword/>}/>
