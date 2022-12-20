@@ -15,3 +15,7 @@ export const forgotPassword = (body) => {
 export const resetPassword = (body) => {
     return apiPatch(`/auth/resetPassword`, body);
 }
+
+export const changePassword = (body) => {
+    return apiPost(`/auth/changePassword`, body);
+}

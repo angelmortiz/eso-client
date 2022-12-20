@@ -13,6 +13,7 @@ import Signup from '../Auth/Signup';
 import Login from '../Auth/Login';
 import ForgotPassword from '../Auth/ForgotPassword';
 import ResetPassword from '../Auth/ResetPassword';
+import ChangePassword from '../Auth/ChangePassword';
 
 
 const HealthContent = props => {
@@ -21,7 +22,8 @@ const HealthContent = props => {
         <Route path="/auth/signup" element={<Signup/>}/>
         <Route path="/auth/login" element={<Login/>}/>
         <Route path="/auth/forgotPassword" element={<ForgotPassword/>}/>
-        <Route path="/auth/resetPassword/" element={<ResetPassword/>}/>
+        <Route path="/auth/resetPassword" element={<ResetPassword/>}/>
+        <Route path="/auth/changePassword" element={<ChangePassword/>}/>
         <Route path="/nutrition/add-food" element={<AddFood/>}/>
         <Route path="/activities/exercises" element={<Exercises/>}/>
         <Route path="/activities/exercise/:id" element={<ExerciseDetails/>}/>
