@@ -1,4 +1,4 @@
-import { apiPost } from "../apiActions"
+import { apiPost, apiPatch } from "../apiActions"
 
 export const signup = (body) => {
     return apiPost(`/auth/signup`, body);
@@ -10,4 +10,8 @@ export const login = (body) => {
 
 export const forgotPassword = (body) => {
     return apiPost(`/auth/forgotPassword`, body);
+}
+
+export const resetPassword = (body) => {
+    return apiPatch(`/auth/resetPassword`, body);
 }

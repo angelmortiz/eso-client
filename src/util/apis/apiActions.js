@@ -52,6 +52,23 @@ export const apiPut = (path, body) => {
     });
 }
 
+export const apiPatch = (path, body) => {
+    const requestOptions = {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json',},
+        credentials: 'include',
+        body: JSON.stringify(body)
+    };
+
+    return fetch(`${API_ADDRESS}${path}`, requestOptions)
+    .then(apiResponse => {
+        return apiResponse.json();
+    })
+    .catch(error => {
+        console.log("An error ocurred while patching information: ", error);
+    });
+}
+
 export const apiDelete = (path) => {
     const requestOptions = {
         method: 'DELETE',
