@@ -14,8 +14,9 @@ import Login from '../Auth/Login';
 import ForgotPassword from '../Auth/ForgotPassword';
 import ResetPassword from '../Auth/ResetPassword';
 import ChangePassword from '../Auth/ChangePassword';
+import UserInfo from '../UserInfo/UserInfo';
 
-
+//IMPROVE: This is no longer just "health", this should be place in another file
 const HealthContent = props => {
     return <Routes>
         <Route path="/" element={<HomePage/>}/>
@@ -24,6 +25,7 @@ const HealthContent = props => {
         <Route path="/auth/forgotPassword" element={<ForgotPassword/>}/>
         <Route path="/auth/resetPassword" element={<ResetPassword/>}/>
         <Route path="/auth/changePassword" element={<ChangePassword/>}/>
+        <Route path="/user/info" element={<UserInfo/>}/>
         <Route path="/nutrition/add-food" element={<AddFood/>}/>
         <Route path="/activities/exercises" element={<Exercises/>}/>
         <Route path="/activities/exercise/:id" element={<ExerciseDetails/>}/>
