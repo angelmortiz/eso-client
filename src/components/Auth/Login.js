@@ -1,8 +1,9 @@
-
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { authActions } from "../../store/authSlice";
+import { userActions } from "../../store/userSlice";
 import { login } from '../../util/apis/auth/authApis';
+import { fetchCurrentUser } from "../../util/apis/users/usersApis";
 import classes from '../Health/General/CSS/Form.module.css'
 
 const Login = props => {
@@ -13,9 +14,9 @@ const Login = props => {
         const formVals = getValuesFromForm(event.target.elements);
 
         login(formVals).then(response => {
-            console.log("Response: ", response);
             if (response && response.status === 'success') {
                 dispatch(authActions.login());
+                getCurrentUserInfo();
             }
         });
     };
@@ -25,6 +26,14 @@ const Login = props => {
         values.email = elements.email.value;
         values.password = elements.password.value;
         return values;
+    };
+
+    const getCurrentUserInfo = () =>  {
+        fetchCurrentUser().then(response => {
+            if (response && response.status === 'success'){
+                dispatch(userActions.setUserInfo(response.userInfo));
+            }
+        });
     };
 
     return <section className={classes['main-section']}>

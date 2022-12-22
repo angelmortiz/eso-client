@@ -14,7 +14,7 @@ import Login from '../Auth/Login';
 import ForgotPassword from '../Auth/ForgotPassword';
 import ResetPassword from '../Auth/ResetPassword';
 import ChangePassword from '../Auth/ChangePassword';
-import UserInfo from '../UserInfo/UserInfo';
+import UserInfo from '../User/UserInfo';
 
 //IMPROVE: This is no longer just "health", this should be place in another file
 const HealthContent = props => {
