@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authActions } from "../../store/authSlice";
 import { userActions } from "../../store/userSlice";
 import { login } from '../../util/apis/auth/authApis';
@@ -7,6 +7,7 @@ import { fetchCurrentUser } from "../../util/apis/users/usersApis";
 import classes from '../Health/General/CSS/Form.module.css'
 
 const Login = props => {
+    const navigateTo = useNavigate();
     const dispatch = useDispatch();
 
     const loginUser = (event) => {
@@ -16,6 +17,7 @@ const Login = props => {
         login(formVals).then(response => {
             if (response && response.status === 'success') {
                 dispatch(authActions.login());
+                navigateTo('/activities/exercises');
                 getCurrentUserInfo();
             }
         });
