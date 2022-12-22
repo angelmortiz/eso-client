@@ -1,15 +1,16 @@
-import { Fragment } from "react";
+import { Provider } from "react-redux";
 import HealthContent from "./components/Health/HealthContent";
 import NavigationBar from "./components/UI/NavigationBar";
+import store from './store/index'
 
 function App() {
   return (
-    <Fragment>
+    <Provider store={store}>
         <NavigationBar />
         <main>
           <HealthContent />
         </main>
-    </Fragment>
+    </Provider>
   );
 }
 

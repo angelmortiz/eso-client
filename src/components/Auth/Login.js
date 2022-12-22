@@ -1,15 +1,22 @@
+
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { authActions } from "../../store/authSlice";
 import { login } from '../../util/apis/auth/authApis';
 import classes from '../Health/General/CSS/Form.module.css'
 
 const Login = props => {
+    const dispatch = useDispatch();
+
     const loginUser = (event) => {
         event.preventDefault();
         const formVals = getValuesFromForm(event.target.elements);
 
-        console.log('formVals: ', formVals);
         login(formVals).then(response => {
             console.log("Response: ", response);
+            if (response && response.status === 'success') {
+                dispatch(authActions.login());
+            }
         });
     };
 

@@ -8,6 +8,10 @@ export const login = (body) => {
     return apiPost(`/auth/login`, body);
 }
 
+export const logout = () => {
+    return apiPost(`/auth/logout`, {});
+}
+
 export const forgotPassword = (body) => {
     return apiPost(`/auth/forgotPassword`, body);
 }
