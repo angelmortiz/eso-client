@@ -9,16 +9,7 @@ import classes from './UserInfo.module.css';
 const UserInfo = props => {
     const navigateTo = useNavigate();
     const dispatch = useDispatch();
-    const isUserAuthenticated = useSelector(state => state.auth.isUserAuthenticated);
     const currentUserInfo = useSelector(state => state.userInfo.userInfo);
-
-    //prevents component to be loaded if no user is logged in
-    useEffect(() => {
-        console.log("isUserAuthenticated: ", isUserAuthenticated);
-        if(!isUserAuthenticated) {
-            navigateTo('/');
-        }
-    });
 
     const userLogout = (event) => {
         event.preventDefault();

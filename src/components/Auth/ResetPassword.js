@@ -1,28 +1,21 @@
 import { resetPassword } from '../../util/apis/auth/authApis';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import classes from '../Health/General/CSS/Form.module.css';
 
 const ResetPassword = props => {
     const navigateTo = useNavigate();
     const [resetToken, setResetToken] = useState();
     const [searchParams, setSearchParams] = useSearchParams();
-    const isUserAuthenticated = useSelector(state => state.auth.isUserAuthenticated);
 
     useEffect(() => {
-        //prevents logged user to login with another account before loggin out
-        if (isUserAuthenticated) {
-            navigateTo('/user/info');
-            return;
-        }
         extractTokenFromUrl();
     });
 
     const extractTokenFromUrl = () => {
         const token = searchParams.get('token');
         //IMPROVE: Show error if the token could not be found
-        if (!token) return;
+        if (!token)  { navigateTo('/'); return; }
 
         searchParams.delete('token');
         setResetToken(token);

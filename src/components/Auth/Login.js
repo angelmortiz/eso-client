@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { authActions } from "../../store/authSlice";
 import { userActions } from "../../store/userSlice";
@@ -10,12 +9,6 @@ import classes from '../Health/General/CSS/Form.module.css'
 const Login = props => {
     const navigateTo = useNavigate();
     const dispatch = useDispatch();
-    const isUserAuthenticated = useSelector(state => state.auth.isUserAuthenticated);
-
-    //prevents logged user to login with another account before loggin out
-    useEffect(() => {
-        if (isUserAuthenticated) navigateTo('/user/info');
-    });
 
     const loginUser = (event) => {
         event.preventDefault();

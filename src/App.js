@@ -1,17 +1,22 @@
+import { useState } from "react";
 import { Provider } from "react-redux";
-import AutoLogin from "./components/Auth/AutoLogin";
+import CheckAuth from "./components/Auth/CheckAuth";
 import HealthContent from "./components/Health/HealthContent";
 import NavigationBar from "./components/UI/NavigationBar";
 import store from './store/index'
 
 function App() {
+  const [wasAuthenticationVerified, setAuthenticationStatus] = useState(false);
+
   return (
     <Provider store={store}>
-        <AutoLogin/>
+        <CheckAuth setAuthenticationStatus={setAuthenticationStatus}/>
         <NavigationBar />
-        <main>
-          <HealthContent />
-        </main>
+        {wasAuthenticationVerified && 
+          <main>
+            <HealthContent />
+          </main>
+        }
     </Provider>
   );
 }

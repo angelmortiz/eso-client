@@ -23,3 +23,7 @@ export const resetPassword = (body) => {
 export const changePassword = (body) => {
     return apiPost(`/auth/changePassword`, body);
 }
+
+export const isAuthenticationValid = () => {
+    return apiPost(`/auth/isAuthenticationValid`, {});
+}
