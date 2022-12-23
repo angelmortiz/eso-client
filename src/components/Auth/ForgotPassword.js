@@ -1,8 +1,18 @@
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { forgotPassword } from '../../util/apis/auth/authApis';
 import classes from '../Health/General/CSS/Form.module.css';
 
 const ForgotPassword = props => {
+    const navigateTo = useNavigate();
+    const isUserAuthenticated = useSelector(state => state.auth.isUserAuthenticated);
 
+    //prevents logged user to login with another account before loggin out
+    useEffect(() => {
+        if (isUserAuthenticated) navigateTo('/user/info');
+    });
+    
     const userForgotPassword = (event) => {
         event.preventDefault();
 

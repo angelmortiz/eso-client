@@ -1,4 +1,5 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import HomePage from '../UI/HomePage/HomePage';
 import AddExercise from './Activities/Exercises/AddExercise';
 import AddMuscle from './Activities/Muscles/AddMuscle';
@@ -18,9 +19,11 @@ import UserInfo from '../User/UserInfo';
 
 //IMPROVE: This is no longer just "health", this should be place in another file
 const HealthContent = props => {
+    const isUserAuthenticated = false;//useSelector(state => state.auth.isUserAuthenticated);
+
     return <Routes>
         <Route path="/" element={<HomePage/>}/>
-        <Route path="/auth/signup" element={<Signup/>}/>
+        <Route path="/auth/signup" element={isUserAuthenticated ? <Signup/> : <UserInfo/>}/>
         <Route path="/auth/login" element={<Login/>}/>
         <Route path="/auth/forgotPassword" element={<ForgotPassword/>}/>
         <Route path="/auth/resetPassword" element={<ResetPassword/>}/>

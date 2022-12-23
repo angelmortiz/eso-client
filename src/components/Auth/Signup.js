@@ -1,8 +1,19 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { signup } from '../../util/apis/auth/authApis';
 import classes from '../Health/General/CSS/Form.module.css'
 
 const Signup = props => {
+    const navigateTo = useNavigate();
+    const isUserAuthenticated = useSelector(state => state.auth.isUserAuthenticated);
+    
+    
+    console.log("Inside signup");
+    //prevents logged user to login with another account before loggin out
+    // useEffect(() => {
+    //     if (isUserAuthenticated) navigateTo('/user/info');
+    // });
 
     const signupUser = (event) => {
         event.preventDefault();
@@ -11,6 +22,9 @@ const Signup = props => {
         console.log('formVals: ', formVals);
         signup(formVals).then(response => {
             console.log("Response: ", response);
+            if (response && response.status === 'success') {
+                navigateTo('/auth/login');
+            }
         });
     };
 

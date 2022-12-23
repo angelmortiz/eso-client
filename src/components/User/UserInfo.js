@@ -14,6 +14,7 @@ const UserInfo = props => {
 
     //prevents component to be loaded if no user is logged in
     useEffect(() => {
+        console.log("isUserAuthenticated: ", isUserAuthenticated);
         if(!isUserAuthenticated) {
             navigateTo('/');
         }
