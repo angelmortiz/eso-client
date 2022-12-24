@@ -1,5 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
 import HomePage from '../UI/HomePage/HomePage';
 import AddExercise from './Activities/Exercises/AddExercise';
 import AddMuscle from './Activities/Muscles/AddMuscle';
@@ -16,27 +15,28 @@ import ForgotPassword from '../Auth/ForgotPassword';
 import ResetPassword from '../Auth/ResetPassword';
 import ChangePassword from '../Auth/ChangePassword';
 import UserInfo from '../User/UserInfo';
+import AuthProtected from '../Auth/ProtectedRoutes/AuthProtected';
+import PrivateRoute from '../Auth/ProtectedRoutes/PrivateRoute';
 
 //IMPROVE: This is no longer just "health", this should be place in another file
 const HealthContent = props => {
-    const isUserAuthenticated = useSelector(state => state.auth.isUserAuthenticated);
-
     return <Routes>
         <Route path="/" element={<HomePage/>}/>
         
         {/* AUTH */}
-        <Route path="/auth/signup" element={isUserAuthenticated ? <Navigate replace to='/'/> : <Signup/>}/>
-        <Route path="/auth/login" element={isUserAuthenticated ? <Navigate replace to='/'/> : <Login/>}/>
-        <Route path="/auth/forgotPassword" element={isUserAuthenticated ? <Navigate replace to='/'/>: <ForgotPassword/>}/>
-        <Route path="/auth/resetPassword" element={isUserAuthenticated ? <Navigate replace to='/'/> : <ResetPassword/>}/>
-        <Route path="/auth/changePassword" element={!isUserAuthenticated ? <Navigate replace to='/auth/login'/> : <ChangePassword/>}/>
-        
+        {/* IMPROVE: Consider using nested routes to apply protection to multiple routes */}
+        <Route path="/auth/signup" element={<AuthProtected> <Signup/> </AuthProtected>}/>
+        <Route path="/auth/login" element={<AuthProtected> <Login/> </AuthProtected>}/>
+        <Route path="/auth/forgotPassword" element={<AuthProtected> <ForgotPassword/> </AuthProtected>}/>
+        <Route path="/auth/resetPassword" element={<AuthProtected> <ResetPassword/> </AuthProtected>}/>
+        <Route path="/auth/changePassword" element={<PrivateRoute> <ChangePassword/> </PrivateRoute>}/>
+
         {/* USER */}
-        <Route path="/user/info" element={<UserInfo/>}/>
+        <Route path="/user/info" element={<PrivateRoute> <UserInfo/> </PrivateRoute>}/>
         
         {/* HEALTH */}
         <Route path="/nutrition/add-food" element={<AddFood/>}/>
-        <Route path="/activities/exercises" element={<Exercises/>}/>
+        <Route path="/activities/exercises" element={<PrivateRoute> <Exercises/> </PrivateRoute>}/>
         <Route path="/activities/exercise/:id" element={<ExerciseDetails/>}/>
         <Route path="/activities/add-exercise" element={<AddExercise/>}/>
         <Route path="/activities/update-exercise/:id" element={<UpdateExercise/>}/>
