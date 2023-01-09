@@ -1,5 +1,5 @@
 import IncrementalInput from '../../General/Selects/IncrementalInput';
-import addClasses from '../../General/CSS/AddInfo.module.css';
+import addClasses from '../../General/CSS/Form.module.css';
 import { postPhysicalCondition } from '../../../../util/apis/physicalConditions/physicalConditionsApis';
 
 const AddPhysicalCondition = props => {

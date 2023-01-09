@@ -1,0 +1,86 @@
+/*************/
+/** DESKTOP **/
+/*************/
+.card {
+    width: 35rem;
+    margin: 2rem auto;
+    padding: 1rem 1rem;
+    /* border: 2px solid #007E86; */
+    border-radius: 8px;
+    background-color: rgb(230, 230, 230);
+}
+
+.main-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.title {
+    font-size: 2rem;
+}
+
+.img {
+    border: 1px solid #007d8649;
+    border-radius: 8px;
+    height: 20rem;
+    width: 20rem;
+
+    margin: 1rem 0;
+}
+
+.loading-img {
+    display: block;
+    margin: 1rem auto;
+    grid-column: 1 / -1;
+    height: 50px;
+    width: 50px;
+}
+
+.info-block {
+    margin: 1rem 0;
+}
+
+.label, .value {
+    display: inline-block;
+    font-size: 18px;
+}
+
+.label {
+    margin-right: 10px;
+    font-weight: 600;
+}
+
+.logout-btn {
+    width: 40%;
+    margin: 1rem 0;
+    padding: 10px 8px;
+    background-color: #007E86;
+    border: 0px;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.logout-btn:hover,
+.logout-btn:active {
+    cursor: pointer;
+    background-color: #028e98;
+}
+/*************/
+/*** PHONE ***/
+/*************/
+@media (max-width: 450px) {
+    .card {
+        width: 85%;
+    }
+
+    .img {
+        height: 16rem;
+        width: 16rem;
+    }
+}

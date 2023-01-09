@@ -1,9 +1,14 @@
 // const API_ADDRESS = "http://192.168.4.173:3000/api";
-const API_ADDRESS = "http://192.168.4.129:3000/api";
-// const API_ADDRESS = "http://localhost:3000/api";
+// const API_ADDRESS = "http://192.168.4.129:3000/api";
+const API_ADDRESS = "http://localhost:3000/api";
 
 export const apiGet = path => {
-    return fetch(`${API_ADDRESS}${path}`)
+    const requestOptions = {
+        method: 'GET',
+        credentials: 'include'
+    };
+
+    return fetch(`${API_ADDRESS}${path}`, requestOptions)
     .then(apiResponse => {
         return apiResponse.json();
     })
@@ -17,6 +22,7 @@ export const apiPost = (path, body) => {
     const requestOptions = {
         method: 'POST',
         headers: {'Content-Type': 'application/json',},
+        credentials: 'include',
         body: JSON.stringify(body)
     };
 
@@ -33,6 +39,7 @@ export const apiPut = (path, body) => {
     const requestOptions = {
         method: 'PUT',
         headers: {'Content-Type': 'application/json',},
+        credentials: 'include',
         body: JSON.stringify(body)
     };
 
@@ -45,9 +52,27 @@ export const apiPut = (path, body) => {
     });
 }
 
+export const apiPatch = (path, body) => {
+    const requestOptions = {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json',},
+        credentials: 'include',
+        body: JSON.stringify(body)
+    };
+
+    return fetch(`${API_ADDRESS}${path}`, requestOptions)
+    .then(apiResponse => {
+        return apiResponse.json();
+    })
+    .catch(error => {
+        console.log("An error ocurred while patching information: ", error);
+    });
+}
+
 export const apiDelete = (path) => {
     const requestOptions = {
-        method: 'DELETE'
+        method: 'DELETE',
+        credentials: 'include'
     };
 
     return fetch(`${API_ADDRESS}${path}`, requestOptions)

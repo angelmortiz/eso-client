@@ -1,15 +1,23 @@
-import { Fragment } from "react";
+import { useState } from "react";
+import { Provider } from "react-redux";
+import CheckAuth from "./components/Auth/CheckAuth";
 import HealthContent from "./components/Health/HealthContent";
 import NavigationBar from "./components/UI/NavigationBar";
+import store from './store/index'
 
 function App() {
+  const [wasAuthenticationVerified, setAuthenticationStatus] = useState(false);
+
   return (
-    <Fragment>
+    <Provider store={store}>
+        <CheckAuth setAuthenticationStatus={setAuthenticationStatus}/>
         <NavigationBar />
-        <main>
-          <HealthContent />
-        </main>
-    </Fragment>
+        {wasAuthenticationVerified && 
+          <main>
+            <HealthContent />
+          </main>
+        }
+    </Provider>
   );
 }
 
