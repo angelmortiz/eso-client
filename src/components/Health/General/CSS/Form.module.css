@@ -101,6 +101,27 @@
     background-color: #028e98;
 }
 
+.submit-btn-disabled {
+    width: 100%;
+    margin: 1rem 0;
+    padding: 10px 8px;
+    background-color: rgb(207, 207, 207);
+    border: 1px;
+    border-color: #007E86;
+    border-radius: 4px;
+    color:  rgb(154, 154, 154);
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.submit-btn-disabled:hover,
+.submit-btn-disabled:active {
+    cursor: not-allowed;
+}
+
+
+
 .loading-img {
     margin: 1rem auto;
     height: 20px;

@@ -35,8 +35,7 @@ const getWindowDimensions = () => {
 //binds modal to root app element
 Modal.setAppElement('#root');
 
-const DeleteConfirmationModal = props => {
-    const exercise = props.info;
+const OkConfirmationModal = props => {
     const closeModalOnParent = props.closeModal;
     const [isOpen, setIsOpen] = useState(props.isModalOpen);
 
@@ -49,23 +48,17 @@ const DeleteConfirmationModal = props => {
         closeModalOnParent();
     };
 
-    const confirmDelete = () => {
-        props.confirmDelete();
-    };
-
     return <Modal
         isOpen={isOpen}
         onRequestClose={closeModal}
         style={getWindowDimensions().width >= 450 ? modalStylesDesktop : modalStylesPhone}>
             <div className={classes['modal-content']}>
-                <h3 className={classes['title']}>⚠️ Are you sure you want to delete this exercise?</h3>
-                <p className={classes['message']}>You are about to delete the exercise: <strong>'{exercise?.name} ({exercise?.alternativeName})'</strong>, with id: <strong>'{exercise?._id}'</strong></p>
+                <h3 className={classes['title']}>{props.message}</h3>
                 <div className={classes['buttons']}>
-                    <button onClick={closeModal} className={classes['button']}>Cancel</button>
-                    <button onClick={confirmDelete} className={classes['button']}>Confirm</button>
+                    <button onClick={closeModal} className={classes['button']}>Ok</button>
                 </div>
             </div>
         </Modal>
 };
 
-export default DeleteConfirmationModal;
+export default OkConfirmationModal;

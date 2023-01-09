@@ -7,6 +7,7 @@ const ResetPassword = props => {
     const navigateTo = useNavigate();
     const [resetToken, setResetToken] = useState();
     const [searchParams, setSearchParams] = useSearchParams();
+    //const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
     useEffect(() => {
         extractTokenFromUrl();
@@ -14,8 +15,13 @@ const ResetPassword = props => {
 
     const extractTokenFromUrl = () => {
         const token = searchParams.get('token');
-        //IMPROVE: Show error if the token could not be found
-        if (!token)  { navigateTo('/'); return; }
+        if (!token) {
+            if (!resetToken) {
+                console.error("Error: reset token not available.");
+                navigateTo('/auth/login');
+            }
+            return;
+        }
 
         searchParams.delete('token');
         setResetToken(token);
@@ -33,8 +39,16 @@ const ResetPassword = props => {
 
         resetPassword(body).then(response => {
             console.log("Response: ", response);
+            if (response &&  response === 'success') {
+                //setIsConfirmationModalOpen(true);
+            }
         });
     };
+
+    // const closeConfirmationModal = () => {
+    //     setIsConfirmationModalOpen(false);
+    //     navigateTo('/');
+    // }
 
     return <section className={classes['main-section']}>
         <form id="resetPassword-form" onSubmit={userResetPassword} className={classes['main-form']}>
