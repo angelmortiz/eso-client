@@ -2,12 +2,14 @@ import { resetPassword } from '../../util/apis/auth/authApis';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import classes from '../Health/General/CSS/Form.module.css';
+import OkConfirmationModal from '../Health/General/Popups/SimpleMessage/OkConfirmationModal';
 
 const ResetPassword = props => {
     const navigateTo = useNavigate();
     const [resetToken, setResetToken] = useState();
     const [searchParams, setSearchParams] = useSearchParams();
-    //const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+    const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+    const [isButtonEnabled, setButtonStatus] = useState(true);
 
     useEffect(() => {
         extractTokenFromUrl();
@@ -30,6 +32,7 @@ const ResetPassword = props => {
 
     const userResetPassword = (event) => {
         event.preventDefault();
+        setButtonStatus(false);
 
         const password = event.target.elements.password.value;
         const passwordConfirmation = event.target.elements.passwordConfirmation.value;
@@ -39,16 +42,17 @@ const ResetPassword = props => {
 
         resetPassword(body).then(response => {
             console.log("Response: ", response);
-            if (response &&  response === 'success') {
-                //setIsConfirmationModalOpen(true);
+            if (response &&  response.status === 'success') {
+                setIsConfirmationModalOpen(true);
             }
+            setButtonStatus(true);
         });
     };
 
-    // const closeConfirmationModal = () => {
-    //     setIsConfirmationModalOpen(false);
-    //     navigateTo('/');
-    // }
+    const closeConfirmationModal = () => {
+        setIsConfirmationModalOpen(false);
+        navigateTo('/auth/login');
+    }
 
     return <section className={classes['main-section']}>
         <form id="resetPassword-form" onSubmit={userResetPassword} className={classes['main-form']}>
@@ -65,8 +69,15 @@ const ResetPassword = props => {
                 placeholder='Re-enter password'className={classes['select-input']} />
             
             {/* SUBMIT BUTTON */}
-            <button type="submit" id="reset-password" className={classes['submit-btn']}>Reset Password</button>
+            <button type="submit" id="reset-password" 
+            className={isButtonEnabled ? classes['submit-btn'] : classes['submit-btn-disabled']}>
+                Reset Password
+            </button>
         </form>
+
+        {/* Password reset confirmation modal */}
+        <OkConfirmationModal isModalOpen={isConfirmationModalOpen} closeModal={closeConfirmationModal}
+            message='Password has been reset successfully. Please login.'/>
     </section>
 };
 
