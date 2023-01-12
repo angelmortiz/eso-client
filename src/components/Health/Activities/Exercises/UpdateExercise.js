@@ -31,8 +31,9 @@ const UpdateExercise = props => {
     //Gets the most updated info from current exercise
     useEffect(() => {
         if (!id) console.log(`Error: exercise id not found in the url.`);
-        fetchExerciseById(id).then(data => { 
-            setExercise(data.body);
+        fetchExerciseById(id).then(response => { 
+            if (!response || !response.isSuccess) return;
+            setExercise(response.body);
         });
     }, [id]);
 
@@ -58,16 +59,18 @@ const UpdateExercise = props => {
 
     //Fetches options for muscles and equipments
     useEffect(() => {
-        fetchAllMuscleNames().then(data => { 
+        fetchAllMuscleNames().then(response => { 
+            if (!response || !response.isSuccess) return;
             //adds an empty default option
-            data.unshift({_id: "", name: "-- Choose a muscle --"});
-            setMuscles(data);
+            response.body.unshift({_id: "", name: "-- Choose a muscle --"});
+            setMuscles(response.body);
         });
 
-        fetchAllEquipmentNames().then(data => { 
+        fetchAllEquipmentNames().then(response => { 
+            if (!response || !response.isSuccess) return;
             //adds an empty default option
-            data.unshift({_id: "", name: "-- Choose an equipment --"});
-            setEquipmentsOptions(data);
+            response.body.unshift({_id: "", name: "-- Choose an equipment --"});
+            setEquipmentsOptions(response.body);
         });
     }, []);
 
@@ -79,7 +82,7 @@ const UpdateExercise = props => {
         
         putExercise(id, formVals).then(response => { 
             console.log("Response: ", response);
-            if (response.isSuccess) {
+            if (response && response.isSuccess) {
                 //Navigate to the just updated exercise id
                 navigate(`/activities/exercise/${id}`);
             }

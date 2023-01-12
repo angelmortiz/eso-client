@@ -14,16 +14,18 @@ const AddExercise = props => {
     const [equipments, setEquipments] = useState([]);
 
     useEffect(() => {
-        fetchAllMuscleNames().then(data => { 
+        fetchAllMuscleNames().then(response => { 
+            if (!response || !response.isSuccess) return;
             //adds an empty default option
-            data.unshift({_id: "", name: "-- Choose a muscle --"});
-            setMuscles(data);
+            response.body.unshift({_id: "", name: "-- Choose a muscle --"});
+            setMuscles(response.body);
         });
 
-        fetchAllEquipmentNames().then(data => { 
+        fetchAllEquipmentNames().then(response => { 
+            if (!response || !response.isSuccess) return;
             //adds an empty default option
-            data.unshift({_id: "", name: "-- Choose an equipment --"});
-            setEquipments(data);
+            response.body.unshift({_id: "", name: "-- Choose an equipment --"});
+            setEquipments(response.body);
         });
     }, []);
 

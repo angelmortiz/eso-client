@@ -13,7 +13,7 @@ const UserInfo = props => {
     const userLogout = (event) => {
         event.preventDefault();
         logout().then( response => {
-            if(response && response.status === 'success'){
+            if(response && response.isSuccess){
                 dispatch(authActions.logout());
                 dispatch(userActions.removeUserInfo());
                 navigateTo('/');

@@ -42,7 +42,7 @@ const ResetPassword = props => {
 
         resetPassword(body).then(response => {
             console.log("Response: ", response);
-            if (response &&  response.status === 'success') {
+            if (response &&  response.isSuccess) {
                 setIsConfirmationModalOpen(true);
             }
             setButtonStatus(true);

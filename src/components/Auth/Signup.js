@@ -8,11 +8,10 @@ const Signup = props => {
     const signupUser = (event) => {
         event.preventDefault();
         const formVals = getValuesFromForm(event.target.elements);
-
-        console.log('formVals: ', formVals);
+        
         signup(formVals).then(response => {
             console.log("Response: ", response);
-            if (response && response.status === 'success') {
+            if (response && response.isSuccess) {
                 navigateTo('/auth/login');
             }
         });

@@ -15,7 +15,7 @@ const Login = props => {
         const formVals = getValuesFromForm(event.target.elements);
 
         login(formVals).then(response => {
-            if (response && response.status === 'success') {
+            if (response && response.isSuccess) {
                 dispatch(authActions.login());
                 navigateTo('/activities/exercises');
                 getCurrentUserInfo();
@@ -32,8 +32,8 @@ const Login = props => {
 
     const getCurrentUserInfo = () =>  {
         fetchCurrentUser().then(response => {
-            if (response && response.status === 'success'){
-                dispatch(userActions.setUserInfo(response.userInfo));
+            if (response && response.isSuccess){
+                dispatch(userActions.setUserInfo(response.body));
             }
         });
     };

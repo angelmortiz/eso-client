@@ -10,10 +10,11 @@ const AddMuscle = props => {
     const [exercises, setExercises] = useState([]);
 
     useEffect(() => {
-        fetchAllExerciseNames().then(data => { 
+        fetchAllExerciseNames().then(response => { 
+            if (!response || !response.isSuccess) return;
             //adds an empty default option
-            data.unshift({_id: "", name: "-- Choose an exercise --"});
-            setExercises(data);
+            response.body.unshift({_id: "", name: "-- Choose an exercise --"});
+            setExercises(response.body);
         });
     }, []);
 
@@ -48,8 +49,8 @@ const AddMuscle = props => {
         event.preventDefault();
         const formVals = getValuesFromForm(event.target.elements);
 
-        postMuscle(formVals).then(data => { 
-            console.log("Response data: ", data);
+        postMuscle(formVals).then(response => { 
+            console.log("Response: ", response);
         });
     };
 

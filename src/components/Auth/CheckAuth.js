@@ -17,7 +17,7 @@ const CheckAuth = props => {
 
     const checkUserAuthentication = () => {
         isAuthenticationValid().then(response => {
-            if (!response || response.status !== 'success') return;
+            if (!response || !response.isSuccess) return;
             
             //sets authentication to true in redux store
             dispatch(authActions.login());
@@ -33,13 +33,13 @@ const CheckAuth = props => {
 
     const getUserInfo = () => {
         fetchCurrentUser().then(response => {
-            if (!response || response.status !== 'success'){
+            if (!response || !response.isSuccess){
                 console.log('User could not be fetched. Message:', response?.message);
                 return;
             }
 
             //sets user info into redux store
-            dispatch(userActions.setUserInfo(response.userInfo));
+            dispatch(userActions.setUserInfo(response.body));
         }).catch(error => {
             console.log('Error occurred while fetching user information. Error: ', error);
         });

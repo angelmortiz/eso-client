@@ -16,7 +16,7 @@ const ForgotPassword = props => {
         const email = event.target.elements.email.value;
         forgotPassword({email}).then(response => {
             console.log("Response: ", response);
-            if (response && response.status === 'success') {
+            if (response && response.isSuccess) {
                 setIsConfirmationModalOpen(true);
             }
 

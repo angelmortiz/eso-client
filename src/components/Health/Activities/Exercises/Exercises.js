@@ -18,23 +18,29 @@ const Exercises = props => {
     const [selectedType, setSelectedType] = useState("");
 
     useEffect(() => {
-        fetchAllExercises().then(data => { 
-            console.log('data: ', data);
-            setExercises(data.body);
+        fetchAllExercises().then(response => { 
+            console.log('response: ', response);
+
+            if (!response || !response.isSuccess) return;
+            setExercises(response.body);
         });
     }, []);
 
     useEffect(() => {
-        fetchAllMuscleNames().then(data => { 
+        fetchAllMuscleNames().then(response => { 
+            if (!response || !response.isSuccess) return;
+
             //adds an empty default option
-            data.unshift({_id: "", name: "-- No filter --"});
-            setMuscleFiltersOptions(data);
+            response.body.unshift({_id: "", name: "-- No filter --"});
+            setMuscleFiltersOptions(response.body);
         });
 
-        fetchAllEquipmentNames().then(data => { 
+        fetchAllEquipmentNames().then(response => { 
+            if (!response || !response.isSuccess) return;
+
             //adds an empty default option
-            data.unshift({_id: "", name: "-- No filter --"});
-            setEquipmentFilterOptions(data);
+            response.body.unshift({_id: "", name: "-- No filter --"});
+            setEquipmentFilterOptions(response.body);
         });
     }, []);
 
