@@ -19,7 +19,8 @@ const Exercises = props => {
 
     useEffect(() => {
         fetchAllExercises().then(data => { 
-            setExercises(data);
+            console.log('data: ', data);
+            setExercises(data.body);
         });
     }, []);
 

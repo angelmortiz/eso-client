@@ -71,6 +71,8 @@ const NavigationBar = props => {
                 </li>
 
                 {/* ADD NEW */}
+                {/* Only available for admin users */}
+                {isUserAuthenticated && currentUserInfo.role === 'admin' &&
                 <li key="addNew"className={classes['dropdown']}>
                     <span> Add New </span>
                     <div className={classes['dropdown-content']}>
@@ -102,6 +104,8 @@ const NavigationBar = props => {
                         </ul>
                     </div>
                 </li>
+                }
+
             </ul>
             {/* //IMPROVE: Consider creating components login and user profile in NavBar */}
             {!isUserAuthenticated && 

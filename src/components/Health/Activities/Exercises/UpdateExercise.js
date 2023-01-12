@@ -32,7 +32,7 @@ const UpdateExercise = props => {
     useEffect(() => {
         if (!id) console.log(`Error: exercise id not found in the url.`);
         fetchExerciseById(id).then(data => { 
-            setExercise(data);
+            setExercise(data.body);
         });
     }, [id]);
 
@@ -76,8 +76,7 @@ const UpdateExercise = props => {
     const UpdateExercise = (event) => {
         event.preventDefault();
         const formVals = getValuesFromForm(event.target.elements);
-        // console.log("formVals: ", formVals);
-
+        
         putExercise(id, formVals).then(response => { 
             console.log("Response: ", response);
             if (response.isSuccess) {
