@@ -17,9 +17,9 @@ const ExerciseDetails = props => {
 
     useEffect(() => {
         if (!id) console.log(`Error: exercise id not found in the url.`);
-        fetchExerciseById(id).then(data => { 
-            const vidId = data.body.linkToVideo?.substr(16); //extracts the video id from YT link
-            setExercise(data.body);
+        fetchExerciseById(id).then(response => { 
+            const vidId = response.body.linkToVideo?.substr(16); //extracts the video id from YT link
+            setExercise(response.body);
             setVideoExercise(vidId);
         });
     }, [id]);

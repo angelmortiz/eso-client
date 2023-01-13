@@ -4,9 +4,10 @@ import addClasses from '../../General/CSS/Form.module.css';
 import { fetchAllExerciseNames } from '../../../../util/apis/exercises/exercisesApis';
 import { useEffect, useState} from 'react';
 import { postMuscle } from '../../../../util/apis/muscles/musclesApis';
+import { useNavigate } from 'react-router-dom';
 
 const AddMuscle = props => {
-    /** Fields Data */
+    const navigateTo = useNavigate();
     const [exercises, setExercises] = useState([]);
 
     useEffect(() => {
@@ -50,7 +51,9 @@ const AddMuscle = props => {
         const formVals = getValuesFromForm(event.target.elements);
 
         postMuscle(formVals).then(response => { 
-            console.log("Response: ", response);
+            console.log("response: ", response);
+            if (!response || !response.isSuccess) return;
+            navigateTo('/activities/muscles')
         });
     };
 

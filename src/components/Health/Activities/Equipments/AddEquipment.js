@@ -9,10 +9,10 @@ const AddEquipment = props => {
     const [exercises, setExercises] = useState([]);
 
     useEffect(() => {
-        fetchAllExerciseNames().then(data => { 
+        fetchAllExerciseNames().then(response => { 
             //adds an empty default option
-            data.unshift({_id: "", name: "-- Choose an exercise --"});
-            setExercises(data);
+            response.body.unshift({_id: "", name: "-- Choose an exercise --"});
+            setExercises(response.body);
         });
     }, []);
 
@@ -36,8 +36,8 @@ const AddEquipment = props => {
         const formVals = getValuesFromForm(event.target.elements);
 
         //TODO: Handle errors
-        postEquipment(formVals).then(data => { 
-            console.log("Response data: ", data);
+        postEquipment(formVals).then(response => { 
+            console.log("response: ", response);
         });
     };
 

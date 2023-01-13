@@ -15,11 +15,13 @@ const Login = props => {
         const formVals = getValuesFromForm(event.target.elements);
 
         login(formVals).then(response => {
-            if (response && response.isSuccess) {
-                dispatch(authActions.login());
-                navigateTo('/activities/exercises');
-                getCurrentUserInfo();
+            if (!response || !response.isSuccess) {
+                return;
             }
+
+            dispatch(authActions.login());
+            navigateTo('/activities/exercises');
+            getCurrentUserInfo();
         });
     };
 
