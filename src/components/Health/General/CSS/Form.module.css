@@ -142,6 +142,13 @@
     background-color: #028e98;
     border: none;
 }
+
+.error-text{
+    color: red;
+
+}
+
+
 /*************/
 /*** PHONE ***/
 /*************/

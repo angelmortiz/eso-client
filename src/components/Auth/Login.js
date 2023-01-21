@@ -13,6 +13,7 @@ const Login = props => {
     const loginUser = (event) => {
         event.preventDefault();
         const formVals = getValuesFromForm(event.target.elements);
+        validateFormValues(formVals);
 
         login(formVals).then(response => {
             if (!response || !response.isSuccess) {
@@ -40,6 +41,16 @@ const Login = props => {
         });
     };
 
+    const validateFormValues = (vals) => {
+        if (!vals.email){
+            
+        }
+
+        if (!vals.email){
+            
+        }
+    };
+
     return <section className={classes['main-section']}>
         <form id="login-form" onSubmit={loginUser} className={classes['main-form']}>
             <h1 className={classes['form-title']}>Login</h1>
@@ -54,6 +65,7 @@ const Login = props => {
             <input type="password" id="password" name="password"
                 placeholder='Enter password'className={classes['select-input']} />
             
+            <p className={classes['error-text']}>Please enter an email.</p>
             {/* SUBMIT BUTTON */}
             <button type="submit" id="login-user" className={classes['submit-btn']}>Login</button>
         </form>

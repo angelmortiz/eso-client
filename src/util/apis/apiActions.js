@@ -8,14 +8,7 @@ export const apiGet = path => {
         credentials: 'include'
     };
 
-    return fetch(`${API_ADDRESS}${path}`, requestOptions)
-    .then(apiResponse => {
-        return apiResponse.json();
-    })
-    .catch(error => {
-            console.log("An error ocurred while fetching information: ", error);
-        }
-    );
+    return fetchAction(path, requestOptions, 'getting');
 }
 
 export const apiPost = (path, body) => {
@@ -26,13 +19,7 @@ export const apiPost = (path, body) => {
         body: JSON.stringify(body)
     };
 
-    return fetch(`${API_ADDRESS}${path}`, requestOptions)
-    .then(apiResponse => {
-        return apiResponse.json();
-    })
-    .catch(error => {
-        console.log("An error ocurred while posting information: ", error);
-    });
+    return fetchAction(path, requestOptions, 'posting');
 }
 
 export const apiPut = (path, body) => {
@@ -43,13 +30,7 @@ export const apiPut = (path, body) => {
         body: JSON.stringify(body)
     };
 
-    return fetch(`${API_ADDRESS}${path}`, requestOptions)
-    .then(apiResponse => {
-        return apiResponse.json();
-    })
-    .catch(error => {
-        console.log("An error ocurred while updating information: ", error);
-    });
+    return fetchAction(path, requestOptions, 'putting');
 }
 
 export const apiPatch = (path, body) => {
@@ -60,13 +41,7 @@ export const apiPatch = (path, body) => {
         body: JSON.stringify(body)
     };
 
-    return fetch(`${API_ADDRESS}${path}`, requestOptions)
-    .then(apiResponse => {
-        return apiResponse.json();
-    })
-    .catch(error => {
-        console.log("An error ocurred while patching information: ", error);
-    });
+    return fetchAction(path, requestOptions, 'patching');
 }
 
 export const apiDelete = (path) => {
@@ -75,11 +50,20 @@ export const apiDelete = (path) => {
         credentials: 'include'
     };
 
-    return fetch(`${API_ADDRESS}${path}`, requestOptions)
-    .then(apiResponse => {
-        return apiResponse.json();
-    })
-    .catch(error => {
-        console.log("An error ocurred while deleting document: ", error);
-    });
+    return fetchAction(path, requestOptions, 'deleting');
 }
+
+const fetchAction = async (path, requestOptions, actionName) => {
+    try {
+        const apiResponse = await fetch(`${API_ADDRESS}${path}`, requestOptions);
+        const response = await apiResponse.json();
+
+        //Middleware to catch fails and errors from backend
+        if (!response?.isSuccess){
+            console.error('Error in response: ', response);
+        }
+        return response;
+    } catch (error) {
+        console.error(`An error ocurred while ${actionName} document: `, error);
+    }
+};

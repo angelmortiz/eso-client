@@ -17,15 +17,14 @@ const CheckAuth = props => {
 
     const checkUserAuthentication = () => {
         isAuthenticationValid().then(response => {
-            if (!response || !response.isSuccess) return;
-            
+            if (!response || !response.body.isUserAuthenticated) return;
+
             //sets authentication to true in redux store
             dispatch(authActions.login());
-
             //If user has a valid auth, pulls user info
             getUserInfo();
         }).catch(error => {
-            console.log('Error occurred while checking user authentication. Error: ', error);
+            console.error('Error occurred while checking user authentication. Error: ', error);
         }).finally(() => {
             props.setAuthenticationStatus(true);
         });
