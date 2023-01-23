@@ -120,8 +120,6 @@
     cursor: not-allowed;
 }
 
-
-
 .loading-img {
     margin: 1rem auto;
     height: 20px;
@@ -147,6 +145,12 @@
     color: rgb(176, 16, 72);
     margin: 0 0 1rem 0;
 
+}
+
+.response-error-text {
+    text-align: center;
+    color: rgb(176, 16, 72);
+    margin-top: 0.5rem;
 }
 
 

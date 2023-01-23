@@ -1,49 +1,177 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { changePassword } from '../../util/apis/auth/authApis';
 import classes from '../Health/General/CSS/Form.module.css';
+import FormInput from '../Health/General/Inputs/FormInput';
+import OkConfirmationModal from '../Health/General/Popups/SimpleMessage/OkConfirmationModal';
 
-const userChangePassword = (event) =>  {
+const ChangePassword = (props) => {
+  const navigateTo = useNavigate();
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [isButtonEnabled, setButtonStatus] = useState(true);
+  const [responseError, setResponseError] = useState('');
+  const [formValues, setFormValues] = useState({
+    currentPassword: '',
+    newPassword: '',
+    passwordConfirmation: '',
+  });
+  const [formErrors, setFormErrors] = useState({
+    currentPassword: [],
+    newPassword: [],
+    passwordConfirmation: [],
+  });
+
+  const inputValues = {
+    currentPassword: {
+      name: 'currentPassword',
+      label: 'Current password',
+      type: 'password',
+      id: 'currentPassword',
+      placeholder: 'Enter the current password',
+    },
+    newPassword: {
+      name: 'newPassword',
+      label: 'New password',
+      type: 'password',
+      id: 'newPassword',
+      placeholder: 'Enter the new password',
+      pattern:
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/,
+    },
+    passwordConfirmation: {
+      name: 'passwordConfirmation',
+      label: 'Confirm password',
+      type: 'password',
+      id: 'passwordConfirmation',
+      placeholder: 'Re-enter the same password',
+      pattern: formValues.newPassword,
+    },
+  };
+
+  const onChange = (e) => {
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  };
+
+  const userChangePassword = (event) => {
     event.preventDefault();
-    const formVals = getValuesFromForm(event.target.elements);
 
-    changePassword(formVals).then(response => {
-        console.log("Response: ", response);
+    if (!isValidationSuccessful()) return;
+
+    changePassword(formValues).then((response) => {
+      console.log('Response: ', response);
+      if (response && response.isSuccess) {
+        setIsConfirmationModalOpen(true);
+      } else if (response && response.message){
+        setResponseError(response.message);
+      }
+
+      setButtonStatus(true);
     });
-};
+  };
 
-const getValuesFromForm = (elements) => {
-    const values = {};
-    values.currentPassword = elements.currentPassword.value;
-    values.newPassword = elements.password.value;
-    values.passwordConfirmation = elements.passwordConfirmation.value;
-    return values;
-};
+  const isValidationSuccessful = () => {
+    const { currentPassword, newPassword, passwordConfirmation } = formValues;
+    let errors = {
+      currentPassword: [],
+      newPassword: [],
+      passwordConfirmation: [],
+    };
 
-const ChangePassword = props => {
-    return <section className={classes['main-section']}>
-        <form id="changePassword-form" onSubmit={userChangePassword} className={classes['main-form']}>
-            <h1 className={classes['form-title']}>Change Password</h1>
+    //current password validations
+    if (!currentPassword) {
+      errors.currentPassword.push('Current password is required.');
+    }
 
-            {/* CURRENT PASSWORD */}
-            <label htmlFor="current-password" className={classes['text-label']}>Current password:</label>
-            <input type="password" id="current-password" name="currentPassword"
-                placeholder='Enter current password'className={classes['select-input']} />
+    //new confirmation validations
+    if (!newPassword) {
+      errors.newPassword.push('New password is required.');
+    } else if (!inputValues.newPassword.pattern.test(newPassword)) {
+      errors.newPassword.push(
+        'Password must contain 8-20 characters and include at least one letter, one number, and one special character.'
+      );
+    }
 
+    //password confirmation validations
+    if (!passwordConfirmation) {
+      errors.passwordConfirmation.push('Password confirmation is required.');
+    } else if (formValues.passwordConfirmation !== formValues.newPassword) {
+      errors.passwordConfirmation.push('Passwords do not match.');
+    }
 
-            {/* PASSWORD */}
-            <label htmlFor="password" className={classes['text-label']}>New password:</label>
-            <input type="password" id="password" name="password"
-                placeholder='Enter new password'className={classes['select-input']} />
+    setFormErrors(errors);
 
-            {/* PASSWORD CONFIRMATION */}
-            <label htmlFor="passwordConfirmation" className={classes['text-label']}>Confirm password:</label>
-            <input type="password" id="passwordConfirmation" name="passwordConfirmation"
-                placeholder='Re-enter new password'className={classes['select-input']} />
-            
-            {/* SUBMIT BUTTON */}
-            <button type="submit" id="change-password" className={classes['submit-btn']}>Change Password</button>
-        </form>
+    //true if no errors were found, otherwise, false
+    return (
+      errors.currentPassword.length === 0 &&
+      errors.newPassword.length === 0 &&
+      errors.passwordConfirmation.length === 0
+    );
+  };
+
+  const closeConfirmationModal = () => {
+    setIsConfirmationModalOpen(false);
+    navigateTo('/auth/login');
+  };
+
+  return (
+    <section className={classes['main-section']}>
+      <form
+        id="changePassword-form"
+        onSubmit={userChangePassword}
+        className={classes['main-form']}
+      >
+        <h1 className={classes['form-title']}>Change Password</h1>
+
+        {/* CURRENT PASSWORD */}
+        <FormInput
+          {...inputValues.currentPassword}
+          errors={formErrors.currentPassword}
+          value={formValues['currentPassword']}
+          onChange={onChange}
+        />
+
+        {/* NEW PASSWORD */}
+        <FormInput
+          {...inputValues.newPassword}
+          errors={formErrors.newPassword}
+          value={formValues['newPassword']}
+          onChange={onChange}
+        />
+
+        {/* PASSWORD CONFIRMATION */}
+        <FormInput
+          {...inputValues.passwordConfirmation}
+          errors={formErrors.passwordConfirmation}
+          value={formValues['passwordConfirmation']}
+          onChange={onChange}
+        />
+
+        {/* SUBMIT BUTTON */}
+        <button
+          type="submit"
+          id="change-password"
+          className={
+            isButtonEnabled
+              ? classes['submit-btn']
+              : classes['submit-btn-disabled']
+          }
+        >
+          Change Password
+        </button>
+
+        {responseError && (
+          <span className={classes['response-error-text']}>{responseError}</span>
+        )}
+      </form>
+
+      {/* Password changed confirmation modal */}
+      <OkConfirmationModal
+        isModalOpen={isConfirmationModalOpen}
+        closeModal={closeConfirmationModal}
+        message="Password has been changed successfully."
+      />
     </section>
-
-}
+  );
+};
 
 export default ChangePassword;

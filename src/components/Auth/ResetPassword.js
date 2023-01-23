@@ -113,7 +113,7 @@ const ResetPassword = (props) => {
 
   const closeConfirmationModal = () => {
     setIsConfirmationModalOpen(false);
-    navigateTo('/auth/login');
+    navigateTo('/');
   };
 
   return (

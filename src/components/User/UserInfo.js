@@ -10,8 +10,8 @@ const UserInfo = props => {
     const dispatch = useDispatch();
     const currentUserInfo = useSelector(state => state.userInfo.userInfo);
 
-    const userLogout = (event) => {
-        event.preventDefault();
+    const userLogout = (e) => {
+        e.preventDefault();
         logout().then( response => {
             if(response && response.isSuccess){
                 dispatch(authActions.logout());
@@ -19,6 +19,11 @@ const UserInfo = props => {
                 navigateTo('/');
             }
         });
+    };
+
+    const changePassword = (e) => {
+        e.preventDefault();
+        navigateTo('/auth/changePassword');
     };
 
     return <section className={classes['card']}>
@@ -40,6 +45,10 @@ const UserInfo = props => {
                 </div>
             </div>
 
+            <button className={classes['change-password-btn']} onClick={changePassword}>Change password</button>
+
+            <hr className={classes['horizontal-division']} />
+            
             <button className={classes['logout-btn']} onClick={userLogout}>Log out</button>
         </div>
     </section>
