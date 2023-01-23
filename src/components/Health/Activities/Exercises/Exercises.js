@@ -1,4 +1,4 @@
-import InfoCard from "../../General/Cards/InfoCard";
+import InfoCard from "../../../UI/Cards/InfoCard";
 import HealthGrid from "../../General/Pages/HealthGrid";
 import  classes from './Exercises.module.css';
 import { fetchAllExercises } from "../../../../util/apis/exercises/exercisesApis"

@@ -1,4 +1,4 @@
-import IncrementalInput from '../../General/Selects/IncrementalInput';
+import IncrementalInput from '../../../UI/Selects/IncrementalInput';
 import addClasses from '../../General/CSS/Form.module.css';
 import { postPhysicalCondition } from '../../../../util/apis/physicalConditions/physicalConditionsApis';
 

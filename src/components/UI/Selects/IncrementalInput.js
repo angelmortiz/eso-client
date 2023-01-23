@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import addClasses from '../../General/CSS/Form.module.css';
+import addClasses from '../../Health/General/CSS/Form.module.css';
 
 const IncrementalInput = props => {
     const info = props.input;

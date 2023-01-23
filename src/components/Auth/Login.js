@@ -6,7 +6,7 @@ import { userActions } from '../../store/userSlice';
 import { login } from '../../util/apis/auth/authApis';
 import { fetchCurrentUser } from '../../util/apis/users/usersApis';
 import classes from '../Health/General/CSS/Form.module.css';
-import FormInput from '../Health/General/Inputs/FormInput';
+import FormInput from '../UI/Inputs/FormInput';
 
 const inputValues = {
   email: {

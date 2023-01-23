@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signup } from '../../util/apis/auth/authApis';
 import classes from '../Health/General/CSS/Form.module.css';
-import FormInput from '../Health/General/Inputs/FormInput';
+import FormInput from '../UI/Inputs/FormInput';
 
 const inputValues = {
   firstName: {

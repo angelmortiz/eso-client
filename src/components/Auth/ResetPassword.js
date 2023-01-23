@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import classes from '../Health/General/CSS/Form.module.css';
 import OkConfirmationModal from '../Health/General/Popups/SimpleMessage/OkConfirmationModal';
-import FormInput from '../Health/General/Inputs/FormInput';
+import FormInput from '../UI/Inputs/FormInput';
 
 const inputValues = {
   password: {
