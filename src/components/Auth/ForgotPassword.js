@@ -11,6 +11,7 @@ const ForgotPassword = (props) => {
   const [isButtonEnabled, setButtonStatus] = useState(true);
   const [formValues, setFormValues] = useState({ email: '' });
   const [formErrors, setFormErrors] = useState({ email: []});
+  const [responseError, setResponseError] = useState('');
 
   const emailValues = {
       name: 'email',
@@ -34,6 +35,8 @@ const ForgotPassword = (props) => {
       console.log('Response: ', response);
       if (response && response.isSuccess) {
         setIsConfirmationModalOpen(true);
+      } else if (response && response.message){
+        setResponseError(response.message);
       }
 
       setButtonStatus(true);
@@ -91,6 +94,10 @@ const ForgotPassword = (props) => {
         >
           Send Email
         </button>
+
+        {responseError && (
+          <span className={classes['response-error-text']}>{responseError}</span>
+        )}
       </form>
 
       {/* Email sent confirmation modal */}

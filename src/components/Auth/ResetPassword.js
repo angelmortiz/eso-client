@@ -11,6 +11,7 @@ const ResetPassword = (props) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [isButtonEnabled, setButtonStatus] = useState(true);
+  const [responseError, setResponseError] = useState('');
   const [formValues, setFormValues] = useState({
     password: '',
     passwordConfirmation: '',
@@ -78,7 +79,10 @@ const ResetPassword = (props) => {
       console.log('Response: ', response);
       if (response && response.isSuccess) {
         setIsConfirmationModalOpen(true);
+      } else if (response && response.message){
+        setResponseError(response.message);
       }
+      
       setButtonStatus(true);
     });
   };
@@ -153,6 +157,10 @@ const ResetPassword = (props) => {
         >
           Reset Password
         </button>
+
+        {responseError && (
+          <span className={classes['response-error-text']}>{responseError}</span>
+        )}
       </form>
 
       {/* Password reset confirmation modal */}

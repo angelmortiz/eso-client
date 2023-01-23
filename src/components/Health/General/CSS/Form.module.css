@@ -126,6 +126,10 @@
     width: 20px;
 }
 
+.forgot-password {
+    margin-top: 1rem;
+}
+
 .division {
     margin: 1rem 0 1rem 0;
     width: 100%;

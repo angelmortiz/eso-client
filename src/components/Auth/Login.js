@@ -11,6 +11,7 @@ import FormInput from '../Health/General/Inputs/FormInput';
 const Login = (props) => {
   const [formValues, setFormValues] = useState({ email: '', password: '' });
   const [formErrors, setFormErrors] = useState({ email: [], password: [] });
+  const [responseError, setResponseError] = useState('');
   const navigateTo = useNavigate();
   const dispatch = useDispatch();
 
@@ -27,9 +28,7 @@ const Login = (props) => {
       label: 'Password',
       type: 'password',
       id: 'password',
-      placeholder: 'Enter a password',
-      pattern:
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/,
+      placeholder: 'Enter a password'
     },
   };
 
@@ -44,6 +43,7 @@ const Login = (props) => {
 
     login(formValues).then((response) => {
       if (!response || !response.isSuccess) {
+        setResponseError(response?.message);
         return;
       }
 
@@ -78,10 +78,6 @@ const Login = (props) => {
     //password validations
     if (!password) {
       errors.password.push('Password is required.');
-    } else if (!inputValues.password.pattern.test(password)) {
-      errors.password.push(
-        'Password must contain 8-20 characters and include at least one letter, one number, and one special character.'
-      );
     }
     setFormErrors(errors);
 
@@ -118,6 +114,10 @@ const Login = (props) => {
         <button type="submit" id="login-user" className={classes['submit-btn']}>
           Login
         </button>
+
+        {responseError && (
+          <span className={classes['response-error-text']}>{responseError}</span>
+        )}
       </form>
 
       <Link to="/auth/forgotPassword" className={classes['forgot-password']}>
