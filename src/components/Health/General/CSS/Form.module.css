@@ -144,7 +144,8 @@
 }
 
 .error-text{
-    color: red;
+    color: rgb(176, 16, 72);
+    margin: 0 0 1rem 0;
 
 }
 

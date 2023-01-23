@@ -1,85 +1,140 @@
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { authActions } from "../../store/authSlice";
-import { userActions } from "../../store/userSlice";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { authActions } from '../../store/authSlice';
+import { userActions } from '../../store/userSlice';
 import { login } from '../../util/apis/auth/authApis';
-import { fetchCurrentUser } from "../../util/apis/users/usersApis";
-import classes from '../Health/General/CSS/Form.module.css'
+import { fetchCurrentUser } from '../../util/apis/users/usersApis';
+import classes from '../Health/General/CSS/Form.module.css';
+import FormInput from '../Health/General/Inputs/FormInput';
 
-const Login = props => {
-    const navigateTo = useNavigate();
-    const dispatch = useDispatch();
+const Login = (props) => {
+  const [formValues, setFormValues] = useState({ email: '', password: '' });
+  const [formErrors, setFormErrors] = useState({ email: [], password: [] });
+  const navigateTo = useNavigate();
+  const dispatch = useDispatch();
 
-    const loginUser = (event) => {
-        event.preventDefault();
-        const formVals = getValuesFromForm(event.target.elements);
-        validateFormValues(formVals);
+  const inputValues = {
+    email: {
+      name: 'email',
+      label: 'Email',
+      type: 'text',
+      id: 'email',
+      placeholder: 'Enter an email',
+    },
+    password: {
+      name: 'password',
+      label: 'Password',
+      type: 'password',
+      id: 'password',
+      placeholder: 'Enter a password',
+      pattern:
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/,
+    },
+  };
 
-        login(formVals).then(response => {
-            if (!response || !response.isSuccess) {
-                return;
-            }
+  const onChange = (e) => {
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  };
 
-            dispatch(authActions.login());
-            navigateTo('/activities/exercises');
-            getCurrentUserInfo();
-        });
+  const loginUser = (e) => {
+    e.preventDefault();
+
+    if (!isValidationSuccessful()) return;
+
+    login(formValues).then((response) => {
+      if (!response || !response.isSuccess) {
+        return;
+      }
+
+      dispatch(authActions.login());
+      navigateTo('/activities/exercises');
+      getCurrentUserInfo();
+    });
+  };
+
+  const getCurrentUserInfo = () => {
+    fetchCurrentUser().then((response) => {
+      if (response && response.isSuccess) {
+        dispatch(userActions.setUserInfo(response.body));
+      }
+    });
+  };
+
+  const isValidationSuccessful = () => {
+    const { email, password } = formValues;
+    let errors = {
+      email: [],
+      password: [],
     };
 
-    const getValuesFromForm = (elements) => {
-        const values = {};
-        values.email = elements.email.value;
-        values.password = elements.password.value;
-        return values;
-    };
+    // email validations
+    if (!email) {
+      errors.email.push('Email is required.');
+    } else if (email.indexOf('@') === -1) {
+      errors.email.push(`The email must contain a '@' to be valid.`);
+    }
 
-    const getCurrentUserInfo = () =>  {
-        fetchCurrentUser().then(response => {
-            if (response && response.isSuccess){
-                dispatch(userActions.setUserInfo(response.body));
-            }
-        });
-    };
+    //password validations
+    if (!password) {
+      errors.password.push('Password is required.');
+    } else if (!inputValues.password.pattern.test(password)) {
+      errors.password.push(
+        'Password must contain 8-20 characters and include at least one letter, one number, and one special character.'
+      );
+    }
+    setFormErrors(errors);
 
-    const validateFormValues = (vals) => {
-        if (!vals.email){
-            
-        }
+    //true if no errors were found, otherwise, false
+    return errors.email.length === 0 && errors.password.length === 0;
+  };
 
-        if (!vals.email){
-            
-        }
-    };
+  return (
+    <section className={classes['main-section']}>
+      <form
+        id="login-form"
+        onSubmit={loginUser}
+        className={classes['main-form']}
+      >
+        <h1 className={classes['form-title']}>Login</h1>
 
-    return <section className={classes['main-section']}>
-        <form id="login-form" onSubmit={loginUser} className={classes['main-form']}>
-            <h1 className={classes['form-title']}>Login</h1>
+        {/* EMAIL */}
+        <FormInput
+          {...inputValues.email}
+          errors={formErrors.email}
+          value={formValues[inputValues['email']]}
+          onChange={onChange}
+        />
 
-            {/* EMAIL */}
-            <label htmlFor="email" className={classes['text-label']}>Email:</label>
-            <input type="email" id="email" name="email"
-                placeholder='Enter email' className={classes['select-input']}/>
-            
-            {/* PASSWORD */}
-            <label htmlFor="password" className={classes['text-label']}>Password:</label>
-            <input type="password" id="password" name="password"
-                placeholder='Enter password'className={classes['select-input']} />
-            
-            <p className={classes['error-text']}>Please enter an email.</p>
-            {/* SUBMIT BUTTON */}
-            <button type="submit" id="login-user" className={classes['submit-btn']}>Login</button>
-        </form>
+        {/* PASSWORD */}
+        <FormInput
+          {...inputValues.password}
+          errors={formErrors.password}
+          value={formValues[inputValues['password']]}
+          onChange={onChange}
+        />
 
-        <Link to='/auth/forgotPassword' className={classes['forgot-password']}>Forgot Password</Link>
-        
-        {/* Division line */}
-        <div className={classes['division']}>
-            <hr className={classes['horizontal-division']}/>
-            &nbsp;&nbsp;or&nbsp;&nbsp;
-            <hr className={classes['horizontal-division']}/>
-        </div>
-        <Link to='/auth/signup' className={classes['submit-btn']}>Sign Up</Link>
+        {/* SUBMIT BUTTON */}
+        <button type="submit" id="login-user" className={classes['submit-btn']}>
+          Login
+        </button>
+      </form>
+
+      <Link to="/auth/forgotPassword" className={classes['forgot-password']}>
+        Forgot Password
+      </Link>
+
+      {/* Division line */}
+      <div className={classes['division']}>
+        <hr className={classes['horizontal-division']} />
+        &nbsp;&nbsp;or&nbsp;&nbsp;
+        <hr className={classes['horizontal-division']} />
+      </div>
+      <Link to="/auth/signup" className={classes['submit-btn']}>
+        Sign Up
+      </Link>
     </section>
-}
+  );
+};
 
 export default Login;
