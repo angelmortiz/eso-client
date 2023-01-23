@@ -102,7 +102,7 @@ const Login = (props) => {
         <FormInput
           {...inputValues.email}
           errors={formErrors.email}
-          value={formValues[inputValues['email']]}
+          value={formValues['email']}
           onChange={onChange}
         />
 
@@ -110,7 +110,7 @@ const Login = (props) => {
         <FormInput
           {...inputValues.password}
           errors={formErrors.password}
-          value={formValues[inputValues['password']]}
+          value={formValues['password']}
           onChange={onChange}
         />
 
