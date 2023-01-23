@@ -5,6 +5,14 @@ import classes from '../Health/General/CSS/Form.module.css';
 import FormInput from '../Health/General/Inputs/FormInput';
 import OkConfirmationModal from '../Health/General/Popups/SimpleMessage/OkConfirmationModal';
 
+const emailValues = {
+  name: 'email',
+  label: 'Email',
+  type: 'text',
+  id: 'email',
+  placeholder: 'Enter an email',
+};
+
 const ForgotPassword = (props) => {
   const navigateTo = useNavigate();
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
@@ -12,14 +20,6 @@ const ForgotPassword = (props) => {
   const [formValues, setFormValues] = useState({ email: '' });
   const [formErrors, setFormErrors] = useState({ email: []});
   const [responseError, setResponseError] = useState('');
-
-  const emailValues = {
-      name: 'email',
-      label: 'Email',
-      type: 'text',
-      id: 'email',
-      placeholder: 'Enter an email',
-  };
 
   const onChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });

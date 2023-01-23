@@ -5,6 +5,25 @@ import classes from '../Health/General/CSS/Form.module.css';
 import OkConfirmationModal from '../Health/General/Popups/SimpleMessage/OkConfirmationModal';
 import FormInput from '../Health/General/Inputs/FormInput';
 
+const inputValues = {
+  password: {
+    name: 'password',
+    label: 'New password',
+    type: 'password',
+    id: 'newPassword',
+    placeholder: 'Enter a password',
+    pattern:
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/,
+  },
+  passwordConfirmation: {
+    name: 'passwordConfirmation',
+    label: 'Confirm password',
+    type: 'password',
+    id: 'passwordConfirmation',
+    placeholder: 'Re-enter the same password'
+  },
+};
+
 const ResetPassword = (props) => {
   const navigateTo = useNavigate();
   const [resetToken, setResetToken] = useState();
@@ -25,25 +44,6 @@ const ResetPassword = (props) => {
     extractTokenFromUrl();
   });
 
-  const inputValues = {
-    password: {
-      name: 'password',
-      label: 'New password',
-      type: 'password',
-      id: 'newPassword',
-      placeholder: 'Enter a password',
-      pattern:
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/,
-    },
-    passwordConfirmation: {
-      name: 'passwordConfirmation',
-      label: 'Confirm password',
-      type: 'password',
-      id: 'passwordConfirmation',
-      placeholder: 'Re-enter the same password',
-      pattern: formValues.password,
-    },
-  };
 
   const onChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
@@ -82,7 +82,7 @@ const ResetPassword = (props) => {
       } else if (response && response.message){
         setResponseError(response.message);
       }
-      
+
       setButtonStatus(true);
     });
   };

@@ -4,6 +4,46 @@ import { signup } from '../../util/apis/auth/authApis';
 import classes from '../Health/General/CSS/Form.module.css';
 import FormInput from '../Health/General/Inputs/FormInput';
 
+const inputValues = {
+  firstName: {
+    name: 'firstName',
+    label: 'First name',
+    type: 'text',
+    id: 'firstName',
+    placeholder: 'Enter your first name',
+  },
+  lastName: {
+    name: 'lastName',
+    label: 'Last name',
+    type: 'text',
+    id: 'lastName',
+    placeholder: 'Enter your last name',
+  },
+  email: {
+    name: 'email',
+    label: 'Email',
+    type: 'text',
+    id: 'email',
+    placeholder: 'Enter an email',
+  },
+  password: {
+    name: 'password',
+    label: 'New password',
+    type: 'password',
+    id: 'newPassword',
+    placeholder: 'Enter a password',
+    pattern:
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/,
+  },
+  passwordConfirmation: {
+    name: 'passwordConfirmation',
+    label: 'Confirm password',
+    type: 'password',
+    id: 'passwordConfirmation',
+    placeholder: 'Re-enter the same password'
+  },
+};
+
 const Signup = (props) => {
   const navigateTo = useNavigate();
   const [responseError, setResponseError] = useState('');
@@ -21,47 +61,6 @@ const Signup = (props) => {
     password: [],
     passwordConfirmation: [],
   });
-
-  const inputValues = {
-    firstName: {
-      name: 'firstName',
-      label: 'First name',
-      type: 'text',
-      id: 'firstName',
-      placeholder: 'Enter your first name',
-    },
-    lastName: {
-      name: 'lastName',
-      label: 'Last name',
-      type: 'text',
-      id: 'lastName',
-      placeholder: 'Enter your last name',
-    },
-    email: {
-      name: 'email',
-      label: 'Email',
-      type: 'text',
-      id: 'email',
-      placeholder: 'Enter an email',
-    },
-    password: {
-      name: 'password',
-      label: 'New password',
-      type: 'password',
-      id: 'newPassword',
-      placeholder: 'Enter a password',
-      pattern:
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/,
-    },
-    passwordConfirmation: {
-      name: 'passwordConfirmation',
-      label: 'Confirm password',
-      type: 'password',
-      id: 'passwordConfirmation',
-      placeholder: 'Re-enter the same password',
-      pattern: formValues.password,
-    },
-  };
 
   const onChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });

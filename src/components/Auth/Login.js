@@ -8,29 +8,29 @@ import { fetchCurrentUser } from '../../util/apis/users/usersApis';
 import classes from '../Health/General/CSS/Form.module.css';
 import FormInput from '../Health/General/Inputs/FormInput';
 
+const inputValues = {
+  email: {
+    name: 'email',
+    label: 'Email',
+    type: 'text',
+    id: 'email',
+    placeholder: 'Enter an email',
+  },
+  password: {
+    name: 'password',
+    label: 'Password',
+    type: 'password',
+    id: 'password',
+    placeholder: 'Enter a password'
+  },
+};
+
 const Login = (props) => {
   const [formValues, setFormValues] = useState({ email: '', password: '' });
   const [formErrors, setFormErrors] = useState({ email: [], password: [] });
   const [responseError, setResponseError] = useState('');
   const navigateTo = useNavigate();
   const dispatch = useDispatch();
-
-  const inputValues = {
-    email: {
-      name: 'email',
-      label: 'Email',
-      type: 'text',
-      id: 'email',
-      placeholder: 'Enter an email',
-    },
-    password: {
-      name: 'password',
-      label: 'Password',
-      type: 'password',
-      id: 'password',
-      placeholder: 'Enter a password'
-    },
-  };
 
   const onChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });

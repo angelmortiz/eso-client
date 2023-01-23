@@ -5,6 +5,32 @@ import classes from '../Health/General/CSS/Form.module.css';
 import FormInput from '../Health/General/Inputs/FormInput';
 import OkConfirmationModal from '../Health/General/Popups/SimpleMessage/OkConfirmationModal';
 
+const inputValues = {
+  currentPassword: {
+    name: 'currentPassword',
+    label: 'Current password',
+    type: 'password',
+    id: 'currentPassword',
+    placeholder: 'Enter the current password',
+  },
+  newPassword: {
+    name: 'newPassword',
+    label: 'New password',
+    type: 'password',
+    id: 'newPassword',
+    placeholder: 'Enter the new password',
+    pattern:
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/,
+  },
+  passwordConfirmation: {
+    name: 'passwordConfirmation',
+    label: 'Confirm password',
+    type: 'password',
+    id: 'passwordConfirmation',
+    placeholder: 'Re-enter the same password'
+  },
+};
+
 const ChangePassword = (props) => {
   const navigateTo = useNavigate();
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
@@ -20,33 +46,6 @@ const ChangePassword = (props) => {
     newPassword: [],
     passwordConfirmation: [],
   });
-
-  const inputValues = {
-    currentPassword: {
-      name: 'currentPassword',
-      label: 'Current password',
-      type: 'password',
-      id: 'currentPassword',
-      placeholder: 'Enter the current password',
-    },
-    newPassword: {
-      name: 'newPassword',
-      label: 'New password',
-      type: 'password',
-      id: 'newPassword',
-      placeholder: 'Enter the new password',
-      pattern:
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/,
-    },
-    passwordConfirmation: {
-      name: 'passwordConfirmation',
-      label: 'Confirm password',
-      type: 'password',
-      id: 'passwordConfirmation',
-      placeholder: 'Re-enter the same password',
-      pattern: formValues.newPassword,
-    },
-  };
 
   const onChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
