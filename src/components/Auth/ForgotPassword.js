@@ -70,11 +70,7 @@ const ForgotPassword = (props) => {
         className={classes['main-form']}
       >
         <h1 className={classes['form-title']}>Forgot Password</h1>
-
-        {/* EMAIL */}
-        {/* <label htmlFor="email" className={classes['text-label']}>Email:</label>
-            <input type="email" id="email" name="email"
-                placeholder='Enter email' className={classes['select-input']}/> */}
+        
         {/* EMAIL */}
         <FormInput
           {...emailValues}

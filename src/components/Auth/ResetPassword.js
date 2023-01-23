@@ -3,82 +3,166 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import classes from '../Health/General/CSS/Form.module.css';
 import OkConfirmationModal from '../Health/General/Popups/SimpleMessage/OkConfirmationModal';
+import FormInput from '../Health/General/Inputs/FormInput';
 
-const ResetPassword = props => {
-    const navigateTo = useNavigate();
-    const [resetToken, setResetToken] = useState();
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
-    const [isButtonEnabled, setButtonStatus] = useState(true);
+const ResetPassword = (props) => {
+  const navigateTo = useNavigate();
+  const [resetToken, setResetToken] = useState();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [isButtonEnabled, setButtonStatus] = useState(true);
+  const [formValues, setFormValues] = useState({
+    password: '',
+    passwordConfirmation: '',
+  });
+  const [formErrors, setFormErrors] = useState({
+    password: [],
+    passwordConfirmation: [],
+  });
 
-    useEffect(() => {
-        extractTokenFromUrl();
-    });
+  useEffect(() => {
+    extractTokenFromUrl();
+  });
 
-    const extractTokenFromUrl = () => {
-        const token = searchParams.get('token');
-        if (!token) {
-            if (!resetToken) {
-                console.error("Error: reset token not available.");
-                navigateTo('/auth/login');
-            }
-            return;
-        }
+  const inputValues = {
+    password: {
+      name: 'password',
+      label: 'New password',
+      type: 'password',
+      id: 'newPassword',
+      placeholder: 'Enter a password',
+      pattern:
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/,
+    },
+    passwordConfirmation: {
+      name: 'passwordConfirmation',
+      label: 'Confirm password',
+      type: 'password',
+      id: 'passwordConfirmation',
+      placeholder: 'Re-enter the same password',
+      pattern: formValues.password,
+    },
+  };
 
-        searchParams.delete('token');
-        setResetToken(token);
-        setSearchParams(searchParams);
+  const onChange = (e) => {
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  };
+
+  const extractTokenFromUrl = () => {
+    const token = searchParams.get('token');
+    if (!token) {
+      if (!resetToken) {
+        console.error('Error: reset token not available.');
+        navigateTo('/auth/login');
+      }
+      return;
     }
 
-    const userResetPassword = (event) => {
-        event.preventDefault();
-        setButtonStatus(false);
+    searchParams.delete('token');
+    setResetToken(token);
+    setSearchParams(searchParams);
+  };
 
-        const password = event.target.elements.password.value;
-        const passwordConfirmation = event.target.elements.passwordConfirmation.value;
-        const body = {
-            password, passwordConfirmation, resetToken
-        }
+  const userResetPassword = (event) => {
+    event.preventDefault();
 
-        resetPassword(body).then(response => {
-            console.log("Response: ", response);
-            if (response &&  response.isSuccess) {
-                setIsConfirmationModalOpen(true);
-            }
-            setButtonStatus(true);
-        });
+    if (!isValidationSuccessful()) return;
+    setButtonStatus(false);
+
+    const body = {
+      ...formValues,
+      resetToken,
     };
 
-    const closeConfirmationModal = () => {
-        setIsConfirmationModalOpen(false);
-        navigateTo('/auth/login');
+    resetPassword(body).then((response) => {
+      console.log('Response: ', response);
+      if (response && response.isSuccess) {
+        setIsConfirmationModalOpen(true);
+      }
+      setButtonStatus(true);
+    });
+  };
+
+  const isValidationSuccessful = () => {
+    const { password, passwordConfirmation } = formValues;
+    let errors = {
+      password: [],
+      passwordConfirmation: [],
+    };
+
+    //password validations
+    if (!password) {
+      errors.password.push('Password is required.');
+    } else if (!inputValues.password.pattern.test(password)) {
+      errors.password.push(
+        'Password must contain 8-20 characters and include at least one letter, one number, and one special character.'
+      );
     }
 
-    return <section className={classes['main-section']}>
-        <form id="resetPassword-form" onSubmit={userResetPassword} className={classes['main-form']}>
-            <h1 className={classes['form-title']}>Reset Password</h1>
+    //password confirmation validations
+    if (!passwordConfirmation) {
+        errors.passwordConfirmation.push('Password confirmation is required.');
+    } else if (formValues.passwordConfirmation !== formValues.password) {
+        errors.passwordConfirmation.push('Passwords do not match.');
+    }
+    setFormErrors(errors);
 
-            {/* PASSWORD */}
-            <label htmlFor="password" className={classes['text-label']}>New password:</label>
-            <input type="password" id="password" name="password"
-                placeholder='Enter password'className={classes['select-input']} />
+    //true if no errors were found, otherwise, false
+    return errors.password.length === 0 && errors.passwordConfirmation.length === 0;
+  };
 
-            {/* PASSWORD CONFIRMATION */}
-            <label htmlFor="passwordConfirmation" className={classes['text-label']}>Confirm password:</label>
-            <input type="password" id="passwordConfirmation" name="passwordConfirmation"
-                placeholder='Re-enter password'className={classes['select-input']} />
-            
-            {/* SUBMIT BUTTON */}
-            <button type="submit" id="reset-password" 
-            className={isButtonEnabled ? classes['submit-btn'] : classes['submit-btn-disabled']}>
-                Reset Password
-            </button>
-        </form>
+  const closeConfirmationModal = () => {
+    setIsConfirmationModalOpen(false);
+    navigateTo('/auth/login');
+  };
 
-        {/* Password reset confirmation modal */}
-        <OkConfirmationModal isModalOpen={isConfirmationModalOpen} closeModal={closeConfirmationModal}
-            message='Password has been reset successfully. Please login.'/>
+  return (
+    <section className={classes['main-section']}>
+      <form
+        id="resetPassword-form"
+        onSubmit={userResetPassword}
+        className={classes['main-form']}
+      >
+        <h1 className={classes['form-title']}>Reset Password</h1>
+
+        {/* PASSWORD */}
+        <FormInput
+          {...inputValues.password}
+          errors={formErrors.password}
+          value={formValues['password']}
+          onChange={onChange}
+        />
+
+        {/* PASSWORD CONFIRMATION */}
+        <FormInput
+          {...inputValues.passwordConfirmation}
+          errors={formErrors.passwordConfirmation}
+          value={formValues['passwordConfirmation']}
+          onChange={onChange}
+        />
+
+        {/* SUBMIT BUTTON */}
+        <button
+          type="submit"
+          id="reset-password"
+          className={
+            isButtonEnabled
+              ? classes['submit-btn']
+              : classes['submit-btn-disabled']
+          }
+        >
+          Reset Password
+        </button>
+      </form>
+
+      {/* Password reset confirmation modal */}
+      <OkConfirmationModal
+        isModalOpen={isConfirmationModalOpen}
+        closeModal={closeConfirmationModal}
+        message="Password has been reset successfully. Please login."
+      />
     </section>
+  );
 };
 
 export default ResetPassword;
