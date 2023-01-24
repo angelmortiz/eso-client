@@ -1,6 +1,6 @@
 import InfoCard from "../../../UI/Cards/InfoCard";
-import CardGrid from "../../../UI/Grids/CardGrid";
-import classes from '../../../UI/General/CSS/Grid.module.css';
+import GridView from "../../../UI/Grids/GridView";
+import classes from '../../../UI/General/CSS/GridContent.module.css';
 import { fetchAllExercises } from "../../../../util/apis/exercises/exercisesApis"
 import { useState, useEffect } from "react";
 import { fetchAllEquipmentNames } from '../../../../util/apis/equipments/equipmentsApis';
@@ -87,7 +87,7 @@ const Exercises = props => {
         setFilteredExercises(exercises);
     };
 
-    return <CardGrid title="Exercises">
+    return <GridView title="Exercises">
         {/* FILTERS */}
         <section className={classes['filters-section']}>
             <button className={classes['show-btn']} onClick={() => setShowFilters(!showFilters)}>
@@ -130,7 +130,7 @@ const Exercises = props => {
             {showFilters && <hr className={`${classes['separator']} ${classes['separator-bottom']}`}/>}
         </section>
         {addInfoCards()}
-    </CardGrid>
+    </GridView>
 };
 
 export default Exercises;

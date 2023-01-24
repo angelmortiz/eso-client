@@ -1,6 +1,6 @@
-import  classes from './Grid.module.css';
+import  classes from './GridView.module.css';
 
-const CardGrid = props => {
+const GridView = props => {
 
     return <div className={classes['grid']}>
         <h1 className={classes['title']}>{props.title}</h1>
@@ -12,4 +12,4 @@ const CardGrid = props => {
     </div>
 };
 
-export default CardGrid;
+export default GridView;

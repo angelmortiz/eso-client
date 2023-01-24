@@ -1,8 +1,8 @@
-import CardGrid from "../../../UI/Grids/CardGrid";
+import GridView from "../../../UI/Grids/GridView";
 
 const Muscles = props => {
-    return <CardGrid title="Muscles">
-    </CardGrid>
+    return <GridView title="Muscles">
+    </GridView>
 };
 
 export default Muscles;
