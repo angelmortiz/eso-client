@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Provider } from "react-redux";
 import CheckAuth from "./components/Auth/CheckAuth";
-import Router from "./components/Health/Router";
+import Router from "./components/Router";
 import NavigationBar from "./components/UI/NavigationBar";
 import store from './store/index'
 

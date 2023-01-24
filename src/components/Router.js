@@ -1,27 +1,27 @@
 import { Route, Routes } from 'react-router-dom';
-import HomePage from '../UI/HomePage/HomePage';
-import AddExercise from './Activities/Exercises/AddExercise';
-import AddMuscle from './Activities/Muscles/AddMuscle';
-import AddEquipment from './Activities/Equipments/AddEquipment';
-import AddPhysicalCondition from './Activities/PhysicalConditions/AddPhysicalCondition';
-import ExerciseDetails from './Activities/Exercises/ExerciseDetails';
-import Exercises from './Activities/Exercises/Exercises';
-import AddFood from './Nutrition/Foods/AddFood';
-import UpdateExercise from './Activities/Exercises/UpdateExercise';
-import Muscles from './Activities/Muscles/Muscles';
-import Signup from '../Auth/Signup';
-import Login from '../Auth/Login';
-import ForgotPassword from '../Auth/ForgotPassword';
-import ResetPassword from '../Auth/ResetPassword';
-import ChangePassword from '../Auth/ChangePassword';
-import UserInfo from '../User/UserInfo';
-import AuthProtected from '../Auth/ProtectedRoutes/AuthProtected';
-import PrivateRoute from '../Auth/ProtectedRoutes/PrivateRoute';
+import Home from './Home/Home';
+import AddExercise from './Health/Activities/Exercises/AddExercise';
+import AddMuscle from './Health/Activities/Muscles/AddMuscle';
+import AddEquipment from './Health/Activities/Equipments/AddEquipment';
+import AddPhysicalCondition from './Health/Activities/PhysicalConditions/AddPhysicalCondition';
+import ExerciseDetails from './Health/Activities/Exercises/ExerciseDetails';
+import Exercises from './Health/Activities/Exercises/Exercises';
+import AddFood from './Health/Nutrition/Foods/AddFood';
+import UpdateExercise from './Health/Activities/Exercises/UpdateExercise';
+import Muscles from './Health/Activities/Muscles/Muscles';
+import Signup from './Auth/Signup';
+import Login from './Auth/Login';
+import ForgotPassword from './Auth/ForgotPassword';
+import ResetPassword from './Auth/ResetPassword';
+import ChangePassword from './Auth/ChangePassword';
+import UserInfo from './User/UserInfo';
+import AuthProtected from './Auth/ProtectedRoutes/AuthProtected';
+import PrivateRoute from './Auth/ProtectedRoutes/PrivateRoute';
 
 //IMPROVE: This is no longer just "health", this should be place in another file
 const Router = props => {
     return <Routes>
-        <Route path="/" element={<HomePage/>}/>
+        <Route path="/" element={<Home/>}/>
         
         {/* AUTH */}
         {/* IMPROVE: Consider using nested routes to apply protection to multiple routes */}

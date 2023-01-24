@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import classes from './HomePage.module.css';
+import classes from './Home.module.css';
 
-const HomePage = props => {
+const Home = props => {
     const isUserAuthenticated = useSelector(state => state.auth.isUserAuthenticated);
 
     return <section className={classes['main-section']}>
@@ -12,4 +12,4 @@ const HomePage = props => {
 
 };
 
-export default HomePage;
+export default Home;
