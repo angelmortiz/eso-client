@@ -1,4 +1,4 @@
-import addClasses from '../../General/CSS/Form.module.css';
+import addClasses from '../../../UI/General/CSS/Form.module.css';
 
 const Food = props => {
     return <section className={addClasses['main-section']}>

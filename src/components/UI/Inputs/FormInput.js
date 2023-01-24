@@ -1,4 +1,4 @@
-import classes from '../../Health/General/CSS/Form.module.css';
+import classes from '../General/CSS/Form.module.css';
 
 const FormInput = (props) => {
   const {

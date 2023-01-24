@@ -1,6 +1,6 @@
 import IncrementalSelect from '../../../UI/Selects/IncrementalSelect';
 import SelectInput from '../../../UI/Selects/SelectInput';
-import addClasses from '../../General/CSS/Form.module.css';
+import addClasses from '../../../UI/General/CSS/Form.module.css';
 import { putExercise } from '../../../../util/apis/exercises/exercisesApis';
 import { useEffect, useState} from 'react';
 import { fetchAllEquipmentNames } from '../../../../util/apis/equipments/equipmentsApis';

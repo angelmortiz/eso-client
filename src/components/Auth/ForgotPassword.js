@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { forgotPassword } from '../../util/apis/auth/authApis';
-import classes from '../Health/General/CSS/Form.module.css';
+import classes from '../UI/General/CSS/Form.module.css';
 import FormInput from '../UI/Inputs/FormInput';
 import OkConfirmationModal from '../UI/Popups/SimpleMessage/OkConfirmationModal';
 

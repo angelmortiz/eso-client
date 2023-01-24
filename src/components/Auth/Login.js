@@ -5,7 +5,7 @@ import { authActions } from '../../store/authSlice';
 import { userActions } from '../../store/userSlice';
 import { login } from '../../util/apis/auth/authApis';
 import { fetchCurrentUser } from '../../util/apis/users/usersApis';
-import classes from '../Health/General/CSS/Form.module.css';
+import classes from '../UI/General/CSS/Form.module.css';
 import FormInput from '../UI/Inputs/FormInput';
 
 const inputValues = {

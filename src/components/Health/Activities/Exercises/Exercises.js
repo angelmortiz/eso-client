@@ -1,6 +1,6 @@
 import InfoCard from "../../../UI/Cards/InfoCard";
 import CardGrid from "../../../UI/Grids/CardGrid";
-import  classes from './Exercises.module.css';
+import classes from '../../../UI/General/CSS/Grid.module.css';
 import { fetchAllExercises } from "../../../../util/apis/exercises/exercisesApis"
 import { useState, useEffect } from "react";
 import { fetchAllEquipmentNames } from '../../../../util/apis/equipments/equipmentsApis';

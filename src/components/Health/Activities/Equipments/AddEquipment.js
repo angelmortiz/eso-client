@@ -1,5 +1,5 @@
 import IncrementalSelect from '../../../UI/Selects/IncrementalSelect';
-import addClasses from '../../General/CSS/Form.module.css';
+import addClasses from '../../../UI/General/CSS/Form.module.css';
 import { fetchAllExerciseNames } from '../../../../util/apis/exercises/exercisesApis';
 import { postEquipment } from '../../../../util/apis/equipments/equipmentsApis';
 import { useEffect, useState} from 'react';
