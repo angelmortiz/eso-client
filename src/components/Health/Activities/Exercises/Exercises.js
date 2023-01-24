@@ -1,5 +1,5 @@
 import InfoCard from "../../../UI/Cards/InfoCard";
-import HealthGrid from "../../General/Pages/HealthGrid";
+import CardGrid from "../../../UI/Grids/CardGrid";
 import  classes from './Exercises.module.css';
 import { fetchAllExercises } from "../../../../util/apis/exercises/exercisesApis"
 import { useState, useEffect } from "react";
@@ -87,7 +87,7 @@ const Exercises = props => {
         setFilteredExercises(exercises);
     };
 
-    return <HealthGrid title="Exercises">
+    return <CardGrid title="Exercises">
         {/* FILTERS */}
         <section className={classes['filters-section']}>
             <button className={classes['show-btn']} onClick={() => setShowFilters(!showFilters)}>
@@ -130,7 +130,7 @@ const Exercises = props => {
             {showFilters && <hr className={`${classes['separator']} ${classes['separator-bottom']}`}/>}
         </section>
         {addInfoCards()}
-    </HealthGrid>
+    </CardGrid>
 };
 
 export default Exercises;

@@ -1,8 +1,8 @@
-import HealthGrid from "../../General/Pages/HealthGrid";
+import CardGrid from "../../../UI/Grids/CardGrid";
 
 const Muscles = props => {
-    return <HealthGrid title="Muscles">
-    </HealthGrid>
+    return <CardGrid title="Muscles">
+    </CardGrid>
 };
 
 export default Muscles;

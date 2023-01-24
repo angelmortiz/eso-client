@@ -1,6 +1,6 @@
 import  classes from './Grid.module.css';
 
-const HealthGrid = props => {
+const CardGrid = props => {
 
     return <div className={classes['grid']}>
         <h1 className={classes['title']}>{props.title}</h1>
@@ -12,4 +12,4 @@ const HealthGrid = props => {
     </div>
 };
 
-export default HealthGrid;
+export default CardGrid;
