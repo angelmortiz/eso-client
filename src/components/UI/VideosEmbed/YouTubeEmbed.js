@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classes from "./YouTubeEmbed.module.css";
+import styles from "./YouTubeEmbed.module.css";
 
 const YouTubeEmbed = ({ embedId }) => (
-  <div className={classes['video-responsive']}>
+  <div className={styles['video-responsive']}>
     <iframe
       width="853"
       height="480"

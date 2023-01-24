@@ -1,7 +1,7 @@
 import { resetPassword } from '../../util/apis/auth/authApis';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import classes from '../UI/General/CSS/Form.module.css';
+import styles from '../UI/General/CSS/Form.module.css';
 import OkConfirmationModal from '../UI/Popups/SimpleMessage/OkConfirmationModal';
 import FormInput from '../UI/Inputs/FormInput';
 
@@ -121,13 +121,13 @@ const ResetPassword = (props) => {
   };
 
   return (
-    <section className={classes['main-section']}>
+    <section className={styles['main-section']}>
       <form
         id="resetPassword-form"
         onSubmit={userResetPassword}
-        className={classes['main-form']}
+        className={styles['main-form']}
       >
-        <h1 className={classes['form-title']}>Reset Password</h1>
+        <h1 className={styles['form-title']}>Reset Password</h1>
 
         {/* PASSWORD */}
         <FormInput
@@ -151,15 +151,15 @@ const ResetPassword = (props) => {
           id="reset-password"
           className={
             isButtonEnabled
-              ? classes['submit-btn']
-              : classes['submit-btn-disabled']
+              ? styles['submit-btn']
+              : styles['submit-btn-disabled']
           }
         >
           Reset Password
         </button>
 
         {responseError && (
-          <span className={classes['response-error-text']}>{responseError}</span>
+          <span className={styles['response-error-text']}>{responseError}</span>
         )}
       </form>
 

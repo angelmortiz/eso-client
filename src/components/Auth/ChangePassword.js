@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { changePassword } from '../../util/apis/auth/authApis';
-import classes from '../UI/General/CSS/Form.module.css';
+import styles from '../UI/General/CSS/Form.module.css';
 import FormInput from '../UI/Inputs/FormInput';
 import OkConfirmationModal from '../UI/Popups/SimpleMessage/OkConfirmationModal';
 
@@ -113,13 +113,13 @@ const ChangePassword = (props) => {
   };
 
   return (
-    <section className={classes['main-section']}>
+    <section className={styles['main-section']}>
       <form
         id="changePassword-form"
         onSubmit={userChangePassword}
-        className={classes['main-form']}
+        className={styles['main-form']}
       >
-        <h1 className={classes['form-title']}>Change Password</h1>
+        <h1 className={styles['form-title']}>Change Password</h1>
 
         {/* CURRENT PASSWORD */}
         <FormInput
@@ -151,15 +151,15 @@ const ChangePassword = (props) => {
           id="change-password"
           className={
             isButtonEnabled
-              ? classes['submit-btn']
-              : classes['submit-btn-disabled']
+              ? styles['submit-btn']
+              : styles['submit-btn-disabled']
           }
         >
           Change Password
         </button>
 
         {responseError && (
-          <span className={classes['response-error-text']}>{responseError}</span>
+          <span className={styles['response-error-text']}>{responseError}</span>
         )}
       </form>
 

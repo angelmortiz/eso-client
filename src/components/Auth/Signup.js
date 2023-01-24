@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signup } from '../../util/apis/auth/authApis';
-import classes from '../UI/General/CSS/Form.module.css';
+import styles from '../UI/General/CSS/Form.module.css';
 import FormInput from '../UI/Inputs/FormInput';
 
 const inputValues = {
@@ -136,13 +136,13 @@ const Signup = (props) => {
   };
 
   return (
-    <section className={classes['main-section']}>
+    <section className={styles['main-section']}>
       <form
         id="signup-form"
         onSubmit={signupUser}
-        className={classes['main-form']}
+        className={styles['main-form']}
       >
-        <h1 className={classes['form-title']}>Sign Up</h1>
+        <h1 className={styles['form-title']}>Sign Up</h1>
 
         {/* FIRST NAME */}
         <FormInput
@@ -188,25 +188,25 @@ const Signup = (props) => {
         <button
           type="submit"
           id="signup-user"
-          className={classes['submit-btn']}
+          className={styles['submit-btn']}
         >
           Sign Up
         </button>
 
         {responseError && (
-          <span className={classes['response-error-text']}>
+          <span className={styles['response-error-text']}>
             {responseError}
           </span>
         )}
       </form>
 
       {/* Division line */}
-      <div className={classes['division']}>
-        <hr className={classes['horizontal-division']} />
+      <div className={styles['division']}>
+        <hr className={styles['horizontal-division']} />
         &nbsp;&nbsp;or&nbsp;&nbsp;
-        <hr className={classes['horizontal-division']} />
+        <hr className={styles['horizontal-division']} />
       </div>
-      <Link to="/auth/login" className={classes['submit-btn']}>
+      <Link to="/auth/login" className={styles['submit-btn']}>
         Login
       </Link>
     </section>

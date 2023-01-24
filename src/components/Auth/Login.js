@@ -5,7 +5,7 @@ import { authActions } from '../../store/authSlice';
 import { userActions } from '../../store/userSlice';
 import { login } from '../../util/apis/auth/authApis';
 import { fetchCurrentUser } from '../../util/apis/users/usersApis';
-import classes from '../UI/General/CSS/Form.module.css';
+import styles from '../UI/General/CSS/Form.module.css';
 import FormInput from '../UI/Inputs/FormInput';
 
 const inputValues = {
@@ -86,13 +86,13 @@ const Login = (props) => {
   };
 
   return (
-    <section className={classes['main-section']}>
+    <section className={styles['main-section']}>
       <form
         id="login-form"
         onSubmit={loginUser}
-        className={classes['main-form']}
+        className={styles['main-form']}
       >
-        <h1 className={classes['form-title']}>Login</h1>
+        <h1 className={styles['form-title']}>Login</h1>
 
         {/* EMAIL */}
         <FormInput
@@ -111,26 +111,26 @@ const Login = (props) => {
         />
 
         {/* SUBMIT BUTTON */}
-        <button type="submit" id="login-user" className={classes['submit-btn']}>
+        <button type="submit" id="login-user" className={styles['submit-btn']}>
           Login
         </button>
 
         {responseError && (
-          <span className={classes['response-error-text']}>{responseError}</span>
+          <span className={styles['response-error-text']}>{responseError}</span>
         )}
       </form>
 
-      <Link to="/auth/forgotPassword" className={classes['forgot-password']}>
+      <Link to="/auth/forgotPassword" className={styles['forgot-password']}>
         Forgot Password
       </Link>
 
       {/* Division line */}
-      <div className={classes['division']}>
-        <hr className={classes['horizontal-division']} />
+      <div className={styles['division']}>
+        <hr className={styles['horizontal-division']} />
         &nbsp;&nbsp;or&nbsp;&nbsp;
-        <hr className={classes['horizontal-division']} />
+        <hr className={styles['horizontal-division']} />
       </div>
-      <Link to="/auth/signup" className={classes['submit-btn']}>
+      <Link to="/auth/signup" className={styles['submit-btn']}>
         Sign Up
       </Link>
     </section>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { forgotPassword } from '../../util/apis/auth/authApis';
-import classes from '../UI/General/CSS/Form.module.css';
+import styles from '../UI/General/CSS/Form.module.css';
 import FormInput from '../UI/Inputs/FormInput';
 import OkConfirmationModal from '../UI/Popups/SimpleMessage/OkConfirmationModal';
 
@@ -66,13 +66,13 @@ const ForgotPassword = (props) => {
   };
 
   return (
-    <section className={classes['main-section']}>
+    <section className={styles['main-section']}>
       <form
         id="forgotPassword-form"
         onSubmit={userForgotPassword}
-        className={classes['main-form']}
+        className={styles['main-form']}
       >
-        <h1 className={classes['form-title']}>Forgot Password</h1>
+        <h1 className={styles['form-title']}>Forgot Password</h1>
         
         {/* EMAIL */}
         <FormInput
@@ -88,15 +88,15 @@ const ForgotPassword = (props) => {
           id="forgot-password"
           className={
             isButtonEnabled
-              ? classes['submit-btn']
-              : classes['submit-btn-disabled']
+              ? styles['submit-btn']
+              : styles['submit-btn-disabled']
           }
         >
           Send Email
         </button>
 
         {responseError && (
-          <span className={classes['response-error-text']}>{responseError}</span>
+          <span className={styles['response-error-text']}>{responseError}</span>
         )}
       </form>
 

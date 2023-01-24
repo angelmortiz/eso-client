@@ -1,14 +1,14 @@
-import  classes from './GridView.module.css';
+import  styles from './GridView.module.css';
 
 const GridView = props => {
 
-    return <div className={classes['grid']}>
-        <h1 className={classes['title']}>{props.title}</h1>
+    return <div className={styles['grid']}>
+        <h1 className={styles['title']}>{props.title}</h1>
          
         {/* CONTENT */}
         { props.children && props.children.length 
             ? props.children
-            : <img src="/loading.gif" alt="Loading..." className={classes['loading-img']}/>}
+            : <img src="/loading.gif" alt="Loading..." className={styles['loading-img']}/>}
     </div>
 };
 

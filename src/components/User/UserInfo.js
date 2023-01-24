@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { authActions } from '../../store/authSlice';
 import { userActions } from '../../store/userSlice';
 import { logout } from '../../util/apis/auth/authApis';
-import classes from './UserInfo.module.css';
+import styles from './UserInfo.module.css';
 
 const UserInfo = props => {
     const navigateTo = useNavigate();
@@ -26,30 +26,30 @@ const UserInfo = props => {
         navigateTo('/auth/changePassword');
     };
 
-    return <section className={classes['card']}>
-        <div className={classes['main-section']}>
+    return <section className={styles['card']}>
+        <div className={styles['main-section']}>
             {/* NAME */}
-            <h1 className={classes['title']}>User Information</h1>
+            <h1 className={styles['title']}>User Information</h1>
 
             {/* TODO: Add image */}
-            <div className={classes['general-info']}>
+            <div className={styles['general-info']}>
                 {/* NAME */}
-                <div className={classes['info-block']}>
-                    <p className={classes['label']}>Name: </p>
-                    <p className={classes['value']}>{`${currentUserInfo.firstName} ${currentUserInfo.lastName}`}</p>
+                <div className={styles['info-block']}>
+                    <p className={styles['label']}>Name: </p>
+                    <p className={styles['value']}>{`${currentUserInfo.firstName} ${currentUserInfo.lastName}`}</p>
                 </div>
                 {/* EMAIL */}
-                <div className={classes['info-block']}>
-                    <p className={classes['label']}>Email: </p>
-                    <p className={classes['value']}>{currentUserInfo.email}</p>
+                <div className={styles['info-block']}>
+                    <p className={styles['label']}>Email: </p>
+                    <p className={styles['value']}>{currentUserInfo.email}</p>
                 </div>
             </div>
 
-            <button className={classes['change-password-btn']} onClick={changePassword}>Change password</button>
+            <button className={styles['change-password-btn']} onClick={changePassword}>Change password</button>
 
-            <hr className={classes['horizontal-division']} />
+            <hr className={styles['horizontal-division']} />
             
-            <button className={classes['logout-btn']} onClick={userLogout}>Log out</button>
+            <button className={styles['logout-btn']} onClick={userLogout}>Log out</button>
         </div>
     </section>
 };

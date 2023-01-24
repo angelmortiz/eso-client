@@ -1,6 +1,6 @@
 import InfoCard from "../../../UI/Cards/InfoCard";
 import GridView from "../../../UI/Grids/GridView";
-import classes from '../../../UI/General/CSS/GridContent.module.css';
+import styles from '../../../UI/General/CSS/GridContent.module.css';
 import { fetchAllExercises } from "../../../../util/apis/exercises/exercisesApis"
 import { useState, useEffect } from "react";
 import { fetchAllEquipmentNames } from '../../../../util/apis/equipments/equipmentsApis';
@@ -89,45 +89,45 @@ const Exercises = props => {
 
     return <GridView title="Exercises">
         {/* FILTERS */}
-        <section className={classes['filters-section']}>
-            <button className={classes['show-btn']} onClick={() => setShowFilters(!showFilters)}>
+        <section className={styles['filters-section']}>
+            <button className={styles['show-btn']} onClick={() => setShowFilters(!showFilters)}>
                 {showFilters ? 'Hide filters' : 'Show filters'}
             </button>
-            {showFilters && <hr className={classes['separator']}/>}
+            {showFilters && <hr className={styles['separator']}/>}
             {/* Shows the filters only when the user opens the tray */}
             {   showFilters &&
-                <div className={classes['filters-selects']}> 
+                <div className={styles['filters-selects']}> 
                     {/* MUSCLE FILTER */}
-                    <div className={classes['filter']}>
-                        <label htmlFor="select-muscle" className={classes['text-label']}>Muscle:</label>
-                        <select key="select-muscle" name="select-muscle" className={classes['select-input']} value={selectedMuscle} onChange={event => setSelectedMuscle(event.target.value)}>
+                    <div className={styles['filter']}>
+                        <label htmlFor="select-muscle" className={styles['text-label']}>Muscle:</label>
+                        <select key="select-muscle" name="select-muscle" className={styles['select-input']} value={selectedMuscle} onChange={event => setSelectedMuscle(event.target.value)}>
                             {muscleFilterOptions.map((option, index) => {
                                 return <option key={`muscle_${option.name}_${index+1}`} value={option._id}>{option.name}</option>
                             })}
                         </select>
                     </div>
                     {/* EQUIPMENT FILTER */}
-                    <div className={classes['filter']}>
-                        <label htmlFor="select-equipment" className={classes['text-label']}>Equipment:</label>
-                        <select key="select-equipment" name="select-equipment" className={classes['select-input']} value={selectedEquipment} onChange={event => setSelectedEquipment(event.target.value)}>
+                    <div className={styles['filter']}>
+                        <label htmlFor="select-equipment" className={styles['text-label']}>Equipment:</label>
+                        <select key="select-equipment" name="select-equipment" className={styles['select-input']} value={selectedEquipment} onChange={event => setSelectedEquipment(event.target.value)}>
                             {equipmentFilterOptions.map((option, index) => {
                                 return <option key={`equipment_${option.name}_${index+1}`} value={option._id}>{option.name}</option>
                             })}
                         </select>
                     </div>
                     {/* TYPE FILTER */}
-                    <div className={classes['filter']}>
-                        <label htmlFor="select-type" className={classes['text-label']}>Type:</label>
-                        <select key="select-type" name="select-type" className={classes['select-input']} value={selectedType} onChange={event => setSelectedType(event.target.value)}>
+                    <div className={styles['filter']}>
+                        <label htmlFor="select-type" className={styles['text-label']}>Type:</label>
+                        <select key="select-type" name="select-type" className={styles['select-input']} value={selectedType} onChange={event => setSelectedType(event.target.value)}>
                             {typeFilterOptions.map((option, index) => {
                                 return <option key={`type_${option.value}_${index+1}`} value={option.value}>{option.label}</option>
                             })}
                         </select>
                     </div>
-                    <button className={classes['clear-btn']} onClick={clearFilters}>Clear filters</button>
+                    <button className={styles['clear-btn']} onClick={clearFilters}>Clear filters</button>
                 </div>
             }
-            {showFilters && <hr className={`${classes['separator']} ${classes['separator-bottom']}`}/>}
+            {showFilters && <hr className={`${styles['separator']} ${styles['separator-bottom']}`}/>}
         </section>
         {addInfoCards()}
     </GridView>
