@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { deleteExercise, fetchExerciseById } from "../../../../util/apis/exercises/exercisesApis"
 import YouTubeEmbed from "../../../UI/VideosEmbed/YouTubeEmbed";
 import classes from '../../General/CSS/Details.module.css';
-import DeleteConfirmationModal from "../../General/Popups/Delete/DeleteConfirmationModal";
+import DeleteConfirmationModal from "../../../UI/Popups/Delete/DeleteConfirmationModal";
+
 
 
 const ExerciseDetails = props => {

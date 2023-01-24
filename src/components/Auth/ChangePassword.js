@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { changePassword } from '../../util/apis/auth/authApis';
 import classes from '../Health/General/CSS/Form.module.css';
 import FormInput from '../UI/Inputs/FormInput';
-import OkConfirmationModal from '../Health/General/Popups/SimpleMessage/OkConfirmationModal';
+import OkConfirmationModal from '../UI/Popups/SimpleMessage/OkConfirmationModal';
 
 const inputValues = {
   currentPassword: {
