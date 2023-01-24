@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Provider } from "react-redux";
 import CheckAuth from "./components/Auth/CheckAuth";
-import HealthContent from "./components/Health/HealthContent";
+import Router from "./components/Health/Router";
 import NavigationBar from "./components/UI/NavigationBar";
 import store from './store/index'
 
@@ -14,7 +14,7 @@ function App() {
         <NavigationBar />
         {wasAuthenticationVerified && 
           <main>
-            <HealthContent />
+            <Router />
           </main>
         }
     </Provider>

@@ -19,7 +19,7 @@ import AuthProtected from '../Auth/ProtectedRoutes/AuthProtected';
 import PrivateRoute from '../Auth/ProtectedRoutes/PrivateRoute';
 
 //IMPROVE: This is no longer just "health", this should be place in another file
-const HealthContent = props => {
+const Router = props => {
     return <Routes>
         <Route path="/" element={<HomePage/>}/>
         
@@ -52,4 +52,4 @@ const HealthContent = props => {
     </Routes>
 };
 
-export default HealthContent;
+export default Router;
