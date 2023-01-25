@@ -3,8 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { deleteExercise, fetchExerciseById } from "../../../../util/apis/exercises/exercisesApis"
 import YouTubeEmbed from "../../../UI/VideosEmbed/YouTubeEmbed";
-import classes from '../../General/CSS/Details.module.css';
-import DeleteConfirmationModal from "../../General/Popups/Delete/DeleteConfirmationModal";
+import styles from '../../../UI/General/CSS/Details.module.css';
+import DeleteConfirmationModal from "../../../UI/Popups/Delete/DeleteConfirmationModal";
+
 
 
 const ExerciseDetails = props => {
@@ -17,9 +18,9 @@ const ExerciseDetails = props => {
 
     useEffect(() => {
         if (!id) console.log(`Error: exercise id not found in the url.`);
-        fetchExerciseById(id).then(data => { 
-            const vidId = data.body.linkToVideo?.substr(16); //extracts the video id from YT link
-            setExercise(data.body);
+        fetchExerciseById(id).then(response => { 
+            const vidId = response.body.linkToVideo?.substr(16); //extracts the video id from YT link
+            setExercise(response.body);
             setVideoExercise(vidId);
         });
     }, [id]);
@@ -48,58 +49,58 @@ const ExerciseDetails = props => {
         });
     };
 
-    return <section className={classes['card']}>
+    return <section className={styles['card']}>
         { !exercise
-        ? <img src="/loading.gif" alt="Loading..." className={classes['loading-img']}/>
-        : <div className={classes['main-section']}>
+        ? <img src="/loading.gif" alt="Loading..." className={styles['loading-img']}/>
+        : <div className={styles['main-section']}>
             {/* NAME */}
-            <h1 className={classes['name']}>{exercise.name}</h1>
+            <h1 className={styles['name']}>{exercise.name}</h1>
             {/* ALTERNATIVE NAME */}
-            <h2 className={classes['alternative-name']}>{exercise.alternativeName}</h2>
+            <h2 className={styles['alternative-name']}>{exercise.alternativeName}</h2>
             {/* IMAGE */}
-            <img src={exercise.linkToImage} alt={exercise.name} className={classes['img']}/>
-            <div className={classes['general-info']}>
+            <img src={exercise.linkToImage} alt={exercise.name} className={styles['img']}/>
+            <div className={styles['general-info']}>
                 {/* DIFFICULTY */}
-                <div className={classes['info-block']}>
-                    <p className={classes['label']}>Difficulty: </p>
-                    <p className={classes['value']}>{exercise.difficulty}</p>
+                <div className={styles['info-block']}>
+                    <p className={styles['label']}>Difficulty: </p>
+                    <p className={styles['value']}>{exercise.difficulty}</p>
                 </div>
                 {/* COMPOUND MOVEMENT */}
-                <div className={classes['info-block']}>
-                    <p className={classes['label']}>Compound movement: </p>
-                    <p className={classes['value']}>{exercise.compoundMovement ? 'Yes' : 'No'}</p>
+                <div className={styles['info-block']}>
+                    <p className={styles['label']}>Compound movement: </p>
+                    <p className={styles['value']}>{exercise.compoundMovement ? 'Yes' : 'No'}</p>
                 </div>
                 {/* MAIN MUSCLE */}
-                <div className={classes['info-block']}>
-                    <p className={classes['label']}>Main muscle: </p>
-                    <p className={classes['value']}>{exercise.mainMuscle.muscleName}</p>
+                <div className={styles['info-block']}>
+                    <p className={styles['label']}>Main muscle: </p>
+                    <p className={styles['value']}>{exercise.mainMuscle.muscleName}</p>
                 </div>
                 {/* SECONDARY MUSCLES */}
-                <div className={classes['info-block']}>
-                    <p className={classes['label']}>Secondary muscles: </p>
+                <div className={styles['info-block']}>
+                    <p className={styles['label']}>Secondary muscles: </p>
                     {/* TODO: Implement logic for multiple options */}
-                    <p className={classes['value']}>{exercise.secondaryMuscles[0]?.muscleName || "No secondary muscles"}</p>
+                    <p className={styles['value']}>{exercise.secondaryMuscles[0]?.muscleName || "No secondary muscles"}</p>
                 </div>
                 {/* TYPES */}
-                <div className={classes['info-block']}>
-                    <p className={classes['label']}>Type: </p>
+                <div className={styles['info-block']}>
+                    <p className={styles['label']}>Type: </p>
                     {/* TODO: Implement logic for multiple options */}
-                    <p className={classes['value']}>{exercise.types[0]}</p>
+                    <p className={styles['value']}>{exercise.types[0]}</p>
                 </div>
                 {/* EQUIPMENTS */}
-                <div className={classes['info-block']}>
-                    <p className={classes['label']}>Equipments: </p>
+                <div className={styles['info-block']}>
+                    <p className={styles['label']}>Equipments: </p>
                     {/* TODO: Implement logic for multiple options */}
-                    <p className={classes['value']}>{exercise.equipments[0]?.equipmentName || "No equipment"}</p>
+                    <p className={styles['value']}>{exercise.equipments[0]?.equipmentName || "No equipment"}</p>
                 </div>
             </div>
-            <button type="button" id="show-video-btn" className={classes['show-btn']} onClick={toggleShowVideo}>{showVideo ? "Hide video" : "Show video"}</button>
+            <button type="button" id="show-video-btn" className={styles['show-btn']} onClick={toggleShowVideo}>{showVideo ? "Hide video" : "Show video"}</button>
             {/* VIDEO */}
-            {showVideo && <YouTubeEmbed embedId={videoId} className={classes['video']}/>  }
+            {showVideo && <YouTubeEmbed embedId={videoId} className={styles['video']}/>  }
             <hr />
-            <div className={classes['bottom-btns-div']}>
-                <Link to={`/activities/update-exercise/${id}`} className={classes['link']}>Update</Link>
-                <button type="button" id="delete-exercise-btn" className={classes['delete-btn']} onClick={openDeleteConfirmationModal}>Delete</button>
+            <div className={styles['bottom-btns-div']}>
+                <Link to={`/activities/update-exercise/${id}`} className={styles['link']}>Update</Link>
+                <button type="button" id="delete-exercise-btn" className={styles['delete-btn']} onClick={openDeleteConfirmationModal}>Delete</button>
             </div>
          </div>
         }

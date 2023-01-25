@@ -1,6 +1,6 @@
-import IncrementalSelect from '../../General/Selects/IncrementalSelect';
-import SelectInput from '../../General/Selects/SelectInput';
-import addClasses from '../../General/CSS/Form.module.css';
+import IncrementalSelect from '../../../UI/Selects/IncrementalSelect';
+import SelectInput from '../../../UI/Selects/SelectInput';
+import addClasses from '../../../UI/General/CSS/Form.module.css';
 import { postExercise } from '../../../../util/apis/exercises/exercisesApis';
 import { useEffect, useState} from 'react';
 import { fetchAllEquipmentNames } from '../../../../util/apis/equipments/equipmentsApis';
@@ -14,16 +14,18 @@ const AddExercise = props => {
     const [equipments, setEquipments] = useState([]);
 
     useEffect(() => {
-        fetchAllMuscleNames().then(data => { 
+        fetchAllMuscleNames().then(response => { 
+            if (!response || !response.isSuccess) return;
             //adds an empty default option
-            data.unshift({_id: "", name: "-- Choose a muscle --"});
-            setMuscles(data);
+            response.body.unshift({_id: "", name: "-- Choose a muscle --"});
+            setMuscles(response.body);
         });
 
-        fetchAllEquipmentNames().then(data => { 
+        fetchAllEquipmentNames().then(response => { 
+            if (!response || !response.isSuccess) return;
             //adds an empty default option
-            data.unshift({_id: "", name: "-- Choose an equipment --"});
-            setEquipments(data);
+            response.body.unshift({_id: "", name: "-- Choose an equipment --"});
+            setEquipments(response.body);
         });
     }, []);
 

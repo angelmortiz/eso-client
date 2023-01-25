@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import classes from '../CSS/PopupStyles.module.css';
+import styles from '../CSS/PopupStyles.module.css';
 
 //modal styles
 const modalStylesDesktop = {
@@ -52,10 +52,10 @@ const OkConfirmationModal = props => {
         isOpen={isOpen}
         onRequestClose={closeModal}
         style={getWindowDimensions().width >= 450 ? modalStylesDesktop : modalStylesPhone}>
-            <div className={classes['modal-content']}>
-                <h3 className={classes['title']}>{props.message}</h3>
-                <div className={classes['buttons']}>
-                    <button onClick={closeModal} className={classes['button']}>Ok</button>
+            <div className={styles['modal-content']}>
+                <h3 className={styles['title']}>{props.message}</h3>
+                <div className={styles['buttons']}>
+                    <button onClick={closeModal} className={styles['button']}>Ok</button>
                 </div>
             </div>
         </Modal>

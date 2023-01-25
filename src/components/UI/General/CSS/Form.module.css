@@ -120,16 +120,18 @@
     cursor: not-allowed;
 }
 
-
-
 .loading-img {
     margin: 1rem auto;
     height: 20px;
     width: 20px;
 }
 
+.forgot-password {
+    margin-top: 1rem;
+}
+
 .division {
-    margin: 2rem 0 1rem 0;
+    margin: 1rem 0 1rem 0;
     width: 100%;
     display: flex;
     align-items: center;
@@ -142,6 +144,20 @@
     background-color: #028e98;
     border: none;
 }
+
+.error-text{
+    color: rgb(176, 16, 72);
+    margin: 0 0 1rem 0;
+
+}
+
+.response-error-text {
+    text-align: center;
+    color: rgb(176, 16, 72);
+    margin-top: 0.5rem;
+}
+
+
 /*************/
 /*** PHONE ***/
 /*************/

@@ -1,5 +1,5 @@
-import IncrementalInput from '../../General/Selects/IncrementalInput';
-import addClasses from '../../General/CSS/Form.module.css';
+import IncrementalInput from '../../../UI/Selects/IncrementalInput';
+import addClasses from '../../../UI/General/CSS/Form.module.css';
 import { postPhysicalCondition } from '../../../../util/apis/physicalConditions/physicalConditionsApis';
 
 const AddPhysicalCondition = props => {
@@ -57,8 +57,8 @@ const AddPhysicalCondition = props => {
         event.preventDefault();
         const formVals = getValuesFromForm(event.target.elements);
         // console.log("value: ", formVals);
-        postPhysicalCondition(formVals).then(data => { 
-            console.log("Response data: ", data);
+        postPhysicalCondition(formVals).then(response => { 
+            console.log("response: ", response);
         });
     };
 

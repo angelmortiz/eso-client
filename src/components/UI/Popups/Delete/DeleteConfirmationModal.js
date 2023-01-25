@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import classes from '../CSS/PopupStyles.module.css';
+import styles from '../CSS/PopupStyles.module.css';
 
 //modal styles
 const modalStylesDesktop = {
@@ -57,12 +57,12 @@ const DeleteConfirmationModal = props => {
         isOpen={isOpen}
         onRequestClose={closeModal}
         style={getWindowDimensions().width >= 450 ? modalStylesDesktop : modalStylesPhone}>
-            <div className={classes['modal-content']}>
-                <h3 className={classes['title']}>⚠️ Are you sure you want to delete this exercise?</h3>
-                <p className={classes['message']}>You are about to delete the exercise: <strong>'{exercise?.name} ({exercise?.alternativeName})'</strong>, with id: <strong>'{exercise?._id}'</strong></p>
-                <div className={classes['buttons']}>
-                    <button onClick={closeModal} className={classes['button']}>Cancel</button>
-                    <button onClick={confirmDelete} className={classes['button']}>Confirm</button>
+            <div className={styles['modal-content']}>
+                <h3 className={styles['title']}>⚠️ Are you sure you want to delete this exercise?</h3>
+                <p className={styles['message']}>You are about to delete the exercise: <strong>'{exercise?.name} ({exercise?.alternativeName})'</strong>, with id: <strong>'{exercise?._id}'</strong></p>
+                <div className={styles['buttons']}>
+                    <button onClick={closeModal} className={styles['button']}>Cancel</button>
+                    <button onClick={confirmDelete} className={styles['button']}>Confirm</button>
                 </div>
             </div>
         </Modal>

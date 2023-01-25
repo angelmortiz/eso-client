@@ -1,19 +1,21 @@
-import IncrementalSelect from '../../General/Selects/IncrementalSelect';
-import SelectInput from '../../General/Selects/SelectInput';
-import addClasses from '../../General/CSS/Form.module.css';
+import IncrementalSelect from '../../../UI/Selects/IncrementalSelect';
+import SelectInput from '../../../UI/Selects/SelectInput';
+import addClasses from '../../../UI/General/CSS/Form.module.css';
 import { fetchAllExerciseNames } from '../../../../util/apis/exercises/exercisesApis';
 import { useEffect, useState} from 'react';
 import { postMuscle } from '../../../../util/apis/muscles/musclesApis';
+import { useNavigate } from 'react-router-dom';
 
 const AddMuscle = props => {
-    /** Fields Data */
+    const navigateTo = useNavigate();
     const [exercises, setExercises] = useState([]);
 
     useEffect(() => {
-        fetchAllExerciseNames().then(data => { 
+        fetchAllExerciseNames().then(response => { 
+            if (!response || !response.isSuccess) return;
             //adds an empty default option
-            data.unshift({_id: "", name: "-- Choose an exercise --"});
-            setExercises(data);
+            response.body.unshift({_id: "", name: "-- Choose an exercise --"});
+            setExercises(response.body);
         });
     }, []);
 
@@ -48,8 +50,10 @@ const AddMuscle = props => {
         event.preventDefault();
         const formVals = getValuesFromForm(event.target.elements);
 
-        postMuscle(formVals).then(data => { 
-            console.log("Response data: ", data);
+        postMuscle(formVals).then(response => { 
+            console.log("response: ", response);
+            if (!response || !response.isSuccess) return;
+            navigateTo('/activities/muscles')
         });
     };
 

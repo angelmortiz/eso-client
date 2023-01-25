@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState} from "react";
-import addClasses from '../../General/CSS/Form.module.css';
+import addClasses from '../General/CSS/Form.module.css';
 import SelectInput from "./SelectInput";
 
 const IncrementalSelect = props => {
