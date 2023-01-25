@@ -1,3 +1,6 @@
+import store from '../../store/index';
+import { toastNotificationActions } from '../../store/toastNotificationSlice';
+
 // const API_ADDRESS = "http://192.168.4.173:3000/api";
 // const API_ADDRESS = "http://192.168.4.129:3000/api";
 const API_ADDRESS = "http://localhost:3000/api";
@@ -58,10 +61,12 @@ const fetchAction = async (path, requestOptions, actionName) => {
         const apiResponse = await fetch(`${API_ADDRESS}${path}`, requestOptions);
         const response = await apiResponse.json();
 
-        //Middleware to catch fails and errors from backend
+        //Middleware to catch fails and errors from backend and show them in the notifications
         if (!response?.isSuccess){
             console.error('Error in response: ', response);
+            store.dispatch(toastNotificationActions.showNotification({type:'fail', message: response.message}));
         }
+
         return response;
     } catch (error) {
         console.error(`An error ocurred while ${actionName} document: `, error);

@@ -1,4 +1,6 @@
 import { forwardRef, useImperativeHandle, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { toastNotificationActions } from '../../../store/toastNotificationSlice';
 import styles from './ToastNotification.module.css';
 
 const types = {
@@ -8,21 +10,27 @@ const types = {
 };
 
 const ToastNotification = forwardRef((props, ref) => {
+  const dispatch = useDispatch();
   const [notificationState, setNotificationState] = useState('hide');
   const { type, message } = props;
 
   //shows the toast notification for a few seconds before hiding back
   useImperativeHandle(ref, () => ({
     show() {
-        setNotificationState('show');
+      setNotificationState('show');
       setTimeout(() => {
         setNotificationState('hide');
+
+        //clears the notification info from the Redux store
+        dispatch(toastNotificationActions.clearUpNotification());
       }, 3800);
     },
   }));
 
   return (
-    <div className={`${styles['notification']} ${styles[type]} ${styles[notificationState]}`}>
+    <div
+      className={`${styles['notification']} ${styles[type]} ${styles[notificationState]}`}
+    >
       {/* ICON */}
       <div className={styles['icon']}>
         {/* SUCCESSFUL ICON */}
