@@ -1,0 +1,8 @@
+//IMPROVE: Consider changing the 'elements.values' for useRef
+
+/* AUTH */
+//TODO: Create an option to change the password of a logged in user
+//TODO: Implement navigation after changing the password
+//TODO: Create a change email option
+//TODO: Implement navigation after email change
+//TODO: Implement an email confirmation for sign up (confirm the email is valid)

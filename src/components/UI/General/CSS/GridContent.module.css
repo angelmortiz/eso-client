@@ -1,0 +1,105 @@
+/*************/
+/** DESKTOP **/
+/*************/
+.filters-section {
+    width: 100%;
+    grid-column: 1/-1;
+    display: grid;
+}
+
+.show-btn {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    text-decoration: underline;
+    color: #007E86;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.show-btn:hover,
+.show-btn:active {
+    cursor: pointer;
+    color: #015a61;
+}
+
+.separator {
+    margin: 1rem 0;
+    border: none;
+    border-top: 1px solid rgb(240, 240, 240);
+
+}
+
+.separator-bottom {
+    margin: 1rem 0 0 0;
+}
+
+.filters-selects {
+    display: flex;
+    justify-content: center;
+    gap: 2vw;
+    flex-wrap: wrap;
+}
+
+.text-label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.select-input {
+    padding: 0;
+    margin: 0;
+    border: 1.5px solid #007E86;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.clear-btn {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    color: #007E86;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.clear-btn:hover,
+.clear-btn:active {
+    cursor: pointer;
+    color: #015a61;
+}
+
+/*************/
+/*** PHONE ***/
+/*************/
+@media (max-width: 450px) {
+
+    .filters-selects {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5vh;
+        flex-wrap: wrap;
+    }
+
+    .filter {
+        width: 65%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        /* background-color: blue; */
+    }
+
+    .text-label {
+        width: 40%;
+    }
+
+    .select-input {
+        flex-grow: 1;
+    }
+}
