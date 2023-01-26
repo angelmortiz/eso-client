@@ -18,6 +18,7 @@ import UserInfo from './User/UserInfo';
 import AuthProtected from './Auth/ProtectedRoutes/AuthProtected';
 import PrivateRoute from './Auth/ProtectedRoutes/PrivateRoute';
 import AddWorkout from './Health/Activities/Workouts/AddWorkout';
+import AddProgram from './Health/Activities/Programs/AddProgram';
 
 //IMPROVE: This is no longer just "health", this should be place in another file
 const Router = props => {
@@ -51,6 +52,7 @@ const Router = props => {
         <Route path="/activities/physicalCondition/:id" element={<PhysicalConditionDetails/>}/> */}
         <Route path="/activities/add-physicalCondition" element={<AddPhysicalCondition/>}/>
         <Route path="/activities/add-workout" element={<AddWorkout/>}/>
+        <Route path="/activities/add-program" element={<AddProgram/>}/>
     </Routes>
 };
 
