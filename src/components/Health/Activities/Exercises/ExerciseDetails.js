@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
-import { deleteExercise, fetchExerciseById } from "../../../../util/apis/exercises/exercisesApis"
+import { deleteExercise, fetchExerciseById } from "../../../../util/apis/activities/exercises/exercisesApis"
 import YouTubeEmbed from "../../../UI/VideosEmbed/YouTubeEmbed";
 import styles from '../../../UI/General/CSS/Details.module.css';
 import DeleteConfirmationModal from "../../../UI/Popups/Delete/DeleteConfirmationModal";

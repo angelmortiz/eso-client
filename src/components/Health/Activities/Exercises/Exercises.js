@@ -1,10 +1,10 @@
 import InfoCard from "../../../UI/Cards/InfoCard";
 import GridView from "../../../UI/Grids/GridView";
 import styles from '../../../UI/General/CSS/GridContent.module.css';
-import { fetchAllExercises } from "../../../../util/apis/exercises/exercisesApis"
+import { fetchAllExercises } from "../../../../util/apis/activities/exercises/exercisesApis"
 import { useState, useEffect } from "react";
-import { fetchAllEquipmentNames } from '../../../../util/apis/equipments/equipmentsApis';
-import { fetchAllMuscleNames } from '../../../../util/apis/muscles/musclesApis';
+import { fetchAllEquipmentNames } from '../../../../util/apis/activities/equipments/equipmentsApis';
+import { fetchAllMuscleNames } from '../../../../util/apis/activities/muscles/musclesApis';
 
 const Exercises = props => {
     const [exercises, setExercises] = useState([]);

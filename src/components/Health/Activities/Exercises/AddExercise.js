@@ -1,10 +1,10 @@
 import IncrementalSelect from '../../../UI/Selects/IncrementalSelect';
 import SelectInput from '../../../UI/Selects/SelectInput';
 import addClasses from '../../../UI/General/CSS/Form.module.css';
-import { postExercise } from '../../../../util/apis/exercises/exercisesApis';
+import { postExercise } from '../../../../util/apis/activities/exercises/exercisesApis';
 import { useEffect, useState} from 'react';
-import { fetchAllEquipmentNames } from '../../../../util/apis/equipments/equipmentsApis';
-import { fetchAllMuscleNames } from '../../../../util/apis/muscles/musclesApis';
+import { fetchAllEquipmentNames } from '../../../../util/apis/activities/equipments/equipmentsApis';
+import { fetchAllMuscleNames } from '../../../../util/apis/activities/muscles/musclesApis';
 import { useNavigate } from 'react-router-dom';
 
 

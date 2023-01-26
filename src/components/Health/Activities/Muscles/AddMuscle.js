@@ -1,9 +1,9 @@
 import IncrementalSelect from '../../../UI/Selects/IncrementalSelect';
 import SelectInput from '../../../UI/Selects/SelectInput';
 import addClasses from '../../../UI/General/CSS/Form.module.css';
-import { fetchAllExerciseNames } from '../../../../util/apis/exercises/exercisesApis';
+import { fetchAllExerciseNames } from '../../../../util/apis/activities/exercises/exercisesApis';
 import { useEffect, useState} from 'react';
-import { postMuscle } from '../../../../util/apis/muscles/musclesApis';
+import { postMuscle } from '../../../../util/apis/activities/muscles/musclesApis';
 import { useNavigate } from 'react-router-dom';
 
 const AddMuscle = props => {
