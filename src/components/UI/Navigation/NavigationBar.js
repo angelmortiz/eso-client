@@ -89,6 +89,12 @@ const NavigationBar = props => {
                             <li key="addChronicConditions"className={styles['li-dropdown-option']}>
                                 <Link to='/nutrition/add-chronicConditions' className={styles['nav-links']}>Chronic Condition</Link>
                             </li> */}
+                            <li key="addPrograms" className={styles['li-dropdown-option']}> 
+                                <Link to='/activities/add-program' className={styles['nav-links']}>Program</Link>
+                            </li>
+                            <li key="addWorkouts" className={styles['li-dropdown-option']}> 
+                                <Link to='/activities/add-workout' className={styles['nav-links']}>Workout</Link>
+                            </li>
                             <li key="addExercises" className={styles['li-dropdown-option']}> 
                                 <Link to='/activities/add-exercise' className={styles['nav-links']}>Exercise</Link>
                             </li>

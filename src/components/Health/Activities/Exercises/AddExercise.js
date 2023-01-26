@@ -1,6 +1,6 @@
 import IncrementalSelect from '../../../UI/Selects/IncrementalSelect';
 import SelectInput from '../../../UI/Selects/SelectInput';
-import addClasses from '../../../UI/General/CSS/Form.module.css';
+import styles from '../../../UI/General/CSS/Form.module.css';
 import { postExercise } from '../../../../util/apis/activities/exercises/exercisesApis';
 import { useEffect, useState} from 'react';
 import { fetchAllEquipmentNames } from '../../../../util/apis/activities/equipments/equipmentsApis';
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const AddExercise = props => {
-    const navigate = useNavigate();
+    const navigateTo = useNavigate();
     const [muscles, setMuscles] = useState([]);
     const [equipments, setEquipments] = useState([]);
 
@@ -112,15 +112,15 @@ const AddExercise = props => {
     /** [END] FIELDS DATA */
 
     /** Functions */
-    const addExercise = (event) => {
-        event.preventDefault();
-        const formVals = getValuesFromForm(event.target.elements);
+    const addExercise = (e) => {
+        e.preventDefault();
+        const formVals = getValuesFromForm(e.target.elements);
 
         postExercise(formVals).then(response => { 
             console.log("Response: ", response);
             if (response.isSuccess) {
-                // TODO: Navigate to the just added exercise id
-                navigate(`/activities/exercises/`);
+                //IMPROVE: Navigate to the just added exercise id
+                navigateTo(`/activities/exercises/`);
             }
         });
     };
@@ -171,62 +171,62 @@ const AddExercise = props => {
     };
 
     /** Render */
-    return <section className={addClasses['main-section']}>
-        <form id="add-exercise-form"  onSubmit={addExercise} className={addClasses['main-form']}>
-            <h1 className={addClasses['form-title']}>Add Exercise</h1>
+    return <section className={styles['main-section']}>
+        <form id="add-exercise-form"  onSubmit={addExercise} className={styles['main-form']}>
+            <h1 className={styles['form-title']}>Add Exercise</h1>
             
             {/* NAME */}
-            <label htmlFor="exercise-name" className={addClasses['text-label']}>Name:</label>
+            <label htmlFor="exercise-name" className={styles['text-label']}>Name:</label>
             <input type="text" id="exercise-name" name="name"
-                placeholder='Enter the exercise name...' className={addClasses['select-input']}/>
+                placeholder='Enter the exercise name...' className={styles['select-input']}/>
             
             {/* ALTERNATIVE NAME */}
-            <label htmlFor="exercise-alternativeName" className={addClasses['text-label']}>Alternative name:</label>
+            <label htmlFor="exercise-alternativeName" className={styles['text-label']}>Alternative name:</label>
             <input type="text" id="exercise-alternativeName" name="alternativeName"
-                placeholder='Enter an alternative name...'className={addClasses['select-input']} />
+                placeholder='Enter an alternative name...'className={styles['select-input']} />
             
             {/* DIFFICULTY */}
-            <label htmlFor="exercise-difficulty" className={addClasses['text-label']}>Difficulty:</label>
+            <label htmlFor="exercise-difficulty" className={styles['text-label']}>Difficulty:</label>
             <SelectInput select={difficultyInfo.select}/>
             
             {/* COMPOUND MOVEMENT */}
-            <label htmlFor="exercise-compoundMovement" className={addClasses['text-label']}>Compound movement:</label>
+            <label htmlFor="exercise-compoundMovement" className={styles['text-label']}>Compound movement:</label>
             <SelectInput select={compoundMovementInfo.select}/>
             
             {/* MAIN MUSCLE */}
-            <label htmlFor="exercise-mainMuscle" className={addClasses['text-label']}>Main muscle:</label>
+            <label htmlFor="exercise-mainMuscle" className={styles['text-label']}>Main muscle:</label>
             { muscles && muscles.length 
                 ? <SelectInput select={mainMuscleInfo.select}/>
-                : <img src="/loading.gif" alt="Loading..." className={addClasses['loading-img']}/>}
+                : <img src="/loading.gif" alt="Loading..." className={styles['loading-img']}/>}
 
             {/* SECONDARY MUSCLES */}
-            <label htmlFor="exercise-secondaryMuscles" className={addClasses['text-label']}>Secondary muscles:</label>
+            <label htmlFor="exercise-secondaryMuscles" className={styles['text-label']}>Secondary muscles:</label>
             { muscles && muscles.length 
                 ? <IncrementalSelect info={secondaryMusclesInfo}/>
-                : <img src="/loading.gif" alt="Loading..." className={addClasses['loading-img']}/>}
+                : <img src="/loading.gif" alt="Loading..." className={styles['loading-img']}/>}
             
             {/* TYPES */}
-            <label htmlFor="exercise-types" className={addClasses['text-label']}>Types:</label>
+            <label htmlFor="exercise-types" className={styles['text-label']}>Types:</label>
             <IncrementalSelect info={typesInfo}/>
 
             {/* EQUIPMENTS */}
-            <label htmlFor="exercise-equipments" className={addClasses['text-label']}>Equipments:</label>
+            <label htmlFor="exercise-equipments" className={styles['text-label']}>Equipments:</label>
             { equipments && equipments.length 
                 ? <IncrementalSelect info={equipmentsInfo}/>
-                : <img src="/loading.gif" alt="Loading..." className={addClasses['loading-img']}/>}
+                : <img src="/loading.gif" alt="Loading..." className={styles['loading-img']}/>}
 
             {/* IMAGE */}
-            <label htmlFor="exercise-image" className={addClasses['text-label']}>Image:</label>
+            <label htmlFor="exercise-image" className={styles['text-label']}>Image:</label>
             <input type="text" id="exercise-image" name="linkToImage"
-                placeholder='Enter the link for the image...' className={addClasses['select-input']}/>
+                placeholder='Enter the link for the image...' className={styles['select-input']}/>
 
             {/* VIDEO */}
-            <label htmlFor="exercise-video" className={addClasses['text-label']}>Video:</label>
+            <label htmlFor="exercise-video" className={styles['text-label']}>Video:</label>
             <input type="text" id="exercise-video" name="linkToVideo"
-                placeholder='Enter the link for the video...' className={addClasses['select-input']}/>
+                placeholder='Enter the link for the video...' className={styles['select-input']}/>
 
             {/* SUBMIT BUTTON */}
-            <button type="submit" id="add-exercse-btn" className={addClasses['submit-btn']}>Add exercise</button>
+            <button type="submit" id="add-exercise-btn" className={styles['submit-btn']}>Add exercise</button>
         </form>
     </section>
 };
