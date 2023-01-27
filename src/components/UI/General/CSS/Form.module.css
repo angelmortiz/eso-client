@@ -43,6 +43,12 @@
     font-size: 18px;
 }
 
+.text-label-small{
+    font-size: 16px;
+    text-align: center;
+    flex: 0 auto;
+}
+
 .select-content {
     position: relative;
 }
@@ -53,6 +59,25 @@
 
     padding: 10px 8px;
     margin: 5px 0 20px 0;
+    border: 1.5px solid #007E86;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.select-inputs-small-div{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 2px 0 10px 0;
+}
+
+.select-input-small {
+    flex: 1 auto;
+    width: 35%;
+    appearance: none;
+
+    padding: 6px 4px;
+    margin: 5px;
     border: 1.5px solid #007E86;
     border-radius: 4px;
     font-size: 16px;

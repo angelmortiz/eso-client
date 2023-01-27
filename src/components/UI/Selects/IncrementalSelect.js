@@ -1,7 +1,11 @@
-import { Fragment, useEffect, useState} from "react";
+import { useEffect, useState} from "react";
 import addClasses from '../General/CSS/Form.module.css';
 import SelectInput from "./SelectInput";
 
+/** This component makes it possible to add new select inputs by clicking the 'add' button.
+ * This allows the user to add multiple options without knowing in advanced how
+ * may elements should be added from the beginning.
+ */
 const IncrementalSelect = props => {
     const info = props.info;
     const [count, setCount] = useState(1);
@@ -40,14 +44,14 @@ const IncrementalSelect = props => {
 
     }, [props.selectedValues, info]);
 
-    return <Fragment>
+    return <>
         {/* Displays all the selects, including the selects being added through btn clicked. */}
         {selectList}
         
         {/* ADD BUTTON */}
         <button type="button" id={info.button.id} className={addClasses['add-btn']} onClick={addSelect}>
             {info.button.label}</button>
-    </Fragment>
+    </>
 };
 
 export default IncrementalSelect;

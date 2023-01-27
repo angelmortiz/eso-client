@@ -4,6 +4,7 @@ import { fetchAllExerciseNames } from '../../../../util/apis/activities/exercise
 import { postWorkout } from '../../../../util/apis/activities/workouts/workoutsApis';
 import styles from '../../../UI/General/CSS/Form.module.css';
 import SelectInput from '../../../UI/Selects/SelectInput';
+import AddExercisePlan from './AddExercisePlan';
 
 const AddWorkout = (props) => {
   const navigateTo = useNavigate();
@@ -21,32 +22,32 @@ const AddWorkout = (props) => {
 
   const workoutTypes = {
     select: {
-        id: "workout-types",
-        name: "types",
-        options: [
-            {value: "", label:"-- Choose type --"},
-            {value: "Strength", label:"Strength"},
-            {value: "Hypertrophy", label:"Hypertrophy"},
-            {value: "Endurance", label:"Endurance"},
-        ]
-    }
-  }
+      id: 'workout-types',
+      name: 'types',
+      options: [
+        { value: '', label: '-- Choose type --' },
+        { value: 'Strength', label: 'Strength' },
+        { value: 'Hypertrophy', label: 'Hypertrophy' },
+        { value: 'Endurance', label: 'Endurance' },
+      ],
+    },
+  };
 
   const workoutTargets = {
     select: {
-        id: "workout-targets",
-        name: "targets",
-        options: [
-            {value: "", label:"-- Choose target --"},
-            {value: "Full Body", label:"Full Body"},
-            {value: "Upper Body", label:"Upper Body"},
-            {value: "Lower Body", label:"Lower Body"},
-            {value: "Front Muscles", label:"Front Muscles"},
-            {value: "Back Muscles", label:"Back Muscles"},
-            {value: "Mixed", label:"Mixed"},
-        ]
-    }
-  }
+      id: 'workout-targets',
+      name: 'targets',
+      options: [
+        { value: '', label: '-- Choose target --' },
+        { value: 'Full Body', label: 'Full Body' },
+        { value: 'Upper Body', label: 'Upper Body' },
+        { value: 'Lower Body', label: 'Lower Body' },
+        { value: 'Front Muscles', label: 'Front Muscles' },
+        { value: 'Back Muscles', label: 'Back Muscles' },
+        { value: 'Mixed', label: 'Mixed' },
+      ],
+    },
+  };
 
   const addWorkout = (e) => {
     e.preventDefault();
@@ -127,6 +128,9 @@ const AddWorkout = (props) => {
         </label>
         <SelectInput select={workoutTargets.select} />
 
+        {/* EXERCISES */}
+        <AddExercisePlan />
+        
         {/* SUBMIT BUTTON */}
         <button
           type="submit"

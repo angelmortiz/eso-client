@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import addClasses from '../General/CSS/Form.module.css';
 
 const IncrementalInput = props => {
@@ -21,14 +21,14 @@ const IncrementalInput = props => {
         className={addClasses['select-input']}/>
     };
 
-    return <Fragment>
+    return <>
         {/* Displays all the inputs, including the inputs being added through btn clicked. */}
         {inputList}
         
         {/* ADD BUTTON */}
         <button type="button" id={info.button.id} className={addClasses['add-btn']} onClick={addInput}>
             {info.button.label}</button>
-    </Fragment>
+    </>
 };
 
 export default IncrementalInput;
