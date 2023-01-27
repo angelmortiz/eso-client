@@ -4,7 +4,7 @@ import { fetchAllExerciseNames } from '../../../../util/apis/activities/exercise
 import { postWorkout } from '../../../../util/apis/activities/workouts/workoutsApis';
 import styles from '../../../UI/General/CSS/Form.module.css';
 import SelectInput from '../../../UI/Selects/SelectInput';
-import AddExercisePlan from './AddExercisePlan';
+import IncrementalExercisePlan from './IncrementalExercisePlan';
 
 const AddWorkout = (props) => {
   const navigateTo = useNavigate();
@@ -15,7 +15,7 @@ const AddWorkout = (props) => {
       if (!response || !response.isSuccess) return;
 
       //adds an empty default option
-      response.body.unshift({ _id: '', name: '-- Choose an workout --' });
+      response.body.unshift({ _id: '', name: '-- Choose an exercise --' });
       setExercises(response.body);
     });
   }, []);
@@ -46,6 +46,16 @@ const AddWorkout = (props) => {
         { value: 'Back Muscles', label: 'Back Muscles' },
         { value: 'Mixed', label: 'Mixed' },
       ],
+    },
+  };
+
+  const exercisesInfo = {
+    select: {
+      id: 'exerciseplan-exercise',
+      name: 'exerciseplan-exercise',
+      value: '_id',
+      label: 'name',
+      options: exercises,
     },
   };
 
@@ -129,7 +139,7 @@ const AddWorkout = (props) => {
         <SelectInput select={workoutTargets.select} />
 
         {/* EXERCISES */}
-        <AddExercisePlan />
+        <IncrementalExercisePlan exercisesInfo={exercisesInfo}/>
         
         {/* SUBMIT BUTTON */}
         <button

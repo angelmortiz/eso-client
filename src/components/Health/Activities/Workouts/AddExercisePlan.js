@@ -2,40 +2,45 @@ import styles from '../../../UI/General/CSS/Form.module.css';
 import SelectInput from '../../../UI/Selects/SelectInput';
 
 const AddExercisePlan = (props) => {
-  // const exercises = props.exercises;
+  const {exercises, count} = props;
 
-  const exercises = {
-    select: {
-      id: 'exerciseplan-exercise',
-      name: 'exerciseplan-exercise',
-      options: [
-        {
-          value: '',
-          label: '-- Choose an exercise --',
-        },
-        {
-          value: '635ad2f5c485d32428804e9a',
-          label: 'Romanian Deadlift',
-        },
-        {
-          value: '635a855cc485d32428804e79',
-          label: 'Deadlift',
-        },
-        {
-          value: '6361739cfcc32170737d8627',
-          label: 'Squat',
-        },
-      ],
-    },
-  };
+  //DELETE: after testing is completed
+  //   const exercises = {
+  //     select: {
+  //       id: 'exerciseplan-exercise',
+  //       name: 'exerciseplan-exercise',
+  //       value: '_id',
+  //       label: 'value',
+  //       options: [
+  //         {
+  //           _id: '',
+  //           value: '-- Choose an exercise --',
+  //         },
+  //         {
+  //           _id: '635ad2f5c485d32428804e9a',
+  //           value: 'Romanian Deadlift',
+  //         },
+  //         {
+  //           _id: '635a855cc485d32428804e79',
+  //           value: 'Deadlift',
+  //         },
+  //         {
+  //           _id: '6361739cfcc32170737d8627',
+  //           value: 'Squat',
+  //         },
+  //       ],
+  //     },
+  //   };
 
   return (
-    <div className={styles['exercise-plan-div']}>
+    <div className={styles['exerciseplan-div']}>
+      <h3 className={styles['exerciseplan-title']}>Exercise Plan {count}</h3>
+      
       {/* EXERCISE */}
       <label htmlFor="exerciseplan-exercise" className={styles['text-label']}>
         Exercise:
       </label>
-      <SelectInput select={exercises.select} />
+      <SelectInput select={exercises.select} value="_id" label="value" />
 
       {/* SETS */}
       <label htmlFor="exerciseplan-sets" className={styles['text-label']}>

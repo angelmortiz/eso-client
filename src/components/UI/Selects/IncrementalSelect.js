@@ -1,5 +1,5 @@
 import { useEffect, useState} from "react";
-import addClasses from '../General/CSS/Form.module.css';
+import styles from '../General/CSS/Form.module.css';
 import SelectInput from "./SelectInput";
 
 /** This component makes it possible to add new select inputs by clicking the 'add' button.
@@ -11,8 +11,8 @@ const IncrementalSelect = props => {
     const [count, setCount] = useState(1);
     const [selectList, setSelectList] = useState([newSelectInput(count)]);
 
-    const addSelect = event => {
-        event.preventDefault();
+    const addSelect = e => {
+        e.preventDefault();
         //increases the count and adds a new dropdown to the DOM
         setCount(previousCount => {
             const newCount = previousCount + 1;
@@ -49,7 +49,7 @@ const IncrementalSelect = props => {
         {selectList}
         
         {/* ADD BUTTON */}
-        <button type="button" id={info.button.id} className={addClasses['add-btn']} onClick={addSelect}>
+        <button type="button" id={info.button.id} className={styles['add-btn']} onClick={addSelect}>
             {info.button.label}</button>
     </>
 };
