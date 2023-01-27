@@ -8,7 +8,7 @@ import IncrementalExercisePlan from './IncrementalExercisePlan';
 
 const AddWorkout = (props) => {
   const navigateTo = useNavigate();
-  const [exercises, setExercises] = useState([]);
+  const [exercises, setExercises] = useState(null);
 
   useEffect(() => {
     fetchAllExerciseNames().then((response) => {
@@ -23,7 +23,7 @@ const AddWorkout = (props) => {
   const workoutTypes = {
     select: {
       id: 'workout-types',
-      name: 'types',
+      name: 'type',
       options: [
         { value: '', label: '-- Choose type --' },
         { value: 'Strength', label: 'Strength' },
@@ -36,7 +36,7 @@ const AddWorkout = (props) => {
   const workoutTargets = {
     select: {
       id: 'workout-targets',
-      name: 'targets',
+      name: 'target',
       options: [
         { value: '', label: '-- Choose target --' },
         { value: 'Full Body', label: 'Full Body' },
@@ -52,7 +52,7 @@ const AddWorkout = (props) => {
   const exercisesInfo = {
     select: {
       id: 'exerciseplan-exercise',
-      name: 'exerciseplan-exercise',
+      name: 'exercisePlanExercise',
       value: '_id',
       label: 'name',
       options: exercises,
@@ -63,23 +63,50 @@ const AddWorkout = (props) => {
     e.preventDefault();
     const formVals = getValuesFromForm(e.target.elements);
 
-    postWorkout(formVals).then((response) => {
-      console.log('Response: ', response);
-      if (response.isSuccess) {
-        //IMPROVE: Navigate to the just added workout id
-        navigateTo(`/activities/workouts`);
-      }
-    });
+    // postWorkout(formVals).then((response) => {
+    //   console.log('Response: ', response);
+    //   if (response.isSuccess) {
+    //     //IMPROVE: Navigate to the just added workout id
+    //     navigateTo(`/activities/workouts`);
+    //   }
+    // });
   };
 
   const getValuesFromForm = (elements) => {
     const values = {};
     values.name = elements.name.value;
     values.description = elements.description.value;
+    values.variant = elements.variant.value;
     values.type = elements.type.value;
     values.target = elements.target.value;
-    values.variant = elements.variant.value;
+
+    //extracting exercise plans info
+    values.exercises = extractMultiOptionValues(elements.exercisePlanExercise);
+    values.setsMin = extractMultiOptionValues(elements.exercisePlanSetsMin);
+    values.setsMax = extractMultiOptionValues(elements.exercisePlanSetsMax);
+    values.repsMin = extractMultiOptionValues(elements.exercisePlanRepsMin);
+    values.repsMax = extractMultiOptionValues(elements.exercisePlanRepsMax);
+    values.tempoEcc = extractMultiOptionValues(elements.exercisePlanTempoEcc);
+    values.tempoP1 = extractMultiOptionValues(elements.exercisePlanTempoP1);
+    values.tempoCon = extractMultiOptionValues(elements.exercisePlanTempoCon);
+    values.tempoP2 = extractMultiOptionValues(elements.exercisePlanTempoP2);
+    values.rirMin = extractMultiOptionValues(elements.exercisePlanRirMin);
+    values.rirMax = extractMultiOptionValues(elements.exercisePlanRirMax);
+    values.restMin = extractMultiOptionValues(elements.exercisePlanRestMin);
+    values.restMax = extractMultiOptionValues(elements.exercisePlanRestMax);
+    console.log('values: ', values);
   };
+
+  const extractMultiOptionValues = (elements) => {    
+    //if there is only one select dropdown, it adds the HTMLSelectElement to an array before extracting the value.
+    //if there are multiple select dropdowns, converts the RadioNodeList into an array (to later use .map()).
+    elements = Object.prototype.toString.call(elements).includes('HTML', 0) ?
+        [elements] : [...elements];
+    
+    let values = elements.map(element => { return element.value; });
+    values = values.filter(v => v); //removes empty selections
+    return values;
+};
 
   return (
     <section className={styles['main-section']}>
@@ -89,9 +116,8 @@ const AddWorkout = (props) => {
         className={styles['main-form']}
       >
         <h1 className={styles['form-title']}>Add Workout</h1>
-
         {/* NAME */}
-        <label htmlFor="workout-name" className={styles['text-label']}>
+        <label htmlFor="workoutName" className={styles['text-label']}>
           Name:
         </label>
         <input
@@ -101,45 +127,48 @@ const AddWorkout = (props) => {
           placeholder="Enter the workout name..."
           className={styles['select-input']}
         />
-
         {/* DESCRIPTION */}
-        <label htmlFor="workout-description" className={styles['text-label']}>
+        <label htmlFor="workoutDescription" className={styles['text-label']}>
           Description:
         </label>
         <input
           type="text"
           id="workout-description"
-          name="workout-description"
+          name="description"
           placeholder="Enter a description..."
           className={styles['select-input']}
         />
-
         {/* VARIANT */}
-        <label htmlFor="workout-variant" className={styles['text-label']}>
+        <label htmlFor="workoutVariant" className={styles['text-label']}>
           Variant:
         </label>
         <input
           type="text"
           id="workout-variant"
-          name="workout-variant"
+          name="variant"
           placeholder="Enter a variant..."
           className={styles['select-input']}
         />
-
         {/* TYPE */}
-        <label htmlFor="workout-type" className={styles['text-label']}>
+        <label htmlFor="workoutType" className={styles['text-label']}>
           Type:
         </label>
         <SelectInput select={workoutTypes.select} />
-
         {/* TARGET */}
-        <label htmlFor="workout-target" className={styles['text-label']}>
+        <label htmlFor="workoutTarget" className={styles['text-label']}>
           Target:
         </label>
         <SelectInput select={workoutTargets.select} />
-
         {/* EXERCISES */}
-        <IncrementalExercisePlan exercisesInfo={exercisesInfo}/>
+        {exercises ? (
+          <IncrementalExercisePlan exercisesInfo={exercisesInfo} />
+        ) : (
+          <img
+            src="/loading.gif"
+            alt="Loading..."
+            className={styles['loading-img']}
+          />
+        )}
         
         {/* SUBMIT BUTTON */}
         <button

@@ -181,21 +181,21 @@
   margin-top: 0.5rem;
 }
 
-.exerciseplan-list {
+.exercise-plan-list {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.exerciseplan-div {
+.exercise-plan-div {
   border-top: 1px solid gray;
   border-bottom: 1px solid gray;
   border-radius: 8px;
   margin: 0.5rem 0 1rem 0;
 }
 
-.exerciseplan-title {
+.exercise-plan-title {
   text-align: center;
   margin: 1rem 0 0.5rem 0;
 }
