@@ -23,7 +23,7 @@ const AddExercisePlan = (props) => {
         <input
           type="number"
           id="exercisePlan-sets-min"
-          name="exercisePlanSetsMin"
+          name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
         />
@@ -31,7 +31,7 @@ const AddExercisePlan = (props) => {
         <input
           type="number"
           id="exercisePlan-sets-max"
-          name="exercisePlanSetsMax"
+          name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
         />
@@ -46,7 +46,7 @@ const AddExercisePlan = (props) => {
         <input
           type="number"
           id="exercisePlan-reps-min"
-          name="exercisePlanRepsMin"
+          name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
         />
@@ -54,7 +54,7 @@ const AddExercisePlan = (props) => {
         <input
           type="number"
           id="exercisePlan-reps-max"
-          name="exercisePlanRepsMax"
+          name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
         />
@@ -69,7 +69,7 @@ const AddExercisePlan = (props) => {
         <input
           type="number"
           id="exercisePlan-tempo-eccentric"
-          name="exercisePlanTempoEcc"
+          name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
         />
@@ -77,7 +77,7 @@ const AddExercisePlan = (props) => {
         <input
           type="number"
           id="exercisePlan-tempo-pause1"
-          name="exercisePlanTempoP1"
+          name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
         />
@@ -85,7 +85,7 @@ const AddExercisePlan = (props) => {
         <input
           type="number"
           id="exercisePlan-tempo-concentric"
-          name="exercisePlanTempoCon"
+          name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
         />
@@ -93,7 +93,7 @@ const AddExercisePlan = (props) => {
         <input
           type="number"
           id="exercisePlan-tempo-pause2"
-          name="exercisePlanTempoP2"
+          name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
         />
@@ -108,7 +108,7 @@ const AddExercisePlan = (props) => {
         <input
           type="number"
           id="exercisePlan-rir-min"
-          name="exercisePlanRirMin"
+          name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="0"
         />
@@ -116,7 +116,7 @@ const AddExercisePlan = (props) => {
         <input
           type="number"
           id="exercisePlan-rir-max"
-          name="exercisePlanRirMax"
+          name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="0"
         />
@@ -131,7 +131,7 @@ const AddExercisePlan = (props) => {
         <input
           type="number"
           id="exercisePlan-rest-min"
-          name="exercisePlanRestMin"
+          name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="0"
         />
@@ -139,7 +139,7 @@ const AddExercisePlan = (props) => {
         <input
           type="number"
           id="exercisePlan-rest-max"
-          name="exercisePlanRestMax"
+          name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="0"
         />

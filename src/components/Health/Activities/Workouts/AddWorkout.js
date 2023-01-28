@@ -62,18 +62,15 @@ const AddWorkout = (props) => {
   const addWorkout = (e) => {
     e.preventDefault();
     let formVals = getFormValues(e.target.elements);
-    console.log("formVals", formVals);
-    
-    // formVals.exercisePlans = reformatExercisePlans(formVals.exercisePlans);
-    // console.log("exercisePlans", formVals);
+    console.log('formVals', formVals);
 
-    // postWorkout(formVals).then((response) => {
-    //   console.log('Response: ', response);
-    //   if (response.isSuccess) {
-    //     //IMPROVE: Navigate to the just added workout id
-    //     navigateTo(`/activities/workouts`);
-    //   }
-    // });
+    postWorkout(formVals).then((response) => {
+      console.log('Response: ', response);
+      if (response.isSuccess) {
+        //IMPROVE: Navigate to the just added workout id
+        navigateTo(`/activities/workouts`);
+      }
+    });
   };
 
   const getFormValues = (elements) => {
@@ -83,40 +80,65 @@ const AddWorkout = (props) => {
     values.variant = elements.variant.value;
     values.type = elements.type.value;
     values.target = elements.target.value;
-    values.exercisePlans = {};
+    values.exercises = {};
 
     //extracting exercise plans info
-    values.exercisePlans.exercises = extractMultiOptionValues(elements.exercisePlanExercise);
-    values.exercisePlans.setsMin = extractMultiOptionValues(elements.exercisePlanSetsMin);
-    values.exercisePlans.setsMax = extractMultiOptionValues(elements.exercisePlanSetsMax);
-    values.exercisePlans.repsMin = extractMultiOptionValues(elements.exercisePlanRepsMin);
-    values.exercisePlans.repsMax = extractMultiOptionValues(elements.exercisePlanRepsMax);
-    values.exercisePlans.tempoEcc = extractMultiOptionValues(elements.exercisePlanTempoEcc);
-    values.exercisePlans.tempoP1 = extractMultiOptionValues(elements.exercisePlanTempoP1);
-    values.exercisePlans.tempoCon = extractMultiOptionValues(elements.exercisePlanTempoCon);
-    values.exercisePlans.tempoP2 = extractMultiOptionValues(elements.exercisePlanTempoP2);
-    values.exercisePlans.rirMin = extractMultiOptionValues(elements.exercisePlanRirMin);
-    values.exercisePlans.rirMax = extractMultiOptionValues(elements.exercisePlanRirMax);
-    values.exercisePlans.restMin = extractMultiOptionValues(elements.exercisePlanRestMin);
-    values.exercisePlans.restMax = extractMultiOptionValues(elements.exercisePlanRestMax);
+    values.exercises.exerciseIds = filterEmptyValues(
+      extractMultiOptionValues(elements.exercisePlanExercise)
+    );
+    values.exercises = extractExercisePlanValues(
+      values.exercises.exerciseIds,
+      elements
+    );
     return values;
   };
 
-  const reformatExercisePlans = (plans) => {
-    const count = plans.exercises.length;
-
-
+  const filterEmptyValues = (arr) => {
+    return arr.filter((x) => x);
   };
 
-  const extractMultiOptionValues = (elements) => {    
+  const extractMultiOptionValues = (elements) => {
     //if there is only one select dropdown, it adds the HTMLSelectElement to an array before extracting the value.
     //if there are multiple select dropdowns, converts the RadioNodeList into an array (to later use .map()).
-    elements = Object.prototype.toString.call(elements).includes('HTML', 0) ?
-        [elements] : [...elements];
+    elements = Object.prototype.toString.call(elements).includes('HTML', 0)
+      ? [elements]
+      : [...elements];
 
-    let values = elements.map(element => { return element.value });
+    //extracts the value from all elements
+    let values = elements.map((element) => {
+      return element.value;
+    });
     return values;
-};
+  };
+
+  const extractExercisePlanValues = (exerciseIds, elements) => {
+    let exercisePlanValues = [];
+    if (!exerciseIds || exerciseIds.length === 0) return null;
+
+    /**
+       * Note: All the elements of each exercise plan section follows the same
+       * naming format: 'exercisePlan_x'. This enables the possibility of getting
+       * all the values of each plan with the same input name.
+       * The result is an array with 12 values that can be broken down to:
+       * sets (2), reps (2), tempo (4), rir (2), and rest (2).
+       */
+    exerciseIds.forEach((id, index) => {
+      const exerciseValues = extractMultiOptionValues(
+        elements[`exercisePlan_${index + 1}`]
+      );
+      let exerciseVal = {};
+      exerciseVal.exerciseId = id;
+      exerciseVal.sets = exerciseValues.slice(0, 2);
+      exerciseVal.reps = exerciseValues.slice(2, 4);
+      exerciseVal.tempo = exerciseValues.slice(4, 8);
+      exerciseVal.rir = exerciseValues.slice(8, 10);
+      exerciseVal.rest = exerciseValues.slice(10, 12);
+
+      exercisePlanValues.push(exerciseVal);
+    });
+
+    return exercisePlanValues;
+  };
 
   return (
     <section className={styles['main-section']}>
@@ -179,7 +201,7 @@ const AddWorkout = (props) => {
             className={styles['loading-img']}
           />
         )}
-        
+
         {/* SUBMIT BUTTON */}
         <button
           type="submit"
