@@ -62,7 +62,10 @@ const AddWorkout = (props) => {
   const addWorkout = (e) => {
     e.preventDefault();
     let formVals = getFormValues(e.target.elements);
-    formVals.exercisePlans = reformatExercisePlans(formVals.exercisePlans);
+    console.log("formVals", formVals);
+    
+    // formVals.exercisePlans = reformatExercisePlans(formVals.exercisePlans);
+    // console.log("exercisePlans", formVals);
 
     // postWorkout(formVals).then((response) => {
     //   console.log('Response: ', response);
@@ -96,13 +99,13 @@ const AddWorkout = (props) => {
     values.exercisePlans.rirMax = extractMultiOptionValues(elements.exercisePlanRirMax);
     values.exercisePlans.restMin = extractMultiOptionValues(elements.exercisePlanRestMin);
     values.exercisePlans.restMax = extractMultiOptionValues(elements.exercisePlanRestMax);
-    console.log('values: ', values);
+    return values;
   };
 
   const reformatExercisePlans = (plans) => {
     const count = plans.exercises.length;
 
-    
+
   };
 
   const extractMultiOptionValues = (elements) => {    
@@ -110,9 +113,8 @@ const AddWorkout = (props) => {
     //if there are multiple select dropdowns, converts the RadioNodeList into an array (to later use .map()).
     elements = Object.prototype.toString.call(elements).includes('HTML', 0) ?
         [elements] : [...elements];
-    
-    let values = elements.map(element => { return element.value; });
-    values = values.filter(v => v); //removes empty selections
+
+    let values = elements.map(element => { return element.value });
     return values;
 };
 
