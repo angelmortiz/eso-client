@@ -188,14 +188,14 @@
     align-items: center;
 }
 
-.exercise-plan-div {
+.plan-div {
   border-top: 1px solid gray;
   border-bottom: 1px solid gray;
   border-radius: 8px;
   margin: 0.5rem 0 1rem 0;
 }
 
-.exercise-plan-title {
+.plan-title {
   text-align: center;
   margin: 1rem 0 0.5rem 0;
 }

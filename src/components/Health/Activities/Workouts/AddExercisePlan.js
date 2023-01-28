@@ -5,8 +5,8 @@ const AddExercisePlan = (props) => {
   const {exercises, count} = props;
 
   return (
-    <div className={styles['exercise-plan-div']}>
-      <h3 className={styles['exercise-plan-title']}>Exercise Plan {count}</h3>
+    <div className={styles['plan-div']}>
+      <h3 className={styles['plan-title']}>Exercise Plan {count}</h3>
       
       {/* EXERCISE */}
       <label htmlFor="exercisePlanExercise" className={styles['text-label']}>

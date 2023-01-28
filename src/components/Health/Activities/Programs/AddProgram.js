@@ -4,10 +4,11 @@ import { fetchAllWorkoutNames } from '../../../../util/apis/activities/workouts/
 import { postProgram } from '../../../../util/apis/activities/programs/programsApis';
 import styles from '../../../UI/General/CSS/Form.module.css';
 import SelectInput from '../../../UI/Selects/SelectInput';
+import AddWeeklyPlan from './AddWeeklyPlan';
 
 const AddProgram = (props) => {
   const navigateTo = useNavigate();
-  const [workouts, setWorkouts] = useState([]);
+  const [workouts, setWorkouts] = useState(null);
 
   useEffect(() => {
     fetchAllWorkoutNames().then((response) => {
@@ -44,6 +45,26 @@ const AddProgram = (props) => {
       ],
     },
   };
+
+  const workoutsInfo = {
+    select: {
+      id: 'workoutPlan-workout',
+      name: 'workoutPlanWorkout',
+      value: '_id',
+      label: 'name',
+      options: workouts,
+    },
+  };
+
+  const daysOfTheWeek = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thrusday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ];
 
   const addProgram = (e) => {
     e.preventDefault();
@@ -106,12 +127,6 @@ const AddProgram = (props) => {
         </label>
         <SelectInput select={programTypes.select} />
 
-        {/* TARGET */}
-        <label htmlFor="program-sequence" className={styles['text-label']}>
-            Sequence:
-        </label>
-        <SelectInput select={programSequence.select} />
-
         {/* DURANTION */}
         <label htmlFor="program-duration" className={styles['text-label']}>
           Durantion:
@@ -123,6 +138,18 @@ const AddProgram = (props) => {
           placeholder="Enter a duration..."
           className={styles['select-input']}
         />
+
+        {/* SEQUENCE */}
+        <label htmlFor="program-sequence" className={styles['text-label']}>
+          Sequence:
+        </label>
+        <SelectInput select={programSequence.select} />
+
+        {/* WEEKLY PLAN */}
+        {workouts &&
+          daysOfTheWeek.map((day) => (
+            <AddWeeklyPlan workouts={workoutsInfo} dayOfTheWeek={day} />
+          ))}
 
         {/* SUBMIT BUTTON */}
         <button
