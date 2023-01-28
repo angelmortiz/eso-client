@@ -114,7 +114,7 @@ const AddExercise = props => {
     /** Functions */
     const addExercise = (e) => {
         e.preventDefault();
-        const formVals = getValuesFromForm(e.target.elements);
+        const formVals = getFormValues(e.target.elements);
 
         postExercise(formVals).then(response => { 
             console.log("Response: ", response);
@@ -125,7 +125,7 @@ const AddExercise = props => {
         });
     };
 
-    const getValuesFromForm = (elements) => {
+    const getFormValues = (elements) => {
         const values = {};
         values.name = elements.name.value;
         values.alternativeName = elements.alternativeName.value;

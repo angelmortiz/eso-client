@@ -55,14 +55,14 @@ const AddPhysicalCondition = props => {
     /** Functions */
     const addPhysicalCondition = (event) => {
         event.preventDefault();
-        const formVals = getValuesFromForm(event.target.elements);
+        const formVals = getFormValues(event.target.elements);
         // console.log("value: ", formVals);
         postPhysicalCondition(formVals).then(response => { 
             console.log("response: ", response);
         });
     };
 
-    const getValuesFromForm = (elements) => {
+    const getFormValues = (elements) => {
         const values = {};
         values.name = elements.name.value;
         values.description = elements.description.value;

@@ -47,7 +47,7 @@ const AddProgram = (props) => {
 
   const addProgram = (e) => {
     e.preventDefault();
-    const formVals = getValuesFromForm(e.target.elements);
+    const formVals = getFormValues(e.target.elements);
 
     postProgram(formVals).then((response) => {
       console.log('Response: ', response);
@@ -58,7 +58,7 @@ const AddProgram = (props) => {
     });
   };
 
-  const getValuesFromForm = (elements) => {
+  const getFormValues = (elements) => {
     const values = {};
     values.name = elements.name.value;
     values.description = elements.description.value;

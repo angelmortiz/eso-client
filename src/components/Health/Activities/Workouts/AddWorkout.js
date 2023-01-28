@@ -61,7 +61,8 @@ const AddWorkout = (props) => {
 
   const addWorkout = (e) => {
     e.preventDefault();
-    const formVals = getValuesFromForm(e.target.elements);
+    let formVals = getFormValues(e.target.elements);
+    formVals.exercisePlans = reformatExercisePlans(formVals.exercisePlans);
 
     // postWorkout(formVals).then((response) => {
     //   console.log('Response: ', response);
@@ -72,29 +73,36 @@ const AddWorkout = (props) => {
     // });
   };
 
-  const getValuesFromForm = (elements) => {
+  const getFormValues = (elements) => {
     const values = {};
     values.name = elements.name.value;
     values.description = elements.description.value;
     values.variant = elements.variant.value;
     values.type = elements.type.value;
     values.target = elements.target.value;
+    values.exercisePlans = {};
 
     //extracting exercise plans info
-    values.exercises = extractMultiOptionValues(elements.exercisePlanExercise);
-    values.setsMin = extractMultiOptionValues(elements.exercisePlanSetsMin);
-    values.setsMax = extractMultiOptionValues(elements.exercisePlanSetsMax);
-    values.repsMin = extractMultiOptionValues(elements.exercisePlanRepsMin);
-    values.repsMax = extractMultiOptionValues(elements.exercisePlanRepsMax);
-    values.tempoEcc = extractMultiOptionValues(elements.exercisePlanTempoEcc);
-    values.tempoP1 = extractMultiOptionValues(elements.exercisePlanTempoP1);
-    values.tempoCon = extractMultiOptionValues(elements.exercisePlanTempoCon);
-    values.tempoP2 = extractMultiOptionValues(elements.exercisePlanTempoP2);
-    values.rirMin = extractMultiOptionValues(elements.exercisePlanRirMin);
-    values.rirMax = extractMultiOptionValues(elements.exercisePlanRirMax);
-    values.restMin = extractMultiOptionValues(elements.exercisePlanRestMin);
-    values.restMax = extractMultiOptionValues(elements.exercisePlanRestMax);
+    values.exercisePlans.exercises = extractMultiOptionValues(elements.exercisePlanExercise);
+    values.exercisePlans.setsMin = extractMultiOptionValues(elements.exercisePlanSetsMin);
+    values.exercisePlans.setsMax = extractMultiOptionValues(elements.exercisePlanSetsMax);
+    values.exercisePlans.repsMin = extractMultiOptionValues(elements.exercisePlanRepsMin);
+    values.exercisePlans.repsMax = extractMultiOptionValues(elements.exercisePlanRepsMax);
+    values.exercisePlans.tempoEcc = extractMultiOptionValues(elements.exercisePlanTempoEcc);
+    values.exercisePlans.tempoP1 = extractMultiOptionValues(elements.exercisePlanTempoP1);
+    values.exercisePlans.tempoCon = extractMultiOptionValues(elements.exercisePlanTempoCon);
+    values.exercisePlans.tempoP2 = extractMultiOptionValues(elements.exercisePlanTempoP2);
+    values.exercisePlans.rirMin = extractMultiOptionValues(elements.exercisePlanRirMin);
+    values.exercisePlans.rirMax = extractMultiOptionValues(elements.exercisePlanRirMax);
+    values.exercisePlans.restMin = extractMultiOptionValues(elements.exercisePlanRestMin);
+    values.exercisePlans.restMax = extractMultiOptionValues(elements.exercisePlanRestMax);
     console.log('values: ', values);
+  };
+
+  const reformatExercisePlans = (plans) => {
+    const count = plans.exercises.length;
+
+    
   };
 
   const extractMultiOptionValues = (elements) => {    

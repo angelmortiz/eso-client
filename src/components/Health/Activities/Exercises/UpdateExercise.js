@@ -78,7 +78,7 @@ const UpdateExercise = props => {
     //runs when update button is clicked
     const UpdateExercise = (event) => {
         event.preventDefault();
-        const formVals = getValuesFromForm(event.target.elements);
+        const formVals = getFormValues(event.target.elements);
         
         putExercise(id, formVals).then(response => { 
             console.log("Response: ", response);
@@ -89,7 +89,7 @@ const UpdateExercise = props => {
         });
     };
 
-    const getValuesFromForm = (elements) => {
+    const getFormValues = (elements) => {
         const values = {};
         values.id = id;
         values.name = elements.name.value;
