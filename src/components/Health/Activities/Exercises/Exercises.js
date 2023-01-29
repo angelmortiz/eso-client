@@ -100,7 +100,7 @@ const Exercises = props => {
                     {/* MUSCLE FILTER */}
                     <div className={styles['filter']}>
                         <label htmlFor="select-muscle" className={styles['text-label']}>Muscle:</label>
-                        <select key="select-muscle" name="select-muscle" className={styles['select-input']} value={selectedMuscle} onChange={event => setSelectedMuscle(event.target.value)}>
+                        <select key="select-muscle" name="select-muscle" className={styles['select-input']} value={selectedMuscle} onChange={e => setSelectedMuscle(e.target.value)}>
                             {muscleFilterOptions.map((option, index) => {
                                 return <option key={`muscle_${option.name}_${index+1}`} value={option._id}>{option.name}</option>
                             })}
@@ -109,7 +109,7 @@ const Exercises = props => {
                     {/* EQUIPMENT FILTER */}
                     <div className={styles['filter']}>
                         <label htmlFor="select-equipment" className={styles['text-label']}>Equipment:</label>
-                        <select key="select-equipment" name="select-equipment" className={styles['select-input']} value={selectedEquipment} onChange={event => setSelectedEquipment(event.target.value)}>
+                        <select key="select-equipment" name="select-equipment" className={styles['select-input']} value={selectedEquipment} onChange={e => setSelectedEquipment(e.target.value)}>
                             {equipmentFilterOptions.map((option, index) => {
                                 return <option key={`equipment_${option.name}_${index+1}`} value={option._id}>{option.name}</option>
                             })}
@@ -118,7 +118,7 @@ const Exercises = props => {
                     {/* TYPE FILTER */}
                     <div className={styles['filter']}>
                         <label htmlFor="select-type" className={styles['text-label']}>Type:</label>
-                        <select key="select-type" name="select-type" className={styles['select-input']} value={selectedType} onChange={event => setSelectedType(event.target.value)}>
+                        <select key="select-type" name="select-type" className={styles['select-input']} value={selectedType} onChange={e => setSelectedType(e.target.value)}>
                             {typeFilterOptions.map((option, index) => {
                                 return <option key={`type_${option.value}_${index+1}`} value={option.value}>{option.label}</option>
                             })}

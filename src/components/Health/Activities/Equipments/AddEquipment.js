@@ -31,9 +31,9 @@ const AddEquipment = props => {
     };
 
     /** Functions */
-    const addEquipment = (event) => {
-        event.preventDefault();
-        const formVals = getFormValues(event.target.elements);
+    const addEquipment = (e) => {
+        e.preventDefault();
+        const formVals = getFormValues(e.target.elements);
 
         //TODO: Handle errors
         postEquipment(formVals).then(response => { 

@@ -76,9 +76,9 @@ const UpdateExercise = props => {
 
     /** FUNCTIONS */
     //runs when update button is clicked
-    const UpdateExercise = (event) => {
-        event.preventDefault();
-        const formVals = getFormValues(event.target.elements);
+    const UpdateExercise = (e) => {
+        e.preventDefault();
+        const formVals = getFormValues(e.target.elements);
         
         putExercise(id, formVals).then(response => { 
             console.log("Response: ", response);
@@ -229,7 +229,7 @@ const UpdateExercise = props => {
                     <input type="text" id="exercise-name" name="name"
                         placeholder='Enter the exercise name...' className={addClasses['select-input']}
                         value={name}
-                        onChange={event => setName(event.target.value)}/>
+                        onChange={e => setName(e.target.value)}/>
                 </div>
                 
                 {/* ALTERNATIVE NAME */}
@@ -238,7 +238,7 @@ const UpdateExercise = props => {
                     <input type="text" id="exercise-alternativeName" name="alternativeName"
                         placeholder='Enter an alternative name...'className={addClasses['select-input']}
                         value={alternativeName}
-                        onChange={event => setAlternativeName(event.target.value)}/>
+                        onChange={e => setAlternativeName(e.target.value)}/>
                 </div>
                     
                 {/* DIFFICULTY */}
@@ -289,7 +289,7 @@ const UpdateExercise = props => {
                     <input type="text" id="exercise-image" name="linkToImage"
                         placeholder='Enter the link for the image...' className={addClasses['select-input']}
                         value={linkToImage}
-                        onChange={event => setLinkToImage(event.target.value)}/>
+                        onChange={e => setLinkToImage(e.target.value)}/>
                 </div>
 
                 {/* VIDEO */}
@@ -298,7 +298,7 @@ const UpdateExercise = props => {
                     <input type="text" id="exercise-video" name="linkToVideo"
                         placeholder='Enter the link for the video...' className={addClasses['select-input']}
                         value={linkToVideo}
-                        onChange={event => setLinkToVideo(event.target.value)}/>
+                        onChange={e => setLinkToVideo(e.target.value)}/>
                 </div>
             </div>
             {/* SUBMIT BUTTON */}

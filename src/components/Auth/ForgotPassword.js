@@ -25,8 +25,8 @@ const ForgotPassword = (props) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
-  const userForgotPassword = (event) => {
-    event.preventDefault();
+  const userForgotPassword = (e) => {
+    e.preventDefault();
 
     if (!isValidationSuccessful()) return;
 

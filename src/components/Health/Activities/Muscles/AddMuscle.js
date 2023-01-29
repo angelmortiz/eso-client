@@ -46,9 +46,9 @@ const AddMuscle = props => {
     };
 
     /** Functions */
-    const addMuscle = (event) => {
-        event.preventDefault();
-        const formVals = getFormValues(event.target.elements);
+    const addMuscle = (e) => {
+        e.preventDefault();
+        const formVals = getFormValues(e.target.elements);
 
         postMuscle(formVals).then(response => { 
             console.log("response: ", response);

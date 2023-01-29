@@ -6,8 +6,8 @@ const IncrementalInput = props => {
     const [count, setCount] = useState(1);
     const [inputList, setInputList] = useState([newInputElement(count)]);
     
-    const addInput = event => {
-        event.preventDefault();
+    const addInput = e => {
+        e.preventDefault();
         setCount( prevCount => {
             const newCount = prevCount + 1;
             setInputList(s => s.concat(newInputElement(newCount)));

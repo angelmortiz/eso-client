@@ -10,6 +10,7 @@ import IncrementalWorkoutPlan from './IncrementalWorkoutPlan';
 const AddProgram = (props) => {
   const navigateTo = useNavigate();
   const [workouts, setWorkouts] = useState(null);
+  const [sequenceType, setSequenceType] = useState('');
 
   useEffect(() => {
     fetchAllWorkoutNames().then((response) => {
@@ -144,17 +145,27 @@ const AddProgram = (props) => {
         <label htmlFor="program-sequence" className={styles['text-label']}>
           Sequence:
         </label>
-        <SelectInput select={programSequence.select} />
+        <SelectInput
+          select={programSequence.select}
+          selectedValue={sequenceType}
+          setValue={setSequenceType}
+        />
 
         {/* WEEKLY PLAN */}
-        {/* {workouts &&
+        {workouts &&
+          sequenceType === 'Weekly' &&
           daysOfTheWeek.map((day) => (
-            <AddWorkoutPlan workouts={workoutsInfo} dayOfTheWeek={day} />
-          ))} */}
+            <AddWorkoutPlan
+              key={`workoutPlan-${day}`}
+              workouts={workoutsInfo}
+              title={day}
+            />
+          ))}
 
-          {/* CYCLE PLAN */}
-          {workouts && 
-          <IncrementalWorkoutPlan workoutsInfo={workoutsInfo}/>}
+        {/* CYCLE PLAN */}
+        {workouts && sequenceType === 'Cycle' && (
+          <IncrementalWorkoutPlan workoutsInfo={workoutsInfo} />
+        )}
 
         {/* SUBMIT BUTTON */}
         <button

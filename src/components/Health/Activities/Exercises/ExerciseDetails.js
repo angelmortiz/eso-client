@@ -25,13 +25,13 @@ const ExerciseDetails = props => {
         });
     }, [id]);
 
-    const toggleShowVideo = (event) => {
-        event.preventDefault();
+    const toggleShowVideo = (e) => {
+        e.preventDefault();
         setShowVideo(!showVideo);
     };
 
-    const openDeleteConfirmationModal = (event) => {
-        event.preventDefault();
+    const openDeleteConfirmationModal = (e) => {
+        e.preventDefault();
         setIsDeleteModalOpen(true);
     };
 

@@ -4,6 +4,7 @@ import addClasses from '../General/CSS/Form.module.css';
 const SelectInput = (props) => {
   const [selectValue, setSelectValue] = useState('');
 
+  const setValueFunc = props.setValue;
   const info = props.select;
   const optionValue = info.value || 'value'; //handles cases where the select's value has a different name (Ex. _id).
   const optionLabel = info.label || 'label'; //handles cases where the select's label has a different name (Ex. name).
@@ -15,6 +16,12 @@ const SelectInput = (props) => {
     setSelectValue(props.selectedValue);
   }, [props.selectedValue]);
 
+  /** if a function was passed to set the value in the parent component,
+   * executes the function whenever the value in the input changes.*/ 
+  useEffect(() => {
+    if (setValueFunc) setValueFunc(selectValue);
+  }, [selectValue, setValueFunc])
+
   return (
     <div className={addClasses['select-content']}>
       <select
@@ -23,7 +30,7 @@ const SelectInput = (props) => {
         name={info.name}
         className={addClasses['select-input']}
         value={selectValue}
-        onChange={(event) => setSelectValue(event.target.value)}
+        onChange={(e) => setSelectValue(e.target.value)}
       >
         {info.options.map((option) => {
           return (
