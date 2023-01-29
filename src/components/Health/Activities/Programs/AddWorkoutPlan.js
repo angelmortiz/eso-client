@@ -1,11 +1,11 @@
 import styles from '../../../UI/General/CSS/Form.module.css';
 import SelectInput from '../../../UI/Selects/SelectInput';
 
-const AddWeeklyPlan = (props) => {
-  const { workouts, dayOfTheWeek } = props;
+const AddWorkoutPlan = (props) => {
+  const { workouts, title } = props;
 
   return <div className={styles['plan-div']}>
-    <h3 className={styles['plan-title']}>{dayOfTheWeek}</h3>
+    <h3 className={styles['plan-title']}>{title}</h3>
 
     {/* WORKOUT */}
     <label htmlFor="workoutPlanWorkout" className={styles['text-label']}>
@@ -16,4 +16,4 @@ const AddWeeklyPlan = (props) => {
   </div>
 };
 
-export default AddWeeklyPlan;
+export default AddWorkoutPlan;

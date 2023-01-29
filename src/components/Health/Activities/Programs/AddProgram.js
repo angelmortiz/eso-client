@@ -4,7 +4,8 @@ import { fetchAllWorkoutNames } from '../../../../util/apis/activities/workouts/
 import { postProgram } from '../../../../util/apis/activities/programs/programsApis';
 import styles from '../../../UI/General/CSS/Form.module.css';
 import SelectInput from '../../../UI/Selects/SelectInput';
-import AddWeeklyPlan from './AddWeeklyPlan';
+import AddWorkoutPlan from './AddWorkoutPlan';
+import IncrementalWorkoutPlan from './IncrementalWorkoutPlan';
 
 const AddProgram = (props) => {
   const navigateTo = useNavigate();
@@ -146,10 +147,14 @@ const AddProgram = (props) => {
         <SelectInput select={programSequence.select} />
 
         {/* WEEKLY PLAN */}
-        {workouts &&
+        {/* {workouts &&
           daysOfTheWeek.map((day) => (
-            <AddWeeklyPlan workouts={workoutsInfo} dayOfTheWeek={day} />
-          ))}
+            <AddWorkoutPlan workouts={workoutsInfo} dayOfTheWeek={day} />
+          ))} */}
+
+          {/* CYCLE PLAN */}
+          {workouts && 
+          <IncrementalWorkoutPlan workoutsInfo={workoutsInfo}/>}
 
         {/* SUBMIT BUTTON */}
         <button

@@ -29,7 +29,7 @@ const IncrementalExercisePlan = (props) => {
   }
 
   return (
-    <div className={styles['exercise-plan-list']}>
+    <div className={styles['plan-list']}>
       {/* Displays all the exercise plans.*/}
       {exercisePlanList}
 
