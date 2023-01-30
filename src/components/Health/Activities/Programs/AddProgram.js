@@ -24,8 +24,8 @@ const AddProgram = (props) => {
 
   const programTypes = {
     select: {
-      id: 'program-types',
-      name: 'types',
+      id: 'program-type',
+      name: 'type',
       options: [
         { value: '', label: '-- Choose type --' },
         { value: 'Strength', label: 'Strength' },
@@ -71,7 +71,7 @@ const AddProgram = (props) => {
   const addProgram = (e) => {
     e.preventDefault();
     const formVals = getFormValues(e.target.elements);
-
+    console.log('formVals:  ', formVals);
     postProgram(formVals).then((response) => {
       console.log('Response: ', response);
       if (response.isSuccess) {
@@ -86,8 +86,65 @@ const AddProgram = (props) => {
     values.name = elements.name.value;
     values.description = elements.description.value;
     values.type = elements.type.value;
-    values.sequence = elements.sequence.value;
     values.durantion = elements.duration.value;
+    values.sequence = elements.sequence.value;
+    values.workouts = {};
+
+    //extracting workout plans info
+    values.workouts.workoutIds = extractMultiOptionValues(
+      elements.workoutPlanWorkout
+    );
+
+    values.workouts =
+      values.sequence === 'Weekly'
+        ? extractWeeklyWorkoutPlanValues(values.workouts.workoutIds)
+        : extractCycleWorkoutPlanValues(values.workouts.workoutIds);
+
+    return values;
+  };
+
+  const extractMultiOptionValues = (elements) => {
+    //if there is only one select dropdown, it adds the HTMLSelectElement to an array before extracting the value.
+    //if there are multiple select dropdowns, converts the RadioNodeList into an array (to later use .map()).
+    elements = Object.prototype.toString.call(elements).includes('HTML', 0)
+      ? [elements]
+      : [...elements];
+
+    //extracts the value from all elements
+    let values = elements.map((element) => {
+      return element.value;
+    });
+    return values;
+  };
+
+  const extractWeeklyWorkoutPlanValues = (workoutIds) => {
+    const workoutPlanValues = [];
+    if (!workoutIds || workoutIds.length !== 7) return null;
+
+    daysOfTheWeek.forEach((day, index) => {
+      let planVals = {};
+      planVals.dayOfTheWeek = day;
+      planVals.workoutId = workoutIds[index];
+
+      workoutPlanValues.push(planVals);
+    });
+
+    return workoutPlanValues;
+  };
+
+  const extractCycleWorkoutPlanValues = (workoutIds) => {
+    const workoutPlanValues = [];
+    if (!workoutIds || workoutIds.length === 0) return null;
+
+    workoutIds.forEach((id, index) => {
+      let planVals = {};
+      planVals.dayNumber = index+1;
+      planVals.workoutId = id;
+
+      workoutPlanValues.push(planVals);
+    });
+
+    return workoutPlanValues;
   };
 
   return (
@@ -118,7 +175,7 @@ const AddProgram = (props) => {
         <input
           type="text"
           id="program-description"
-          name="program-description"
+          name="description"
           placeholder="Enter a description..."
           className={styles['select-input']}
         />
@@ -136,7 +193,7 @@ const AddProgram = (props) => {
         <input
           type="text"
           id="program-duration"
-          name="program-duration"
+          name="duration"
           placeholder="Enter a duration..."
           className={styles['select-input']}
         />
