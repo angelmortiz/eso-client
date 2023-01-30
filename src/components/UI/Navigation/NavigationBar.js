@@ -50,6 +50,14 @@ const NavigationBar = props => {
                     <span> Activities </span>
                     <div className={styles['dropdown-content']}>
                         <ul className={styles['ul-dropdown-options']}>
+                            {/* PROGRAMS */}
+                            <li key="programs" className={styles['li-dropdown-option']}> 
+                                <Link to='/activities/programs' className={styles['nav-links']}>Programs</Link>
+                            </li>
+                            {/* WORKOUTS */}
+                            <li key="workouts" className={styles['li-dropdown-option']}> 
+                                <Link to='/activities/workouts' className={styles['nav-links']}>Workouts</Link>
+                            </li>
                             {/* EXERCISES */}
                             <li key="exercises" className={styles['li-dropdown-option']}> 
                                 <Link to='/activities/exercises' className={styles['nav-links']}>Exercises</Link>

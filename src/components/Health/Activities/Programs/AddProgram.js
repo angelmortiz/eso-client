@@ -88,6 +88,7 @@ const AddProgram = (props) => {
     values.type = elements.type.value;
     values.durantion = elements.duration.value;
     values.sequence = elements.sequence.value;
+    values.linkToImage = elements.linkToImage.value;
     values.workouts = {};
 
     //extracting workout plans info
@@ -138,7 +139,7 @@ const AddProgram = (props) => {
 
     workoutIds.forEach((id, index) => {
       let planVals = {};
-      planVals.dayNumber = index+1;
+      planVals.dayNumber = index + 1;
       planVals.workoutId = id;
 
       workoutPlanValues.push(planVals);
@@ -197,7 +198,17 @@ const AddProgram = (props) => {
           placeholder="Enter a duration..."
           className={styles['select-input']}
         />
-
+        {/* LINK TO IMAGE */}
+        <label htmlFor="programLinkToImage" className={styles['text-label']}>
+          Image:
+        </label>
+        <input
+          type="text"
+          id="program-linkToImage"
+          name="linkToImage"
+          placeholder="Enter a image link..."
+          className={styles['select-input']}
+        />
         {/* SEQUENCE */}
         <label htmlFor="program-sequence" className={styles['text-label']}>
           Sequence:

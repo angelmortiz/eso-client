@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import styles from "./InfoCard.module.css"
+import styles from "../../../UI/General/CSS/InfoCard.module.css"
 
-const InfoCard = props => {
-    const info = props.info;
+const ExerciseInfoCard = props => {
+    const { info } = props ;
 
     return <div className={styles['card']}> 
             <img src={info.linkToImage} alt={info.name} className={styles['img']}/>
@@ -23,7 +23,7 @@ const InfoCard = props => {
                     </div>
                     <div className={styles['info-block']}>
                         <p className={styles['label']}>Type:</p>
-                        {/* TODO: Handle scenarios where there is more than one equipment */}
+                        {/* TODO: Handle scenarios where there is more than one type */}
                         <p className={styles['value']}>{info.types[0]}</p>
                     </div>
                 </div>
@@ -32,4 +32,4 @@ const InfoCard = props => {
         </div>
 };
 
-export default InfoCard;
+export default ExerciseInfoCard;

@@ -80,6 +80,7 @@ const AddWorkout = (props) => {
     values.variant = elements.variant.value;
     values.type = elements.type.value;
     values.target = elements.target.value;
+    values.linkToImage = elements.linkToImage.value;
     values.exercises = {};
 
     //extracting exercise plans info
@@ -191,6 +192,17 @@ const AddWorkout = (props) => {
           Target:
         </label>
         <SelectInput select={workoutTargets.select} />
+        {/* LINK TO IMAGE */}
+        <label htmlFor="workoutLinkToImage" className={styles['text-label']}>
+          Image:
+        </label>
+        <input
+          type="text"
+          id="workout-linkToImage"
+          name="linkToImage"
+          placeholder="Enter a image link..."
+          className={styles['select-input']}
+        />
         {/* EXERCISES */}
         {exercises ? (
           <IncrementalExercisePlan exercisesInfo={exercisesInfo} />

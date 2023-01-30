@@ -6,7 +6,6 @@ import AddEquipment from './Health/Activities/Equipments/AddEquipment';
 import AddPhysicalCondition from './Health/Activities/PhysicalConditions/AddPhysicalCondition';
 import ExerciseDetails from './Health/Activities/Exercises/ExerciseDetails';
 import Exercises from './Health/Activities/Exercises/Exercises';
-import AddFood from './Health/Nutrition/Foods/AddFood';
 import UpdateExercise from './Health/Activities/Exercises/UpdateExercise';
 import Muscles from './Health/Activities/Muscles/Muscles';
 import Signup from './Auth/Signup';
@@ -19,8 +18,10 @@ import AuthProtected from './Auth/ProtectedRoutes/AuthProtected';
 import PrivateRoute from './Auth/ProtectedRoutes/PrivateRoute';
 import AddWorkout from './Health/Activities/Workouts/AddWorkout';
 import AddProgram from './Health/Activities/Programs/AddProgram';
+import Programs from './Health/Activities/Programs/Programs';
+import Workouts from './Health/Activities/Workouts/Workouts';
 
-//IMPROVE: This is no longer just "health", this should be place in another file
+//IMPROVE: Consider breaking down the routes into different files to make it more readable
 const Router = props => {
     return <Routes>
         <Route path="/" element={<Home/>}/>
@@ -36,23 +37,39 @@ const Router = props => {
         {/* USER */}
         <Route path="/user/info" element={<PrivateRoute> <UserInfo/> </PrivateRoute>}/>
         
-        {/* HEALTH */}
-        <Route path="/nutrition/add-food" element={<AddFood/>}/>
-        <Route path="/activities/exercises" element={<PrivateRoute> <Exercises/> </PrivateRoute>}/>
-        <Route path="/activities/exercise/:id" element={<ExerciseDetails/>}/>
-        <Route path="/activities/add-exercise" element={<AddExercise/>}/>
-        <Route path="/activities/update-exercise/:id" element={<UpdateExercise/>}/>
+        {/* ACTIVITIES */}
+        {/* Display all activities */}
+        <Route path="/activities/programs" element={<Programs/>}/>
+        <Route path="/activities/workouts" element={<Workouts/>}/>
+        <Route path="/activities/exercises" element={<Exercises/>}/>
         <Route path="/activities/muscles" element={<Muscles/>}/>
+        {/* <Route path="/activities/equipments" element={<Equipments/>}/> */}
+        {/* <Route path="/activities/physicalConditions" element={<PhysicalConditions/>}/> */}
+
+        {/* Display activity by id */}
+        {/* <Route path="/activities/program/:id" element={<ProgramDetails/>}/> */}
+        {/* <Route path="/activities/workout/:id" element={<WorkoutDetails/>}/> */}
+        <Route path="/activities/exercise/:id" element={<ExerciseDetails/>}/>
         {/* <Route path="/activities/muscle/:id" element={<MuscleDetails/>}/> */}
-        <Route path="/activities/add-muscle" element={<AddMuscle/>}/>
-        {/* <Route path="/activities/equipments" element={<Equipments/>}/>
-        <Route path="/activities/equipment/:id" element={<EquipmentDetails/>}/> */}
-        <Route path="/activities/add-equipment" element={<AddEquipment/>}/>
-        {/* <Route path="/activities/physicalConditions" element={<PhysicalConditions/>}/>
-        <Route path="/activities/physicalCondition/:id" element={<PhysicalConditionDetails/>}/> */}
-        <Route path="/activities/add-physicalCondition" element={<AddPhysicalCondition/>}/>
-        <Route path="/activities/add-workout" element={<AddWorkout/>}/>
+        {/* <Route path="/activities/equipment/:id" element={<EquipmentDetails/>}/> */}
+        {/* <Route path="/activities/physicalCondition/:id" element={<PhysicalConditionDetails/>}/> */}
+
+        {/* Add activity */}
         <Route path="/activities/add-program" element={<AddProgram/>}/>
+        <Route path="/activities/add-workout" element={<AddWorkout/>}/>
+        <Route path="/activities/add-exercise" element={<AddExercise/>}/>
+        <Route path="/activities/add-muscle" element={<AddMuscle/>}/>
+        <Route path="/activities/add-equipment" element={<AddEquipment/>}/>
+        <Route path="/activities/add-physicalCondition" element={<AddPhysicalCondition/>}/>
+
+        {/* Update or delete activity */}
+        {/* <Route path="/activities/update-program/:id" element={<UpdateProgram/>}/> */}
+        {/* <Route path="/activities/update-workout/:id" element={<UpdateWorkout/>}/> */}
+        <Route path="/activities/update-exercise/:id" element={<UpdateExercise/>}/>
+        {/* <Route path="/activities/update-muscle/:id" element={<UpdateMuscle/>}/> */}
+        {/* <Route path="/activities/update-equipment/:id" element={<UpdateEquipment/>}/> */}
+        {/* <Route path="/activities/update-physicalCondition/:id" element={<UpdatePhysicalCondition/>}/> */}
+        
     </Routes>
 };
 

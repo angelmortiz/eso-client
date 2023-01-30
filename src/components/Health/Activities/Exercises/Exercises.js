@@ -1,4 +1,4 @@
-import InfoCard from "../../../UI/Cards/InfoCard";
+import ExerciseInfoCard from "./ExerciseInfoCard";
 import GridView from "../../../UI/Grids/GridView";
 import styles from '../../../UI/General/CSS/GridContent.module.css';
 import { fetchAllExercises } from "../../../../util/apis/activities/exercises/exercisesApis"
@@ -75,7 +75,7 @@ const Exercises = props => {
     const addInfoCards = () => {
         let infoCards = [];
         infoCards = filteredExercises.map(exercise => {
-            return <InfoCard key={exercise._id} info={exercise} />
+            return <ExerciseInfoCard key={exercise._id} info={exercise} />
         });
         return infoCards;
     };
