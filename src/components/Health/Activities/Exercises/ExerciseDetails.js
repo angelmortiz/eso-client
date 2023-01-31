@@ -134,14 +134,14 @@ const ExerciseDetails = (props) => {
           <div className={styles['bottom-btns-div']}>
             <Link
               to={`/activities/update-exercise/${id}`}
-              className={styles['link']}
+              className={styles['bottom-btns']}
             >
               Update
             </Link>
             <button
               type="button"
               id="delete-exercise-btn"
-              className={styles['delete-btn']}
+              className={styles['bottom-btns']}
               onClick={openDeleteConfirmationModal}
             >
               Delete
@@ -155,6 +155,7 @@ const ExerciseDetails = (props) => {
         closeModal={closeDeleteModal}
         confirmDelete={confirmDeleteExercise}
         info={exercise}
+        type="exercise"
       />
     </section>
   );

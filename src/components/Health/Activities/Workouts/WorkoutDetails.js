@@ -5,6 +5,7 @@ import {
   fetchWorkoutById,
 } from '../../../../util/apis/activities/workouts/workoutsApis';
 import styles from '../../../UI/General/CSS/Details.module.css';
+import DeleteConfirmationModal from '../../../UI/Popups/Delete/DeleteConfirmationModal';
 
 const WorkoutDetails = (props) => {
   const { id } = useParams();
@@ -107,6 +108,31 @@ const WorkoutDetails = (props) => {
           </table>
         </div>
       )}
+      <div className={styles['bottom-btns-div']}>
+        <Link
+          to={`/activities/update-workout/${id}`}
+          className={styles['bottom-btns']}
+        >
+          Update
+        </Link>
+        <button
+          type="button"
+          id="delete-exercise-btn"
+          className={styles['bottom-btns']}
+          onClick={openDeleteConfirmationModal}
+        >
+          Delete
+        </button>
+      </div>
+
+      {/* Delete Confirmation Modal */}
+      <DeleteConfirmationModal
+        isModalOpen={isDeleteModalOpen}
+        closeModal={closeDeleteModal}
+        confirmDelete={confirmDeleteWorkout}
+        info={workout}
+        type="workout"
+      />
     </div>
   );
 };

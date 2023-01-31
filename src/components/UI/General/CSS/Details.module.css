@@ -86,9 +86,8 @@
   display: flex;
 }
 
-.link,
-.delete-btn {
-  width: 8rem;
+.bottom-btns {
+  width: 30%;
   margin: auto;
   padding: 8px 6px;
   border: 0px;
@@ -101,10 +100,8 @@
   cursor: pointer;
 }
 
-.link:hover,
-.link:active,
-.delete-btn:hover,
-.delete-btn:active {
+.bottom-btns:hover,
+.bottom-btns:active {
   cursor: pointer;
   background-color: #028e98;
 }
