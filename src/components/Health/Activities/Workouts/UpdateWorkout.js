@@ -259,7 +259,7 @@ const UpdateWorkout = (props) => {
 
         {/* EXERCISES */}
         {exercises ? (
-          <IncrementalExercisePlan exercisesInfo={exercisesInfo} />
+          <IncrementalExercisePlan exercisesInfo={exercisesInfo} selectedPlans={exercisePlans}/>
         ) : (
           <img
             src="/loading.gif"

@@ -1,18 +1,28 @@
+import { useState } from 'react';
 import styles from '../../../UI/General/CSS/Form.module.css';
 import SelectInput from '../../../UI/Selects/SelectInput';
 
 const AddExercisePlan = (props) => {
-  const {exercises, count} = props;
+  const { exercises, count, selectedPlan } = props;
+
+  /** INPUT VALUES */
+  const [sets, setSets] = useState([]);
+  const [reps, setReps] = useState([]);
 
   return (
     <div className={styles['plan-div']}>
       <h3 className={styles['plan-title']}>Exercise Plan {count}</h3>
-      
+
       {/* EXERCISE */}
       <label htmlFor="exercisePlanExercise" className={styles['text-label']}>
         Exercise:
       </label>
-      <SelectInput select={exercises.select} value="_id" label="value" />
+      <SelectInput
+        select={exercises.select}
+        value="_id"
+        label="value"
+        selectedValue={selectedPlan.exerciseId}
+      />
 
       {/* SETS */}
       <label htmlFor="exercisePlanSets" className={styles['text-label']}>
@@ -26,6 +36,8 @@ const AddExercisePlan = (props) => {
           name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
+          value={selectedPlan?.sets[0]}
+          onChange={(e) => setSets((s) => [e.target.value, s[1]])}
         />
         <label className={styles['text-label-small']}>Max:</label>
         <input
@@ -34,6 +46,8 @@ const AddExercisePlan = (props) => {
           name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
+          value={selectedPlan?.sets[1]}
+          onChange={(e) => setSets((s) => [s[0], e.target.value])}
         />
       </div>
 
@@ -49,6 +63,8 @@ const AddExercisePlan = (props) => {
           name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
+          value={selectedPlan?.reps[0]}
+          onChange={(e) => setReps((s) => [e.target.value, s[1]])}
         />
         <label className={styles['text-label-small']}>Max:</label>
         <input
@@ -57,6 +73,8 @@ const AddExercisePlan = (props) => {
           name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
+          value={selectedPlan?.reps[1]}
+          onChange={(e) => setReps((s) => [s[0], e.target.value, ])}
         />
       </div>
 
