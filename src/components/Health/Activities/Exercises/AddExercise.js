@@ -7,11 +7,95 @@ import { fetchAllEquipmentNames } from '../../../../util/apis/activities/equipme
 import { fetchAllMuscleNames } from '../../../../util/apis/activities/muscles/musclesApis';
 import { useNavigate } from 'react-router-dom';
 
+/** FIELDS DATA */
+const difficultyInfo = {
+    select: {
+      id: 'exercise-difficulty',
+      name: 'difficulty',
+      options: [
+        { value: '', label: '-- Choose difficulty --' },
+        { value: 'Easy', label: 'Easy' },
+        { value: 'Intermediate', label: 'Intermediate' },
+        { value: 'Advanced', label: 'Advanced' },
+      ],
+    },
+  };
+  
+  const compoundMovementInfo = {
+    select: {
+      id: 'exercise-compoundMovement',
+      name: 'compoundMovement',
+      options: [
+        { value: '', label: '-- Choose option --' },
+        { value: 'yes', label: 'Yes' },
+        { value: 'no', label: 'No' },
+      ],
+    },
+  };
+  
+  const mainMuscleInfo = {
+    select: {
+      id: 'exercise-mainMuscle',
+      name: 'mainMuscle',
+      value: '_id',
+      label: 'name',
+      options: [],
+    },
+  };
+  
+  const secondaryMusclesInfo = {
+    select: {
+      id: 'exercise-secondaryMuscle',
+      name: 'secondaryMuscles',
+      value: '_id',
+      label: 'name',
+      options: [],
+    },
+    button: {
+      id: 'add-muscle-btn',
+      label: 'Add muscle',
+    },
+  };
+  
+  const typesInfo = {
+    select: {
+      id: 'exercise-types',
+      name: 'types',
+      options: [
+        // TODO: Pull values from backend
+        { value: '', label: '-- Choose a type --' },
+        { value: 'HIIT', label: 'HIIT' },
+        { value: 'Strength', label: 'Strength' },
+      ],
+    },
+    button: {
+      id: 'add-type-btn',
+      label: 'Add type',
+    },
+  };
+  
+  const equipmentsInfo = {
+    select: {
+      id: 'exercise-equipments',
+      name: 'equipments',
+      value: '_id',
+      label: 'name',
+      options: [],
+    },
+    button: {
+      id: 'add-equipment-btn',
+      label: 'Add equipment',
+    },
+  };
+  /** [END] FIELDS DATA */
 
 const AddExercise = props => {
     const navigateTo = useNavigate();
     const [muscles, setMuscles] = useState([]);
     const [equipments, setEquipments] = useState([]);
+    mainMuscleInfo.select.options = muscles;
+    secondaryMusclesInfo.select.options = muscles;
+    equipmentsInfo.select.options = equipments;
 
     useEffect(() => {
         fetchAllMuscleNames().then(response => { 
@@ -28,88 +112,6 @@ const AddExercise = props => {
             setEquipments(response.body);
         });
     }, []);
-
-    /** FIELDS DATA */
-    const difficultyInfo = {
-        select: {
-            id: "exercise-difficulty",
-            name: "difficulty",
-            options: [
-                {value: "", label:"-- Choose difficulty --"},
-                {value: "Easy", label:"Easy"},
-                {value: "Intermediate", label:"Intermediate"},
-                {value: "Advanced", label:"Advanced"},
-            ]
-        }
-    }
-
-    const compoundMovementInfo = {
-        select: {
-            id: "exercise-compoundMovement",
-            name: "compoundMovement",
-            options: [
-                {value: "", label:"-- Choose option --"},
-                {value: "yes", label:"Yes"},
-                {value: "no", label:"No"}
-            ]
-        }
-    }
-
-    const mainMuscleInfo = {
-        select: {
-            id: "exercise-mainMuscle",
-            name: "mainMuscle",
-            value: "_id",
-            label: "name",
-            options: muscles
-        }
-    };
-
-    const secondaryMusclesInfo = {
-        select: {
-            id: "exercise-secondaryMuscle",
-            name: "secondaryMuscles",
-            value: "_id",
-            label: "name",
-            options: muscles
-        },
-        button: {
-            id: "add-muscle-btn",
-            label: "Add muscle"
-        }
-    };
-
-    const typesInfo = {
-        select: {
-            id: "exercise-types",
-            name: "types",
-            options: [
-                // TODO: Pull values from backend or global variable
-                {value: "", label:"-- Choose a type --"},
-                {value: "HIIT", label:"HIIT"},
-                {value: "Strength", label:"Strength"},
-            ]
-        },
-        button: {
-            id: "add-type-btn",
-            label: "Add type"
-        }
-    };
-
-    const equipmentsInfo = {
-        select: {
-            id: "exercise-equipments",
-            name: "equipments",
-            value: "_id",
-            label: "name",
-            options: equipments
-        },
-        button: {
-            id: "add-equipment-btn",
-            label: "Add equipment"
-        }
-    };
-    /** [END] FIELDS DATA */
 
     /** Functions */
     const addExercise = (e) => {

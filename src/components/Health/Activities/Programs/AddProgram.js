@@ -7,10 +7,58 @@ import SelectInput from '../../../UI/Selects/SelectInput';
 import AddWorkoutPlan from './AddWorkoutPlan';
 import IncrementalWorkoutPlan from './IncrementalWorkoutPlan';
 
+//IMPROVE: Consider moving these values to a different file
+const programTypes = {
+  select: {
+    id: 'program-type',
+    name: 'type',
+    options: [
+      { value: '', label: '-- Choose type --' },
+      { value: 'Strength', label: 'Strength' },
+      { value: 'Hypertrophy', label: 'Hypertrophy' },
+      { value: 'Endurance', label: 'Endurance' },
+      { value: 'Mixed', label: 'Mixed' },
+    ],
+  },
+};
+
+const programSequence = {
+  select: {
+    id: 'program-sequence',
+    name: 'sequence',
+    options: [
+      { value: '', label: '-- Choose sequence --' },
+      { value: 'Weekly', label: 'Weekly' },
+      { value: 'Cycle', label: 'Cycle' },
+    ],
+  },
+};
+
+const workoutsInfo = {
+  select: {
+    id: 'workoutPlan-workout',
+    name: 'workoutPlanWorkout',
+    value: '_id',
+    label: 'name',
+    options: [],
+  },
+};
+
+const daysOfTheWeek = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thrusday',
+  'Friday',
+  'Saturday',
+  'Sunday',
+];
+
 const AddProgram = (props) => {
   const navigateTo = useNavigate();
   const [workouts, setWorkouts] = useState(null);
   const [sequenceType, setSequenceType] = useState('');
+  workoutsInfo.select.options = workouts;
 
   useEffect(() => {
     fetchAllWorkoutNames().then((response) => {
@@ -21,52 +69,6 @@ const AddProgram = (props) => {
       setWorkouts(response.body);
     });
   }, []);
-
-  const programTypes = {
-    select: {
-      id: 'program-type',
-      name: 'type',
-      options: [
-        { value: '', label: '-- Choose type --' },
-        { value: 'Strength', label: 'Strength' },
-        { value: 'Hypertrophy', label: 'Hypertrophy' },
-        { value: 'Endurance', label: 'Endurance' },
-        { value: 'Mixed', label: 'Mixed' },
-      ],
-    },
-  };
-
-  const programSequence = {
-    select: {
-      id: 'program-sequence',
-      name: 'sequence',
-      options: [
-        { value: '', label: '-- Choose sequence --' },
-        { value: 'Weekly', label: 'Weekly' },
-        { value: 'Cycle', label: 'Cycle' },
-      ],
-    },
-  };
-
-  const workoutsInfo = {
-    select: {
-      id: 'workoutPlan-workout',
-      name: 'workoutPlanWorkout',
-      value: '_id',
-      label: 'name',
-      options: workouts,
-    },
-  };
-
-  const daysOfTheWeek = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thrusday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ];
 
   const addProgram = (e) => {
     e.preventDefault();
@@ -143,7 +145,7 @@ const AddProgram = (props) => {
       let planVals = {};
       planVals.dayNumber = index + 1;
       planVals.workoutId = id;
-      planVals.name = workouts.find(ex => ex._id === id)?.name;
+      planVals.name = workouts.find((ex) => ex._id === id)?.name;
 
       workoutPlanValues.push(planVals);
     });
