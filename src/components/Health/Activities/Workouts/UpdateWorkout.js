@@ -101,7 +101,8 @@ const UpdateWorkout = (props) => {
   const UpdateWorkout = (e) => {
     e.preventDefault();
     const formVals = getFormValues(e.target.elements);
-
+    
+    console.log("formVals: ", formVals);
     putWorkout(id, formVals).then((response) => {
       console.log('Response: ', response);
       if (response && response.isSuccess) {
@@ -113,6 +114,7 @@ const UpdateWorkout = (props) => {
 
   const getFormValues = (elements) => {
     const values = {};
+    values.id = id;
     values.name = elements.name.value;
     values.description = elements.description.value;
     values.variant = elements.variant.value;
@@ -161,7 +163,10 @@ const UpdateWorkout = (props) => {
      * The result is an array with 12 values that can be broken down to:
      * sets (2), reps (2), tempo (4), rir (2), and rest (2).
      */
-    exerciseIds.forEach((id, index) => {
+    let index = 0
+    for (const id of exerciseIds) {
+      if (!id) continue; //removes exercise plans that do not have a exercise selected
+
       const exerciseValues = extractMultiOptionValues(
         elements[`exercisePlan_${index + 1}`]
       );
@@ -175,7 +180,8 @@ const UpdateWorkout = (props) => {
       exerciseVal.rest = exerciseValues.slice(10, 12);
 
       exercisePlanValues.push(exerciseVal);
-    });
+      index++;
+    }
 
     return exercisePlanValues;
   };
