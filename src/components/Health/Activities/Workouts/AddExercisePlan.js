@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../../../UI/General/CSS/Form.module.css';
 import SelectInput from '../../../UI/Selects/SelectInput';
 
@@ -6,8 +6,25 @@ const AddExercisePlan = (props) => {
   const { exercises, count, selectedPlan } = props;
 
   /** INPUT VALUES */
-  const [sets, setSets] = useState([]);
-  const [reps, setReps] = useState([]);
+  const [exerciseId, setExerciseId] = useState();
+  const [sets, setSets] = useState([0, 0]);
+  const [reps, setReps] = useState([0, 0]);
+  const [tempo, setTempo] = useState([0, 0, 0, 0]);
+  const [rir, setRir] = useState([0, 0]);
+  const [rest, setRest] = useState([0, 0]);
+  /** [END] INPUT VALUES */
+
+  //Sets input values based on the current info fetched from the db
+  useEffect(() => {
+    if (!selectedPlan) return;
+
+    setExerciseId(selectedPlan.exerciseId);
+    setSets(selectedPlan.sets);
+    setReps(selectedPlan.reps);
+    setTempo(selectedPlan.tempo);
+    setRir(selectedPlan.rir);
+    setRest(selectedPlan.rest);
+  }, [selectedPlan]);
 
   return (
     <div className={styles['plan-div']}>
@@ -21,7 +38,8 @@ const AddExercisePlan = (props) => {
         select={exercises.select}
         value="_id"
         label="value"
-        selectedValue={selectedPlan.exerciseId}
+        selectedValue={exerciseId}
+        onChange={(e) => setExerciseId(e.target.value)}
       />
 
       {/* SETS */}
@@ -36,8 +54,8 @@ const AddExercisePlan = (props) => {
           name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
-          value={selectedPlan?.sets[0]}
-          onChange={(e) => setSets((s) => [e.target.value, s[1]])}
+          value={sets[0]}
+          onChange={(e) => setSets((x) => [e.target.value, x[1]])}
         />
         <label className={styles['text-label-small']}>Max:</label>
         <input
@@ -46,8 +64,8 @@ const AddExercisePlan = (props) => {
           name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
-          value={selectedPlan?.sets[1]}
-          onChange={(e) => setSets((s) => [s[0], e.target.value])}
+          value={sets[1]}
+          onChange={(e) => setSets((x) => [x[0], e.target.value])}
         />
       </div>
 
@@ -63,7 +81,7 @@ const AddExercisePlan = (props) => {
           name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
-          value={selectedPlan?.reps[0]}
+          value={reps[0]}
           onChange={(e) => setReps((s) => [e.target.value, s[1]])}
         />
         <label className={styles['text-label-small']}>Max:</label>
@@ -73,8 +91,8 @@ const AddExercisePlan = (props) => {
           name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
-          value={selectedPlan?.reps[1]}
-          onChange={(e) => setReps((s) => [s[0], e.target.value, ])}
+          value={reps[1]}
+          onChange={(e) => setReps((x) => [x[0], e.target.value])}
         />
       </div>
 
@@ -90,6 +108,8 @@ const AddExercisePlan = (props) => {
           name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
+          value={tempo[0]}
+          onChange={(e) => setTempo((x) => [e.target.value, x[1], x[2], x[3]])}
         />
         <label className={styles['text-label-small']}>P:</label>
         <input
@@ -98,6 +118,8 @@ const AddExercisePlan = (props) => {
           name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
+          value={tempo[1]}
+          onChange={(e) => setTempo((x) => [x[0], e.target.value, x[2], x[3]])}
         />
         <label className={styles['text-label-small']}>Con:</label>
         <input
@@ -106,6 +128,8 @@ const AddExercisePlan = (props) => {
           name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
+          value={tempo[2]}
+          onChange={(e) => setTempo((x) => [x[0], x[1], e.target.value, x[3]])}
         />
         <label className={styles['text-label-small']}>P:</label>
         <input
@@ -114,6 +138,8 @@ const AddExercisePlan = (props) => {
           name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="1"
+          value={tempo[3]}
+          onChange={(e) => setTempo((x) => [x[0], x[1], x[3], e.target.value])}
         />
       </div>
 
@@ -129,6 +155,8 @@ const AddExercisePlan = (props) => {
           name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="0"
+          value={rir[0]}
+          onChange={(e) => setRir((x) => [e.target.value, x[1]])}
         />
         <label className={styles['text-label-small']}>Max:</label>
         <input
@@ -137,6 +165,8 @@ const AddExercisePlan = (props) => {
           name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="0"
+          value={rir[1]}
+          onChange={(e) => setRir((x) => [x[0], e.target.value])}
         />
       </div>
 
@@ -152,6 +182,8 @@ const AddExercisePlan = (props) => {
           name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="0"
+          value={rest[0]}
+          onChange={(e) => setRest((x) => [e.target.value, x[1]])}
         />
         <label className={styles['text-label-small']}>Max:</label>
         <input
@@ -160,6 +192,8 @@ const AddExercisePlan = (props) => {
           name={`exercisePlan_${count}`}
           className={styles['select-input-small']}
           min="0"
+          value={rest[1]}
+          onChange={(e) => setRest((x) => [x[0], e.target.value])}
         />
       </div>
     </div>
