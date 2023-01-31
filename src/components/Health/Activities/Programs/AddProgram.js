@@ -72,6 +72,7 @@ const AddProgram = (props) => {
     e.preventDefault();
     const formVals = getFormValues(e.target.elements);
     console.log('formVals:  ', formVals);
+
     postProgram(formVals).then((response) => {
       console.log('Response: ', response);
       if (response.isSuccess) {
@@ -126,6 +127,7 @@ const AddProgram = (props) => {
       let planVals = {};
       planVals.dayOfTheWeek = day;
       planVals.workoutId = workoutIds[index];
+      planVals.name = workouts.find((ex) => ex._id === workoutIds[index])?.name;
 
       workoutPlanValues.push(planVals);
     });
@@ -141,6 +143,7 @@ const AddProgram = (props) => {
       let planVals = {};
       planVals.dayNumber = index + 1;
       planVals.workoutId = id;
+      planVals.name = workouts.find(ex => ex._id === id)?.name;
 
       workoutPlanValues.push(planVals);
     });

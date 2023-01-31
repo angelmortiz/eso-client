@@ -129,6 +129,7 @@ const AddWorkout = (props) => {
       );
       let exerciseVal = {};
       exerciseVal.exerciseId = id;
+      exerciseVal.name = exercises.find(ex => ex._id === id)?.name;
       exerciseVal.sets = exerciseValues.slice(0, 2);
       exerciseVal.reps = exerciseValues.slice(2, 4);
       exerciseVal.tempo = exerciseValues.slice(4, 8);

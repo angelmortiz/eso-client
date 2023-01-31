@@ -20,6 +20,7 @@ import AddWorkout from './Health/Activities/Workouts/AddWorkout';
 import AddProgram from './Health/Activities/Programs/AddProgram';
 import Programs from './Health/Activities/Programs/Programs';
 import Workouts from './Health/Activities/Workouts/Workouts';
+import WorkoutDetails from './Health/Activities/Workouts/WorkoutDetails';
 
 //IMPROVE: Consider breaking down the routes into different files to make it more readable
 const Router = props => {
@@ -48,7 +49,7 @@ const Router = props => {
 
         {/* Display activity by id */}
         {/* <Route path="/activities/program/:id" element={<ProgramDetails/>}/> */}
-        {/* <Route path="/activities/workout/:id" element={<WorkoutDetails/>}/> */}
+        <Route path="/activities/workout/:id" element={<WorkoutDetails/>}/>
         <Route path="/activities/exercise/:id" element={<ExerciseDetails/>}/>
         {/* <Route path="/activities/muscle/:id" element={<MuscleDetails/>}/> */}
         {/* <Route path="/activities/equipment/:id" element={<EquipmentDetails/>}/> */}
@@ -62,7 +63,7 @@ const Router = props => {
         <Route path="/activities/add-equipment" element={<AddEquipment/>}/>
         <Route path="/activities/add-physicalCondition" element={<AddPhysicalCondition/>}/>
 
-        {/* Update or delete activity */}
+        {/* Update activity */}
         {/* <Route path="/activities/update-program/:id" element={<UpdateProgram/>}/> */}
         {/* <Route path="/activities/update-workout/:id" element={<UpdateWorkout/>}/> */}
         <Route path="/activities/update-exercise/:id" element={<UpdateExercise/>}/>
