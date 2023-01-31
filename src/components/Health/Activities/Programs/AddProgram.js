@@ -89,7 +89,7 @@ const AddProgram = (props) => {
     values.name = elements.name.value;
     values.description = elements.description.value;
     values.type = elements.type.value;
-    values.durantion = elements.duration.value;
+    values.duration = elements.duration.value;
     values.sequence = elements.sequence.value;
     values.linkToImage = elements.linkToImage.value;
     values.workouts = {};
@@ -194,13 +194,13 @@ const AddProgram = (props) => {
 
         {/* DURANTION */}
         <label htmlFor="program-duration" className={styles['text-label']}>
-          Durantion:
+          Durantion (weeks):
         </label>
         <input
-          type="text"
+          type="number"
           id="program-duration"
           name="duration"
-          placeholder="Enter a duration..."
+          placeholder="Enter duration in weeks..."
           className={styles['select-input']}
         />
         {/* LINK TO IMAGE */}

@@ -18,12 +18,12 @@ const ProgramInfoCard = (props) => {
           </div>
           <div className={styles['info-block']}>
             <p className={styles['label']}>Durantion:</p>
-            <p className={styles['value']}>{info.durationn}</p>
+            <p className={styles['value']}>{info.duration} weeks</p>
           </div>
 
           <div className={styles['info-block']}>
             <p className={styles['label']}>Sequence:</p>
-            <p className={styles['value']}>{info.Sequence}</p>
+            <p className={styles['value']}>{info.sequence}</p>
           </div>
         </div>
       </div>

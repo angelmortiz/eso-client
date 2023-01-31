@@ -22,6 +22,7 @@ import Programs from './Health/Activities/Programs/Programs';
 import Workouts from './Health/Activities/Workouts/Workouts';
 import WorkoutDetails from './Health/Activities/Workouts/WorkoutDetails';
 import UpdateWorkout from './Health/Activities/Workouts/UpdateWorkout';
+import ProgramDetails from './Health/Activities/Programs/ProgramDetails';
 
 //IMPROVE: Consider breaking down the routes into different files to make it more readable
 const Router = props => {
@@ -49,7 +50,7 @@ const Router = props => {
         {/* <Route path="/activities/physicalConditions" element={<PhysicalConditions/>}/> */}
 
         {/* Display activity by id */}
-        {/* <Route path="/activities/program/:id" element={<ProgramDetails/>}/> */}
+        <Route path="/activities/program/:id" element={<ProgramDetails/>}/>
         <Route path="/activities/workout/:id" element={<WorkoutDetails/>}/>
         <Route path="/activities/exercise/:id" element={<ExerciseDetails/>}/>
         {/* <Route path="/activities/muscle/:id" element={<MuscleDetails/>}/> */}

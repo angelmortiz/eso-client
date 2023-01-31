@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
-  deleteWorkout,
-  fetchWorkoutById,
-} from '../../../../util/apis/activities/workouts/workoutsApis';
+  deleteProgram,
+  fetchProgramById,
+} from '../../../../util/apis/activities/programs/programsApis';
 import styles from '../../../UI/General/CSS/Details.module.css';
 import DeleteConfirmationModal from '../../../UI/Popups/Delete/DeleteConfirmationModal';
 
-const WorkoutDetails = (props) => {
+const ProgramDetails = (props) => {
   const { id } = useParams();
   const navigateTo = useNavigate();
-  const [workout, setWorkout] = useState(null);
+  const [program, setProgram] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   useEffect(() => {
-    if (!id) console.error(`Error: workout id not found in the url.`);
-    fetchWorkoutById(id).then((response) => {
+    if (!id) console.error(`Error: program id not found in the url.`);
+    fetchProgramById(id).then((response) => {
       if (!response || !response.isSuccess) return;
-      setWorkout(response.body);
+      setProgram(response.body);
     });
   }, [id]);
 
@@ -30,19 +30,19 @@ const WorkoutDetails = (props) => {
     setIsDeleteModalOpen(false);
   };
 
-  const confirmDeleteWorkout = () => {
+  const confirmDeleteProgram = () => {
     closeDeleteModal();
 
-    //TODO: Check if workout was deleted successfully
-    deleteWorkout(id).then((response) => {
+    //TODO: Check if program was deleted successfully
+    deleteProgram(id).then((response) => {
       if (!response || !response.isSuccess) return;
-      navigateTo('/activities/workouts');
+      navigateTo('/activities/programs');
     });
   };
 
   return (
     <div className={styles['card']}>
-      {!workout ? (
+      {!program ? (
         <img
           src="/loading.gif"
           alt="Loading..."
@@ -51,56 +51,50 @@ const WorkoutDetails = (props) => {
       ) : (
         <div className={styles['main-section']}>
           {/* NAME */}
-          <h1 className={styles['name']}>{workout.name}</h1>
+          <h1 className={styles['name']}>{program.name}</h1>
           <div className={styles['general-info']}>
             {/* DESCRIPTION */}
             <div className={styles['info-block']}>
               <p className={styles['label']}>Description: </p>
-              <p className={styles['value']}>{workout.description}</p>
-            </div>
-            {/* VARIANT */}
-            <div className={styles['info-block']}>
-              <p className={styles['label']}>Variant: </p>
-              <p className={styles['value']}>{workout.variant}</p>
+              <p className={styles['value']}>{program.description}</p>
             </div>
             {/* TYPE */}
             <div className={styles['info-block']}>
               <p className={styles['label']}>Type: </p>
-              <p className={styles['value']}>{workout.type}</p>
+              <p className={styles['value']}>{program.type}</p>
             </div>
-            {/* TARGET */}
+            {/* DURATION */}
             <div className={styles['info-block']}>
-              <p className={styles['label']}>Target: </p>
-              <p className={styles['value']}>{workout.target}</p>
+              <p className={styles['label']}>Durantion: </p>
+              <p className={styles['value']}>{program.duration} weeks</p>
+            </div>
+            {/* SEQUENCE */}
+            <div className={styles['info-block']}>
+              <p className={styles['label']}>Sequence: </p>
+              <p className={styles['value']}>{program.sequence}</p>
             </div>
           </div>
           <table className={styles['info-table']}>
             <thead>
               <tr>
-                <th>#</th>
-                <th>Exercise</th>
-                <th>Sets</th>
-                <th>Reps</th>
-                <th>Tempo</th>
-                <th>RIR</th>
-                <th>Rest</th>
+                <th>Day</th>
+                <th>Workout</th>
               </tr>
             </thead>
             <tbody>
-              {workout.exercises.map((ex, index) => {
+              {program.workouts.map((workout, index) => {
                 return (
-                  <tr key={`row-${index + 1}`}>
-                    <td>{index + 1}</td>
+                  <tr key={`workout_${index}`}>
                     <td>
-                      <Link to={`/activities/exercise/${ex.exerciseId}`}>
-                        {ex.name}
+                      {program.sequence === 'Weekly'
+                        ? workout.dayOfTheWeek
+                        : workout.dayNumber}
+                    </td>
+                    <td>
+                      <Link to={`/activities/workout/${workout.workoutId}`}>
+                        {workout.name}
                       </Link>
                     </td>
-                    <td>{ex.sets.join('-')}</td>
-                    <td>{ex.reps.join('-')}</td>
-                    <td>{ex.tempo.join('-')}</td>
-                    <td>{ex.rir.join('-')}</td>
-                    <td>{ex.rest.join('-')}</td>
                   </tr>
                 );
               })}
@@ -110,7 +104,7 @@ const WorkoutDetails = (props) => {
       )}
       <div className={styles['bottom-btns-div']}>
         <Link
-          to={`/activities/update-workout/${id}`}
+          to={`/activities/update-program/${id}`}
           className={styles['bottom-btns']}
         >
           Update
@@ -129,12 +123,12 @@ const WorkoutDetails = (props) => {
       <DeleteConfirmationModal
         isModalOpen={isDeleteModalOpen}
         closeModal={closeDeleteModal}
-        confirmDelete={confirmDeleteWorkout}
-        info={workout}
-        type="workout"
+        confirmDelete={confirmDeleteProgram}
+        info={program}
+        type="program"
       />
     </div>
   );
 };
 
-export default WorkoutDetails;
+export default ProgramDetails;
