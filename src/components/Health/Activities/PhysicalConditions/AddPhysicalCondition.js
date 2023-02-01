@@ -1,6 +1,6 @@
 import IncrementalInput from '../../../UI/Selects/IncrementalInput';
 import addClasses from '../../../UI/General/CSS/Form.module.css';
-import { postPhysicalCondition } from '../../../../util/apis/physicalConditions/physicalConditionsApis';
+import { postPhysicalCondition } from '../../../../util/apis/activities/physicalConditions/physicalConditionsApis';
 
 const AddPhysicalCondition = props => {
     /** Fields Data */
@@ -53,16 +53,16 @@ const AddPhysicalCondition = props => {
     }
 
     /** Functions */
-    const addPhysicalCondition = (event) => {
-        event.preventDefault();
-        const formVals = getValuesFromForm(event.target.elements);
+    const addPhysicalCondition = (e) => {
+        e.preventDefault();
+        const formVals = getFormValues(e.target.elements);
         // console.log("value: ", formVals);
         postPhysicalCondition(formVals).then(response => { 
             console.log("response: ", response);
         });
     };
 
-    const getValuesFromForm = (elements) => {
+    const getFormValues = (elements) => {
         const values = {};
         values.name = elements.name.value;
         values.description = elements.description.value;

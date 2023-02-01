@@ -1,7 +1,7 @@
 import IncrementalSelect from '../../../UI/Selects/IncrementalSelect';
 import addClasses from '../../../UI/General/CSS/Form.module.css';
-import { fetchAllExerciseNames } from '../../../../util/apis/exercises/exercisesApis';
-import { postEquipment } from '../../../../util/apis/equipments/equipmentsApis';
+import { fetchAllExerciseNames } from '../../../../util/apis/activities/exercises/exercisesApis';
+import { postEquipment } from '../../../../util/apis/activities/equipments/equipmentsApis';
 import { useEffect, useState} from 'react';
 
 const AddEquipment = props => {
@@ -31,9 +31,9 @@ const AddEquipment = props => {
     };
 
     /** Functions */
-    const addEquipment = (event) => {
-        event.preventDefault();
-        const formVals = getValuesFromForm(event.target.elements);
+    const addEquipment = (e) => {
+        e.preventDefault();
+        const formVals = getFormValues(e.target.elements);
 
         //TODO: Handle errors
         postEquipment(formVals).then(response => { 
@@ -41,7 +41,7 @@ const AddEquipment = props => {
         });
     };
 
-    const getValuesFromForm = (elements) => {
+    const getFormValues = (elements) => {
         const values = {};
         values.name = elements.name.value;
         values.alternativeName = elements.alternativeName.value;

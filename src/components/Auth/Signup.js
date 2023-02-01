@@ -66,8 +66,8 @@ const Signup = (props) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
-  const signupUser = (event) => {
-    event.preventDefault();
+  const signupUser = (e) => {
+    e.preventDefault();
 
     if (!isValidationSuccessful()) return;
 

@@ -50,6 +50,14 @@ const NavigationBar = props => {
                     <span> Activities </span>
                     <div className={styles['dropdown-content']}>
                         <ul className={styles['ul-dropdown-options']}>
+                            {/* PROGRAMS */}
+                            <li key="programs" className={styles['li-dropdown-option']}> 
+                                <Link to='/activities/programs' className={styles['nav-links']}>Programs</Link>
+                            </li>
+                            {/* WORKOUTS */}
+                            <li key="workouts" className={styles['li-dropdown-option']}> 
+                                <Link to='/activities/workouts' className={styles['nav-links']}>Workouts</Link>
+                            </li>
                             {/* EXERCISES */}
                             <li key="exercises" className={styles['li-dropdown-option']}> 
                                 <Link to='/activities/exercises' className={styles['nav-links']}>Exercises</Link>
@@ -63,9 +71,9 @@ const NavigationBar = props => {
                                 <Link to='/activities/equipments' className={styles['nav-links']}>Equipments</Link>
                             </li>
                             {/* PHYSICAL CONDITIONS */}
-                            <li key="physicalConditions" className={styles['li-dropdown-option']}>
+                            {/* <li key="physicalConditions" className={styles['li-dropdown-option']}>
                                 <Link to='/activities/physicalconditions' className={styles['nav-links']}>Physical Conditions</Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </li>
@@ -89,6 +97,12 @@ const NavigationBar = props => {
                             <li key="addChronicConditions"className={styles['li-dropdown-option']}>
                                 <Link to='/nutrition/add-chronicConditions' className={styles['nav-links']}>Chronic Condition</Link>
                             </li> */}
+                            <li key="addPrograms" className={styles['li-dropdown-option']}> 
+                                <Link to='/activities/add-program' className={styles['nav-links']}>Program</Link>
+                            </li>
+                            <li key="addWorkouts" className={styles['li-dropdown-option']}> 
+                                <Link to='/activities/add-workout' className={styles['nav-links']}>Workout</Link>
+                            </li>
                             <li key="addExercises" className={styles['li-dropdown-option']}> 
                                 <Link to='/activities/add-exercise' className={styles['nav-links']}>Exercise</Link>
                             </li>
@@ -98,9 +112,9 @@ const NavigationBar = props => {
                             <li key="addEquipments" className={styles['li-dropdown-option']}>
                                 <Link to='/activities/add-equipment' className={styles['nav-links']}>Equipment</Link>
                             </li>
-                            <li key="addPhysicalConditions" className={styles['li-dropdown-option']}>
+                            {/* <li key="addPhysicalConditions" className={styles['li-dropdown-option']}>
                                 <Link to='/activities/add-physicalCondition' className={styles['nav-links']}>Physical Condition</Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </li>

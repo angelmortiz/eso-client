@@ -1,4 +1,4 @@
-import { apiDelete, apiGet, apiPost, apiPut } from "../apiActions"
+import { apiDelete, apiGet, apiPost, apiPut } from "../../apiActions"
 
 export const fetchAllExercises = () => {
     return apiGet('/activities/exercises');

@@ -1,9 +1,9 @@
 import IncrementalSelect from '../../../UI/Selects/IncrementalSelect';
 import SelectInput from '../../../UI/Selects/SelectInput';
 import addClasses from '../../../UI/General/CSS/Form.module.css';
-import { fetchAllExerciseNames } from '../../../../util/apis/exercises/exercisesApis';
+import { fetchAllExerciseNames } from '../../../../util/apis/activities/exercises/exercisesApis';
 import { useEffect, useState} from 'react';
-import { postMuscle } from '../../../../util/apis/muscles/musclesApis';
+import { postMuscle } from '../../../../util/apis/activities/muscles/musclesApis';
 import { useNavigate } from 'react-router-dom';
 
 const AddMuscle = props => {
@@ -46,9 +46,9 @@ const AddMuscle = props => {
     };
 
     /** Functions */
-    const addMuscle = (event) => {
-        event.preventDefault();
-        const formVals = getValuesFromForm(event.target.elements);
+    const addMuscle = (e) => {
+        e.preventDefault();
+        const formVals = getFormValues(e.target.elements);
 
         postMuscle(formVals).then(response => { 
             console.log("response: ", response);
@@ -57,7 +57,7 @@ const AddMuscle = props => {
         });
     };
 
-    const getValuesFromForm = (elements) => {
+    const getFormValues = (elements) => {
         const values = {};
         values.name = elements.name.value;
         values.alternativeName = elements.alternativeName.value;

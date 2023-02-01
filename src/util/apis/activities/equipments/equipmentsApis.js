@@ -1,4 +1,4 @@
-import { apiGet, apiPost } from "../apiActions"
+import { apiGet, apiPost } from "../../apiActions"
 
 export const fetchAllEquipments = () => {
     return apiGet('/activities/equipments');

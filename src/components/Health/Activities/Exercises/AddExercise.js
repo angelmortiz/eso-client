@@ -1,17 +1,101 @@
 import IncrementalSelect from '../../../UI/Selects/IncrementalSelect';
 import SelectInput from '../../../UI/Selects/SelectInput';
-import addClasses from '../../../UI/General/CSS/Form.module.css';
-import { postExercise } from '../../../../util/apis/exercises/exercisesApis';
+import styles from '../../../UI/General/CSS/Form.module.css';
+import { postExercise } from '../../../../util/apis/activities/exercises/exercisesApis';
 import { useEffect, useState} from 'react';
-import { fetchAllEquipmentNames } from '../../../../util/apis/equipments/equipmentsApis';
-import { fetchAllMuscleNames } from '../../../../util/apis/muscles/musclesApis';
+import { fetchAllEquipmentNames } from '../../../../util/apis/activities/equipments/equipmentsApis';
+import { fetchAllMuscleNames } from '../../../../util/apis/activities/muscles/musclesApis';
 import { useNavigate } from 'react-router-dom';
 
+/** FIELDS DATA */
+const difficultyInfo = {
+    select: {
+      id: 'exercise-difficulty',
+      name: 'difficulty',
+      options: [
+        { value: '', label: '-- Choose difficulty --' },
+        { value: 'Easy', label: 'Easy' },
+        { value: 'Intermediate', label: 'Intermediate' },
+        { value: 'Advanced', label: 'Advanced' },
+      ],
+    },
+  };
+  
+  const compoundMovementInfo = {
+    select: {
+      id: 'exercise-compoundMovement',
+      name: 'compoundMovement',
+      options: [
+        { value: '', label: '-- Choose option --' },
+        { value: 'yes', label: 'Yes' },
+        { value: 'no', label: 'No' },
+      ],
+    },
+  };
+  
+  const mainMuscleInfo = {
+    select: {
+      id: 'exercise-mainMuscle',
+      name: 'mainMuscle',
+      value: '_id',
+      label: 'name',
+      options: [],
+    },
+  };
+  
+  const secondaryMusclesInfo = {
+    select: {
+      id: 'exercise-secondaryMuscle',
+      name: 'secondaryMuscles',
+      value: '_id',
+      label: 'name',
+      options: [],
+    },
+    button: {
+      id: 'add-muscle-btn',
+      label: 'Add muscle',
+    },
+  };
+  
+  const typesInfo = {
+    select: {
+      id: 'exercise-types',
+      name: 'types',
+      options: [
+        // TODO: Pull values from backend
+        { value: '', label: '-- Choose a type --' },
+        { value: 'HIIT', label: 'HIIT' },
+        { value: 'Strength', label: 'Strength' },
+      ],
+    },
+    button: {
+      id: 'add-type-btn',
+      label: 'Add type',
+    },
+  };
+  
+  const equipmentsInfo = {
+    select: {
+      id: 'exercise-equipments',
+      name: 'equipments',
+      value: '_id',
+      label: 'name',
+      options: [],
+    },
+    button: {
+      id: 'add-equipment-btn',
+      label: 'Add equipment',
+    },
+  };
+  /** [END] FIELDS DATA */
 
 const AddExercise = props => {
-    const navigate = useNavigate();
+    const navigateTo = useNavigate();
     const [muscles, setMuscles] = useState([]);
     const [equipments, setEquipments] = useState([]);
+    mainMuscleInfo.select.options = muscles;
+    secondaryMusclesInfo.select.options = muscles;
+    equipmentsInfo.select.options = equipments;
 
     useEffect(() => {
         fetchAllMuscleNames().then(response => { 
@@ -29,103 +113,21 @@ const AddExercise = props => {
         });
     }, []);
 
-    /** FIELDS DATA */
-    const difficultyInfo = {
-        select: {
-            id: "exercise-difficulty",
-            name: "difficulty",
-            options: [
-                {value: "", label:"-- Choose difficulty --"},
-                {value: "Easy", label:"Easy"},
-                {value: "Intermediate", label:"Intermediate"},
-                {value: "Advanced", label:"Advanced"},
-            ]
-        }
-    }
-
-    const compoundMovementInfo = {
-        select: {
-            id: "exercise-compoundMovement",
-            name: "compoundMovement",
-            options: [
-                {value: "", label:"-- Choose option --"},
-                {value: "yes", label:"Yes"},
-                {value: "no", label:"No"}
-            ]
-        }
-    }
-
-    const mainMuscleInfo = {
-        select: {
-            id: "exercise-mainMuscle",
-            name: "mainMuscle",
-            value: "_id",
-            label: "name",
-            options: muscles
-        }
-    };
-
-    const secondaryMusclesInfo = {
-        select: {
-            id: "exercise-secondaryMuscle",
-            name: "secondaryMuscles",
-            value: "_id",
-            label: "name",
-            options: muscles
-        },
-        button: {
-            id: "add-muscle-btn",
-            label: "Add muscle"
-        }
-    };
-
-    const typesInfo = {
-        select: {
-            id: "exercise-types",
-            name: "types",
-            options: [
-                // TODO: Pull values from backend or global variable
-                {value: "", label:"-- Choose a type --"},
-                {value: "HIIT", label:"HIIT"},
-                {value: "Strength", label:"Strength"},
-            ]
-        },
-        button: {
-            id: "add-type-btn",
-            label: "Add type"
-        }
-    };
-
-    const equipmentsInfo = {
-        select: {
-            id: "exercise-equipments",
-            name: "equipments",
-            value: "_id",
-            label: "name",
-            options: equipments
-        },
-        button: {
-            id: "add-equipment-btn",
-            label: "Add equipment"
-        }
-    };
-    /** [END] FIELDS DATA */
-
     /** Functions */
-    const addExercise = (event) => {
-        event.preventDefault();
-        const formVals = getValuesFromForm(event.target.elements);
+    const addExercise = (e) => {
+        e.preventDefault();
+        const formVals = getFormValues(e.target.elements);
 
         postExercise(formVals).then(response => { 
             console.log("Response: ", response);
             if (response.isSuccess) {
-                // TODO: Navigate to the just added exercise id
-                navigate(`/activities/exercises/`);
+                //IMPROVE: Navigate to the just added exercise id
+                navigateTo(`/activities/exercises/`);
             }
         });
     };
 
-    const getValuesFromForm = (elements) => {
+    const getFormValues = (elements) => {
         const values = {};
         values.name = elements.name.value;
         values.alternativeName = elements.alternativeName.value;
@@ -171,62 +173,62 @@ const AddExercise = props => {
     };
 
     /** Render */
-    return <section className={addClasses['main-section']}>
-        <form id="add-exercise-form"  onSubmit={addExercise} className={addClasses['main-form']}>
-            <h1 className={addClasses['form-title']}>Add Exercise</h1>
+    return <section className={styles['main-section']}>
+        <form id="add-exercise-form"  onSubmit={addExercise} className={styles['main-form']}>
+            <h1 className={styles['form-title']}>Add Exercise</h1>
             
             {/* NAME */}
-            <label htmlFor="exercise-name" className={addClasses['text-label']}>Name:</label>
+            <label htmlFor="exercise-name" className={styles['text-label']}>Name:</label>
             <input type="text" id="exercise-name" name="name"
-                placeholder='Enter the exercise name...' className={addClasses['select-input']}/>
+                placeholder='Enter the exercise name...' className={styles['select-input']}/>
             
             {/* ALTERNATIVE NAME */}
-            <label htmlFor="exercise-alternativeName" className={addClasses['text-label']}>Alternative name:</label>
+            <label htmlFor="exercise-alternativeName" className={styles['text-label']}>Alternative name:</label>
             <input type="text" id="exercise-alternativeName" name="alternativeName"
-                placeholder='Enter an alternative name...'className={addClasses['select-input']} />
+                placeholder='Enter an alternative name...'className={styles['select-input']} />
             
             {/* DIFFICULTY */}
-            <label htmlFor="exercise-difficulty" className={addClasses['text-label']}>Difficulty:</label>
+            <label htmlFor="exercise-difficulty" className={styles['text-label']}>Difficulty:</label>
             <SelectInput select={difficultyInfo.select}/>
             
             {/* COMPOUND MOVEMENT */}
-            <label htmlFor="exercise-compoundMovement" className={addClasses['text-label']}>Compound movement:</label>
+            <label htmlFor="exercise-compoundMovement" className={styles['text-label']}>Compound movement:</label>
             <SelectInput select={compoundMovementInfo.select}/>
             
             {/* MAIN MUSCLE */}
-            <label htmlFor="exercise-mainMuscle" className={addClasses['text-label']}>Main muscle:</label>
+            <label htmlFor="exercise-mainMuscle" className={styles['text-label']}>Main muscle:</label>
             { muscles && muscles.length 
                 ? <SelectInput select={mainMuscleInfo.select}/>
-                : <img src="/loading.gif" alt="Loading..." className={addClasses['loading-img']}/>}
+                : <img src="/loading.gif" alt="Loading..." className={styles['loading-img']}/>}
 
             {/* SECONDARY MUSCLES */}
-            <label htmlFor="exercise-secondaryMuscles" className={addClasses['text-label']}>Secondary muscles:</label>
+            <label htmlFor="exercise-secondaryMuscles" className={styles['text-label']}>Secondary muscles:</label>
             { muscles && muscles.length 
                 ? <IncrementalSelect info={secondaryMusclesInfo}/>
-                : <img src="/loading.gif" alt="Loading..." className={addClasses['loading-img']}/>}
+                : <img src="/loading.gif" alt="Loading..." className={styles['loading-img']}/>}
             
             {/* TYPES */}
-            <label htmlFor="exercise-types" className={addClasses['text-label']}>Types:</label>
+            <label htmlFor="exercise-types" className={styles['text-label']}>Types:</label>
             <IncrementalSelect info={typesInfo}/>
 
             {/* EQUIPMENTS */}
-            <label htmlFor="exercise-equipments" className={addClasses['text-label']}>Equipments:</label>
+            <label htmlFor="exercise-equipments" className={styles['text-label']}>Equipments:</label>
             { equipments && equipments.length 
                 ? <IncrementalSelect info={equipmentsInfo}/>
-                : <img src="/loading.gif" alt="Loading..." className={addClasses['loading-img']}/>}
+                : <img src="/loading.gif" alt="Loading..." className={styles['loading-img']}/>}
 
             {/* IMAGE */}
-            <label htmlFor="exercise-image" className={addClasses['text-label']}>Image:</label>
+            <label htmlFor="exercise-image" className={styles['text-label']}>Image:</label>
             <input type="text" id="exercise-image" name="linkToImage"
-                placeholder='Enter the link for the image...' className={addClasses['select-input']}/>
+                placeholder='Enter the link for the image...' className={styles['select-input']}/>
 
             {/* VIDEO */}
-            <label htmlFor="exercise-video" className={addClasses['text-label']}>Video:</label>
+            <label htmlFor="exercise-video" className={styles['text-label']}>Video:</label>
             <input type="text" id="exercise-video" name="linkToVideo"
-                placeholder='Enter the link for the video...' className={addClasses['select-input']}/>
+                placeholder='Enter the link for the video...' className={styles['select-input']}/>
 
             {/* SUBMIT BUTTON */}
-            <button type="submit" id="add-exercse-btn" className={addClasses['submit-btn']}>Add exercise</button>
+            <button type="submit" id="add-exercise-btn" className={styles['submit-btn']}>Add exercise</button>
         </form>
     </section>
 };
