@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { fetchAllWorkoutNames } from '../../../../util/apis/activities/workouts/workoutsApis';
 import {
   fetchProgramById,
-  postProgram,
+  putProgram,
 } from '../../../../util/apis/activities/programs/programsApis';
 import styles from '../../../UI/General/CSS/Form.module.css';
 import SelectInput from '../../../UI/Selects/SelectInput';
@@ -69,7 +69,7 @@ const UpdateProgram = (props) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [type, setType] = useState('');
-  const [duration, setDuration] = useState();
+  const [duration, setDuration] = useState(0);
   const [linkToImage, setLinkToImage] = useState('');
   const [workoutPlans, setWorkoutPlans] = useState([]);
   /** */
@@ -110,17 +110,18 @@ const UpdateProgram = (props) => {
     const formVals = getFormValues(e.target.elements);
     console.log('formVals:  ', formVals);
 
-    // postProgram(formVals).then((response) => {
-    //   console.log('Response: ', response);
-    //   if (response.isSuccess) {
-    //     //IMPROVE: Navigate to the just added program id
-    //     navigateTo(`/activities/programs`);
-    //   }
-    // });
+    putProgram(id, formVals).then((response) => {
+      console.log('Response: ', response);
+      if (response.isSuccess) {
+        //IMPROVE: Navigate to the just added program id
+        navigateTo(`/activities/programs`);
+      }
+    });
   };
 
   const getFormValues = (elements) => {
     const values = {};
+    values.id = id;
     values.name = elements.name.value;
     values.description = elements.description.value;
     values.type = elements.type.value;
@@ -242,7 +243,7 @@ const UpdateProgram = (props) => {
           placeholder="Enter duration in weeks..."
           className={styles['select-input']}
           value={duration}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => setDuration(e.target.value)}
         />
 
         {/* LINK TO IMAGE */}

@@ -39,7 +39,6 @@ const IncrementalWorkoutPlan = (props) => {
       );
     });
 
-    console.log("selectedInputs: ", selectedPlans);
     setWorkoutPlanList(selectedInputs);
     setCount(newCount)
   },[selectedPlans, workoutsInfo]);

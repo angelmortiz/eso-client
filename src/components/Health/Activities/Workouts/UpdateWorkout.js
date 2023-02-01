@@ -11,43 +11,43 @@ import IncrementalExercisePlan from './IncrementalExercisePlan';
 
 //IMPROVE: Consider moving these values to a different file
 const workoutTypes = {
-    select: {
-      id: 'workout-types',
-      name: 'type',
-      options: [
-        { value: '', label: '-- Choose type --' },
-        { value: 'Strength', label: 'Strength' },
-        { value: 'Hypertrophy', label: 'Hypertrophy' },
-        { value: 'Endurance', label: 'Endurance' },
-      ],
-    },
-  };
+  select: {
+    id: 'workout-types',
+    name: 'type',
+    options: [
+      { value: '', label: '-- Choose type --' },
+      { value: 'Strength', label: 'Strength' },
+      { value: 'Hypertrophy', label: 'Hypertrophy' },
+      { value: 'Endurance', label: 'Endurance' },
+    ],
+  },
+};
 
-  const workoutTargets = {
-    select: {
-      id: 'workout-targets',
-      name: 'target',
-      options: [
-        { value: '', label: '-- Choose target --' },
-        { value: 'Full Body', label: 'Full Body' },
-        { value: 'Upper Body', label: 'Upper Body' },
-        { value: 'Lower Body', label: 'Lower Body' },
-        { value: 'Front Muscles', label: 'Front Muscles' },
-        { value: 'Back Muscles', label: 'Back Muscles' },
-        { value: 'Mixed', label: 'Mixed' },
-      ],
-    },
-  };
+const workoutTargets = {
+  select: {
+    id: 'workout-targets',
+    name: 'target',
+    options: [
+      { value: '', label: '-- Choose target --' },
+      { value: 'Full Body', label: 'Full Body' },
+      { value: 'Upper Body', label: 'Upper Body' },
+      { value: 'Lower Body', label: 'Lower Body' },
+      { value: 'Front Muscles', label: 'Front Muscles' },
+      { value: 'Back Muscles', label: 'Back Muscles' },
+      { value: 'Mixed', label: 'Mixed' },
+    ],
+  },
+};
 
-  const exercisesInfo = {
-    select: {
-      id: 'exerciseplan-exercise',
-      name: 'exercisePlanExercise',
-      value: '_id',
-      label: 'name',
-      options: [],
-    },
-  };
+const exercisesInfo = {
+  select: {
+    id: 'exerciseplan-exercise',
+    name: 'exercisePlanExercise',
+    value: '_id',
+    label: 'name',
+    options: [],
+  },
+};
 
 const UpdateWorkout = (props) => {
   const navigateTo = useNavigate();
@@ -101,8 +101,8 @@ const UpdateWorkout = (props) => {
   const UpdateWorkout = (e) => {
     e.preventDefault();
     const formVals = getFormValues(e.target.elements);
-    
-    console.log("formVals: ", formVals);
+
+    console.log('formVals: ', formVals);
     putWorkout(id, formVals).then((response) => {
       console.log('Response: ', response);
       if (response && response.isSuccess) {
@@ -163,7 +163,7 @@ const UpdateWorkout = (props) => {
      * The result is an array with 12 values that can be broken down to:
      * sets (2), reps (2), tempo (4), rir (2), and rest (2).
      */
-    let index = 0
+    let index = 0;
     for (const id of exerciseIds) {
       if (!id) continue; //removes exercise plans that do not have a exercise selected
 
@@ -241,13 +241,13 @@ const UpdateWorkout = (props) => {
         <label htmlFor="workoutType" className={styles['text-label']}>
           Type:
         </label>
-        <SelectInput select={workoutTypes.select} selectedValue={type}/>
+        <SelectInput select={workoutTypes.select} selectedValue={type} />
 
         {/* TARGET */}
         <label htmlFor="workoutTarget" className={styles['text-label']}>
           Target:
         </label>
-        <SelectInput select={workoutTargets.select} selectedValue={target}/>
+        <SelectInput select={workoutTargets.select} selectedValue={target} />
 
         {/* LINK TO IMAGE */}
         <label htmlFor="workoutLinkToImage" className={styles['text-label']}>
@@ -265,7 +265,10 @@ const UpdateWorkout = (props) => {
 
         {/* EXERCISES */}
         {exercises ? (
-          <IncrementalExercisePlan exercisesInfo={exercisesInfo} selectedPlans={exercisePlans}/>
+          <IncrementalExercisePlan
+            exercisesInfo={exercisesInfo}
+            selectedPlans={exercisePlans}
+          />
         ) : (
           <img
             src="/loading.gif"

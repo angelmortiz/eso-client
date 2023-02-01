@@ -71,9 +71,9 @@ const NavigationBar = props => {
                                 <Link to='/activities/equipments' className={styles['nav-links']}>Equipments</Link>
                             </li>
                             {/* PHYSICAL CONDITIONS */}
-                            <li key="physicalConditions" className={styles['li-dropdown-option']}>
+                            {/* <li key="physicalConditions" className={styles['li-dropdown-option']}>
                                 <Link to='/activities/physicalconditions' className={styles['nav-links']}>Physical Conditions</Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </li>
@@ -112,9 +112,9 @@ const NavigationBar = props => {
                             <li key="addEquipments" className={styles['li-dropdown-option']}>
                                 <Link to='/activities/add-equipment' className={styles['nav-links']}>Equipment</Link>
                             </li>
-                            <li key="addPhysicalConditions" className={styles['li-dropdown-option']}>
+                            {/* <li key="addPhysicalConditions" className={styles['li-dropdown-option']}>
                                 <Link to='/activities/add-physicalCondition' className={styles['nav-links']}>Physical Condition</Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </li>
