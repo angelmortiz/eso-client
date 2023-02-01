@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
-  deleteMuscle,
-  fetchMuscleById,
-} from '../../../../util/apis/activities/muscles/musclesApis';
+  deleteEquipment,
+  fetchEquipmentById,
+} from '../../../../util/apis/activities/equipments/equipmentsApis';
 import styles from '../../../UI/General/CSS/Details.module.css';
 import DeleteConfirmationModal from '../../../UI/Popups/Delete/DeleteConfirmationModal';
 
-const MuscleDetails = (props) => {
+const EquipmentDetails = (props) => {
   const { id } = useParams();
   const navigateTo = useNavigate();
-  const [muscle, setMuscle] = useState(null);
+  const [equipment, setEquipment] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   useEffect(() => {
-    if (!id) console.error(`Error: muscle id not found in the url.`);
-    fetchMuscleById(id).then((response) => {
+    if (!id) console.error(`Error: equipment id not found in the url.`);
+    fetchEquipmentById(id).then((response) => {
       if (!response || !response.isSuccess) return;
-      setMuscle(response.body);
+      setEquipment(response.body);
     });
   }, [id]);
 
@@ -30,18 +30,18 @@ const MuscleDetails = (props) => {
     setIsDeleteModalOpen(false);
   };
 
-  const confirmDeleteMuscle = () => {
+  const confirmDeleteEquipment = () => {
     closeDeleteModal();
 
-    deleteMuscle(id).then((response) => {
+    deleteEquipment(id).then((response) => {
       if (!response || !response.isSuccess) return;
-      navigateTo('/activities/muscles');
+      navigateTo('/activities/equipments');
     });
   };
 
   return (
     <section className={styles['card']}>
-      {!muscle ? (
+      {!equipment ? (
         <img
           src="/loading.gif"
           alt="Loading..."
@@ -50,35 +50,35 @@ const MuscleDetails = (props) => {
       ) : (
         <div className={styles['main-section']}>
           {/* NAME */}
-          <h1 className={styles['name']}>{muscle.name}</h1>
+          <h1 className={styles['name']}>{equipment.name}</h1>
           {/* ALTERNATIVE NAME */}
           <h2 className={styles['alternative-name']}>
-            {muscle.alternativeName}
+            {equipment.alternativeName}
           </h2>
           {/* IMAGE */}
           <img
-            src={muscle.linkToImage}
-            alt={muscle.name}
+            src={equipment.linkToImage}
+            alt={equipment.name}
             className={styles['img']}
           />
           <div className={styles['general-info']}>
-            {/* TYPE */}
+            {/* DESCRIPTION */}
             <div className={styles['info-block']}>
-              <p className={styles['label']}>Type: </p>
-              <p className={styles['value']}>{muscle.type}</p>
+              <p className={styles['label']}>Descriptin: </p>
+              <p className={styles['value']}>{equipment.description}</p>
             </div>
           </div>
           <hr />
           <div className={styles['bottom-btns-div']}>
             <Link
-              to={`/activities/update-muscle/${id}`}
+              to={`/activities/update-equipment/${id}`}
               className={styles['bottom-btns']}
             >
               Update
             </Link>
             <button
               type="button"
-              id="delete-muscle-btn"
+              id="delete-equipment-btn"
               className={styles['bottom-btns']}
               onClick={openDeleteConfirmationModal}
             >
@@ -91,12 +91,12 @@ const MuscleDetails = (props) => {
       <DeleteConfirmationModal
         isModalOpen={isDeleteModalOpen}
         closeModal={closeDeleteModal}
-        confirmDelete={confirmDeleteMuscle}
-        info={muscle}
-        type="muscle"
+        confirmDelete={confirmDeleteEquipment}
+        info={equipment}
+        type="equipment"
       />
     </section>
   );
 };
 
-export default MuscleDetails;
+export default EquipmentDetails;

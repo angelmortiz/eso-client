@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from '../../../UI/General/CSS/InfoCard.module.css';
 
-const MuslceInfoCard = (props) => {
+const EquipmentInfoCard = (props) => {
   const { info } = props;
 
   return (
@@ -12,18 +12,12 @@ const MuslceInfoCard = (props) => {
           <h1 className={styles['name']}>{info.name}</h1>
           <h2 className={styles['alternative-name']}>{info.alternativeName}</h2>
         </div>
-        <div className={styles['general-info']}>
-          <div className={styles['info-block']}>
-            <p className={styles['label']}>Type:</p>
-            <p className={styles['value']}>{info.type}</p>
-          </div>
-        </div>
       </div>
-      <Link to={`/activities/muscle/${info._id}`} className={styles['link']}>
+      <Link to={`/activities/equipment/${info._id}`} className={styles['link']}>
         Details
       </Link>
     </div>
   );
 };
 
-export default MuslceInfoCard;
+export default EquipmentInfoCard;

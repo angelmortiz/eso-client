@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchAllMuscles } from '../../../../util/apis/activities/muscles/musclesApis';
 import GridView from '../../../UI/Grids/GridView';
-import MuslceInfoCard from './MuscleInfoCard';
+import MuscleInfoCard from './MuscleInfoCard';
 
 const Muscles = (props) => {
   const [muscles, setMuscles] = useState([]);
@@ -18,7 +18,7 @@ const Muscles = (props) => {
   const addInfoCards = () => {
     let infoCards = [];
     infoCards = muscles.map((muscle) => {
-      return <MuslceInfoCard key={muscle._id} info={muscle} />;
+      return <MuscleInfoCard key={muscle._id} info={muscle} />;
     });
     return infoCards;
   };
