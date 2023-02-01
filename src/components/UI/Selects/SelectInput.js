@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import addClasses from '../General/CSS/Form.module.css';
+import styles from '../General/CSS/Form.module.css';
 
 const SelectInput = (props) => {
   const [selectValue, setSelectValue] = useState('');
@@ -23,12 +23,12 @@ const SelectInput = (props) => {
   }, [selectValue, setValueFunc])
 
   return (
-    <div className={addClasses['select-content']}>
+    <div className={styles['select-content']}>
       <select
         id={selectId}
         key={selectId}
         name={info.name}
-        className={addClasses['select-input']}
+        className={styles['select-input']}
         value={selectValue}
         onChange={(e) => setSelectValue(e.target.value)}
       >
@@ -45,7 +45,7 @@ const SelectInput = (props) => {
       </select>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className={addClasses['select-arrow']}
+        className={styles['select-arrow']}
         viewBox="0 0 512 512"
       >
         <title>Chevron Down</title>

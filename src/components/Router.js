@@ -24,6 +24,11 @@ import WorkoutDetails from './Health/Activities/Workouts/WorkoutDetails';
 import UpdateWorkout from './Health/Activities/Workouts/UpdateWorkout';
 import ProgramDetails from './Health/Activities/Programs/ProgramDetails';
 import UpdateProgram from './Health/Activities/Programs/UpdateProgram';
+import MuscleDetails from './Health/Activities/Muscles/MuscleDetails';
+import UpdateMuscle from './Health/Activities/Muscles/UpdateMuscle';
+import UpdateEquipment from './Health/Activities/Equipments/UpdateEquipment';
+import EquipmentDetails from './Health/Activities/Equipments/EquipmentDetails';
+import Equipments from './Health/Activities/Equipments/Equipments';
 
 //IMPROVE: Consider breaking down the routes into different files to make it more readable
 const Router = props => {
@@ -47,15 +52,15 @@ const Router = props => {
         <Route path="/activities/workouts" element={<Workouts/>}/>
         <Route path="/activities/exercises" element={<Exercises/>}/>
         <Route path="/activities/muscles" element={<Muscles/>}/>
-        {/* <Route path="/activities/equipments" element={<Equipments/>}/> */}
+        <Route path="/activities/equipments" element={<Equipments/>}/>
         {/* <Route path="/activities/physicalConditions" element={<PhysicalConditions/>}/> */}
 
         {/* Display activity by id */}
         <Route path="/activities/program/:id" element={<ProgramDetails/>}/>
         <Route path="/activities/workout/:id" element={<WorkoutDetails/>}/>
         <Route path="/activities/exercise/:id" element={<ExerciseDetails/>}/>
-        {/* <Route path="/activities/muscle/:id" element={<MuscleDetails/>}/> */}
-        {/* <Route path="/activities/equipment/:id" element={<EquipmentDetails/>}/> */}
+        <Route path="/activities/muscle/:id" element={<MuscleDetails/>}/>
+        <Route path="/activities/equipment/:id" element={<EquipmentDetails/>}/>
         {/* <Route path="/activities/physicalCondition/:id" element={<PhysicalConditionDetails/>}/> */}
 
         {/* Add activity */}
@@ -64,14 +69,14 @@ const Router = props => {
         <Route path="/activities/add-exercise" element={<AddExercise/>}/>
         <Route path="/activities/add-muscle" element={<AddMuscle/>}/>
         <Route path="/activities/add-equipment" element={<AddEquipment/>}/>
-        <Route path="/activities/add-physicalCondition" element={<AddPhysicalCondition/>}/>
+        {/* <Route path="/activities/add-physicalCondition" element={<AddPhysicalCondition/>}/> */}
 
         {/* Update activity */}
         <Route path="/activities/update-program/:id" element={<UpdateProgram/>}/>
         <Route path="/activities/update-workout/:id" element={<UpdateWorkout/>}/>
         <Route path="/activities/update-exercise/:id" element={<UpdateExercise/>}/>
-        {/* <Route path="/activities/update-muscle/:id" element={<UpdateMuscle/>}/> */}
-        {/* <Route path="/activities/update-equipment/:id" element={<UpdateEquipment/>}/> */}
+        <Route path="/activities/update-muscle/:id" element={<UpdateMuscle/>}/>
+        <Route path="/activities/update-equipment/:id" element={<UpdateEquipment/>}/>
         {/* <Route path="/activities/update-physicalCondition/:id" element={<UpdatePhysicalCondition/>}/> */}
         
     </Routes>

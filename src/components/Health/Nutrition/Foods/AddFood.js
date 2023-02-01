@@ -1,20 +1,20 @@
-import addClasses from '../../../UI/General/CSS/Form.module.css';
+import styles from '../../../UI/General/CSS/Form.module.css';
 
 const Food = props => {
-    return <section className={addClasses['main-section']}>
-        <form className={addClasses['main-form']}>
-            <h1 className={addClasses['form-title']}>Add Food</h1>
+    return <section className={styles['main-section']}>
+        <form className={styles['main-form']}>
+            <h1 className={styles['form-title']}>Add Food</h1>
             {/* FOOD NAME */}
-            <label htmlFor="food-name" className={addClasses['text-label']}>Food name:</label>
+            <label htmlFor="food-name" className={styles['text-label']}>Food name:</label>
             <input type="text" id="food-name" name="foodName"
-                placeholder='Enter food name...' className={addClasses['select-input']}/>
+                placeholder='Enter food name...' className={styles['select-input']}/>
             {/* FOOD DESCRIPTION */}
-            <label htmlFor="food-description" className={addClasses['text-label']}>Food description:</label>
+            <label htmlFor="food-description" className={styles['text-label']}>Food description:</label>
             <input type="text" id="food-description" name="foodDescription"
-                placeholder='Enter food description...'className={addClasses['select-input']} />
+                placeholder='Enter food description...'className={styles['select-input']} />
             
             {/* SUBMIT BUTTON */}
-            <button type="submit" className={addClasses['submit-btn']}>Add food</button>
+            <button type="submit" className={styles['submit-btn']}>Add food</button>
         </form>
     </section>
 };

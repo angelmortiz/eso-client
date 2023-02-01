@@ -33,7 +33,6 @@ const ProgramDetails = (props) => {
   const confirmDeleteProgram = () => {
     closeDeleteModal();
 
-    //TODO: Check if program was deleted successfully
     deleteProgram(id).then((response) => {
       if (!response || !response.isSuccess) return;
       navigateTo('/activities/programs');

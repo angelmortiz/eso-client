@@ -1,10 +1,13 @@
 import IncrementalSelect from '../../../UI/Selects/IncrementalSelect';
-import SelectInput from '../../../UI/Selects/SelectInput';
-import styles from '../../../UI/General/CSS/Form.module.css';
-import { fetchAllExerciseNames } from '../../../../util/apis/activities/exercises/exercisesApis';
 import { useEffect, useState } from 'react';
-import { postMuscle } from '../../../../util/apis/activities/muscles/musclesApis';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { fetchAllExerciseNames } from '../../../../util/apis/activities/exercises/exercisesApis';
+import {
+  fetchMuscleById,
+  putMuscle,
+} from '../../../../util/apis/activities/muscles/musclesApis';
+import styles from '../../../UI/General/CSS/Form.module.css';
+import SelectInput from '../../../UI/Selects/SelectInput';
 
 const exercisesInfo = {
   select: {
@@ -32,11 +35,21 @@ const typesInfo = {
   },
 };
 
-const AddMuscle = (props) => {
+const UpdateMuscle = (props) => {
   const navigateTo = useNavigate();
-  const [exercises, setExercises] = useState([]);
+  const { id } = useParams();
+  const [muscle, setMuscle] = useState();
+  const [exercises, setExercises] = useState();
   exercisesInfo.select.options = exercises;
-  
+
+  /** INPUT VALUES */
+  const [name, setName] = useState('');
+  const [alternativeName, setAlternativeName] = useState('');
+  const [type, setType] = useState('');
+  const [linkToImage, setLinkToImage] = useState('');
+  const [muscleExercises, setMuscleExercises] = useState([]);
+  /** */
+
   useEffect(() => {
     fetchAllExerciseNames().then((response) => {
       if (!response || !response.isSuccess) return;
@@ -46,28 +59,66 @@ const AddMuscle = (props) => {
     });
   }, []);
 
-  /** Functions */
-  const addMuscle = (e) => {
+  //Gets the most updated info from current muscle
+  useEffect(() => {
+    if (!id) console.log(`Error: muscle id not found in the url.`);
+    fetchMuscleById(id).then((response) => {
+      if (!response || !response.isSuccess) return;
+      setMuscle(response.body);
+    });
+  }, [id]);
+
+  //Sets input values based on the current info fetched from the db
+  useEffect(() => {
+    if (!muscle) return;
+    setName(muscle.name);
+    setAlternativeName(muscle.alternativeName);
+    setType(muscle.type);
+    setLinkToImage(muscle.linkToImage);
+    setMuscleExercises(muscle.exercises.map((ex) => ex.exerciseId));
+  }, [muscle]);
+
+  const updateMuscle = (e) => {
     e.preventDefault();
     const formVals = getFormValues(e.target.elements);
+    console.log('formVals:  ', formVals);
 
-    postMuscle(formVals).then((response) => {
-      console.log('response: ', response);
-      if (!response || !response.isSuccess) return;
-      navigateTo('/activities/muscles');
+    putMuscle(id, formVals).then((response) => {
+      console.log('Response: ', response);
+      if (response.isSuccess) {
+        //IMPROVE: Navigate to the just added muscle id
+        navigateTo(`/activities/muscles`);
+      }
     });
   };
 
   const getFormValues = (elements) => {
     const values = {};
+    values.id = id;
     values.name = elements.name.value;
     values.alternativeName = elements.alternativeName.value;
     values.type = elements.type.value;
     values.linkToImage = elements.linkToImage.value;
 
-    //multi-select options
+    //extract values from multi-select options
     values.exercises = extractMultiOptionValues(elements.exercises);
+
+    values.exercises = mapIdsToNames(
+      values.exercises,
+      exercises,
+      'exerciseId',
+      'exerciseName'
+    );
+
     return values;
+  };
+
+  const mapIdsToNames = (values, mapArr, idProperty, nameProperty) => {
+    //maps values to objects of ids and names (required for backend)
+    return values.map((id) => {
+      const name = mapArr.find((arr) => arr._id === id)?.name;
+      return { [idProperty]: id, [nameProperty]: name };
+    });
   };
 
   const extractMultiOptionValues = (elements) => {
@@ -84,23 +135,17 @@ const AddMuscle = (props) => {
     });
     values = values.filter((v) => v); //removes empty selections
     values = [...new Set(values)]; //removes duplicate values
-    //maps values to objects of ids and names (required for backend)
-    values = values.map((id) => {
-      const name = exercises.find((exercise) => exercise._id === id)?.name;
-      return { exerciseId: id, exerciseName: name };
-    });
     return values;
   };
 
-  /** Render */
   return (
     <section className={styles['main-section']}>
       <form
-        id="add-muscle-form"
-        onSubmit={addMuscle}
+        id="update-muscle-form"
+        onSubmit={updateMuscle}
         className={styles['main-form']}
       >
-        <h1 className={styles['form-title']}>Add Muscle</h1>
+        <h1 className={styles['form-title']}>Update Muscle</h1>
 
         {/* NAME */}
         <label htmlFor="muscle-name" className={styles['text-label']}>
@@ -112,6 +157,8 @@ const AddMuscle = (props) => {
           name="name"
           placeholder="Enter the muscle name..."
           className={styles['select-input']}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
 
         {/* ALTERNATIVE NAME */}
@@ -127,20 +174,25 @@ const AddMuscle = (props) => {
           name="alternativeName"
           placeholder="Enter an alternative name..."
           className={styles['select-input']}
+          value={alternativeName}
+          onChange={(e) => setAlternativeName(e.target.value)}
         />
 
         {/* TYPE */}
         <label htmlFor="muscle-type" className={styles['text-label']}>
           Type:
         </label>
-        <SelectInput select={typesInfo.select} />
+        <SelectInput select={typesInfo.select} selectedValue={type} />
 
         {/* EXERCISES */}
         <label htmlFor="muscle-exercises" className={styles['text-label']}>
           Exercises:
         </label>
         {exercises && exercises.length ? (
-          <IncrementalSelect info={exercisesInfo} />
+          <IncrementalSelect
+            info={exercisesInfo}
+            selectedValues={muscleExercises}
+          />
         ) : (
           <img
             src="/loading.gif"
@@ -159,19 +211,21 @@ const AddMuscle = (props) => {
           name="linkToImage"
           placeholder="Enter the link for the image..."
           className={styles['select-input']}
+          value={linkToImage}
+          onChange={(e) => setLinkToImage(e.target.value)}
         />
 
         {/* SUBMIT BUTTON */}
         <button
           type="submit"
-          id="add-exercse-btn"
+          id="update-exercse-btn"
           className={styles['submit-btn']}
         >
-          Add muscle
+          Update muscle
         </button>
       </form>
     </section>
   );
 };
 
-export default AddMuscle;
+export default UpdateMuscle;

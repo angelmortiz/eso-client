@@ -7,7 +7,7 @@ import SelectInput from './SelectInput';
  * may elements should be added from the beginning.
  */
 const IncrementalSelect = (props) => {
-  const info = props.info;
+  const { info, selectedValues } = props;
   const [count, setCount] = useState(1);
   const [selectList, setSelectList] = useState([newSelectInput(count)]);
 
@@ -34,7 +34,6 @@ const IncrementalSelect = (props) => {
 
   //This hook is used to add selects automatically on the update page.
   useEffect(() => {
-    const selectedValues = props.selectedValues;
     //skips if no selectedValues has been passed from the parent
     if (!selectedValues || selectedValues.length === 0) {
       return;
@@ -57,7 +56,7 @@ const IncrementalSelect = (props) => {
 
     setSelectList(selectedInputs);
     setCount(newCount);
-  }, [props.selectedValues, info]);
+  }, [selectedValues, info]);
 
   return (
     <>

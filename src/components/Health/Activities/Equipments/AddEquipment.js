@@ -1,5 +1,5 @@
 import IncrementalSelect from '../../../UI/Selects/IncrementalSelect';
-import addClasses from '../../../UI/General/CSS/Form.module.css';
+import styles from '../../../UI/General/CSS/Form.module.css';
 import { fetchAllExerciseNames } from '../../../../util/apis/activities/exercises/exercisesApis';
 import { postEquipment } from '../../../../util/apis/activities/equipments/equipmentsApis';
 import { useEffect, useState} from 'react';
@@ -71,38 +71,38 @@ const AddEquipment = props => {
     };
 
     /** Render */
-    return <section className={addClasses['main-section']}>
-        <form id="add-equipment-form"  onSubmit={addEquipment} className={addClasses['main-form']}>
-            <h1 className={addClasses['form-title']}>Add Equipment</h1>
+    return <section className={styles['main-section']}>
+        <form id="add-equipment-form"  onSubmit={addEquipment} className={styles['main-form']}>
+            <h1 className={styles['form-title']}>Add Equipment</h1>
             
             {/* NAME */}
-            <label htmlFor="equipment-name" className={addClasses['text-label']}>Name:</label>
+            <label htmlFor="equipment-name" className={styles['text-label']}>Name:</label>
             <input type="text" id="equipment-name" name="name"
-                placeholder='Enter the equipment name...' className={addClasses['select-input']}/>
+                placeholder='Enter the equipment name...' className={styles['select-input']}/>
             
             {/* ALTERNATIVE NAME */}
-            <label htmlFor="equipment-alternativeName" className={addClasses['text-label']}>Alternative name:</label>
+            <label htmlFor="equipment-alternativeName" className={styles['text-label']}>Alternative name:</label>
             <input type="text" id="equipment-alternativeName" name="alternativeName"
-                placeholder='Enter an alternative name...'className={addClasses['select-input']} />
+                placeholder='Enter an alternative name...'className={styles['select-input']} />
             
             {/* DESCRIPTION */}
-            <label htmlFor="equipment-description" className={addClasses['text-label']}>Description:</label>
+            <label htmlFor="equipment-description" className={styles['text-label']}>Description:</label>
             <input type="text" id="equipment-description" name="description"
-                placeholder='Enter the equipment description...'className={addClasses['select-input']} />
+                placeholder='Enter the equipment description...'className={styles['select-input']} />
 
             {/* EXERCISES */}
-            <label htmlFor="equipment-exercises" className={addClasses['text-label']}>Exercises:</label>
+            <label htmlFor="equipment-exercises" className={styles['text-label']}>Exercises:</label>
             { exercises && exercises.length 
                 ? <IncrementalSelect info={exercisesInfo} />
-                : <img src="/loading.gif" alt="Loading..." className={addClasses['loading-img']}/>}
+                : <img src="/loading.gif" alt="Loading..." className={styles['loading-img']}/>}
             
             {/* IMAGE */}
-            <label htmlFor="equipment-image" className={addClasses['text-label']}>Image:</label>
+            <label htmlFor="equipment-image" className={styles['text-label']}>Image:</label>
             <input type="text" id="equipment-image" name="linkToImage"
-                placeholder='Enter the link for the image...' className={addClasses['select-input']}/>
+                placeholder='Enter the link for the image...' className={styles['select-input']}/>
 
             {/* SUBMIT BUTTON */}
-            <button type="submit" id="add-exercse-btn" className={addClasses['submit-btn']}>Add equipment</button>
+            <button type="submit" id="add-exercse-btn" className={styles['submit-btn']}>Add equipment</button>
         </form>
     </section>
 };
