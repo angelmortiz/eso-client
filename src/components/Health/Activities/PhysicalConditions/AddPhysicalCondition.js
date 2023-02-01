@@ -1,5 +1,5 @@
 import IncrementalInput from '../../../UI/Selects/IncrementalInput';
-import addClasses from '../../../UI/General/CSS/Form.module.css';
+import styles from '../../../UI/General/CSS/Form.module.css';
 import { postPhysicalCondition } from '../../../../util/apis/activities/physicalConditions/physicalConditionsApis';
 
 const AddPhysicalCondition = props => {
@@ -88,38 +88,38 @@ const AddPhysicalCondition = props => {
     };
 
     /** Render */
-    return <section className={addClasses['main-section']}>
-        <form id="add-physicalCondition-form"  onSubmit={addPhysicalCondition} className={addClasses['main-form']}>
-            <h1 className={addClasses['form-title']}>Add Physical Condition</h1>
+    return <section className={styles['main-section']}>
+        <form id="add-physicalCondition-form"  onSubmit={addPhysicalCondition} className={styles['main-form']}>
+            <h1 className={styles['form-title']}>Add Physical Condition</h1>
             
             {/* NAME */}
-            <label htmlFor="physicalCondition-name" className={addClasses['text-label']}>Name:</label>
+            <label htmlFor="physicalCondition-name" className={styles['text-label']}>Name:</label>
             <input type="text" id="physicalCondition-name" name="name"
-                placeholder='Enter the physical condition name...' className={addClasses['select-input']}/>
+                placeholder='Enter the physical condition name...' className={styles['select-input']}/>
 
             {/* DESCRIPTION */}
-            <label htmlFor="physicalCondition-description" className={addClasses['text-label']}>Description:</label>
+            <label htmlFor="physicalCondition-description" className={styles['text-label']}>Description:</label>
             <input type="text" id="physicalCondition-description" name="description"
-                placeholder='Enter the physical condition description...'className={addClasses['select-input']} />
+                placeholder='Enter the physical condition description...'className={styles['select-input']} />
 
             {/* SYMPTOMS */}
-            <label htmlFor="physicalCondition-symptoms" className={addClasses['text-label']}>Symptoms:</label>
+            <label htmlFor="physicalCondition-symptoms" className={styles['text-label']}>Symptoms:</label>
             <IncrementalInput input={symptomsInfo}/>
 
             {/* CAUSES */}
-            <label htmlFor="physicalCondition-causes" className={addClasses['text-label']}>Causes:</label>
+            <label htmlFor="physicalCondition-causes" className={styles['text-label']}>Causes:</label>
             <IncrementalInput input={causesInfo}/>
 
             {/* TREATMENTS */}
-            <label htmlFor="physicalCondition-treatments" className={addClasses['text-label']}>Treatments:</label>
+            <label htmlFor="physicalCondition-treatments" className={styles['text-label']}>Treatments:</label>
             <IncrementalInput input={treatmentsInfo}/>
 
             {/* TESTS */}
-            <label htmlFor="physicalCondition-tests" className={addClasses['text-label']}>Tests:</label>
+            <label htmlFor="physicalCondition-tests" className={styles['text-label']}>Tests:</label>
             <IncrementalInput input={testsInfo}/>
 
             {/* SUBMIT BUTTON */}
-            <button type="submit" id="add-exercse-btn" className={addClasses['submit-btn']}>Add Physical Condition</button>
+            <button type="submit" id="add-exercse-btn" className={styles['submit-btn']}>Add Physical Condition</button>
         </form>
     </section>
 };

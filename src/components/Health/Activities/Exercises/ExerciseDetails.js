@@ -11,7 +11,7 @@ import DeleteConfirmationModal from '../../../UI/Popups/Delete/DeleteConfirmatio
 
 const ExerciseDetails = (props) => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const navigateTo = useNavigate();
   const [exercise, setExercise] = useState(null);
   const [videoId, setVideoExercise] = useState(null);
   const [showVideo, setShowVideo] = useState(false);
@@ -45,10 +45,9 @@ const ExerciseDetails = (props) => {
   const confirmDeleteExercise = () => {
     closeDeleteModal();
 
-    //TODO: Check if exercise was deleted successfully
     deleteExercise(id).then((response) => {
-      console.log('Response: ', response);
-      navigate('/activities/exercises');
+      if (!response || !response.isSuccess) return;
+      navigateTo('/activities/exercises');
     });
   };
 
