@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchAllWorkoutNames } from '../../../../util/apis/activities/workouts/workoutsApis';
-import { postProgram } from '../../../../util/apis/activities/programs/programsApis';
+import {
+  fetchProgramById,
+  postProgram,
+} from '../../../../util/apis/activities/programs/programsApis';
 import styles from '../../../UI/General/CSS/Form.module.css';
 import SelectInput from '../../../UI/Selects/SelectInput';
 import AddWorkoutPlan from './AddWorkoutPlan';
@@ -54,11 +57,43 @@ const daysOfTheWeek = [
   'Sunday',
 ];
 
-const AddProgram = (props) => {
+const UpdateProgram = (props) => {
   const navigateTo = useNavigate();
+  const { id } = useParams();
+  const [program, setProgram] = useState();
   const [workouts, setWorkouts] = useState(null);
   const [sequence, setSequence] = useState('');
   workoutsInfo.select.options = workouts;
+
+  /** INPUT VALUES */
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [type, setType] = useState('');
+  const [duration, setDuration] = useState();
+  const [linkToImage, setLinkToImage] = useState('');
+  const [workoutPlans, setWorkoutPlans] = useState([]);
+  /** */
+
+  //Gets the most updated info from current program
+  useEffect(() => {
+    if (!id) console.log(`Error: program id not found in the url.`);
+    fetchProgramById(id).then((response) => {
+      if (!response || !response.isSuccess) return;
+      setProgram(response.body);
+    });
+  }, [id]);
+
+  //Sets input values based on the current info fetched from the db
+  useEffect(() => {
+    if (!program) return;
+    setName(program.name);
+    setDescription(program.description);
+    setType(program.type);
+    setDuration(program.duration);
+    setLinkToImage(program.linkToImage);
+    setSequence(program.sequence);
+    setWorkoutPlans(program.workouts);
+  }, [program]);
 
   useEffect(() => {
     fetchAllWorkoutNames().then((response) => {
@@ -70,18 +105,18 @@ const AddProgram = (props) => {
     });
   }, []);
 
-  const addProgram = (e) => {
+  const UpdateProgram = (e) => {
     e.preventDefault();
     const formVals = getFormValues(e.target.elements);
     console.log('formVals:  ', formVals);
 
-    postProgram(formVals).then((response) => {
-      console.log('Response: ', response);
-      if (response.isSuccess) {
-        //IMPROVE: Navigate to the just added program id
-        navigateTo(`/activities/programs`);
-      }
-    });
+    // postProgram(formVals).then((response) => {
+    //   console.log('Response: ', response);
+    //   if (response.isSuccess) {
+    //     //IMPROVE: Navigate to the just added program id
+    //     navigateTo(`/activities/programs`);
+    //   }
+    // });
   };
 
   const getFormValues = (elements) => {
@@ -156,11 +191,11 @@ const AddProgram = (props) => {
   return (
     <section className={styles['main-section']}>
       <form
-        id="add-program-form"
-        onSubmit={addProgram}
+        id="update-program-form"
+        onSubmit={UpdateProgram}
         className={styles['main-form']}
       >
-        <h1 className={styles['form-title']}>Add Program</h1>
+        <h1 className={styles['form-title']}>Update Program</h1>
 
         {/* NAME */}
         <label htmlFor="program-name" className={styles['text-label']}>
@@ -172,6 +207,8 @@ const AddProgram = (props) => {
           name="name"
           placeholder="Enter the program name..."
           className={styles['select-input']}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
 
         {/* DESCRIPTION */}
@@ -184,13 +221,15 @@ const AddProgram = (props) => {
           name="description"
           placeholder="Enter a description..."
           className={styles['select-input']}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
 
         {/* TYPE */}
         <label htmlFor="program-type" className={styles['text-label']}>
           Type:
         </label>
-        <SelectInput select={programTypes.select} />
+        <SelectInput select={programTypes.select} selectedValue={type} />
 
         {/* DURANTION */}
         <label htmlFor="program-duration" className={styles['text-label']}>
@@ -202,7 +241,10 @@ const AddProgram = (props) => {
           name="duration"
           placeholder="Enter duration in weeks..."
           className={styles['select-input']}
+          value={duration}
+          onChange={(e) => setDescription(e.target.value)}
         />
+
         {/* LINK TO IMAGE */}
         <label htmlFor="programLinkToImage" className={styles['text-label']}>
           Image:
@@ -213,7 +255,10 @@ const AddProgram = (props) => {
           name="linkToImage"
           placeholder="Enter a image link..."
           className={styles['select-input']}
+          value={linkToImage}
+          onChange={(e) => setLinkToImage(e.target.value)}
         />
+
         {/* SEQUENCE */}
         <label htmlFor="program-sequence" className={styles['text-label']}>
           Sequence:
@@ -232,25 +277,29 @@ const AddProgram = (props) => {
               key={`workoutPlan-${day}`}
               workouts={workoutsInfo}
               title={day}
+              selectedPlan={workoutPlans.find((wo) => wo.dayOfTheWeek === day)}
             />
           ))}
 
         {/* CYCLE PLAN */}
         {workouts && sequence === 'Cycle' && (
-          <IncrementalWorkoutPlan workoutsInfo={workoutsInfo} />
+          <IncrementalWorkoutPlan
+            workoutsInfo={workoutsInfo}
+            selectedPlans={workoutPlans}
+          />
         )}
 
         {/* SUBMIT BUTTON */}
         <button
           type="submit"
-          id="add-program-btn"
+          id="update-program-btn"
           className={styles['submit-btn']}
         >
-          Add program
+          Update program
         </button>
       </form>
     </section>
   );
 };
 
-export default AddProgram;
+export default UpdateProgram;

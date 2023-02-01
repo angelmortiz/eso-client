@@ -48,7 +48,7 @@ const IncrementalExercisePlan = (props) => {
     });
   };
 
-  function newExercisePlan(newCount, value = undefined) {
+  function newExercisePlan(newCount) {
     return (
       <AddExercisePlan
         exercises={exercisesInfo}
