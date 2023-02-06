@@ -1,5 +1,9 @@
 import { apiGet } from "../apiActions";
 
 export const fetchCurrentUser = () => {
-    return apiGet(`/user/currentUser`);
+    return apiGet(`/users/user`);
+}
+
+export const fetchAllUsers = () => {
+    return apiGet(`/users`);
 }

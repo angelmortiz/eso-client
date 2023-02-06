@@ -29,6 +29,7 @@ import UpdateMuscle from './Health/Activities/Muscles/UpdateMuscle';
 import UpdateEquipment from './Health/Activities/Equipments/UpdateEquipment';
 import EquipmentDetails from './Health/Activities/Equipments/EquipmentDetails';
 import Equipments from './Health/Activities/Equipments/Equipments';
+import AssignProgram from './Health/Activities/ProgramHistories/AssignProgram';
 
 //IMPROVE: Consider breaking down the routes into different files to make it more readable
 const Router = props => {
@@ -70,6 +71,9 @@ const Router = props => {
         <Route path="/activities/add-muscle" element={<AddMuscle/>}/>
         <Route path="/activities/add-equipment" element={<AddEquipment/>}/>
         {/* <Route path="/activities/add-physicalCondition" element={<AddPhysicalCondition/>}/> */}
+
+        {/* Assign activity */}
+        <Route path="/activities/program/assign" element={<AssignProgram/>}/>
 
         {/* Update activity */}
         <Route path="/activities/update-program/:id" element={<UpdateProgram/>}/>
