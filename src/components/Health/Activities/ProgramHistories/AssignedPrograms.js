@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchProgramHistoriesAssignedToUser } from '../../../../util/apis/activities/programHistories/programHistoriesApis';
 import styles from '../../../UI/General/CSS/ProgramHistory.module.css';
+import ProgramHistoryInfoCard from './ProgramHistoryInfoCard';
 
 const AssignedPrograms = (props) => {
   const [assignedPrograms, setAssignedPrograms] = useState();
@@ -28,8 +29,8 @@ const AssignedPrograms = (props) => {
 
   return (
     <div className={styles['grid']}>
-      <h1 className={styles['title']}>Assigned Programs</h1>
-      
+      <h1 className={styles['page-title']}>Assigned Programs</h1>
+
       {/* LOADING  IMAGE... */}
       {!assignedPrograms && (
         <img
@@ -42,21 +43,26 @@ const AssignedPrograms = (props) => {
       {/* ACTIVE PROGRAM */}
       {activeProgram && (
         <section id="active" className={styles['program-section']}>
-          <h3>Active Program</h3>
+          <h3 className={styles['section-label']}>Active Program</h3>
+          <ProgramHistoryInfoCard program={activeProgram} />
         </section>
       )}
 
       {/* NEXT PROGRAM */}
       {nextProgram && (
         <section id="next" className={styles['program-section']}>
-          <h3>Next Program</h3>
+          <h3 className={styles['section-label']}>Next Program</h3>
+          <ProgramHistoryInfoCard program={nextProgram} activateStart={true}/>
         </section>
       )}
 
       {/* WAITING PROGRAMS */}
       {waitingPrograms && (
         <section id="waiting" className={styles['program-section']}>
-          <h3>Waiting Programs</h3>
+          <h3 className={styles['section-label']}>Waiting Programs</h3>
+          {waitingPrograms.map((program) => (
+            <ProgramHistoryInfoCard program={program} />
+          ))}
         </section>
       )}
     </div>
