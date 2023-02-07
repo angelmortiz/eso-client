@@ -26,12 +26,6 @@ const ProgramHistoryInfoCard = (props) => {
               )}
             </span>
           )}
-          <span>
-            <strong>Duration</strong>: {program.programInfo.duration} weeks
-          </span>
-          <span>
-            <strong>Type</strong>: {program.programInfo.type}
-          </span>
           {program.isCompleted && (
             <span>
               <strong>Completed on:</strong>{' '}
@@ -41,6 +35,12 @@ const ProgramHistoryInfoCard = (props) => {
               )}
             </span>
           )}
+          <span>
+            <strong>Duration</strong>: {program.programInfo.duration} weeks
+          </span>
+          <span>
+            <strong>Type</strong>: {program.programInfo.type}
+          </span>
           <span>
             <strong>Assigned by</strong>: {program.assignedByName}
           </span>
