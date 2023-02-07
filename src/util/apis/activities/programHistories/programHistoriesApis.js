@@ -8,8 +8,8 @@ export const fetchProgramHistoryById = (id) => {
     return apiGet(`/activities/programHistory/${id}`);
 }
 
-export const programHistoriesByAssignedTo = (id) => {
-    return apiGet(`/activities/programHistories/assignedTo/${id}`);
+export const fetchProgramHistoriesAssignedToUser = (filter) => {
+    return apiGet(`/activities/programHistories/assignedTo/currentUser/${filter}`);
 }
 
 export const postProgramHistory = (body) => {

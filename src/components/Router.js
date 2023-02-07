@@ -3,7 +3,6 @@ import Home from './Home/Home';
 import AddExercise from './Health/Activities/Exercises/AddExercise';
 import AddMuscle from './Health/Activities/Muscles/AddMuscle';
 import AddEquipment from './Health/Activities/Equipments/AddEquipment';
-import AddPhysicalCondition from './Health/Activities/PhysicalConditions/AddPhysicalCondition';
 import ExerciseDetails from './Health/Activities/Exercises/ExerciseDetails';
 import Exercises from './Health/Activities/Exercises/Exercises';
 import UpdateExercise from './Health/Activities/Exercises/UpdateExercise';
@@ -31,7 +30,7 @@ import EquipmentDetails from './Health/Activities/Equipments/EquipmentDetails';
 import Equipments from './Health/Activities/Equipments/Equipments';
 import AssignProgram from './Health/Activities/ProgramHistories/AssignProgram';
 import AssignedPrograms from './Health/Activities/ProgramHistories/AssignedPrograms';
-import ProgramsHistory from './Health/Activities/ProgramHistories/ProgramsHistory';
+import CompletedPrograms from './Health/Activities/ProgramHistories/CompletedPrograms';
 
 //IMPROVE: Consider breaking down the routes into different files to make it more readable
 const Router = (props) => {
@@ -140,7 +139,7 @@ const Router = (props) => {
       {/* Programs History */}
       <Route path="/activities/programHistory/assign" element={<AssignProgram />} />
       <Route path="/activities/programHistory/assigned" element={<AssignedPrograms />} />
-      <Route path="/activities/programHistory/history" element={<ProgramsHistory />} />
+      <Route path="/activities/programHistory/completed" element={<CompletedPrograms />} />
     </Routes>
   );
 };

@@ -54,10 +54,10 @@ const NavigationBar = (props) => {
                       className={styles['li-dropdown-option']}
                     >
                       <Link
-                        to="/activities/programHistory/history"
+                        to="/activities/programHistory/completed"
                         className={styles['nav-links']}
                       >
-                        History
+                        Completed
                       </Link>
                     </li>
                   </ul>
