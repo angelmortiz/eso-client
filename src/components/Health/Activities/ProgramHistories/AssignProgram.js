@@ -21,7 +21,7 @@ const userOptions = {
     id: 'user-selection',
     name: 'user',
     value: '_id',
-    label: 'name',
+    label: 'fullName',
     options: [],
   },
 };
@@ -50,7 +50,7 @@ const AssignProgram = (props) => {
       if (!response || !response.isSuccess) return;
       
       //adds an empty default option
-      response.body.unshift({ _id: '', name: '-- Choose an user --' });
+      response.body.unshift({ _id: '', fullName: '-- Choose an user --' });
       userOptions.select.options = response.body;
       setUsers(userOptions);
     });

@@ -32,6 +32,39 @@ const NavigationBar = (props) => {
           onClick={closeMobileMenu}
         >
           <ul className={styles['ul-nav-options']}>
+            {/* MY PROGRAMS  */}
+            {isUserAuthenticated && (
+              <li key="my-programs" className={styles['dropdown']}>
+                <span> My Programs </span>
+                <div className={styles['dropdown-content']}>
+                  <ul className={styles['ul-dropdown-options']}>
+                    <li
+                      key="assigned-programs"
+                      className={styles['li-dropdown-option']}
+                    >
+                      <Link
+                        to="/activities/programHistory/assigned"
+                        className={styles['nav-links']}
+                      >
+                        Assigned
+                      </Link>
+                    </li>
+                    <li
+                      key="programs-history"
+                      className={styles['li-dropdown-option']}
+                    >
+                      <Link
+                        to="/activities/programHistory/history"
+                        className={styles['nav-links']}
+                      >
+                        History
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            )}
+
             {/* NUTRITION */}
             {/* <li key="nutrition"className={styles['dropdown']}>
                     <span> Nutrition </span>
@@ -194,6 +227,7 @@ const NavigationBar = (props) => {
                   </div>
                 </li>
               )}
+
             {/* ASSIGN  */}
             {/* Only available for admin and editor users */}
             {isUserAuthenticated &&
@@ -203,9 +237,17 @@ const NavigationBar = (props) => {
                   <span> Assign </span>
                   <div className={styles['dropdown-content']}>
                     <ul className={styles['ul-dropdown-options']}>
-                      <li key="assignProgram"className={styles['li-dropdown-option']}> 
-                            <Link to='/activities/program/assign' className={styles['nav-links']}>Program</Link>
-                        </li>
+                      <li
+                        key="assignProgram"
+                        className={styles['li-dropdown-option']}
+                      >
+                        <Link
+                          to="/activities/programHistory/assign"
+                          className={styles['nav-links']}
+                        >
+                          Program
+                        </Link>
+                      </li>
                     </ul>
                   </div>
                 </li>
