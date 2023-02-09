@@ -10,7 +10,7 @@ import DeleteConfirmationModal from '../../../UI/Popups/Delete/DeleteConfirmatio
 const ProgramDetails = (props) => {
   const { id } = useParams();
   const navigateTo = useNavigate();
-  const [program, setProgram] = useState(null);
+  const [program, setProgram] = useState( );
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   useEffect(() => {

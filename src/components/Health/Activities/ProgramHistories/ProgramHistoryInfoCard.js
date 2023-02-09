@@ -53,13 +53,22 @@ const ProgramHistoryInfoCard = (props) => {
         >
           Details
         </Link>
-        {/* LOG STARTED PROGRAM */}
-        {program.isStarted && (
+        {/* CONTINUE LOGGING PROGRAM */}
+        {program.isStarted && !program.isCompleted && (
           <Link
             to={`/activities/program/${program.programId}`}
             className={styles['btn-link']}
           >
-            Log
+            Continue
+          </Link>
+        )}
+        {/* ACCESS PROGRAM LOGS */}
+        {program.isStarted && program.isCompleted && (
+          <Link
+            to={`/activities/program/${program.programId}`}
+            className={styles['btn-link']}
+          >
+            Logs
           </Link>
         )}
         {/* START PROGRAM */}

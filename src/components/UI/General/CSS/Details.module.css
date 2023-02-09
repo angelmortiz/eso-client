@@ -120,6 +120,22 @@
   padding: 0.5rem;
 }
 
+.weeks-section {
+  width: 90%;
+  margin: 0 0 2rem 0;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-label {
+  margin-bottom: 0.5rem;
+  width: 100%;
+  padding-bottom: 5px;
+  border-bottom: 1.5px solid #028e98;
+}
+
 /*************/
 /*** PHONE ***/
 /*************/

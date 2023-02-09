@@ -5,9 +5,9 @@ import ProgramHistoryInfoCard from './ProgramHistoryInfoCard';
 
 const AssignedPrograms = (props) => {
   const [assignedPrograms, setAssignedPrograms] = useState();
-  const [activeProgram, setActiveProgram] = useState();
+  const [activePrograms, setActivePrograms] = useState();
   const [nextProgram, setNextProgram] = useState();
-  const [waitingPrograms, setWaitingPrograms] = useState();
+  const [pendingPrograms, setPendingPrograms] = useState();
 
   useEffect(() => {
     fetchProgramHistoriesAssignedToUser('notCompleted').then((response) => {
@@ -15,15 +15,15 @@ const AssignedPrograms = (props) => {
       setAssignedPrograms(response.body);
 
       //active program
-      setActiveProgram(response.body.filter((program) => program.isStarted)[0]);
+      setActivePrograms(response.body.filter((program) => program.isStarted));
       //next program
       setNextProgram(response.body.filter((program) => !program.isStarted)[0]);
-      //waiting programs
-      let waiting = response.body.filter((program) => !program.isStarted);
-      if (waiting.length > 0) {
-        waiting.shift();
+      //pending programs
+      let pending = response.body.filter((program) => !program.isStarted);
+      if (pending.length > 0) {
+        pending.shift();
       }
-      setWaitingPrograms(waiting);
+      setPendingPrograms(pending);
     });
   }, []);
 
@@ -41,10 +41,12 @@ const AssignedPrograms = (props) => {
       )}
 
       {/* ACTIVE PROGRAM */}
-      {activeProgram && (
+      {activePrograms && (
         <section id="active" className={styles['program-section']}>
-          <h3 className={styles['section-label']}>Active Program</h3>
-          <ProgramHistoryInfoCard program={activeProgram} />
+          <h3 className={styles['section-label']}>Active Programs</h3>
+          {activePrograms.map((program) => (
+            <ProgramHistoryInfoCard program={program} />
+          ))}
         </section>
       )}
 
@@ -56,11 +58,11 @@ const AssignedPrograms = (props) => {
         </section>
       )}
 
-      {/* WAITING PROGRAMS */}
-      {waitingPrograms && (
-        <section id="waiting" className={styles['program-section']}>
-          <h3 className={styles['section-label']}>Waiting Programs</h3>
-          {waitingPrograms.map((program) => (
+      {/* PENDING PROGRAMS */}
+      {pendingPrograms && (
+        <section id="pending" className={styles['program-section']}>
+          <h3 className={styles['section-label']}>Pending Programs</h3>
+          {pendingPrograms.map((program) => (
             <ProgramHistoryInfoCard program={program} />
           ))}
         </section>

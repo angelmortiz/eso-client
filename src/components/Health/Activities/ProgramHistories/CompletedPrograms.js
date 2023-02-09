@@ -28,7 +28,7 @@ const CompletedPrograms = (props) => {
 
       {/* COMPLETED PROGRAMS */}
       {completedPrograms && (
-        <section id="waiting" className={styles['program-section']}>
+        <section id="pending" className={styles['program-section']}>
           <h3 className={styles['section-label']}>Completed Programs</h3>
           {completedPrograms.map((program) => (
             <ProgramHistoryInfoCard program={program} />
