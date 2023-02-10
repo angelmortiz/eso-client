@@ -98,7 +98,7 @@ const ExerciseDetails = (props) => {
               <p className={styles['label']}>Secondary muscles: </p>
               {/* TODO: Implement logic for multiple options */}
               <p className={styles['value']}>
-                {exercise.secondaryMuscles[0]?.muscleName ||
+                {exercise.secondaryMuscles[0]?.name ||
                   'No secondary muscles'}
               </p>
             </div>
