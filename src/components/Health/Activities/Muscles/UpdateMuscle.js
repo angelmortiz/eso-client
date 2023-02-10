@@ -1,27 +1,11 @@
-import IncrementalSelect from '../../../UI/Selects/IncrementalSelect';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchAllExerciseNames } from '../../../../util/apis/activities/exercises/exercisesApis';
 import {
   fetchMuscleById,
   putMuscle,
 } from '../../../../util/apis/activities/muscles/musclesApis';
 import styles from '../../../UI/General/CSS/Form.module.css';
 import SelectInput from '../../../UI/Selects/SelectInput';
-
-const exercisesInfo = {
-  select: {
-    id: 'muscle-exercises',
-    name: 'exercises',
-    value: '_id',
-    label: 'name',
-    options: [],
-  },
-  button: {
-    id: 'add-exercise-btn',
-    label: 'Add exercise',
-  },
-};
 
 const typesInfo = {
   select: {
@@ -39,25 +23,13 @@ const UpdateMuscle = (props) => {
   const navigateTo = useNavigate();
   const { id } = useParams();
   const [muscle, setMuscle] = useState();
-  const [exercises, setExercises] = useState();
-  exercisesInfo.select.options = exercises;
 
   /** INPUT VALUES */
   const [name, setName] = useState('');
   const [alternativeName, setAlternativeName] = useState('');
   const [type, setType] = useState('');
   const [linkToImage, setLinkToImage] = useState('');
-  const [muscleExercises, setMuscleExercises] = useState([]);
   /** */
-
-  useEffect(() => {
-    fetchAllExerciseNames().then((response) => {
-      if (!response || !response.isSuccess) return;
-      //adds an empty default option
-      response.body.unshift({ _id: '', name: '-- Choose an exercise --' });
-      setExercises(response.body);
-    });
-  }, []);
 
   //Gets the most updated info from current muscle
   useEffect(() => {
@@ -75,7 +47,6 @@ const UpdateMuscle = (props) => {
     setAlternativeName(muscle.alternativeName);
     setType(muscle.type);
     setLinkToImage(muscle.linkToImage);
-    setMuscleExercises(muscle.exercises.map((ex) => ex.exerciseId));
   }, [muscle]);
 
   const updateMuscle = (e) => {
@@ -100,41 +71,6 @@ const UpdateMuscle = (props) => {
     values.type = elements.type.value;
     values.linkToImage = elements.linkToImage.value;
 
-    //extract values from multi-select options
-    values.exercises = extractMultiOptionValues(elements.exercises);
-
-    values.exercises = mapIdsToNames(
-      values.exercises,
-      exercises,
-      'exerciseId',
-      'exerciseName'
-    );
-
-    return values;
-  };
-
-  const mapIdsToNames = (values, mapArr, idProperty, nameProperty) => {
-    //maps values to objects of ids and names (required for backend)
-    return values.map((id) => {
-      const name = mapArr.find((arr) => arr._id === id)?.name;
-      return { [idProperty]: id, [nameProperty]: name };
-    });
-  };
-
-  const extractMultiOptionValues = (elements) => {
-    //if there is only one select dropdown, it adds the HTMLSelectElement to an array before extracting the value.
-    //if there are multiple select dropdowns, converts the RadioNodeList into an array (to later use .map()).
-    elements = Object.prototype.toString
-      .call(elements)
-      .includes('HTMLSelectElement')
-      ? [elements]
-      : [...elements];
-
-    let values = elements.map((element) => {
-      return element.value;
-    });
-    values = values.filter((v) => v); //removes empty selections
-    values = [...new Set(values)]; //removes duplicate values
     return values;
   };
 
@@ -184,23 +120,6 @@ const UpdateMuscle = (props) => {
         </label>
         <SelectInput select={typesInfo.select} selectedValue={type} />
 
-        {/* EXERCISES */}
-        <label htmlFor="muscle-exercises" className={styles['text-label']}>
-          Exercises:
-        </label>
-        {exercises && exercises.length ? (
-          <IncrementalSelect
-            info={exercisesInfo}
-            selectedValues={muscleExercises}
-          />
-        ) : (
-          <img
-            src="/loading.gif"
-            alt="Loading..."
-            className={styles['loading-img']}
-          />
-        )}
-
         {/* IMAGE */}
         <label htmlFor="muscle-image" className={styles['text-label']}>
           Image:
@@ -218,7 +137,7 @@ const UpdateMuscle = (props) => {
         {/* SUBMIT BUTTON */}
         <button
           type="submit"
-          id="update-exercse-btn"
+          id="update-muscle-btn"
           className={styles['submit-btn']}
         >
           Update muscle

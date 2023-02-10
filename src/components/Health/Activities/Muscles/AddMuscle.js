@@ -1,24 +1,7 @@
-import IncrementalSelect from '../../../UI/Selects/IncrementalSelect';
 import SelectInput from '../../../UI/Selects/SelectInput';
 import styles from '../../../UI/General/CSS/Form.module.css';
-import { fetchAllExerciseNames } from '../../../../util/apis/activities/exercises/exercisesApis';
-import { useEffect, useState } from 'react';
 import { postMuscle } from '../../../../util/apis/activities/muscles/musclesApis';
 import { useNavigate } from 'react-router-dom';
-
-const exercisesInfo = {
-  select: {
-    id: 'muscle-exercises',
-    name: 'exercises',
-    value: '_id',
-    label: 'name',
-    options: [],
-  },
-  button: {
-    id: 'add-exercise-btn',
-    label: 'Add exercise',
-  },
-};
 
 const typesInfo = {
   select: {
@@ -34,17 +17,6 @@ const typesInfo = {
 
 const AddMuscle = (props) => {
   const navigateTo = useNavigate();
-  const [exercises, setExercises] = useState([]);
-  exercisesInfo.select.options = exercises;
-  
-  useEffect(() => {
-    fetchAllExerciseNames().then((response) => {
-      if (!response || !response.isSuccess) return;
-      //adds an empty default option
-      response.body.unshift({ _id: '', name: '-- Choose an exercise --' });
-      setExercises(response.body);
-    });
-  }, []);
 
   /** Functions */
   const addMuscle = (e) => {
@@ -64,31 +36,6 @@ const AddMuscle = (props) => {
     values.alternativeName = elements.alternativeName.value;
     values.type = elements.type.value;
     values.linkToImage = elements.linkToImage.value;
-
-    //multi-select options
-    values.exercises = extractMultiOptionValues(elements.exercises);
-    return values;
-  };
-
-  const extractMultiOptionValues = (elements) => {
-    //if there is only one select dropdown, it adds the HTMLSelectElement to an array before extracting the value.
-    //if there are multiple select dropdowns, converts the RadioNodeList into an array (to later use .map()).
-    elements = Object.prototype.toString
-      .call(elements)
-      .includes('HTMLSelectElement')
-      ? [elements]
-      : [...elements];
-
-    let values = elements.map((element) => {
-      return element.value;
-    });
-    values = values.filter((v) => v); //removes empty selections
-    values = [...new Set(values)]; //removes duplicate values
-    //maps values to objects of ids and names (required for backend)
-    values = values.map((id) => {
-      const name = exercises.find((exercise) => exercise._id === id)?.name;
-      return { exerciseId: id, exerciseName: name };
-    });
     return values;
   };
 
@@ -135,20 +82,6 @@ const AddMuscle = (props) => {
         </label>
         <SelectInput select={typesInfo.select} />
 
-        {/* EXERCISES */}
-        <label htmlFor="muscle-exercises" className={styles['text-label']}>
-          Exercises:
-        </label>
-        {exercises && exercises.length ? (
-          <IncrementalSelect info={exercisesInfo} />
-        ) : (
-          <img
-            src="/loading.gif"
-            alt="Loading..."
-            className={styles['loading-img']}
-          />
-        )}
-
         {/* IMAGE */}
         <label htmlFor="muscle-image" className={styles['text-label']}>
           Image:
@@ -164,7 +97,7 @@ const AddMuscle = (props) => {
         {/* SUBMIT BUTTON */}
         <button
           type="submit"
-          id="add-exercse-btn"
+          id="add-muscle-btn"
           className={styles['submit-btn']}
         >
           Add muscle

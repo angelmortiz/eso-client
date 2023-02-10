@@ -90,7 +90,7 @@ const ExerciseDetails = (props) => {
             <div className={styles['info-block']}>
               <p className={styles['label']}>Main muscle: </p>
               <p className={styles['value']}>
-                {exercise.mainMuscle.muscleName}
+                {exercise.mainMuscle.name}
               </p>
             </div>
             {/* SECONDARY MUSCLES */}
@@ -113,7 +113,7 @@ const ExerciseDetails = (props) => {
               <p className={styles['label']}>Equipments: </p>
               {/* TODO: Implement logic for multiple options */}
               <p className={styles['value']}>
-                {exercise.equipments[0]?.equipmentName || 'No equipment'}
+                {exercise.equipments[0]?.name || 'No equipment'}
               </p>
             </div>
           </div>

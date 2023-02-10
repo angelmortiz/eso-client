@@ -145,9 +145,9 @@ const NavigationBar = (props) => {
             </li>
 
             {/* ADD NEW */}
-            {/* Only available for admin and editor users */}
+            {/* Only available for Admin and editor users */}
             {isUserAuthenticated &&
-              (currentUserInfo.role === 'admin' ||
+              (currentUserInfo.role === 'Admin' ||
                 currentUserInfo.role === 'editor') && (
                 <li key="addNew" className={styles['dropdown']}>
                   <span> Add New </span>
@@ -229,9 +229,9 @@ const NavigationBar = (props) => {
               )}
 
             {/* ASSIGN  */}
-            {/* Only available for admin and editor users */}
+            {/* Only available for Admin and editor users */}
             {isUserAuthenticated &&
-              (currentUserInfo.role === 'admin' ||
+              (currentUserInfo.role === 'Admin' ||
                 currentUserInfo.role === 'editor') && (
                 <li key="assign" className={styles['dropdown']}>
                   <span> Assign </span>
