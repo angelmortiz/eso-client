@@ -164,8 +164,7 @@ const UpdateProgram = (props) => {
     daysOfTheWeek.forEach((day, index) => {
       let planVals = {};
       planVals.dayOfTheWeek = day;
-      planVals.workoutId = workoutIds[index];
-      planVals.name = workouts.find((ex) => ex._id === workoutIds[index])?.name;
+      planVals.workout = workoutIds[index];
 
       workoutPlanValues.push(planVals);
     });
@@ -180,8 +179,7 @@ const UpdateProgram = (props) => {
     workoutIds.forEach((id, index) => {
       let planVals = {};
       planVals.dayNumber = index + 1;
-      planVals.workoutId = id;
-      planVals.name = workouts.find((ex) => ex._id === id)?.name;
+      planVals.workout = id;
 
       workoutPlanValues.push(planVals);
     });

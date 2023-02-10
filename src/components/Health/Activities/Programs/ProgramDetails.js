@@ -90,8 +90,8 @@ const ProgramDetails = (props) => {
                         : workout.dayNumber}
                     </td>
                     <td>
-                      <Link to={`/activities/workout/${workout.workoutId}`}>
-                        {workout.name}
+                      <Link to={`/activities/workout/${workout.workout?._id}`}>
+                        {workout.workout?.name}
                       </Link>
                     </td>
                   </tr>
@@ -110,7 +110,7 @@ const ProgramDetails = (props) => {
         </Link>
         <button
           type="button"
-          id="delete-exercise-btn"
+          id="delete-program-btn"
           className={styles['bottom-btns']}
           onClick={openDeleteConfirmationModal}
         >
