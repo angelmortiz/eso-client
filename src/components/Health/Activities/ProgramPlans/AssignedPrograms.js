@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { fetchProgramHistoriesAssignedToUser } from '../../../../util/apis/activities/programHistories/programHistoriesApis';
-import styles from '../../../UI/General/CSS/ProgramHistory.module.css';
-import ProgramHistoryInfoCard from './ProgramHistoryInfoCard';
+import { fetchProgramPlansAssignedToUser } from '../../../../util/apis/activities/programPlans/programPlansApis';
+import styles from '../../../UI/General/CSS/ProgramPlan.module.css';
+import ProgramPlanInfoCard from './ProgramPlanInfoCard';
 
 const AssignedPrograms = (props) => {
   const [assignedPrograms, setAssignedPrograms] = useState();
@@ -10,7 +10,7 @@ const AssignedPrograms = (props) => {
   const [pendingPrograms, setPendingPrograms] = useState();
 
   useEffect(() => {
-    fetchProgramHistoriesAssignedToUser('notCompleted').then((response) => {
+    fetchProgramPlansAssignedToUser('notCompleted').then((response) => {
       if (!response || !response.isSuccess) return;
       setAssignedPrograms(response.body);
 
@@ -45,7 +45,7 @@ const AssignedPrograms = (props) => {
         <section id="active" className={styles['program-section']}>
           <h3 className={styles['section-label']}>Active Programs</h3>
           {activePrograms.map((program) => (
-            <ProgramHistoryInfoCard program={program} />
+            <ProgramPlanInfoCard program={program} />
           ))}
         </section>
       )}
@@ -54,7 +54,7 @@ const AssignedPrograms = (props) => {
       {nextProgram && (
         <section id="next" className={styles['program-section']}>
           <h3 className={styles['section-label']}>Next Program</h3>
-          <ProgramHistoryInfoCard program={nextProgram} activateStart={true}/>
+          <ProgramPlanInfoCard program={nextProgram} activateStart={true}/>
         </section>
       )}
 
@@ -63,7 +63,7 @@ const AssignedPrograms = (props) => {
         <section id="pending" className={styles['program-section']}>
           <h3 className={styles['section-label']}>Pending Programs</h3>
           {pendingPrograms.map((program) => (
-            <ProgramHistoryInfoCard program={program} />
+            <ProgramPlanInfoCard program={program} />
           ))}
         </section>
       )}

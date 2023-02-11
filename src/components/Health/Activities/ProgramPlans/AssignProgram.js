@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postProgramHistory } from '../../../../util/apis/activities/programHistories/programHistoriesApis';
+import { postProgramPlan } from '../../../../util/apis/activities/programPlans/programPlansApis';
 import { fetchAllProgramNames } from '../../../../util/apis/activities/programs/programsApis';
 import { fetchAllUsers } from '../../../../util/apis/users/usersApis';
 import styles from '../../../UI/General/CSS/Form.module.css';
@@ -59,7 +59,7 @@ const AssignProgram = (props) => {
   const assignProgram = (e) => {
     e.preventDefault();
 
-    postProgramHistory({ programId: assignedProgram, assignedTo }).then(
+    postProgramPlan({ programId: assignedProgram, assignedTo }).then(
       (response) => {
         console.log('Response: ', response);
           if (response.isSuccess) {
