@@ -33,6 +33,7 @@ import AssignedPrograms from './Health/Activities/ProgramPlans/AssignedPrograms'
 import CompletedPrograms from './Health/Activities/ProgramPlans/CompletedPrograms';
 import ProgramLogs from './Health/Activities/ProgramPlans/ProgramLogs';
 import WorkoutLogs from './Health/Activities/ProgramPlans/WorkoutLogs';
+import ProgramPlanDetails from './Health/Activities/ProgramPlans/ProgramPlanDetails';
 
 //IMPROVE: Consider breaking down the routes into different files to make it more readable
 const Router = (props) => {
@@ -138,6 +139,7 @@ const Router = (props) => {
       <Route path="/activities/programPlan/assign" element={<AssignProgram />} />
       <Route path="/activities/programPlan/assigned" element={<AssignedPrograms />} />
       <Route path="/activities/programPlan/completed" element={<CompletedPrograms />} />
+      <Route path="/activities/programPlan/:id" element={<ProgramPlanDetails />} />
 
       {/* Logs */}
       <Route path="/activities/programPlan/program/logs/:id" element={<ProgramLogs />} />

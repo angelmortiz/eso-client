@@ -5,25 +5,26 @@ import ProgramPlanInfoCard from './ProgramPlanInfoCard';
 
 const AssignedPrograms = (props) => {
   const [assignedPrograms, setAssignedPrograms] = useState();
-  const [activePrograms, setActivePrograms] = useState();
-  const [nextProgram, setNextProgram] = useState();
-  const [pendingPrograms, setPendingPrograms] = useState();
+  // const [activePrograms, setActivePrograms] = useState();
+  // const [nextProgram, setNextProgram] = useState();
+  // const [pendingPrograms, setPendingPrograms] = useState();
 
   useEffect(() => {
-    fetchProgramPlansAssignedToUser('notCompleted').then((response) => {
+    fetchProgramPlansAssignedToUser().then((response) => {
       if (!response || !response.isSuccess) return;
+      console.log('response: ', response);
       setAssignedPrograms(response.body);
 
-      //active program
-      setActivePrograms(response.body.filter((program) => program.isStarted));
-      //next program
-      setNextProgram(response.body.filter((program) => !program.isStarted)[0]);
-      //pending programs
-      let pending = response.body.filter((program) => !program.isStarted);
-      if (pending.length > 0) {
-        pending.shift();
-      }
-      setPendingPrograms(pending);
+      // //active program
+      // setActivePrograms(response.body.filter((program) => program.isStarted));
+      // //next program
+      // setNextProgram(response.body.filter((program) => !program.isStarted)[0]);
+      // //pending programs
+      // let pending = response.body.filter((program) => !program.isStarted);
+      // if (pending.length > 0) {
+      //   pending.shift();
+      // }
+      // setPendingPrograms(pending);
     });
   }, []);
 
@@ -40,7 +41,20 @@ const AssignedPrograms = (props) => {
         />
       )}
 
-      {/* ACTIVE PROGRAM */}
+      {/* ASSIGNED PROGRAMS */}
+      {assignedPrograms && (
+        <section id="active" className={styles['program-section']}>
+          <h3 className={styles['section-label']}>Assigned Programs</h3>
+          {assignedPrograms.map((programPlan) => (
+            <ProgramPlanInfoCard
+              key={`programPlan_${programPlan._id}`}
+              programPlan={programPlan}
+            />
+          ))}
+        </section>
+      )}
+
+      {/*  
       {activePrograms && (
         <section id="active" className={styles['program-section']}>
           <h3 className={styles['section-label']}>Active Programs</h3>
@@ -50,15 +64,15 @@ const AssignedPrograms = (props) => {
         </section>
       )}
 
-      {/* NEXT PROGRAM */}
+      
       {nextProgram && (
         <section id="next" className={styles['program-section']}>
           <h3 className={styles['section-label']}>Next Program</h3>
-          <ProgramPlanInfoCard program={nextProgram} activateStart={true}/>
+          <ProgramPlanInfoCard program={nextProgram} activateStart={true} />
         </section>
       )}
 
-      {/* PENDING PROGRAMS */}
+      
       {pendingPrograms && (
         <section id="pending" className={styles['program-section']}>
           <h3 className={styles['section-label']}>Pending Programs</h3>
@@ -66,7 +80,9 @@ const AssignedPrograms = (props) => {
             <ProgramPlanInfoCard program={program} />
           ))}
         </section>
+          
       )}
+    */}
     </div>
   );
 };
