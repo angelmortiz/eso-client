@@ -59,7 +59,7 @@ const AssignProgram = (props) => {
   const assignProgram = (e) => {
     e.preventDefault();
 
-    postProgramPlan({ programId: assignedProgram, assignedTo }).then(
+    postProgramPlan({ program: assignedProgram, assignedTo }).then(
       (response) => {
         console.log('Response: ', response);
           if (response.isSuccess) {
