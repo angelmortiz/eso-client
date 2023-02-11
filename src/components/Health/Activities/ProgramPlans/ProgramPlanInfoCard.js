@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import styles from '../../../UI/General/CSS/ProgramHistory.module.css';
+import styles from '../../../UI/General/CSS/ProgramPlan.module.css';
 
-const ProgramHistoryInfoCard = (props) => {
+const ProgramPlanInfoCard = (props) => {
   const { program, activateStart } = props;
   const dateFormat = { month: 'long', day: 'numeric', year: 'numeric' };
 
@@ -85,4 +85,4 @@ const ProgramHistoryInfoCard = (props) => {
   );
 };
 
-export default ProgramHistoryInfoCard;
+export default ProgramPlanInfoCard;

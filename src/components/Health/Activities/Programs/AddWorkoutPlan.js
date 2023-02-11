@@ -16,7 +16,7 @@ const AddWorkoutPlan = (props) => {
         select={workouts.select}
         value="_id"
         label="value"
-        selectedValue={selectedPlan?.workoutId}
+        selectedValue={selectedPlan?.workout?._id}
       />
     </div>
   );

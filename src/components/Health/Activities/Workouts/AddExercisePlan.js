@@ -6,7 +6,7 @@ const AddExercisePlan = (props) => {
   const { exercises, count, selectedPlan } = props;
 
   /** INPUT VALUES */
-  const [exerciseId, setExerciseId] = useState();
+  const [exercise, setExercise] = useState();
   const [sets, setSets] = useState([0, 0]);
   const [reps, setReps] = useState([0, 0]);
   const [tempo, setTempo] = useState([0, 0, 0, 0]);
@@ -18,7 +18,7 @@ const AddExercisePlan = (props) => {
   useEffect(() => {
     if (!selectedPlan) return;
 
-    setExerciseId(selectedPlan.exerciseId);
+    setExercise(selectedPlan.exercise);
     setSets(selectedPlan.sets);
     setReps(selectedPlan.reps);
     setTempo(selectedPlan.tempo);
@@ -38,8 +38,8 @@ const AddExercisePlan = (props) => {
         select={exercises.select}
         value="_id"
         label="value"
-        selectedValue={exerciseId}
-        onChange={(e) => setExerciseId(e.target.value)}
+        selectedValue={exercise?._id}
+        onChange={(e) => setExercise(e.target.value)}
       />
 
       {/* SETS */}

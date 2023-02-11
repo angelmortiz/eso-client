@@ -117,7 +117,7 @@ const AddExercise = (props) => {
   const addExercise = (e) => {
     e.preventDefault();
     const formVals = getFormValues(e.target.elements);
-
+    console.log(formVals);
     postExercise(formVals).then((response) => {
       console.log('Response: ', response);
       if (response.isSuccess) {
@@ -137,29 +137,12 @@ const AddExercise = (props) => {
     values.linkToVideo = elements.linkToVideo.value;
     values.mainMuscle = elements.mainMuscle.value;
 
-    //multi-select options
+    // multi-select options
     values.secondaryMuscles = extractMultiOptionValues(
       elements.secondaryMuscles
     );
     values.types = extractMultiOptionValues(elements.types);
     values.equipments = extractMultiOptionValues(elements.equipments);
-
-    //maps the id of each selection to its name
-    values.mainMuscle = values.mainMuscle
-      ? mapIdsToNames([values.mainMuscle], muscles, 'muscleId', 'muscleName')[0]
-      : {};
-    values.secondaryMuscles = mapIdsToNames(
-      values.secondaryMuscles,
-      muscles,
-      'muscleId',
-      'muscleName'
-    );
-    values.equipments = mapIdsToNames(
-      values.equipments,
-      equipments,
-      'equipmentId',
-      'equipmentName'
-    );
 
     return values;
   };
@@ -179,14 +162,6 @@ const AddExercise = (props) => {
     values = values.filter((v) => v); //removes empty selections
     values = [...new Set(values)]; //removes duplicate values
     return values;
-  };
-
-  const mapIdsToNames = (values, mapArr, idProperty, nameProperty) => {
-    //maps values to objects of ids and names (required for backend)
-    return values.map((id) => {
-      const name = mapArr.find((arr) => arr._id === id)?.name;
-      return { [idProperty]: id, [nameProperty]: name };
-    });
   };
 
   /** Render */

@@ -43,18 +43,18 @@ const NavigationBar = (props) => {
                       className={styles['li-dropdown-option']}
                     >
                       <Link
-                        to="/activities/programHistory/assigned"
+                        to="/activities/programPlan/assigned"
                         className={styles['nav-links']}
                       >
                         Assigned
                       </Link>
                     </li>
                     <li
-                      key="programs-history"
+                      key="programs-plan"
                       className={styles['li-dropdown-option']}
                     >
                       <Link
-                        to="/activities/programHistory/completed"
+                        to="/activities/programPlan/completed"
                         className={styles['nav-links']}
                       >
                         Completed
@@ -145,9 +145,9 @@ const NavigationBar = (props) => {
             </li>
 
             {/* ADD NEW */}
-            {/* Only available for admin and editor users */}
+            {/* Only available for Admin and editor users */}
             {isUserAuthenticated &&
-              (currentUserInfo.role === 'admin' ||
+              (currentUserInfo.role === 'Admin' ||
                 currentUserInfo.role === 'editor') && (
                 <li key="addNew" className={styles['dropdown']}>
                   <span> Add New </span>
@@ -229,9 +229,9 @@ const NavigationBar = (props) => {
               )}
 
             {/* ASSIGN  */}
-            {/* Only available for admin and editor users */}
+            {/* Only available for Admin and editor users */}
             {isUserAuthenticated &&
-              (currentUserInfo.role === 'admin' ||
+              (currentUserInfo.role === 'Admin' ||
                 currentUserInfo.role === 'editor') && (
                 <li key="assign" className={styles['dropdown']}>
                   <span> Assign </span>
@@ -242,7 +242,7 @@ const NavigationBar = (props) => {
                         className={styles['li-dropdown-option']}
                       >
                         <Link
-                          to="/activities/programHistory/assign"
+                          to="/activities/programPlan/assign"
                           className={styles['nav-links']}
                         >
                           Program

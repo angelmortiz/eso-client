@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { fetchProgramHistoryById } from '../../../../util/apis/activities/programHistories/programHistoriesApis';
+import { fetchProgramPlanById } from '../../../../util/apis/activities/programPlans/programPlansApis';
 import { fetchProgramById } from '../../../../util/apis/activities/programs/programsApis';
 import styles from '../../../UI/General/CSS/Details.module.css';
 
@@ -22,7 +22,7 @@ const ProgramLogs = (props) => {
 
   useEffect(() => {
     if (!id) console.error(`Error: programLog id not found in the url.`);
-    fetchProgramHistoryById(id).then((response) => {
+    fetchProgramPlanById(id).then((response) => {
       if (!response || !response.isSuccess) return;
       setProgramLog(response.body);
     });

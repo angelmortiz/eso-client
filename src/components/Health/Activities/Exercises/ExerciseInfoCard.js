@@ -14,12 +14,12 @@ const ExerciseInfoCard = props => {
                 <div className={styles['general-info']}>
                     <div className={styles['info-block']}>
                         <p className={styles['label']}>Muscle:</p>
-                        <p className={styles['value']}>{info.mainMuscle.muscleName}</p>
+                        <p className={styles['value']}>{info.mainMuscle.name}</p>
                     </div>
                     <div className={styles['info-block']}>
                         <p className={styles['label']}>Equipment:</p>
                         {/* TODO: Handle scenarios where there is more than one equipment */}
-                        <p className={styles['value']}>{info.equipments[0]?.equipmentName}</p>
+                        <p className={styles['value']}>{info.equipments[0]?.name}</p>
                     </div>
                     <div className={styles['info-block']}>
                         <p className={styles['label']}>Type:</p>
