@@ -92,8 +92,8 @@ const WorkoutDetails = (props) => {
                   <tr key={`row-${index + 1}`}>
                     <td>{index + 1}</td>
                     <td>
-                      <Link to={`/activities/exercise/${ex.exerciseId}`}>
-                        {ex.name}
+                      <Link to={`/activities/exercise/${ex.exercise._id}`}>
+                        {ex.exercise.name}
                       </Link>
                     </td>
                     <td>{ex.sets.join('-')}</td>

@@ -1,110 +1,102 @@
-import IncrementalSelect from '../../../UI/Selects/IncrementalSelect';
 import styles from '../../../UI/General/CSS/Form.module.css';
-import { fetchAllExerciseNames } from '../../../../util/apis/activities/exercises/exercisesApis';
 import { postEquipment } from '../../../../util/apis/activities/equipments/equipmentsApis';
-import { useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const AddEquipment = props => {
-    /** Fields Data */
-    const [exercises, setExercises] = useState([]);
+const AddEquipment = (props) => {
+  const navigateTo = useNavigate();
 
-    useEffect(() => {
-        fetchAllExerciseNames().then(response => { 
-            //adds an empty default option
-            response.body.unshift({_id: "", name: "-- Choose an exercise --"});
-            setExercises(response.body);
-        });
-    }, []);
+  /** Functions */
+  const addEquipment = (e) => {
+    e.preventDefault();
+    const formVals = getFormValues(e.target.elements);
+    
+    postEquipment(formVals).then((response) => {
+      console.log('response: ', response);
+      navigateTo('/activities/equipments');
+    });
+  };
 
-    const exercisesInfo = {
-        select: {
-            id: "equipment-exercises",
-            name: "exercises",
-            value: "_id",
-            label: "name",
-            options: exercises
-        },
-        button: {
-            id: "add-exercise-btn",
-            label: "Add exercise"
-        }
-    };
+  const getFormValues = (elements) => {
+    const values = {};
+    values.name = elements.name.value;
+    values.alternativeName = elements.alternativeName.value;
+    values.description = elements.description.value;
+    values.linkToImage = elements.linkToImage.value;
+    return values;
+  };
 
-    /** Functions */
-    const addEquipment = (e) => {
-        e.preventDefault();
-        const formVals = getFormValues(e.target.elements);
+  /** Render */
+  return (
+    <section className={styles['main-section']}>
+      <form
+        id="add-equipment-form"
+        onSubmit={addEquipment}
+        className={styles['main-form']}
+      >
+        <h1 className={styles['form-title']}>Add Equipment</h1>
 
-        //TODO: Handle errors
-        postEquipment(formVals).then(response => { 
-            console.log("response: ", response);
-        });
-    };
+        {/* NAME */}
+        <label htmlFor="equipment-name" className={styles['text-label']}>
+          Name:
+        </label>
+        <input
+          type="text"
+          id="equipment-name"
+          name="name"
+          placeholder="Enter the equipment name..."
+          className={styles['select-input']}
+        />
 
-    const getFormValues = (elements) => {
-        const values = {};
-        values.name = elements.name.value;
-        values.alternativeName = elements.alternativeName.value;
-        values.description = elements.description.value;
-        values.linkToImage = elements.linkToImage.value;
+        {/* ALTERNATIVE NAME */}
+        <label
+          htmlFor="equipment-alternativeName"
+          className={styles['text-label']}
+        >
+          Alternative name:
+        </label>
+        <input
+          type="text"
+          id="equipment-alternativeName"
+          name="alternativeName"
+          placeholder="Enter an alternative name..."
+          className={styles['select-input']}
+        />
 
-        //multi-select options
-        values.exercises = extractMultiOptionValues(elements.exercises);
-        return values;
-    };
+        {/* DESCRIPTION */}
+        <label htmlFor="equipment-description" className={styles['text-label']}>
+          Description:
+        </label>
+        <input
+          type="text"
+          id="equipment-description"
+          name="description"
+          placeholder="Enter the equipment description..."
+          className={styles['select-input']}
+        />
 
-    const extractMultiOptionValues = (elements) => {
-        //if there is only one select dropdown, it adds the HTMLSelectElement to an array before extracting the value.
-        //if there are multiple select dropdowns, converts the RadioNodeList into an array (to later use .map()).
-        elements = Object.prototype.toString.call(elements).includes('HTMLSelectElement') ?
-            [elements] : [...elements];
-        
-        let values = elements.map(element => { return element.value; });
-        values = values.filter(v => v); //removes empty selections
-        values = [...new Set(values)]; //removes duplicate values
-        //maps values to objects of ids and names (required for backend)
-        values = values.map(id => {
-            const name = exercises.find(exercise => exercise._id === id)?.name;
-            return {exerciseId: id, exerciseName: name};
-        });
-        return values;
-    };
+        {/* IMAGE */}
+        <label htmlFor="equipment-image" className={styles['text-label']}>
+          Image:
+        </label>
+        <input
+          type="text"
+          id="equipment-image"
+          name="linkToImage"
+          placeholder="Enter the link for the image..."
+          className={styles['select-input']}
+        />
 
-    /** Render */
-    return <section className={styles['main-section']}>
-        <form id="add-equipment-form"  onSubmit={addEquipment} className={styles['main-form']}>
-            <h1 className={styles['form-title']}>Add Equipment</h1>
-            
-            {/* NAME */}
-            <label htmlFor="equipment-name" className={styles['text-label']}>Name:</label>
-            <input type="text" id="equipment-name" name="name"
-                placeholder='Enter the equipment name...' className={styles['select-input']}/>
-            
-            {/* ALTERNATIVE NAME */}
-            <label htmlFor="equipment-alternativeName" className={styles['text-label']}>Alternative name:</label>
-            <input type="text" id="equipment-alternativeName" name="alternativeName"
-                placeholder='Enter an alternative name...'className={styles['select-input']} />
-            
-            {/* DESCRIPTION */}
-            <label htmlFor="equipment-description" className={styles['text-label']}>Description:</label>
-            <input type="text" id="equipment-description" name="description"
-                placeholder='Enter the equipment description...'className={styles['select-input']} />
-
-            {/* EXERCISES */}
-            <label htmlFor="equipment-exercises" className={styles['text-label']}>Exercises:</label>
-            { exercises && exercises.length 
-                ? <IncrementalSelect info={exercisesInfo} />
-                : <img src="/loading.gif" alt="Loading..." className={styles['loading-img']}/>}
-            
-            {/* IMAGE */}
-            <label htmlFor="equipment-image" className={styles['text-label']}>Image:</label>
-            <input type="text" id="equipment-image" name="linkToImage"
-                placeholder='Enter the link for the image...' className={styles['select-input']}/>
-
-            {/* SUBMIT BUTTON */}
-            <button type="submit" id="add-exercse-btn" className={styles['submit-btn']}>Add equipment</button>
-        </form>
+        {/* SUBMIT BUTTON */}
+        <button
+          type="submit"
+          id="add-equipment-btn"
+          className={styles['submit-btn']}
+        >
+          Add equipment
+        </button>
+      </form>
     </section>
+  );
 };
 
 export default AddEquipment;

@@ -129,11 +129,11 @@ const UpdateExercise = (props) => {
     setAlternativeName(exercise.alternativeName);
     setDifficulty(exercise.difficulty);
     setCompoundMovement(exercise.compoundMovement ? 'yes' : 'no');
-    setMainMuscle(exercise.mainMuscle?.muscleId);
+    setMainMuscle(exercise.mainMuscle?._id);
     setSecondaryMuscles(
-      extractSelectedValues(exercise.secondaryMuscles, 'muscleId')
+      extractSelectedValues(exercise.secondaryMuscles, '_id')
     );
-    setEquipments(extractSelectedValues(exercise.equipments, 'equipmentId'));
+    setEquipments(extractSelectedValues(exercise.equipments, '_id'));
     setTypes(exercise.types);
     setLinkToImage(exercise.linkToImage);
     setLinkToVideo(exercise.linkToVideo);
@@ -193,28 +193,6 @@ const UpdateExercise = (props) => {
     values.types = extractMultiOptionValues(elements.types);
     values.equipments = extractMultiOptionValues(elements.equipments);
 
-    //maps the id of each selection to its name (required for the db schema)
-    values.mainMuscle = values.mainMuscle
-      ? mapIdsToNames(
-          [values.mainMuscle],
-          musclesOptions,
-          'muscleId',
-          'muscleName'
-        )[0]
-      : {};
-    values.secondaryMuscles = mapIdsToNames(
-      values.secondaryMuscles,
-      musclesOptions,
-      'muscleId',
-      'muscleName'
-    );
-    values.equipments = mapIdsToNames(
-      values.equipments,
-      equipmentsOptions,
-      'equipmentId',
-      'equipmentName'
-    );
-
     return values;
   };
 
@@ -233,14 +211,6 @@ const UpdateExercise = (props) => {
     values = values.filter((v) => v); //removes empty selections
     values = [...new Set(values)]; //removes duplicate values
     return values;
-  };
-
-  const mapIdsToNames = (values, mapArr, idProperty, nameProperty) => {
-    //maps values to objects of ids and names (required for backend)
-    return values.map((id) => {
-      const name = mapArr.find((arr) => arr._id === id)?.name;
-      return { [idProperty]: id, [nameProperty]: name };
-    });
   };
 
   /** Render */
