@@ -29,11 +29,11 @@ import UpdateEquipment from './Health/Activities/Equipments/UpdateEquipment';
 import EquipmentDetails from './Health/Activities/Equipments/EquipmentDetails';
 import Equipments from './Health/Activities/Equipments/Equipments';
 import AssignProgram from './Health/Activities/ProgramPlans/AssignProgram';
-import AssignedPrograms from './Health/Activities/ProgramPlans/AssignedPrograms';
 import CompletedPrograms from './Health/Activities/ProgramPlans/CompletedPrograms';
 import ProgramLogs from './Health/Activities/ProgramPlans/ProgramLogs';
 import WorkoutLogs from './Health/Activities/ProgramPlans/WorkoutLogs';
 import ProgramPlanDetails from './Health/Activities/ProgramPlans/ProgramPlanDetails';
+import AssignedProgramPlans from './Health/Activities/ProgramPlans/AssignedProgramPlans';
 
 //IMPROVE: Consider breaking down the routes into different files to make it more readable
 const Router = (props) => {
@@ -136,14 +136,14 @@ const Router = (props) => {
       />
 
       {/* Programs Plans */}
-      <Route path="/activities/programPlan/assign" element={<AssignProgram />} />
-      <Route path="/activities/programPlan/assigned" element={<AssignedPrograms />} />
-      <Route path="/activities/programPlan/completed" element={<CompletedPrograms />} />
-      <Route path="/activities/programPlan/:id" element={<ProgramPlanDetails />} />
+      <Route path="/activities/programplan/assign" element={<AssignProgram />} />
+      <Route path="/activities/programplan/assigned" element={<AssignedProgramPlans />} />
+      <Route path="/activities/programplan/completed" element={<CompletedPrograms />} />
+      <Route path="/activities/programplan/:id" element={<ProgramPlanDetails />} />
 
       {/* Logs */}
-      <Route path="/activities/programPlan/program/logs/:id" element={<ProgramLogs />} />
-      <Route path="/activities/programPlan/workout/logs/:id" element={<WorkoutLogs />} />
+      <Route path="/activities/programplan/program/logs/:id" element={<ProgramLogs />} />
+      <Route path="/activities/programplan/workout/logs/:id" element={<WorkoutLogs />} />
 
     </Routes>
   );

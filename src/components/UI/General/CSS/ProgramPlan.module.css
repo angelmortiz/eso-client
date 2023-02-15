@@ -20,7 +20,7 @@
   width: 50px;
 }
 
-.program-section {
+.programPlan-section {
   width: 90%;
   margin: 0 0 2rem 0;
   text-align: start;
@@ -50,7 +50,7 @@
   margin-bottom: 1rem;
 }
 
-.program-info {
+.programPlan-info {
   width: 100%;
   display: flex;
 }
@@ -68,7 +68,7 @@
   height: 150px;
 }
 
-.program-details {
+.programPlan-details {
   flex-grow: 1;
   margin: auto;
   display: flex;

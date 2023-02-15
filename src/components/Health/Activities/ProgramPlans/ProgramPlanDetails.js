@@ -104,7 +104,7 @@ const ProgramPlanDetails = (props) => {
           to={`/activities/update-programPlan/${id}`}
           className={styles['bottom-btns']}
         >
-          Update
+          Log
         </Link>
       </div>
     </div>

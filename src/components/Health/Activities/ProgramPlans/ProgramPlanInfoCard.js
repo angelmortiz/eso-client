@@ -8,7 +8,7 @@ const ProgramPlanInfoCard = (props) => {
   return (
     <div className={styles['card']}>
       <h2 className={styles['card-title']}>{programPlan.program.name}</h2>
-      <div className={styles['program-info']}>
+      <div className={styles['programPlan-info']}>
         <div className={styles['img-div']}>
           <img
             src={programPlan.program.linkToImage}
@@ -16,7 +16,7 @@ const ProgramPlanInfoCard = (props) => {
             className={styles['img']}
           />
         </div>
-        <div className={styles['program-details']}>
+        <div className={styles['programPlan-details']}>
           {/* {program.isStarted && (
             <span>
               <strong>Started on:</strong>{' '}
@@ -48,15 +48,21 @@ const ProgramPlanInfoCard = (props) => {
       </div>
       <div className={styles['btns-div']}>
         <Link
-          to={`/activities/programPlan/${programPlan._id}`}
+          to={`/activities/programplan/${programPlan._id}`}
           className={styles['btn-link']}
         >
           Details
         </Link>
+        <Link
+          to={`/activities/programplan/${programPlan._id}`}
+          className={styles['btn-link']}
+        >
+          Log
+        </Link>
         {/*  
         {programPlan.isStarted && !programPlan.isCompleted && (
           <Link
-            to={`/activities/programPlan/${programPlan.program_id}`}
+            to={`/activities/programplan/${programPlan.program_id}`}
             className={styles['btn-link']}
           >
             Continue
