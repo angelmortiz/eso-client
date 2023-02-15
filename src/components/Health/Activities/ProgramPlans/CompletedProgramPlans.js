@@ -3,22 +3,22 @@ import { fetchProgramPlansAssignedToUser } from '../../../../util/apis/activitie
 import styles from '../../../UI/General/CSS/ProgramPlan.module.css';
 import ProgramPlanInfoCard from './ProgramPlanInfoCard';
 
-const CompletedPrograms = (props) => {
-  const [completedPrograms, setCompletedPrograms] = useState();
+const CompletedProgramPlans = (props) => {
+  const [completedProgramPlans, setCompletedProgramPlans] = useState();
 
   useEffect(() => {
     fetchProgramPlansAssignedToUser('completed').then((response) => {
       if (!response || !response.isSuccess) return;
-      setCompletedPrograms(response.body);
+      setCompletedProgramPlans(response.body);
     });
   }, []);
 
   return (
     <div className={styles['grid']}>
-      <h1 className={styles['page-title']}>Completed Programs</h1>
+      <h1 className={styles['page-title']}>Completed Plans</h1>
 
       {/* LOADING  IMAGE... */}
-      {!completedPrograms && (
+      {!completedProgramPlans && (
         <img
           src="/loading.gif"
           alt="Loading..."
@@ -27,10 +27,10 @@ const CompletedPrograms = (props) => {
       )}
 
       {/* COMPLETED PROGRAMS */}
-      {completedPrograms && (
+      {completedProgramPlans && (
         <section id="pending" className={styles['program-section']}>
-          <h3 className={styles['section-label']}>Completed Programs</h3>
-          {completedPrograms.map((program) => (
+          <h3 className={styles['section-label']}>Completed Plans</h3>
+          {completedProgramPlans.map((program) => (
             <ProgramPlanInfoCard program={program} />
           ))}
         </section>
@@ -39,4 +39,4 @@ const CompletedPrograms = (props) => {
   );
 };
 
-export default CompletedPrograms;
+export default CompletedProgramPlans;

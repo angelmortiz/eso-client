@@ -26,10 +26,10 @@ const userOptions = {
   },
 };
 
-const AssignProgram = (props) => {
+const AssignProgramPlan = (props) => {
   const navigateTo = useNavigate();
   const [assignedTo, setAssignedTo] = useState();
-  const [assignedProgram, setAssignedProgram] = useState();
+  const [assignedProgramPlan, setAssignedProgramPlan] = useState();
   const [programs, setPrograms] = useState();
   const [users, setUsers] = useState();
 
@@ -56,10 +56,10 @@ const AssignProgram = (props) => {
     });
   }, []);
 
-  const assignProgram = (e) => {
+  const assignProgramPlan = (e) => {
     e.preventDefault();
 
-    postProgramPlan({ program: assignedProgram, assignedTo }).then(
+    postProgramPlan({ program: assignedProgramPlan, assignedTo }).then(
       (response) => {
         console.log('Response: ', response);
           if (response.isSuccess) {
@@ -74,10 +74,10 @@ const AssignProgram = (props) => {
     <section className={styles['main-section']}>
       <form
         id="assign-program"
-        onSubmit={assignProgram}
+        onSubmit={assignProgramPlan}
         className={styles['main-form']}
       >
-        <h1 className={styles['form-title']}>Assign Program</h1>
+        <h1 className={styles['form-title']}>Assign Plan</h1>
 
         {/* PROGRAM */}
         <label htmlFor="program" className={styles['text-label']}>
@@ -86,7 +86,7 @@ const AssignProgram = (props) => {
         {programs ? (
           <SelectInput
             select={programs?.select}
-            setValue={setAssignedProgram}
+            setValue={setAssignedProgramPlan}
           />
         ) : (
           <img
@@ -123,4 +123,4 @@ const AssignProgram = (props) => {
   );
 };
 
-export default AssignProgram;
+export default AssignProgramPlan;

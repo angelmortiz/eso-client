@@ -14,34 +14,34 @@ const daysOfTheWeek = [
   'Sunday',
 ];
 
-const ProgramLogs = (props) => {
+const ProgramPlanLogs = (props) => {
   const { id } = useParams();
-  const [programLog, setProgramLog] = useState();
+  const [programPlanLog, setProgramPlanLog] = useState();
   const [program, setProgram] = useState();
   const [weeks, setWeeks] = useState();
 
   useEffect(() => {
-    if (!id) console.error(`Error: programLog id not found in the url.`);
+    if (!id) console.error(`Error: programPlanLog id not found in the url.`);
     fetchProgramPlanById(id).then((response) => {
       if (!response || !response.isSuccess) return;
-      setProgramLog(response.body);
+      setProgramPlanLog(response.body);
     });
   }, [id]);
 
   useEffect(() => {
-    if (!programLog) return;
+    if (!programPlanLog) return;
 
-    fetchProgramById(programLog.programId).then((response) => {
+    fetchProgramById(programPlanLog.programId).then((response) => {
       if (!response || !response.isSuccess) return;
       setProgram(response.body);
       //creates an array of numbers based on duration.
       setWeeks([...Array(response.body.duration).keys()]);
     });
-  }, [programLog]);
+  }, [programPlanLog]);
 
   return (
     <div className={styles['card']}>
-      {!programLog ? (
+      {!programPlanLog ? (
         <img
           src="/loading.gif"
           alt="Loading..."
@@ -51,32 +51,32 @@ const ProgramLogs = (props) => {
         <div className={styles['main-section']}>
           {/* NAME */}
           <h1 className={styles['name']}>Logs</h1>
-          <h2>{programLog.programInfo.name}</h2>
+          <h2>{programPlanLog.programInfo.name}</h2>
           <div className={styles['general-info']}>
             {/* DESCRIPTION */}
             <div className={styles['info-block']}>
               <p className={styles['label']}>Description: </p>
               <p className={styles['value']}>
-                {programLog.programInfo.description}
+                {programPlanLog.programInfo.description}
               </p>
             </div>
             {/* TYPE */}
             <div className={styles['info-block']}>
               <p className={styles['label']}>Type: </p>
-              <p className={styles['value']}>{programLog.programInfo.type}</p>
+              <p className={styles['value']}>{programPlanLog.programInfo.type}</p>
             </div>
             {/* DURATION */}
             <div className={styles['info-block']}>
               <p className={styles['label']}>Durantion: </p>
               <p className={styles['value']}>
-                {programLog.programInfo.duration} weeks
+                {programPlanLog.programInfo.duration} weeks
               </p>
             </div>
             {/* SEQUENCE */}
             <div className={styles['info-block']}>
               <p className={styles['label']}>Sequence: </p>
               <p className={styles['value']}>
-                {programLog.programInfo.sequence}
+                {programPlanLog.programInfo.sequence}
               </p>
             </div>
           </div>
@@ -133,7 +133,7 @@ const ProgramLogs = (props) => {
       )}
       <div className={styles['bottom-btns-div']}>
         <Link
-          to={`/activities/update-programLog/${id}`}
+          to={`/activities/update-programPlanLog/${id}`}
           className={styles['bottom-btns']}
         >
           Update
@@ -143,4 +143,4 @@ const ProgramLogs = (props) => {
   );
 };
 
-export default ProgramLogs;
+export default ProgramPlanLogs;
