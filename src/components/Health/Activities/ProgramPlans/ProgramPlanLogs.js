@@ -1,47 +1,32 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { fetchProgramPlanById } from '../../../../util/apis/activities/programPlans/programPlansApis';
-import { fetchProgramById } from '../../../../util/apis/activities/programs/programsApis';
+import { fetchProgramPlanLogsById } from '../../../../util/apis/activities/programPlans/programPlansApis';
 import styles from '../../../UI/General/CSS/Details.module.css';
-
-const daysOfTheWeek = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thrusday',
-  'Friday',
-  'Saturday',
-  'Sunday',
-];
 
 const ProgramPlanLogs = (props) => {
   const { id } = useParams();
-  const [programPlanLog, setProgramPlanLog] = useState();
-  const [program, setProgram] = useState();
-  const [weeks, setWeeks] = useState();
+  const [programPlanLogs, setProgramPlanLogs] = useState();
 
   useEffect(() => {
-    if (!id) console.error(`Error: programPlanLog id not found in the url.`);
-    fetchProgramPlanById(id).then((response) => {
+    if (!id) console.error(`Error: programPlanLogs id not found in the url.`);
+    fetchProgramPlanLogsById(id).then((response) => {
       if (!response || !response.isSuccess) return;
-      setProgramPlanLog(response.body);
+      setProgramPlanLogs(response.body);
     });
   }, [id]);
 
-  useEffect(() => {
-    if (!programPlanLog) return;
+  const getStatus = (logStatus) => {
+    const { isStarted, isCompleted, isSkipped } = logStatus;
 
-    fetchProgramById(programPlanLog.programId).then((response) => {
-      if (!response || !response.isSuccess) return;
-      setProgram(response.body);
-      //creates an array of numbers based on duration.
-      setWeeks([...Array(response.body.duration).keys()]);
-    });
-  }, [programPlanLog]);
+    if (isSkipped) return 'Skipped';
+    if (!isStarted) return 'Not started';
+    if (isStarted && !isCompleted) return 'Active';
+    if (isCompleted) return 'Completed';
+  };
 
   return (
     <div className={styles['card']}>
-      {!programPlanLog ? (
+      {!programPlanLogs ? (
         <img
           src="/loading.gif"
           alt="Loading..."
@@ -51,44 +36,44 @@ const ProgramPlanLogs = (props) => {
         <div className={styles['main-section']}>
           {/* NAME */}
           <h1 className={styles['name']}>Logs</h1>
-          <h2>{programPlanLog.programInfo.name}</h2>
+          <h2>{programPlanLogs.program.name}</h2>
           <div className={styles['general-info']}>
             {/* DESCRIPTION */}
             <div className={styles['info-block']}>
               <p className={styles['label']}>Description: </p>
               <p className={styles['value']}>
-                {programPlanLog.programInfo.description}
+                {programPlanLogs.program.description}
               </p>
             </div>
             {/* TYPE */}
             <div className={styles['info-block']}>
               <p className={styles['label']}>Type: </p>
-              <p className={styles['value']}>{programPlanLog.programInfo.type}</p>
+              <p className={styles['value']}>{programPlanLogs.program.type}</p>
             </div>
             {/* DURATION */}
             <div className={styles['info-block']}>
               <p className={styles['label']}>Durantion: </p>
               <p className={styles['value']}>
-                {programPlanLog.programInfo.duration} weeks
+                {programPlanLogs.program.duration} weeks
               </p>
             </div>
             {/* SEQUENCE */}
             <div className={styles['info-block']}>
               <p className={styles['label']}>Sequence: </p>
               <p className={styles['value']}>
-                {programPlanLog.programInfo.sequence}
+                {programPlanLogs.program.sequence}
               </p>
             </div>
           </div>
-          {weeks &&
-            weeks.map((weekNumber) => (
+          {programPlanLogs?.logs?.weeksLog &&
+            programPlanLogs?.logs?.weeksLog.map((weekLog) => (
               <section
-                key={`wee_section_${weekNumber}`}
+                key={`week_section_${weekLog.weekNumber}`}
                 id="weeks"
                 className={styles['weeks-section']}
               >
                 <h3 className={styles['section-label']}>
-                  Week {weekNumber + 1}
+                  Week {weekLog.weekNumber}
                 </h3>
                 {/* TABLE */}
                 <table className={styles['info-table']}>
@@ -101,44 +86,68 @@ const ProgramPlanLogs = (props) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {!program ? (
-                      <img
-                        src="/loading.gif"
-                        alt="Loading..."
-                        className={styles['loading-img']}
-                      />
-                    ) : /** WEEKLY WORKOUTS */
-                    program.sequence === 'Weekly' ? (
-                      program.workouts.map((wo) => (
-                        <tr key={`row_${wo.workoutId}`}>
-                          <td>{wo.dayOfTheWeek}</td>
-                          <td>
-                            <Link to={`/activities/workout/${wo.workoutId}`}>
-                              {wo.name}
-                            </Link>
-                          </td>
-                          <td>Status</td>
-                          <td>Buttons</td>
-                        </tr>
-                      ))
-                    ) : (
-                      /** CYCLE WORKOUTS */
-                      <tr></tr>
-                    )}
+                    {
+                      /** WORKOUTS */
+                      weekLog.workouts.map((wo) => {
+                        const workoutStatus = getStatus(wo.log);
+                        return (
+                          <tr
+                            key={`week_${weekLog.weekNumber}_day_${
+                              wo.dayOfTheWeek || wo.dayNumber
+                            }`}
+                          >
+                            <td>{wo.dayOfTheWeek || wo.dayNumber}</td>
+                            <td>
+                              <Link
+                                to={`/activities/workout/${wo.workout._id}`}
+                              >
+                                {wo.workout.name}
+                              </Link>
+                            </td>
+                            <td>{workoutStatus}</td>
+                            <td>
+                              {workoutStatus === 'Not started' && (
+                                <div className={styles['action-btns-div']}>
+                                  <button className={styles['action-btn']}>
+                                    Start
+                                  </button>
+                                  <button className={styles['action-btn']}>
+                                    Skip
+                                  </button>
+                                </div>
+                              )}
+                              {workoutStatus === 'Active' && (
+                                <div className={styles['action-btns-div']}>
+                                  <button className={styles['action-btn']}>
+                                    Continue
+                                  </button>
+                                </div>
+                              )}
+                              {workoutStatus === 'Completed' && (
+                                <div className={styles['action-btns-div']}>
+                                  <button className={styles['action-btn']}>
+                                    Logs
+                                  </button>
+                                </div>
+                              )}
+                              {workoutStatus === 'Skipped' && (
+                                <div className={styles['action-btns-div']}>
+                                  <button className={styles['action-btn']}>
+                                    Start
+                                  </button>
+                                </div>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })
+                    }
                   </tbody>
                 </table>
               </section>
             ))}
         </div>
       )}
-      <div className={styles['bottom-btns-div']}>
-        <Link
-          to={`/activities/update-programPlanLog/${id}`}
-          className={styles['bottom-btns']}
-        >
-          Update
-        </Link>
-      </div>
     </div>
   );
 };

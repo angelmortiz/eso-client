@@ -54,7 +54,7 @@ const ProgramPlanInfoCard = (props) => {
           Details
         </Link>
         <Link
-          to={`/activities/programplan/${programPlan._id}`}
+          to={`/activities/programplan/logs/${programPlan._id}`}
           className={styles['btn-link']}
         >
           Log
