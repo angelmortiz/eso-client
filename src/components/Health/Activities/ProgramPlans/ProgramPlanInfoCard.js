@@ -17,24 +17,24 @@ const ProgramPlanInfoCard = (props) => {
           />
         </div>
         <div className={styles['programPlan-details']}>
-          {/* {program.isStarted && (
+          {programPlan.isStarted && (
             <span>
               <strong>Started on:</strong>{' '}
-              {new Date(program.startedOn).toLocaleDateString(
+              {new Date(programPlan.startedOn).toLocaleDateString(
                 'en-US',
                 dateFormat
               )}
             </span>
           )}
-          {program.isCompleted && (
+          {programPlan.isCompleted && (
             <span>
               <strong>Completed on:</strong>{' '}
-              {new Date(program.completedOn).toLocaleDateString(
+              {new Date(programPlan.completedOn).toLocaleDateString(
                 'en-US',
                 dateFormat
               )}
             </span>
-          )} */}
+          )}
           <span>
             <strong>Duration</strong>: {programPlan.program.duration} weeks
           </span>

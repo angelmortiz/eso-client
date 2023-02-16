@@ -16,11 +16,19 @@ const AssignedProgramPlans = (props) => {
       setAssignedProgramPlans(response.body);
 
       //active programPlan
-      setActiveProgramPlans(response.body.filter((programPlan) => programPlan.logs?.log?.isStarted));
+      setActiveProgramPlans(
+        response.body.filter((programPlan) => programPlan.logs?.log?.isStarted)
+      );
       //next programPlan
-      setNextProgramPlans(response.body.filter((programPlan) => !programPlan.logs?.log?.isStarted)[0]);
+      setNextProgramPlans(
+        response.body.filter(
+          (programPlan) => !programPlan.logs?.log?.isStarted
+        )[0]
+      );
       //pending programPlans
-      let pending = response.body.filter((programPlan) => !programPlan.logs?.log?.isStarted);
+      let pending = response.body.filter(
+        (programPlan) => !programPlan.logs?.log?.isStarted
+      );
       if (pending.length > 0) {
         pending.shift();
       }
@@ -30,7 +38,7 @@ const AssignedProgramPlans = (props) => {
 
   return (
     <div className={styles['grid']}>
-      <h1 className={styles['page-title']}>Assigned ProgramPlans</h1>
+      <h1 className={styles['page-title']}>Assigned Plans</h1>
 
       {/* LOADING  IMAGE... */}
       {!assignedProgramPlans && (
@@ -41,12 +49,15 @@ const AssignedProgramPlans = (props) => {
         />
       )}
 
-    {/* ACTIVE PLANS */}
+      {/* ACTIVE PLANS */}
       {activeProgramPlans && (
         <section id="active" className={styles['programPlan-section']}>
           <h3 className={styles['section-label']}>Active Plans</h3>
-          {activeProgramPlans.map((programPlan) => (
-            <ProgramPlanInfoCard programPlan={programPlan} />
+          {activeProgramPlans.map((programPlan, index) => (
+            <ProgramPlanInfoCard
+              programPlan={programPlan}
+              key={`program-plan_active_${index}`}
+            />
           ))}
         </section>
       )}
@@ -54,8 +65,12 @@ const AssignedProgramPlans = (props) => {
       {/* NEXT PLANS */}
       {nextProgramPlans && (
         <section id="next" className={styles['programPlan-section']}>
-          <h3 className={styles['section-label']}>Next Plans</h3>
-          <ProgramPlanInfoCard programPlan={nextProgramPlans} activateStart={true} />
+          <h3 className={styles['section-label']}>Next Plan</h3>
+          <ProgramPlanInfoCard
+            programPlan={nextProgramPlans}
+            activateStart={true}
+            key={`program-plan_next`}
+          />
         </section>
       )}
 
@@ -63,13 +78,14 @@ const AssignedProgramPlans = (props) => {
       {pendingProgramPlans && (
         <section id="pending" className={styles['programPlan-section']}>
           <h3 className={styles['section-label']}>Pending Plans</h3>
-          {pendingProgramPlans.map((programPlan) => (
-            <ProgramPlanInfoCard programPlan={programPlan} />
+          {pendingProgramPlans.map((programPlan, index) => (
+            <ProgramPlanInfoCard
+              programPlan={programPlan}
+              key={`program-plan_pending_${index}`}
+            />
           ))}
         </section>
-          
       )}
-   
     </div>
   );
 };

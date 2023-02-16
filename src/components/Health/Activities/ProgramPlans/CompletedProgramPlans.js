@@ -9,6 +9,8 @@ const CompletedProgramPlans = (props) => {
   useEffect(() => {
     fetchProgramPlansAssignedToUser('completed').then((response) => {
       if (!response || !response.isSuccess) return;
+      console.log('response: ', response);
+
       setCompletedProgramPlans(response.body);
     });
   }, []);
@@ -28,10 +30,13 @@ const CompletedProgramPlans = (props) => {
 
       {/* COMPLETED PROGRAMS */}
       {completedProgramPlans && (
-        <section id="pending" className={styles['program-section']}>
+        <section id="pending" className={styles['programPlan-section']}>
           <h3 className={styles['section-label']}>Completed Plans</h3>
-          {completedProgramPlans.map((program) => (
-            <ProgramPlanInfoCard program={program} />
+          {completedProgramPlans.map((programPlan, index) => (
+            <ProgramPlanInfoCard
+              key={`program-plan_completed_${index}`}
+              programPlan={programPlan}
+            />
           ))}
         </section>
       )}

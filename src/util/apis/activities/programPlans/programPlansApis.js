@@ -8,8 +8,9 @@ export const fetchProgramPlanById = (id) => {
     return apiGet(`/activities/programPlan/${id}`);
 }
 
-export const fetchProgramPlansAssignedToUser = () => {
-    return apiGet(`/activities/programPlans/assignedTo/currentUser`);
+export const fetchProgramPlansAssignedToUser = (filter) => {
+    filter = !filter ? '' : `/${filter}`;
+    return apiGet(`/activities/programPlans/assignedTo/currentUser${filter}`);
 }
 
 export const postProgramPlan = (body) => {
