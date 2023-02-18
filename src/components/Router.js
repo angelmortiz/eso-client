@@ -32,8 +32,8 @@ import ProgramPlanDetails from './Health/Activities/ProgramPlans/ProgramPlanDeta
 import AssignedProgramPlans from './Health/Activities/ProgramPlans/AssignedProgramPlans';
 import AssignProgramPlan from './Health/Activities/ProgramPlans/AssignProgramPlan';
 import CompletedProgramPlans from './Health/Activities/ProgramPlans/CompletedProgramPlans';
-import ProgramPlanWorkoutLogs from './Health/Activities/ProgramPlans/ProgramPlanWorkoutLogs';
-import ProgramPlanLogs from './Health/Activities/ProgramPlans/ProgramPlanLogs';
+import ProgramPlanWorkoutLogs from './Health/Activities/ProgramPlanLogs/ProgramPlanWorkoutLogs';
+import ProgramPlanLogs from './Health/Activities/ProgramPlanLogs/ProgramPlanLogs';
 
 //IMPROVE: Consider breaking down the routes into different files to make it more readable
 const Router = (props) => {

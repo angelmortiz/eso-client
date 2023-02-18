@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchWorkoutPlanLogsById } from '../../../../util/apis/activities/programPlans/programPlansApis';
 import styles from '../../../UI/General/CSS/Details.module.css';
-import IncrementalSetLogs from './IncrementalSetLogs';
+import IncrementalSetLogs from '../ProgramPlanLogs/IncrementalSetLogs';
 
 const ProgramPlanWorkoutLogs = (props) => {
   const { programPlanId, weekNumber, workoutPlanId } = useParams();
