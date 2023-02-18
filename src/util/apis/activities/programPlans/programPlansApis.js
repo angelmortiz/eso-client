@@ -12,6 +12,10 @@ export const fetchProgramPlanLogsById = (id) => {
     return apiGet(`/activities/programPlan/logs/${id}`);
 }
 
+export const fetchWorkoutPlanLogsById = (programPlanId, weekNumber, workoutId) => {
+    return apiGet(`/activities/programPlan/logs/${programPlanId}/weekNumber/${weekNumber}/workout/${workoutId}`);
+}
+
 export const fetchProgramPlansAssignedToUser = (filter) => {
     filter = !filter ? '' : `/${filter}`;
     return apiGet(`/activities/programPlans/assignedTo/currentUser${filter}`);

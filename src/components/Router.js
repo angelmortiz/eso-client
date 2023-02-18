@@ -143,7 +143,7 @@ const Router = (props) => {
 
       {/* Logs */}
       <Route path="/activities/programplan/logs/:id" element={<ProgramPlanLogs />} />
-      <Route path="/activities/programplan/workoutplan/logs/:id" element={<ProgramPlanWorkoutLogs />} />
+      <Route path="/activities/programplan/:programPlanId/week/:weekNumber/workoutplan/:workoutPlanId" element={<ProgramPlanWorkoutLogs />} />
 
     </Routes>
   );
