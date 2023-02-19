@@ -108,9 +108,12 @@ const ProgramPlanLogs = (props) => {
                             <td>
                               {workoutStatus === 'Not started' && (
                                 <div className={styles['action-btns-div']}>
-                                  <button className={styles['action-btn']}>
+                                  <Link
+                                    to={`/activities/programplan/logs/${programPlanLogs._id}/week/${weekLog.weekNumber}/workoutplan/${wo._id}`}
+                                    className={styles['action-btn']}
+                                  >
                                     Start
-                                  </button>
+                                  </Link>
                                   <button className={styles['action-btn']}>
                                     Skip
                                   </button>

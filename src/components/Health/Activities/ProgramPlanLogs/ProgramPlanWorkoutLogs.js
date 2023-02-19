@@ -74,10 +74,14 @@ const ProgramPlanWorkoutLogs = (props) => {
       )}
 
       {/* EXERCISES LOGS */}
-      {workoutLogs?.exercises.map((exercise) => {
+      {workoutLogs?.exercises.map((exercise, index) => {
         const recommendations = extractExerciseRecommendations(exercise);
         return (
-          <section id="active" className={styles['programPlan-section']}>
+          <section
+            id="active"
+            className={styles['programPlan-section']}
+            key={`exercise_${index}`}
+          >
             <h3 className={styles['section-label']}>
               Exercise: {exercise.exercise.name}
             </h3>
@@ -91,7 +95,7 @@ const ProgramPlanWorkoutLogs = (props) => {
               {recommendations.rest[1]}
             </h4>
             {/* INCREMENT SETS LOGS */}
-            <IncrementalSetLogs />
+            <IncrementalSetLogs exercise={exercise.exercise} />
           </section>
         );
       })}
