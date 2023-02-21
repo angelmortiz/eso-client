@@ -95,7 +95,8 @@ const ProgramPlanWorkoutLogs = (props) => {
               {recommendations.rest[1]}
             </h4>
             {/* INCREMENT SETS LOGS */}
-            <IncrementalSetLogs exercise={exercise.exercise} />
+            {/* setLogsIds = programPlanId, weekId, workoutPlanId, exercisePlanId */}
+            <IncrementalSetLogs exercisePlanId={exercise?._id}/>
           </section>
         );
       })}

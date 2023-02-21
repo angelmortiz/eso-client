@@ -99,7 +99,7 @@
   top: 0.8rem;
 }
 
-.add-btn {
+.add-btn, .add-btn-small, .add-btn-medium {
   margin: 0 auto;
   width: 40%;
   padding: 8px 6px;
@@ -110,8 +110,20 @@
   font-size: 14px;
 }
 
+.add-btn-medium {
+  width: 30%;
+}
+
+.add-btn-small {
+  width: 20%;
+}
+
 .add-btn:hover,
-.add-btn:active {
+.add-btn:active,
+.add-btn-medium:hover,
+.add-btn-medium:active,
+.add-btn-small:hover,
+.add-btn-small:active {
   cursor: pointer;
   background-color: #028e98;
 }
@@ -209,6 +221,11 @@
 .plan-title {
   text-align: center;
   margin: 1rem 0 0.5rem 0;
+}
+
+.set-div {
+  display: flex;
+  flex-direction: column;
 }
 /*************/
 /*** PHONE ***/

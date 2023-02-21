@@ -109,7 +109,7 @@ const ProgramPlanLogs = (props) => {
                               {workoutStatus === 'Not started' && (
                                 <div className={styles['action-btns-div']}>
                                   <Link
-                                    to={`/activities/programplan/logs/${programPlanLogs._id}/week/${weekLog.weekNumber}/workoutplan/${wo._id}`}
+                                    to={`/activities/programplan/logs/${programPlanLogs._id}/weekId/${weekLog._id}/week/${weekLog.weekNumber}/workoutplan/${wo._id}`}
                                     className={styles['action-btn']}
                                   >
                                     Start
