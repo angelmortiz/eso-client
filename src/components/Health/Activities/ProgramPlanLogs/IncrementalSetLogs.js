@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { patchAddSetLog } from '../../../../util/apis/activities/programPlans/programPlansApis';
 import styles from '../../../UI/General/CSS/Form.module.css';
 import AddSetLog from './AddSetLog';
 
@@ -12,25 +11,46 @@ const IncrementalSetLogs = (props) => {
   const { exercisePlanId } = props;
   const [count, setCount] = useState(1);
   const [setLogsList, setSetLogsList] = useState([getNewSetLog(count)]);
-  const [enableSetBtn, setEnableSetBtn] = useState(false);
+  const [enableAddSetBtn, setEnableAddSetBtn] = useState(false);
+  const [, setMapActiveEdits] = useState(() => new Map());
 
   function getNewSetLog(newCount) {
     return (
       <AddSetLog
         setNumber={newCount}
         key={`set-log-_${newCount}`}
-        enableAddSetBtn={enableAddSetBtn}
+        setEditingSet={setEditingSet}
         exercisePlanId={exercisePlanId}
       />
     );
   }
 
-  function enableAddSetBtn(status) {
-    setEnableSetBtn(status);
+  function setEditingSet(setNumber, isEditing) {
+    if (isEditing) {
+      /**
+       * Adds value to the map and creates a new Map to force
+       * react to re-render the component with the new map vals.
+       */
+      setMapActiveEdits(
+        (prevMap) => new Map(prevMap.set(setNumber, isEditing))
+      );
+      setEnableAddSetBtn(false);
+    } else {
+      /**
+       * Removes value from the map and creates a new Map to force
+       * react to re-render the component.
+       * Also, enables the Add Set button if there are no sets being edited.
+       */
+      setMapActiveEdits((prevMap) => {
+        prevMap.delete(setNumber);
+        setEnableAddSetBtn(prevMap.size === 0);
+        return new Map(prevMap);
+      });
+    }
   }
 
   const addSetToDOM = () => {
-    setEnableSetBtn(false);
+    setEnableAddSetBtn(false);
     //increases the count and adds a new set to the DOM
     setCount((previousCount) => {
       const newCount = previousCount + 1;
@@ -46,7 +66,7 @@ const IncrementalSetLogs = (props) => {
 
       {/* ADD BUTTON */}
 
-      {enableSetBtn && (
+      {enableAddSetBtn && (
         <button
           type="button"
           id="save-set-log"
