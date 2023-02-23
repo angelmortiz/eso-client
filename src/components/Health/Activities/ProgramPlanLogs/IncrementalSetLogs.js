@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../../../UI/General/CSS/Form.module.css';
 import AddSetLog from './AddSetLog';
 
@@ -8,19 +8,42 @@ import AddSetLog from './AddSetLog';
  * of knowing in advanced how  may elements should be added.
  */
 const IncrementalSetLogs = (props) => {
-  const { exercisePlanId } = props;
+  const { exercise } = props;
   const [count, setCount] = useState(1);
-  const [setLogsList, setSetLogsList] = useState([getNewSetLog(count)]);
+  const [setLogsList, setSetLogsList] = useState([]);
   const [enableAddSetBtn, setEnableAddSetBtn] = useState(false);
   const [, setMapActiveEdits] = useState(() => new Map());
 
-  function getNewSetLog(newCount) {
+  useEffect(() => {
+    if (exercise?.sets.length === 0) {
+      setSetLogsList([getNewSetLog(count)]);
+      return;
+    }
+
+    const setList = [];
+    exercise.sets.forEach((set) => {
+      setList.push(
+        getNewSetLog(set.setNumber, {
+          _id: set._id,
+          weight: set.weight,
+          reps: set.reps,
+          rir: set.rir,
+        })
+      );
+    });
+    setSetLogsList(setList);
+    setCount(exercise.sets.length);
+    setEnableAddSetBtn(true);
+  },[]);
+
+  function getNewSetLog(newCount, setValues) {
     return (
       <AddSetLog
         setNumber={newCount}
         key={`set-log-_${newCount}`}
         setEditingSet={setEditingSet}
-        exercisePlanId={exercisePlanId}
+        exercisePlanId={exercise._id}
+        setValues={setValues}
       />
     );
   }
@@ -54,6 +77,7 @@ const IncrementalSetLogs = (props) => {
     //increases the count and adds a new set to the DOM
     setCount((previousCount) => {
       const newCount = previousCount + 1;
+      setEditingSet(newCount, true);
       setSetLogsList((s) => s.concat(getNewSetLog(newCount)));
       return newCount;
     });

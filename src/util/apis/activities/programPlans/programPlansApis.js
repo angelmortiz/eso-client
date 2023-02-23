@@ -31,16 +31,24 @@ export const postProgramPlan = (body) => {
   return apiPost(`/activities/programPlan`, body);
 };
 
-export const putProgramPlan = (id, body) => {
-  return apiPut(`/activities/programPlan/${id}`, body);
-};
-
-export const patchAddSetLog = (ids, body) => {
+export const postAddSetLog = (ids, body) => {
   const { programPlanId, weekId, workoutPlanId, exercisePlanId } = ids;
-  return apiPatch(
+  return apiPost(
     `/activities/programPlan/${programPlanId}/weekPlan/${weekId}/workoutPlan/${workoutPlanId}/exercisePlan/${exercisePlanId}`,
     body
   );
+};
+
+export const patchUpdateSetLog = (ids, body) => {
+  const { programPlanId, weekId, workoutPlanId, exercisePlanId, setId } = ids;
+  return apiPatch(
+    `/activities/programPlan/${programPlanId}/weekPlan/${weekId}/workoutPlan/${workoutPlanId}/exercisePlan/${exercisePlanId}/setId/${setId}`,
+    body
+  );
+};
+
+export const putProgramPlan = (id, body) => {
+  return apiPut(`/activities/programPlan/${id}`, body);
 };
 
 export const deleteProgramPlan = (id) => {
