@@ -228,6 +228,18 @@
   display: flex;
   flex-direction: column;
 }
+
+.delete-icon {
+  width: 2rem;
+  color: rgb(196, 52, 105);
+}
+
+.delete-icon:hover,
+.delete-icon:active {
+  cursor: pointer;
+  color: rgb(223, 102, 118);
+}
+
 /*************/
 /*** PHONE ***/
 /*************/

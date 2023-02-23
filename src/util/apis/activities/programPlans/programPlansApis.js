@@ -1,4 +1,4 @@
-import { apiDelete, apiGet, apiPatch, apiPost, apiPut } from '../../apiActions';
+import { apiDelete, apiGet, apiPost, apiPut } from '../../apiActions';
 
 export const fetchAllProgramPlans = () => {
   return apiGet('/activities/programPlans');
@@ -8,20 +8,6 @@ export const fetchProgramPlanById = (id) => {
   return apiGet(`/activities/programPlan/${id}`);
 };
 
-export const fetchProgramPlanLogsById = (id) => {
-  return apiGet(`/activities/programPlan/logs/${id}`);
-};
-
-export const fetchWorkoutPlanLogsById = (
-  programPlanId,
-  weekNumber,
-  workoutId
-) => {
-  return apiGet(
-    `/activities/programPlan/logs/${programPlanId}/weekNumber/${weekNumber}/workout/${workoutId}`
-  );
-};
-
 export const fetchProgramPlansAssignedToUser = (filter) => {
   filter = !filter ? '' : `/${filter}`;
   return apiGet(`/activities/programPlans/assignedTo/currentUser${filter}`);
@@ -29,22 +15,6 @@ export const fetchProgramPlansAssignedToUser = (filter) => {
 
 export const postProgramPlan = (body) => {
   return apiPost(`/activities/programPlan`, body);
-};
-
-export const postAddSetLog = (ids, body) => {
-  const { programPlanId, weekId, workoutPlanId, exercisePlanId } = ids;
-  return apiPost(
-    `/activities/programPlan/${programPlanId}/weekPlan/${weekId}/workoutPlan/${workoutPlanId}/exercisePlan/${exercisePlanId}`,
-    body
-  );
-};
-
-export const patchUpdateSetLog = (ids, body) => {
-  const { programPlanId, weekId, workoutPlanId, exercisePlanId, setId } = ids;
-  return apiPatch(
-    `/activities/programPlan/${programPlanId}/weekPlan/${weekId}/workoutPlan/${workoutPlanId}/exercisePlan/${exercisePlanId}/setId/${setId}`,
-    body
-  );
 };
 
 export const putProgramPlan = (id, body) => {

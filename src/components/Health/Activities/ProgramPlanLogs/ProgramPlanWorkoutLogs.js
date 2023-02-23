@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchWorkoutPlanLogsById } from '../../../../util/apis/activities/programPlans/programPlansApis';
+import { fetchWorkoutPlanLogsById } from '../../../../util/apis/activities/programPlanLogs/programPlanLogsApis';
 import styles from '../../../UI/General/CSS/Details.module.css';
 import IncrementalSetLogs from '../ProgramPlanLogs/IncrementalSetLogs';
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { fetchProgramPlanLogsById } from '../../../../util/apis/activities/programPlans/programPlansApis';
+import { fetchProgramPlanLogsById } from '../../../../util/apis/activities/programPlanLogs/programPlanLogsApis';
 import styles from '../../../UI/General/CSS/Details.module.css';
 
 const ProgramPlanLogs = (props) => {

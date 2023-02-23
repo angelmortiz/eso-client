@@ -3,11 +3,13 @@ import { useParams } from 'react-router-dom';
 import {
   patchUpdateSetLog,
   postAddSetLog,
-} from '../../../../util/apis/activities/programPlans/programPlansApis';
+  deleteSetLog
+} from '../../../../util/apis/activities/programPlanLogs/programPlanLogsApis';
 import styles from '../../../UI/General/CSS/Form.module.css';
 
 const AddSetLog = (props) => {
-  const { setNumber, setValues, setEditingSet, exercisePlanId } = props;
+  const { setNumber, setValues, setEditingSet, removeSetLog, exercisePlanId } =
+    props;
   const { programPlanId, weekId, workoutPlanId } = useParams();
   const [setId, setSetId] = useState(setValues?._id || '');
   const [weight, setWeight] = useState(setValues?.weight || '');
@@ -27,7 +29,7 @@ const AddSetLog = (props) => {
     setRIRTouched(false);
 
     //if a set was previously created, update the existing set log
-    setId ? updateSetLog(): addNewSetLog();
+    setId ? updateSetLog() : addNewSetLog();
   };
 
   const addNewSetLog = () => {
@@ -55,7 +57,6 @@ const AddSetLog = (props) => {
 
   const setNewSetValues = () => {
     const setLogValues = {
-      setNumber,
       weight,
       reps,
       rir,
@@ -66,10 +67,22 @@ const AddSetLog = (props) => {
       weekId,
       workoutPlanId,
       exercisePlanId,
-      setId
+      setId,
     };
 
     return { setLogValues, setLogIds };
+  };
+
+  const deleteCurrentSetLog = () => {
+    if (!setId) return;//prevents deleting an empty set
+    
+    const newSetValues = setNewSetValues();
+    deleteSetLog(newSetValues.setLogIds).then((response) => {
+      console.log('response: ', response);
+      if (!response || !response.isSuccess) return;
+      setEditingSet(setNumber, false);
+      removeSetLog(setNumber);
+    });
   };
 
   return (
@@ -121,6 +134,22 @@ const AddSetLog = (props) => {
             setEditingSet(setNumber, true);
           }}
         />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className={styles['delete-icon']}
+          viewBox="0 0 512 512"
+          onClick={deleteCurrentSetLog}
+        >
+          <title>Close</title>
+          <path
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
+            d="M368 368L144 144M368 144L144 368"
+          />
+        </svg>
       </div>
 
       {/*//IMPROVE: Disable btn while no values have been added  */}

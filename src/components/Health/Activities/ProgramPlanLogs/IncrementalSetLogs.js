@@ -21,9 +21,9 @@ const IncrementalSetLogs = (props) => {
     }
 
     const setList = [];
-    exercise.sets.forEach((set) => {
+    exercise.sets.forEach((set, index) => {
       setList.push(
-        getNewSetLog(set.setNumber, {
+        getNewSetLog(index+1, {
           _id: set._id,
           weight: set.weight,
           reps: set.reps,
@@ -32,7 +32,7 @@ const IncrementalSetLogs = (props) => {
       );
     });
     setSetLogsList(setList);
-    setCount(exercise.sets.length);
+    setCount(setList.length);
     setEnableAddSetBtn(true);
   },[]);
 
@@ -44,6 +44,7 @@ const IncrementalSetLogs = (props) => {
         setEditingSet={setEditingSet}
         exercisePlanId={exercise._id}
         setValues={setValues}
+        removeSetLog={removeSetLog}
       />
     );
   }
@@ -70,6 +71,13 @@ const IncrementalSetLogs = (props) => {
         return new Map(prevMap);
       });
     }
+  }
+
+  function removeSetLog(setNumber) {
+    setSetLogsList(prev => {
+        delete prev[setNumber-1]
+        return [...prev];
+    });
   }
 
   const addSetToDOM = () => {
