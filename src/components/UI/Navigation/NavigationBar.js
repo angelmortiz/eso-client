@@ -43,7 +43,7 @@ const NavigationBar = (props) => {
                       className={styles['li-dropdown-option']}
                     >
                       <Link
-                        to="/activities/programPlan/assigned"
+                        to="/activities/programplan/assigned"
                         className={styles['nav-links']}
                       >
                         Assigned
@@ -54,7 +54,7 @@ const NavigationBar = (props) => {
                       className={styles['li-dropdown-option']}
                     >
                       <Link
-                        to="/activities/programPlan/completed"
+                        to="/activities/programplan/completed"
                         className={styles['nav-links']}
                       >
                         Completed
@@ -242,7 +242,7 @@ const NavigationBar = (props) => {
                         className={styles['li-dropdown-option']}
                       >
                         <Link
-                          to="/activities/programPlan/assign"
+                          to="/activities/programplan/assign"
                           className={styles['nav-links']}
                         >
                           Program

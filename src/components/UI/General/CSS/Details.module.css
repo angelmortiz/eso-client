@@ -136,6 +136,35 @@
   border-bottom: 1.5px solid #028e98;
 }
 
+.action-btn{
+  padding: 4px 8px;
+  border: 0px;
+  border-radius: 4px;
+  background-color: #007e86;
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.action-btn:hover,
+.action-btn:active {
+  cursor: pointer;
+  background-color: #028e98;
+}
+
+.action-btns-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.programPlan-section {
+  margin: 1rem;
+}
+
 /*************/
 /*** PHONE ***/
 /*************/

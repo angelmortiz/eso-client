@@ -2,84 +2,91 @@ import { Link } from 'react-router-dom';
 import styles from '../../../UI/General/CSS/ProgramPlan.module.css';
 
 const ProgramPlanInfoCard = (props) => {
-  const { program, activateStart } = props;
+  const { programPlan, activateStart } = props;
   const dateFormat = { month: 'long', day: 'numeric', year: 'numeric' };
 
   return (
     <div className={styles['card']}>
-      <h2 className={styles['card-title']}>{program.programInfo.name}</h2>
-      <div className={styles['program-info']}>
+      <h2 className={styles['card-title']}>{programPlan.program.name}</h2>
+      <div className={styles['programPlan-info']}>
         <div className={styles['img-div']}>
           <img
-            src={program.programInfo.linkToImage}
-            alt={program.programInfo.name}
+            src={programPlan.program.linkToImage}
+            alt={programPlan.program.name}
             className={styles['img']}
           />
         </div>
-        <div className={styles['program-details']}>
-          {program.isStarted && (
+        <div className={styles['programPlan-details']}>
+          {programPlan.isStarted && (
             <span>
               <strong>Started on:</strong>{' '}
-              {new Date(program.startedOn).toLocaleDateString(
+              {new Date(programPlan.startedOn).toLocaleDateString(
                 'en-US',
                 dateFormat
               )}
             </span>
           )}
-          {program.isCompleted && (
+          {programPlan.isCompleted && (
             <span>
               <strong>Completed on:</strong>{' '}
-              {new Date(program.completedOn).toLocaleDateString(
+              {new Date(programPlan.completedOn).toLocaleDateString(
                 'en-US',
                 dateFormat
               )}
             </span>
           )}
           <span>
-            <strong>Duration</strong>: {program.programInfo.duration} weeks
+            <strong>Duration</strong>: {programPlan.program.duration} weeks
           </span>
           <span>
-            <strong>Type</strong>: {program.programInfo.type}
+            <strong>Type</strong>: {programPlan.program.type}
           </span>
           <span>
-            <strong>Assigned by</strong>: {program.assignedByName}
+            <strong>Assigned by</strong>: {programPlan.assignedBy.fullName}
           </span>
         </div>
       </div>
       <div className={styles['btns-div']}>
         <Link
-          to={`/activities/program/${program.programId}`}
+          to={`/activities/programplan/${programPlan._id}`}
           className={styles['btn-link']}
         >
           Details
         </Link>
-        {/* CONTINUE LOGGING PROGRAM */}
-        {program.isStarted && !program.isCompleted && (
+        <Link
+          to={`/activities/programplan/logs/${programPlan._id}`}
+          className={styles['btn-link']}
+        >
+          Log
+        </Link>
+        {/*  
+        {programPlan.isStarted && !programPlan.isCompleted && (
           <Link
-            to={`/activities/program/${program.programId}`}
+            to={`/activities/programplan/${programPlan.program_id}`}
             className={styles['btn-link']}
           >
             Continue
           </Link>
         )}
-        {/* ACCESS PROGRAM LOGS */}
-        {program.isStarted && program.isCompleted && (
+        
+        {programPlan.isStarted && programPlan.isCompleted && (
           <Link
-            to={`/activities/program/${program.programId}`}
+            to={`/activities/program/${programPlan.program._id}`}
             className={styles['btn-link']}
           >
             Logs
           </Link>
         )}
-        {/* START PROGRAM */}
-        {!program.isStarted && activateStart && (
+        
+        {!programPlan.isStarted && activateStart && (
           <Link
-            to={`/activities/program/${program.programId}`}
+            to={`/activities/program/${programPlan.program._id}`}
             className={styles['btn-link']}
           >
             Start
           </Link>
         )}
+        */}
       </div>
     </div>
   );

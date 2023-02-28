@@ -7,11 +7,11 @@ const AddExercisePlan = (props) => {
 
   /** INPUT VALUES */
   const [exercise, setExercise] = useState();
-  const [sets, setSets] = useState([0, 0]);
-  const [reps, setReps] = useState([0, 0]);
-  const [tempo, setTempo] = useState([0, 0, 0, 0]);
-  const [rir, setRir] = useState([0, 0]);
-  const [rest, setRest] = useState([0, 0]);
+  const [sets, setSets] = useState(['', '']);
+  const [reps, setReps] = useState(['', '']);
+  const [tempo, setTempo] = useState(['', '', '', '']);
+  const [rir, setRir] = useState(['', '']);
+  const [rest, setRest] = useState(['', '']);
   /** [END] INPUT VALUES */
 
   //Sets input values based on the current info fetched from the db

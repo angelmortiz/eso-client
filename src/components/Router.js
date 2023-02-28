@@ -28,11 +28,12 @@ import UpdateMuscle from './Health/Activities/Muscles/UpdateMuscle';
 import UpdateEquipment from './Health/Activities/Equipments/UpdateEquipment';
 import EquipmentDetails from './Health/Activities/Equipments/EquipmentDetails';
 import Equipments from './Health/Activities/Equipments/Equipments';
-import AssignProgram from './Health/Activities/ProgramPlans/AssignProgram';
-import AssignedPrograms from './Health/Activities/ProgramPlans/AssignedPrograms';
-import CompletedPrograms from './Health/Activities/ProgramPlans/CompletedPrograms';
-import ProgramLogs from './Health/Activities/ProgramPlans/ProgramLogs';
-import WorkoutLogs from './Health/Activities/ProgramPlans/WorkoutLogs';
+import ProgramPlanDetails from './Health/Activities/ProgramPlans/ProgramPlanDetails';
+import AssignedProgramPlans from './Health/Activities/ProgramPlans/AssignedProgramPlans';
+import AssignProgramPlan from './Health/Activities/ProgramPlans/AssignProgramPlan';
+import CompletedProgramPlans from './Health/Activities/ProgramPlans/CompletedProgramPlans';
+import ProgramPlanWorkoutLogs from './Health/Activities/ProgramPlanLogs/ProgramPlanWorkoutLogs';
+import ProgramPlanLogs from './Health/Activities/ProgramPlanLogs/ProgramPlanLogs';
 
 //IMPROVE: Consider breaking down the routes into different files to make it more readable
 const Router = (props) => {
@@ -135,13 +136,14 @@ const Router = (props) => {
       />
 
       {/* Programs Plans */}
-      <Route path="/activities/programPlan/assign" element={<AssignProgram />} />
-      <Route path="/activities/programPlan/assigned" element={<AssignedPrograms />} />
-      <Route path="/activities/programPlan/completed" element={<CompletedPrograms />} />
+      <Route path="/activities/programplan/assign" element={<AssignProgramPlan />} />
+      <Route path="/activities/programplan/assigned" element={<AssignedProgramPlans />} />
+      <Route path="/activities/programplan/completed" element={<CompletedProgramPlans />} />
+      <Route path="/activities/programplan/:id" element={<ProgramPlanDetails />} />
 
       {/* Logs */}
-      <Route path="/activities/programPlan/program/logs/:id" element={<ProgramLogs />} />
-      <Route path="/activities/programPlan/workout/logs/:id" element={<WorkoutLogs />} />
+      <Route path="/activities/programplan/logs/:id" element={<ProgramPlanLogs />} />
+      <Route path="/activities/programplan/logs/:programPlanId/weekId/:weekId/week/:weekNumber/workoutplan/:workoutPlanId" element={<ProgramPlanWorkoutLogs />} />
 
     </Routes>
   );
