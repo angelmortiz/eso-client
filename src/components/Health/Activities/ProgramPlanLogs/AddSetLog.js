@@ -75,7 +75,7 @@ const AddSetLog = (props) => {
 
   const deleteCurrentSetLog = () => {
     if (!setId) return;//prevents deleting an empty set
-    
+
     const newSetValues = setNewSetValues();
     deleteSetLog(newSetValues.setLogIds).then((response) => {
       console.log('response: ', response);

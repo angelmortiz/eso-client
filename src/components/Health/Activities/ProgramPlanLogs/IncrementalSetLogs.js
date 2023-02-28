@@ -20,6 +20,11 @@ const IncrementalSetLogs = (props) => {
       return;
     }
 
+    updateSetLogList();
+    setEnableAddSetBtn(true);
+  },[]);
+
+  const updateSetLogList = () => {
     const setList = [];
     exercise.sets.forEach((set, index) => {
       setList.push(
@@ -33,14 +38,13 @@ const IncrementalSetLogs = (props) => {
     });
     setSetLogsList(setList);
     setCount(setList.length);
-    setEnableAddSetBtn(true);
-  },[]);
+  }
 
-  function getNewSetLog(newCount, setValues) {
+  function getNewSetLog(setNumber, setValues) {
     return (
       <AddSetLog
-        setNumber={newCount}
-        key={`set-log-_${newCount}`}
+        setNumber={setNumber}
+        key={`set-log_${setNumber}`}
         setEditingSet={setEditingSet}
         exercisePlanId={exercise._id}
         setValues={setValues}
@@ -74,10 +78,16 @@ const IncrementalSetLogs = (props) => {
   }
 
   function removeSetLog(setNumber) {
-    setSetLogsList(prev => {
-        delete prev[setNumber-1]
-        return [...prev];
-    });
+    if (exercise?.sets) delete exercise.sets[setNumber-1]
+
+    console.log("here");
+    updateSetLogList();
+    // setSetLogsList(prev => {
+    //     delete prev[setNumber-1]
+    //     if (exercise?.sets) delete exercise.sets[setNumber-1];
+    //     prev.forEach((set, index) => set.props.setNumber = index+1)
+    //     return [...prev];
+    // });
   }
 
   const addSetToDOM = () => {
