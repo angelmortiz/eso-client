@@ -1,4 +1,4 @@
-import { apiGet, apiPost } from "../apiActions"
+import { apiDelete, apiGet, apiPost, apiPut } from "../../apiActions"
 
 export const fetchAllMuscles = () => {
     return apiGet('/activities/muscles');
@@ -14,4 +14,12 @@ export const fetchMuscleById = (id) => {
 
 export const postMuscle = (body) => {
     return apiPost(`/activities/muscle`, body);
+}
+
+export const putMuscle = (id, body) => {
+    return apiPut(`/activities/muscle/${id}`, body);
+}
+
+export const deleteMuscle = (id) => {
+    return apiDelete(`/activities/muscle/${id}`);
 }

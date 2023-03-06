@@ -64,8 +64,8 @@ const ResetPassword = (props) => {
     setSearchParams(searchParams);
   };
 
-  const userResetPassword = (event) => {
-    event.preventDefault();
+  const userResetPassword = (e) => {
+    e.preventDefault();
 
     if (!isValidationSuccessful()) return;
     setButtonStatus(false);

@@ -26,11 +26,11 @@ const inputValues = {
 };
 
 const Login = (props) => {
+  const navigateTo = useNavigate();
+  const dispatch = useDispatch();
   const [formValues, setFormValues] = useState({ email: '', password: '' });
   const [formErrors, setFormErrors] = useState({ email: [], password: [] });
   const [responseError, setResponseError] = useState('');
-  const navigateTo = useNavigate();
-  const dispatch = useDispatch();
 
   const onChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
