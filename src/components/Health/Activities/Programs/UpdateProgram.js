@@ -111,7 +111,7 @@ const UpdateProgram = (props) => {
     console.log('formVals:  ', formVals);
 
     putProgram(id, formVals).then((response) => {
-      console.log('Response: ', response);
+      //console.log('Response: ', response);
       if (response.isSuccess) {
         //IMPROVE: Navigate to the just added program id
         navigateTo(`/activities/programs`);

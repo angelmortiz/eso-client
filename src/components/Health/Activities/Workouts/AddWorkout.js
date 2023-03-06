@@ -67,7 +67,7 @@ const AddWorkout = (props) => {
     console.log('formVals', formVals);
 
     postWorkout(formVals).then((response) => {
-      console.log('Response: ', response);
+      //console.log('Response: ', response);
       if (response.isSuccess) {
         //IMPROVE: Navigate to the just added workout id
         navigateTo(`/activities/workouts`);

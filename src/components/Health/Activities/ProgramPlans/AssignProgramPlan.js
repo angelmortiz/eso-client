@@ -61,7 +61,7 @@ const AssignProgramPlan = (props) => {
 
     postProgramPlan({ program: assignedProgramPlan, assignedTo }).then(
       (response) => {
-        console.log('Response: ', response);
+        //console.log('Response: ', response);
           if (response.isSuccess) {
             //IMPROVE: Navigate to the just added exercise id
             navigateTo(`/activities/programs/`);

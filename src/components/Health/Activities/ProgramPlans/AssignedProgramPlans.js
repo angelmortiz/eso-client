@@ -12,7 +12,7 @@ const AssignedProgramPlans = (props) => {
   useEffect(() => {
     fetchProgramPlansAssignedToUser().then((response) => {
       if (!response || !response.isSuccess) return;
-      console.log('response: ', response);
+      //console.log('Response: ', response);
       setAssignedProgramPlans(response.body);
 
       //active programPlan

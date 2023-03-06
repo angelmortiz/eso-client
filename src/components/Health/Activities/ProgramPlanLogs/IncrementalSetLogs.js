@@ -14,6 +14,7 @@ const IncrementalSetLogs = (props) => {
   const [enableAddSetBtn, setEnableAddSetBtn] = useState(false);
   const [, setMapActiveEdits] = useState(() => new Map());
 
+  //automatically populates the exercise sets if it's an active exercise
   useEffect(() => {
     if (exercise?.sets.length === 0) {
       setSetLogsList([getNewSetLog(count)]);

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from '../../../UI/General/CSS/ProgramPlan.module.css';
 
 const ProgramPlanInfoCard = (props) => {
-  const { programPlan, activateStart } = props;
+  const { programPlan } = props;
   const dateFormat = { month: 'long', day: 'numeric', year: 'numeric' };
 
   return (

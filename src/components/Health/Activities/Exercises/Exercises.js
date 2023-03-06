@@ -19,7 +19,7 @@ const Exercises = (props) => {
 
   useEffect(() => {
     fetchAllExercises().then((response) => {
-      console.log('response: ', response);
+      //console.log('Response: ', response);
 
       if (!response || !response.isSuccess) return;
       setExercises(response.body);

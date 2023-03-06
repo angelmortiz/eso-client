@@ -24,7 +24,7 @@ const AddMuscle = (props) => {
     const formVals = getFormValues(e.target.elements);
 
     postMuscle(formVals).then((response) => {
-      console.log('response: ', response);
+      //console.log('Response: ', response);
       if (!response || !response.isSuccess) return;
       navigateTo('/activities/muscles');
     });

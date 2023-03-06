@@ -72,7 +72,7 @@ const Signup = (props) => {
     if (!isValidationSuccessful()) return;
 
     signup(formValues).then((response) => {
-      console.log('Response: ', response);
+      //console.log('Response: ', response);
       if (response && response.isSuccess) {
         navigateTo('/auth/login');
       } else if (response && response.message) {

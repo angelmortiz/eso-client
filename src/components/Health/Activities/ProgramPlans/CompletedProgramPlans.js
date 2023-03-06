@@ -9,7 +9,7 @@ const CompletedProgramPlans = (props) => {
   useEffect(() => {
     fetchProgramPlansAssignedToUser('completed').then((response) => {
       if (!response || !response.isSuccess) return;
-      console.log('response: ', response);
+      //console.log('Response: ', response);
 
       setCompletedProgramPlans(response.body);
     });

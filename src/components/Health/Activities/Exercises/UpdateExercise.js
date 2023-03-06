@@ -167,7 +167,7 @@ const UpdateExercise = (props) => {
     const formVals = getFormValues(e.target.elements);
 
     putExercise(id, formVals).then((response) => {
-      console.log('Response: ', response);
+      //console.log('Response: ', response);
       if (response && response.isSuccess) {
         //Navigate to the just updated exercise id
         navigateTo(`/activities/exercise/${id}`);

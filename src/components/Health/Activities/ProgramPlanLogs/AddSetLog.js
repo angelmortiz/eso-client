@@ -36,7 +36,7 @@ const AddSetLog = (props) => {
     const newSetValues = setNewSetValues();
     postAddSetLog(newSetValues.setLogIds, newSetValues.setLogValues).then(
       (response) => {
-        console.log('response: ', response);
+        //console.log('Response: ', response);
         if (!response || !response.isSuccess) return;
         setSetId(response.body._id);
         setEditingSet(setNumber, false);
@@ -48,7 +48,7 @@ const AddSetLog = (props) => {
     const newSetValues = setNewSetValues();
     patchUpdateSetLog(newSetValues.setLogIds, newSetValues.setLogValues).then(
       (response) => {
-        console.log('response: ', response);
+        //console.log('Response: ', response);
         if (!response || !response.isSuccess) return;
         setEditingSet(setNumber, false);
       }
@@ -78,7 +78,7 @@ const AddSetLog = (props) => {
 
     const newSetValues = setNewSetValues();
     deleteSetLog(newSetValues.setLogIds).then((response) => {
-      console.log('response: ', response);
+      //console.log('Response: ', response);
       if (!response || !response.isSuccess) return;
       setEditingSet(setNumber, false);
       removeSetLog(setNumber);
