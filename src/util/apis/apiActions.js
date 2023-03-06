@@ -1,8 +1,9 @@
 import store from '../../store/index';
 import { toastNotificationActions } from '../../store/toastNotificationSlice';
 
-// const API_ADDRESS = "http://localhost:8080/api";
-const API_ADDRESS = "https://eso-server.azurewebsites.net/api";
+// const API_ADDRESS = "http://192.168.4.173:3000/api";
+// const API_ADDRESS = "http://192.168.4.129:3000/api";
+const API_ADDRESS = "http://localhost:3000/api";
 
 export const apiGet = path => {
     const requestOptions = {
