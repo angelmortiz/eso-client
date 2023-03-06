@@ -64,7 +64,7 @@ const AddWorkout = (props) => {
   const addWorkout = (e) => {
     e.preventDefault();
     let formVals = getFormValues(e.target.elements);
-    console.log('formVals', formVals);
+    //console.log('formVals', formVals);
 
     postWorkout(formVals).then((response) => {
       //console.log('Response: ', response);

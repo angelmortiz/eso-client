@@ -12,7 +12,7 @@ const ProgramPlanDetails = (props) => {
     fetchProgramPlanById(id).then((response) => {
       if (!response || !response.isSuccess) return;
 
-      console.log("response: ", response);
+      //console.log("Response: ", response);
       setProgramPlan(response.body);
     });
   }, [id]);

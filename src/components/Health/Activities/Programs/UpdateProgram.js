@@ -108,7 +108,7 @@ const UpdateProgram = (props) => {
   const UpdateProgram = (e) => {
     e.preventDefault();
     const formVals = getFormValues(e.target.elements);
-    console.log('formVals:  ', formVals);
+    //console.log('formVals:  ', formVals);
 
     putProgram(id, formVals).then((response) => {
       //console.log('Response: ', response);

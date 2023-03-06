@@ -117,7 +117,8 @@ const AddExercise = (props) => {
   const addExercise = (e) => {
     e.preventDefault();
     const formVals = getFormValues(e.target.elements);
-    console.log(formVals);
+    //console.log("formVals: ", formVals);
+    
     postExercise(formVals).then((response) => {
       //console.log('Response: ', response);
       if (response.isSuccess) {

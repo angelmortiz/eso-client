@@ -52,7 +52,7 @@ const UpdateMuscle = (props) => {
   const updateMuscle = (e) => {
     e.preventDefault();
     const formVals = getFormValues(e.target.elements);
-    console.log('formVals:  ', formVals);
+    //console.log('formVals:  ', formVals);
 
     putMuscle(id, formVals).then((response) => {
       //console.log('Response: ', response);

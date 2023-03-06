@@ -81,7 +81,6 @@ const IncrementalSetLogs = (props) => {
   function removeSetLog(setNumber) {
     if (exercise?.sets) delete exercise.sets[setNumber-1]
 
-    console.log("here");
     updateSetLogList();
     // setSetLogsList(prev => {
     //     delete prev[setNumber-1]

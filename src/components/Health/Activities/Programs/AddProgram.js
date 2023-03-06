@@ -73,7 +73,7 @@ const AddProgram = (props) => {
   const addProgram = (e) => {
     e.preventDefault();
     const formVals = getFormValues(e.target.elements);
-    console.log('formVals:  ', formVals);
+    //console.log('formVals:  ', formVals);
 
     postProgram(formVals).then((response) => {
       //console.log('Response: ', response);

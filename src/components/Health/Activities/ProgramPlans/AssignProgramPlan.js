@@ -35,7 +35,8 @@ const AssignProgramPlan = (props) => {
 
   useEffect(() => {
     fetchAllProgramNames().then((response) => {
-      console.log('programs: ', response);
+      //console.log('Response: ', response);
+      
       if (!response || !response.isSuccess) return;
       //adds an empty default option
       response.body.unshift({ _id: '', name: '-- Choose a program --' });

@@ -102,7 +102,7 @@ const UpdateWorkout = (props) => {
     e.preventDefault();
     const formVals = getFormValues(e.target.elements);
 
-    console.log('formVals: ', formVals);
+    //console.log('formVals: ', formVals);
     putWorkout(id, formVals).then((response) => {
       //console.log('Response: ', response);
       if (response && response.isSuccess) {

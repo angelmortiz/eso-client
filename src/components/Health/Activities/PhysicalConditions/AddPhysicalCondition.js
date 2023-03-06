@@ -58,7 +58,7 @@ const AddPhysicalCondition = props => {
         const formVals = getFormValues(e.target.elements);
         // console.log("value: ", formVals);
         postPhysicalCondition(formVals).then(response => { 
-            console.log("response: ", response);
+            //console.log("Response: ", response);
         });
     };
 
