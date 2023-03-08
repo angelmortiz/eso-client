@@ -32,7 +32,7 @@ const ForgotPassword = (props) => {
 
     setButtonStatus(false);
     forgotPassword(formValues).then((response) => {
-      console.log('Response: ', response);
+      //console.log('Response: ', response);
       if (response && response.isSuccess) {
         setIsConfirmationModalOpen(true);
       } else if (response && response.message){

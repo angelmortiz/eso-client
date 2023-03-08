@@ -52,10 +52,10 @@ const UpdateMuscle = (props) => {
   const updateMuscle = (e) => {
     e.preventDefault();
     const formVals = getFormValues(e.target.elements);
-    console.log('formVals:  ', formVals);
+    //console.log('formVals:  ', formVals);
 
     putMuscle(id, formVals).then((response) => {
-      console.log('Response: ', response);
+      //console.log('Response: ', response);
       if (response.isSuccess) {
         //IMPROVE: Navigate to the just added muscle id
         navigateTo(`/activities/muscles`);

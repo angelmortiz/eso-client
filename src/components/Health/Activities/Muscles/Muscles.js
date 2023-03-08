@@ -8,7 +8,7 @@ const Muscles = (props) => {
 
   useEffect(() => {
     fetchAllMuscles().then((response) => {
-      console.log('response: ', response);
+      //console.log('Response: ', response);
 
       if (!response || !response.isSuccess) return;
       setMuscles(response.body);

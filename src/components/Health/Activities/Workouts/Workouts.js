@@ -8,7 +8,7 @@ const Workouts = (props) => {
 
     useEffect(() => {
         fetchAllWorkouts().then(response => { 
-            console.log('response: ', response);
+            //console.log('Response: ', response);
 
             if (!response || !response.isSuccess) return;
             setWorkouts(response.body);

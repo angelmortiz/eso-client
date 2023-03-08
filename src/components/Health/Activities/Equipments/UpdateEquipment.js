@@ -40,10 +40,10 @@ const UpdateEquipment = (props) => {
   const updateEquipment = (e) => {
     e.preventDefault();
     const formVals = getFormValues(e.target.elements);
-    console.log('formVals:  ', formVals);
+    //console.log('formVals:  ', formVals);
 
     putEquipment(id, formVals).then((response) => {
-      console.log('Response: ', response);
+      //console.log('Response: ', response);
       if (response.isSuccess) {
         //IMPROVE: Navigate to the just added equipment id
         navigateTo(`/activities/equipments`);

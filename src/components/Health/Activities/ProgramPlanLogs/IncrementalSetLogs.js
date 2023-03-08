@@ -14,6 +14,7 @@ const IncrementalSetLogs = (props) => {
   const [enableAddSetBtn, setEnableAddSetBtn] = useState(false);
   const [, setMapActiveEdits] = useState(() => new Map());
 
+  //automatically populates the exercise sets if it's an active exercise
   useEffect(() => {
     if (exercise?.sets.length === 0) {
       setSetLogsList([getNewSetLog(count)]);
@@ -80,8 +81,8 @@ const IncrementalSetLogs = (props) => {
   function removeSetLog(setNumber) {
     if (exercise?.sets) delete exercise.sets[setNumber-1]
 
-    console.log("here");
     updateSetLogList();
+    //TODO: Check if the logic below should be implemented
     // setSetLogsList(prev => {
     //     delete prev[setNumber-1]
     //     if (exercise?.sets) delete exercise.sets[setNumber-1];

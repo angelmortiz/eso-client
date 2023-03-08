@@ -8,7 +8,7 @@ const Programs = (props) => {
 
     useEffect(() => {
         fetchAllPrograms().then(response => { 
-            console.log('response: ', response);
+            //console.log('Response: ', response);
 
             if (!response || !response.isSuccess) return;
             setPrograms(response.body);

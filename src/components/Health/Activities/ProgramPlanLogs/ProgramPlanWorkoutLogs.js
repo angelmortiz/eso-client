@@ -17,7 +17,7 @@ const ProgramPlanWorkoutLogs = (props) => {
     fetchWorkoutPlanLogsById(programPlanId, weekNumber, workoutPlanId).then(
       (response) => {
         if (!response || !response.isSuccess) return;
-        console.log('response: ', response);
+        //console.log('Response: ', response);
         setWorkoutLogs(response.body);
       }
     );

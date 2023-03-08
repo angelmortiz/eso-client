@@ -73,10 +73,10 @@ const AddProgram = (props) => {
   const addProgram = (e) => {
     e.preventDefault();
     const formVals = getFormValues(e.target.elements);
-    console.log('formVals:  ', formVals);
+    //console.log('formVals:  ', formVals);
 
     postProgram(formVals).then((response) => {
-      console.log('Response: ', response);
+      //console.log('Response: ', response);
       if (response.isSuccess) {
         //IMPROVE: Navigate to the just added program id
         navigateTo(`/activities/programs`);

@@ -11,7 +11,7 @@ const AddEquipment = (props) => {
     const formVals = getFormValues(e.target.elements);
     
     postEquipment(formVals).then((response) => {
-      console.log('response: ', response);
+      //console.log('Response: ', response);
       navigateTo('/activities/equipments');
     });
   };
