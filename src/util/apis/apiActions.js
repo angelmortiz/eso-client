@@ -4,7 +4,7 @@ import { toastNotificationActions } from '../../store/toastNotificationSlice';
 const API_ADDRESS =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:8080/api'
-    : 'https://ensaludoptima.azurewebsites.net/api';
+    : 'https://esoptima-server.azurewebsites.net/api';
 
 export const apiGet = (path) => {
   const requestOptions = {
