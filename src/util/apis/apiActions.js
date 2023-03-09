@@ -1,8 +1,8 @@
 import store from '../../store/index';
 import { toastNotificationActions } from '../../store/toastNotificationSlice';
 
-const SERVER_ADDRESS = process.env.REACT_APP_SERVER_ADDRESS;
-console.log("SERVER_ADDRESS: ", SERVER_ADDRESS);
+const APP_API = process.env.REACT_APP_API_URL;
+console.log("APP_API: ", APP_API);
 
 export const apiGet = (path) => {
   const requestOptions = {
@@ -57,7 +57,7 @@ export const apiDelete = (path) => {
 
 const fetchAction = async (path, requestOptions, actionName) => {
   try {
-    const apiResponse = await fetch(`${SERVER_ADDRESS}${path}`, requestOptions);
+    const apiResponse = await fetch(`${APP_API}${path}`, requestOptions);
     const response = await apiResponse.json();
 
     //Middleware to catch fails and errors from backend and show them in the notifications
