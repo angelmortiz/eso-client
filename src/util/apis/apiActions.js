@@ -1,10 +1,7 @@
 import store from '../../store/index';
 import { toastNotificationActions } from '../../store/toastNotificationSlice';
 
-const API_ADDRESS =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:8080/api'
-    : 'https://esoptima-server.azurewebsites.net/api';
+const SERVER_ADDRESS = process.env.REACT_APP_SERVER_ADDRESS;
 
 export const apiGet = (path) => {
   const requestOptions = {
@@ -59,7 +56,7 @@ export const apiDelete = (path) => {
 
 const fetchAction = async (path, requestOptions, actionName) => {
   try {
-    const apiResponse = await fetch(`${API_ADDRESS}${path}`, requestOptions);
+    const apiResponse = await fetch(`${SERVER_ADDRESS}${path}`, requestOptions);
     const response = await apiResponse.json();
 
     //Middleware to catch fails and errors from backend and show them in the notifications
