@@ -105,24 +105,20 @@ const Login = (props) => {
         <div className="mt-8 mx-6 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 rounded-lg shadow sm:px-10">
             <form className="space-y-6" id="login-form" onSubmit={loginUser}>
-              <div>
-                {/* EMAIL */}
-                <AuthFormInput
-                  {...inputValues.email}
-                  errors={formErrors.email}
-                  value={formValues['email']}
-                  onChange={onChange}
-                />
-              </div>
-              <div>
-                {/* PASSWORD */}
-                <AuthFormInput
-                  {...inputValues.password}
-                  errors={formErrors.password}
-                  value={formValues['password']}
-                  onChange={onChange}
-                />
-              </div>
+              {/* EMAIL */}
+              <AuthFormInput
+                {...inputValues.email}
+                errors={formErrors.email}
+                value={formValues['email']}
+                onChange={onChange}
+              />
+              {/* PASSWORD */}
+              <AuthFormInput
+                {...inputValues.password}
+                errors={formErrors.password}
+                value={formValues['password']}
+                onChange={onChange}
+              />
 
               <div className="flex items-center justify-between">
                 <div className="text-sm">
@@ -135,23 +131,16 @@ const Login = (props) => {
                 </div>
               </div>
 
-              <div>
-                <button
-                  type="submit"
-                  id="login-user"
-                  className="flex w-full justify-center rounded-md bg-cyan-700 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600"
-                >
-                  Log in
-                </button>
-              </div>
-
-              <div>
-                {responseError && (
-                  <span className="mt-1 text-red-800">
-                    {responseError}
-                  </span>
-                )}
-              </div>
+              <button
+                type="submit"
+                id="login-user"
+                className="flex w-full justify-center rounded-md bg-cyan-700 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600"
+              >
+                Log in
+              </button>
+              {responseError && (
+                <span className="mt-1 text-red-800">{responseError}</span>
+              )}
             </form>
 
             <div className="mt-6">
@@ -164,7 +153,7 @@ const Login = (props) => {
                 </div>
               </div>
 
-              <div class="mt-4">
+              <div className="mt-4">
                 <p className="text-gray-600">
                   Are you new around here? Sign up{' '}
                   <Link
