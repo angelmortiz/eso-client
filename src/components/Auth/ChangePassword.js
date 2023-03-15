@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { changePassword } from '../../util/apis/auth/authApis';
 import styles from '../UI/General/CSS/Form.module.css';
 import FormInput from '../UI/Inputs/FormInput';
-import OkConfirmationModal from '../UI/Popups/SimpleMessage/OkConfirmationModal';
+import SimpleConfirmationModal from '../UI/Modals/OneButtonModals/SimpleConfirmationModal';
 
 const inputValues = {
   currentPassword: {
@@ -164,7 +164,7 @@ const ChangePassword = (props) => {
       </form>
 
       {/* Password changed confirmation modal */}
-      <OkConfirmationModal
+      <SimpleConfirmationModal
         isModalOpen={isConfirmationModalOpen}
         closeModal={closeConfirmationModal}
         message="Password has been changed successfully."

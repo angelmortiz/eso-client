@@ -35,7 +35,7 @@ const getWindowDimensions = () => {
 //binds modal to root app element
 Modal.setAppElement('#root');
 
-const OkConfirmationModal = props => {
+const SimpleConfirmationModal = props => {
     const closeModalOnParent = props.closeModal;
     const [isOpen, setIsOpen] = useState(props.isModalOpen);
 
@@ -61,4 +61,4 @@ const OkConfirmationModal = props => {
         </Modal>
 };
 
-export default OkConfirmationModal;
+export default SimpleConfirmationModal;

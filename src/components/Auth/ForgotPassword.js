@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { forgotPassword } from '../../util/apis/auth/authApis';
 import AuthFormInput from '../UI/Inputs/AuthFormInput';
-import OkConfirmationModal from '../UI/Popups/SimpleMessage/OkConfirmationModal';
+import SimpleConfirmationModal from '../UI/Modals/OneButtonModals/SimpleConfirmationModal';
 
 const emailValues = {
   name: 'email',

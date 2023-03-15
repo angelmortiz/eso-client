@@ -2,7 +2,7 @@ import { resetPassword } from '../../util/apis/auth/authApis';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import styles from '../UI/General/CSS/Form.module.css';
-import OkConfirmationModal from '../UI/Popups/SimpleMessage/OkConfirmationModal';
+import SimpleConfirmationModal from '../UI/Modals/OneButtonModals/SimpleConfirmationModal';
 import FormInput from '../UI/Inputs/FormInput';
 
 const inputValues = {
@@ -164,7 +164,7 @@ const ResetPassword = (props) => {
       </form>
 
       {/* Password reset confirmation modal */}
-      <OkConfirmationModal
+      <SimpleConfirmationModal
         isModalOpen={isConfirmationModalOpen}
         closeModal={closeConfirmationModal}
         message="Password has been reset successfully. Please login."

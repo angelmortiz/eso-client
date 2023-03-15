@@ -35,7 +35,7 @@ const getWindowDimensions = () => {
 //binds modal to root app element
 Modal.setAppElement('#root');
 
-const DeleteConfirmationModal = (props) => {
+const TwoButtonConfirmationModal = (props) => {
   const parent = props.info;
   const parentType = props.type;
   const closeModalOnParent = props.closeModal;
@@ -88,4 +88,4 @@ const DeleteConfirmationModal = (props) => {
   );
 };
 
-export default DeleteConfirmationModal;
+export default TwoButtonConfirmationModal;

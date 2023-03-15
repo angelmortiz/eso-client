@@ -7,7 +7,7 @@ import {
 } from '../../../../util/apis/activities/exercises/exercisesApis';
 import YouTubeEmbed from '../../../UI/VideosEmbed/YouTubeEmbed';
 import styles from '../../../UI/General/CSS/Details.module.css';
-import DeleteConfirmationModal from '../../../UI/Popups/Delete/DeleteConfirmationModal';
+import TwoButtonConfirmationModal from '../../../UI/Modals/TwoButtonModals/TwoButtonConfirmationModal';
 
 const ExerciseDetails = (props) => {
   const { id } = useParams();
@@ -33,7 +33,7 @@ const ExerciseDetails = (props) => {
     setShowVideo(!showVideo);
   };
 
-  const openDeleteConfirmationModal = (e) => {
+  const openTwoButtonConfirmationModal = (e) => {
     e.preventDefault();
     setIsDeleteModalOpen(true);
   };
@@ -141,7 +141,7 @@ const ExerciseDetails = (props) => {
               type="button"
               id="delete-exercise-btn"
               className={styles['bottom-btns']}
-              onClick={openDeleteConfirmationModal}
+              onClick={openTwoButtonConfirmationModal}
             >
               Delete
             </button>
@@ -149,7 +149,7 @@ const ExerciseDetails = (props) => {
         </div>
       )}
       {/* Delete Confirmation Modal */}
-      <DeleteConfirmationModal
+      <TwoButtonConfirmationModal
         isModalOpen={isDeleteModalOpen}
         closeModal={closeDeleteModal}
         confirmDelete={confirmDeleteExercise}

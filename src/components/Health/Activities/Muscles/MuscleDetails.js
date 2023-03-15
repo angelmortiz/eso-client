@@ -5,7 +5,7 @@ import {
   fetchMuscleById,
 } from '../../../../util/apis/activities/muscles/musclesApis';
 import styles from '../../../UI/General/CSS/Details.module.css';
-import DeleteConfirmationModal from '../../../UI/Popups/Delete/DeleteConfirmationModal';
+import TwoButtonConfirmationModal from '../../../UI/Modals/TwoButtonModals/TwoButtonConfirmationModal';
 
 const MuscleDetails = (props) => {
   const { id } = useParams();
@@ -21,7 +21,7 @@ const MuscleDetails = (props) => {
     });
   }, [id]);
 
-  const openDeleteConfirmationModal = (e) => {
+  const openTwoButtonConfirmationModal = (e) => {
     e.preventDefault();
     setIsDeleteModalOpen(true);
   };
@@ -80,7 +80,7 @@ const MuscleDetails = (props) => {
               type="button"
               id="delete-muscle-btn"
               className={styles['bottom-btns']}
-              onClick={openDeleteConfirmationModal}
+              onClick={openTwoButtonConfirmationModal}
             >
               Delete
             </button>
@@ -88,7 +88,7 @@ const MuscleDetails = (props) => {
         </div>
       )}
       {/* Delete Confirmation Modal */}
-      <DeleteConfirmationModal
+      <TwoButtonConfirmationModal
         isModalOpen={isDeleteModalOpen}
         closeModal={closeDeleteModal}
         confirmDelete={confirmDeleteMuscle}
