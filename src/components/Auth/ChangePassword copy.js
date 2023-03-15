@@ -1,35 +1,35 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { changePassword } from '../../util/apis/auth/authApis';
-import AuthFormInput from '../UI/Inputs/AuthFormInput';
+import styles from '../UI/General/CSS/Form.module.css';
+import FormInput from '../UI/Inputs/FormInput';
 import SimpleConfirmationModal from '../UI/Modals/OneButtonModals/SimpleConfirmationModal';
 
-const inputValues = [
-  {
+const inputValues = {
+  currentPassword: {
     name: 'currentPassword',
     label: 'Current password',
     type: 'password',
     id: 'currentPassword',
     placeholder: 'Enter the current password',
-    requiredField: true,
   },
-  {
+  newPassword: {
     name: 'newPassword',
     label: 'New password',
     type: 'password',
     id: 'newPassword',
     placeholder: 'Enter the new password',
-    requiredField: true,
+    pattern:
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/,
   },
-  {
+  passwordConfirmation: {
     name: 'passwordConfirmation',
     label: 'Confirm password',
     type: 'password',
     id: 'passwordConfirmation',
-    placeholder: 'Re-enter the same password',
-    requiredField: true,
+    placeholder: 'Re-enter the same password'
   },
-];
+};
 
 const ChangePassword = (props) => {
   const navigateTo = useNavigate();
@@ -60,7 +60,7 @@ const ChangePassword = (props) => {
       //console.log('Response: ', response);
       if (response && response.isSuccess) {
         setIsConfirmationModalOpen(true);
-      } else if (response && response.message) {
+      } else if (response && response.message){
         setResponseError(response.message);
       }
 
@@ -82,10 +82,9 @@ const ChangePassword = (props) => {
     }
 
     //new confirmation validations
-    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
     if (!newPassword) {
       errors.newPassword.push('New password is required.');
-    } else if (!passwordPattern.test(newPassword)) {
+    } else if (!inputValues.newPassword.pattern.test(newPassword)) {
       errors.newPassword.push(
         'Password must contain 8-20 characters and include at least one letter, one number, and one special character.'
       );
@@ -114,59 +113,63 @@ const ChangePassword = (props) => {
   };
 
   return (
-    <>
-      <div className="flex flex-col min-h-full justify-center py-6 sm:px-6 sm:py-12 lg:px-8">
-        {/* LABEL */}
-        <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-700">
-            Change password
-          </h2>
-        </div>
+    <section className={styles['main-section']}>
+      <form
+        id="changePassword-form"
+        onSubmit={userChangePassword}
+        className={styles['main-form']}
+      >
+        <h1 className={styles['form-title']}>Change Password</h1>
 
-        {/* LOG IN CARD */}
-        <div className="mt-6 m-6 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 rounded-lg shadow sm:px-10">
-            <form
-              className="flex flex-col gap-5"
-              id="signup-form"
-              onSubmit={userChangePassword}
-            >
-              {inputValues.map((fieldValues) => (
-                <AuthFormInput
-                  key={`${fieldValues.name}`}
-                  {...fieldValues}
-                  errors={formErrors[fieldValues.name]}
-                  value={formValues[fieldValues.name]}
-                  onChange={onChange}
-                />
-              ))}
+        {/* CURRENT PASSWORD */}
+        <FormInput
+          {...inputValues.currentPassword}
+          errors={formErrors.currentPassword}
+          value={formValues['currentPassword']}
+          onChange={onChange}
+        />
 
-              <button
-                type="submit"
-                id="signup-user"
-                className="flex w-full justify-center mt-2 rounded-md bg-cyan-700 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600"
-                disabled={!isButtonEnabled}
-              >
-                Change password
-              </button>
-              {responseError && (
-                <span className="mt-1 text-red-800">{responseError}</span>
-              )}
-            </form>
-          </div>
-        </div>
-      </div>
+        {/* NEW PASSWORD */}
+        <FormInput
+          {...inputValues.newPassword}
+          errors={formErrors.newPassword}
+          value={formValues['newPassword']}
+          onChange={onChange}
+        />
 
-      {/* Email confirmation sent modal */}
+        {/* PASSWORD CONFIRMATION */}
+        <FormInput
+          {...inputValues.passwordConfirmation}
+          errors={formErrors.passwordConfirmation}
+          value={formValues['passwordConfirmation']}
+          onChange={onChange}
+        />
+
+        {/* SUBMIT BUTTON */}
+        <button
+          type="submit"
+          id="change-password"
+          className={
+            isButtonEnabled
+              ? styles['submit-btn']
+              : styles['submit-btn-disabled']
+          }
+        >
+          Change Password
+        </button>
+
+        {responseError && (
+          <span className={styles['response-error-text']}>{responseError}</span>
+        )}
+      </form>
+
+      {/* Password changed confirmation modal */}
       <SimpleConfirmationModal
         isModalOpen={isConfirmationModalOpen}
         closeModal={closeConfirmationModal}
-        status="OK"
-        title="Password changed"
-        message="Your password has been changed successfully."
-        buttonLabel="OK"
+        message="Password has been changed successfully."
       />
-    </>
+    </section>
   );
 };
 
