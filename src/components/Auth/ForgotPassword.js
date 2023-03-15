@@ -15,7 +15,7 @@ const emailValues = {
 
 const ForgotPassword = (props) => {
   const navigateTo = useNavigate();
-  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(true);
   const [isButtonEnabled, setButtonStatus] = useState(true);
   const [formValues, setFormValues] = useState({ email: '' });
   const [formErrors, setFormErrors] = useState({ email: [] });
@@ -67,59 +67,71 @@ const ForgotPassword = (props) => {
   };
 
   return (
-    <div className="flex flex-col min-h-full justify-center py-6 sm:px-6 lg:px-8">
-      {/* LABEL */}
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-700">
-          Forgot your password
-        </h2>
-        <p className="mt-4 px-12 text-left text-md text-base tracking-tight text-gray-700 md:px-8">
-          Please enter the email address you'd like your password reset
-          information sent to.
-        </p>
-      </div>
+    <>
+      <div className="flex flex-col min-h-full justify-center py-6 sm:px-6 lg:px-8">
+        {/* LABEL */}
+        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-700">
+            Forgot your password
+          </h2>
+          <p className="mt-4 px-12 text-left text-md text-base tracking-tight text-gray-700 md:px-8">
+            Please enter the email address you'd like your password reset
+            information sent to.
+          </p>
+        </div>
 
-      {/* LOG IN CARD */}
-      <div className="mt-4 mx-6 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-6 px-4 rounded-lg shadow sm:px-10">
-          <form
-            className="flex flex-col gap-6"
-            id="forgot-password-form"
-            onSubmit={userForgotPassword}
-          >
-            {/* EMAIL */}
-            <AuthFormInput
-              {...emailValues}
-              errors={formErrors.email}
-              value={formValues['email']}
-              onChange={onChange}
-            />
-
-            <button
-              type="submit"
-              id="forgot-password-user"
-              className="flex w-full justify-center rounded-md bg-cyan-700 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600"
+        {/* LOG IN CARD */}
+        <div className="mt-4 mx-6 sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="bg-white py-6 px-4 rounded-lg shadow sm:px-10">
+            <form
+              className="flex flex-col gap-6"
+              id="forgot-password-form"
+              onSubmit={userForgotPassword}
             >
-              Request reset link
-            </button>
-            {responseError && (
-              <span className="mt-1 text-red-800">{responseError}</span>
-            )}
-          </form>
+              {/* EMAIL */}
+              <AuthFormInput
+                {...emailValues}
+                errors={formErrors.email}
+                value={formValues['email']}
+                onChange={onChange}
+              />
 
-          <div className="mt-5 flex items-center justify-center">
-            <div className="text-sm">
-              <Link
-                to="/auth/login"
-                className="font-medium text-cyan-700 hover:text-cyan-600"
+              <button
+                type="submit"
+                id="forgot-password-user"
+                className="flex w-full justify-center rounded-md bg-cyan-700 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600"
               >
-                Back to login
-              </Link>
+                Request reset link
+              </button>
+              {responseError && (
+                <span className="mt-1 text-red-800">{responseError}</span>
+              )}
+            </form>
+
+            <div className="mt-5 flex items-center justify-center">
+              <div className="text-sm">
+                <Link
+                  to="/auth/login"
+                  className="font-medium text-cyan-700 hover:text-cyan-600"
+                >
+                  Back to login
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+
+      {/* Email confirmation sent modal */}
+      <SimpleConfirmationModal
+        isModalOpen={isConfirmationModalOpen}
+        closeModal={closeConfirmationModal}
+        status="OK"
+        title="Reset link sent"
+        message="An email containing a password reset link has been sent to the email address you provided."
+        buttonLabel="OK"
+      />
+    </>
   );
 };
 
