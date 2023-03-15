@@ -4,11 +4,12 @@ const AuthFormInput = (props) => {
     label,
     errors,
     onChange,
+    pattern,
     ...inputProps
   } = props;
 
   return (
-    <>
+    <div>
       <label htmlFor={name} className="block text-sm font-medium leading-6 text-gray-900">
         {label}
       </label>
@@ -24,7 +25,7 @@ const AuthFormInput = (props) => {
       {errors.map((error, index) => 
         <div key={`${name}-error-${index}`} className="mx-1 mt-1 text-red-800">{error}</div>
       )}
-    </>
+    </div>
   );
 };
 

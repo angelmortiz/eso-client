@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signup } from '../../util/apis/auth/authApis';
-import styles from '../UI/General/CSS/Form.module.css';
-import FormInput from '../UI/Inputs/FormInput';
+import AuthFormInput from '../UI/Inputs/AuthFormInput';
 
 const inputValues = {
   firstName: {
@@ -26,21 +25,28 @@ const inputValues = {
     id: 'email',
     placeholder: 'Enter an email',
   },
+  phone: {
+    name: 'phone_number',
+    label: 'Phone number',
+    type: 'tel',
+    id: 'phone_number',
+    placeholder: 'Enter a phone number',
+    pattern: "[0-9]{3}-[0-9]{2}-[0-9]{3}"
+  },
   password: {
     name: 'password',
     label: 'New password',
     type: 'password',
     id: 'newPassword',
     placeholder: 'Enter a password',
-    pattern:
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/,
+    pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/,
   },
   passwordConfirmation: {
     name: 'passwordConfirmation',
     label: 'Confirm password',
     type: 'password',
     id: 'passwordConfirmation',
-    placeholder: 'Re-enter the same password'
+    placeholder: 'Re-enter the same password',
   },
 };
 
@@ -82,7 +88,8 @@ const Signup = (props) => {
   };
 
   const isValidationSuccessful = () => {
-    const { firstName, lastName, email, password, passwordConfirmation } = formValues;
+    const { firstName, lastName, email, password, passwordConfirmation } =
+      formValues;
     let errors = {
       firstName: [],
       lastName: [],
@@ -136,80 +143,104 @@ const Signup = (props) => {
   };
 
   return (
-    <section className={styles['main-section']}>
-      <form
-        id="signup-form"
-        onSubmit={signupUser}
-        className={styles['main-form']}
-      >
-        <h1 className={styles['form-title']}>Sign Up</h1>
-
-        {/* FIRST NAME */}
-        <FormInput
-          {...inputValues.firstName}
-          errors={formErrors.firstName}
-          value={formValues['firstName']}
-          onChange={onChange}
+    <div className="flex flex-col min-h-full justify-center py-6 sm:px-6 sm:py-12 lg:px-8">
+      {/* LOGO AND SIGN UP LABEL */}
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <img
+          className="hidden sm:block mx-auto h-14 w-auto"
+          src="/icon-logo.png"
+          alt="Your Company"
         />
-
-        {/* LAST NAME */}
-        <FormInput
-          {...inputValues.lastName}
-          errors={formErrors.lastName}
-          value={formValues['lastName']}
-          onChange={onChange}
-        />
-
-        {/* EMAIL */}
-        <FormInput
-          {...inputValues.email}
-          errors={formErrors.email}
-          value={formValues['email']}
-          onChange={onChange}
-        />
-
-        {/* PASSWORD */}
-        <FormInput
-          {...inputValues.password}
-          errors={formErrors.password}
-          value={formValues['password']}
-          onChange={onChange}
-        />
-
-        {/* PASSWORD CONFIRMATION */}
-        <FormInput
-          {...inputValues.passwordConfirmation}
-          errors={formErrors.passwordConfirmation}
-          value={formValues['passwordConfirmation']}
-          onChange={onChange}
-        />
-
-        {/* SUBMIT BUTTON */}
-        <button
-          type="submit"
-          id="signup-user"
-          className={styles['submit-btn']}
-        >
-          Sign Up
-        </button>
-
-        {responseError && (
-          <span className={styles['response-error-text']}>
-            {responseError}
-          </span>
-        )}
-      </form>
-
-      {/* Division line */}
-      <div className={styles['division']}>
-        <hr className={styles['horizontal-division']} />
-        &nbsp;&nbsp;or&nbsp;&nbsp;
-        <hr className={styles['horizontal-division']} />
+        <h1 className="mt-2 text-center text-4xl font-bold tracking-tight text-gray-700">
+          Welcome!
+        </h1>
+        <h2 className="mt-4 text-center text-2xl font-semibold tracking-tight text-gray-700">
+          Create a new account
+        </h2>
       </div>
-      <Link to="/auth/login" className={styles['submit-btn']}>
-        Login
-      </Link>
-    </section>
+
+      {/* LOG IN CARD */}
+      <div className="mt-6 m-6 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="bg-white py-8 px-4 rounded-lg shadow sm:px-10">
+          <form
+            className="flex flex-col gap-5"
+            id="login-form"
+            onSubmit={signupUser}
+          >
+            {/* FIRST NAME */}
+            <AuthFormInput
+              {...inputValues.firstName}
+              errors={formErrors.firstName}
+              value={formValues['firstName']}
+              onChange={onChange}
+            />
+            {/* LAST NAME */}
+            <AuthFormInput
+              {...inputValues.lastName}
+              errors={formErrors.lastName}
+              value={formValues['lastName']}
+              onChange={onChange}
+            />
+            {/* EMAIL */}
+            <AuthFormInput
+              {...inputValues.email}
+              errors={formErrors.email}
+              value={formValues['email']}
+              onChange={onChange}
+            />
+            {/* PASSWORD */}
+            <AuthFormInput
+              {...inputValues.password}
+              errors={formErrors.password}
+              value={formValues['password']}
+              onChange={onChange}
+            />
+            {/* PASSWORD CONFIRMATION */}
+            <AuthFormInput
+              {...inputValues.passwordConfirmation}
+              errors={formErrors.passwordConfirmation}
+              value={formValues['passwordConfirmation']}
+              onChange={onChange}
+            />
+
+            <button
+              type="submit"
+              id="login-user"
+              className="flex w-full justify-center mt-2 rounded-md bg-cyan-700 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600"
+            >
+              Sign up
+            </button>
+            {responseError && (
+              <span className="mt-1 text-red-800">{responseError}</span>
+            )}
+          </form>
+
+          <div className="mt-6">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300" />
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="bg-white px-2 text-gray-500">Or</span>
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <p className="text-gray-600">
+                Do you have an account? Log in{' '}
+                <Link
+                  to="/auth/login"
+                  className="text-cyan-700 underline hover:text-cyan-600"
+                >
+                  here
+                </Link>
+                .
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

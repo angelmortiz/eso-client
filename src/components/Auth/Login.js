@@ -104,7 +104,7 @@ const Login = (props) => {
         {/* LOG IN CARD */}
         <div className="mt-8 mx-6 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 rounded-lg shadow sm:px-10">
-            <form className="space-y-6" id="login-form" onSubmit={loginUser}>
+            <form className="flex flex-col gap-6" id="login-form" onSubmit={loginUser}>
               {/* EMAIL */}
               <AuthFormInput
                 {...inputValues.email}
