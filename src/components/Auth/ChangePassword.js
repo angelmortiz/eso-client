@@ -123,7 +123,7 @@ const ChangePassword = (props) => {
           </h2>
         </div>
 
-        {/* LOG IN CARD */}
+        {/* CHANGE PASSWORD CARD */}
         <div className="mt-6 m-6 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 rounded-lg shadow sm:px-10">
             <form

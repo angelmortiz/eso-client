@@ -1,28 +1,27 @@
 import { resetPassword } from '../../util/apis/auth/authApis';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import styles from '../UI/General/CSS/Form.module.css';
 import SimpleConfirmationModal from '../UI/Modals/OneButtonModals/SimpleConfirmationModal';
-import FormInput from '../UI/Inputs/FormInput';
+import AuthFormInput from '../UI/Inputs/AuthFormInput';
 
-const inputValues = {
-  password: {
+const inputValues = [
+  {
     name: 'password',
     label: 'New password',
     type: 'password',
     id: 'newPassword',
     placeholder: 'Enter a password',
-    pattern:
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/,
+    requiredField: true,
   },
-  passwordConfirmation: {
+  {
     name: 'passwordConfirmation',
     label: 'Confirm password',
     type: 'password',
     id: 'passwordConfirmation',
-    placeholder: 'Re-enter the same password'
+    placeholder: 'Re-enter the same password',
+    requiredField: true,
   },
-};
+];
 
 const ResetPassword = (props) => {
   const navigateTo = useNavigate();
@@ -95,9 +94,10 @@ const ResetPassword = (props) => {
     };
 
     //password validations
+    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
     if (!password) {
       errors.password.push('Password is required.');
-    } else if (!inputValues.password.pattern.test(password)) {
+    } else if (!passwordPattern.test(password)) {
       errors.password.push(
         'Password must contain 8-20 characters and include at least one letter, one number, and one special character.'
       );
@@ -121,55 +121,59 @@ const ResetPassword = (props) => {
   };
 
   return (
-    <section className={styles['main-section']}>
-      <form
-        id="resetPassword-form"
-        onSubmit={userResetPassword}
-        className={styles['main-form']}
-      >
-        <h1 className={styles['form-title']}>Reset Password</h1>
+    <>
+      <div className="flex flex-col min-h-full justify-center py-6 sm:px-6 sm:py-12 lg:px-8">
+        {/* LABEL */}
+        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-700">
+            Reset password
+          </h2>
+        </div>
 
-        {/* PASSWORD */}
-        <FormInput
-          {...inputValues.password}
-          errors={formErrors.password}
-          value={formValues['password']}
-          onChange={onChange}
-        />
+        {/* RESET PASSWORD CARD */}
+        <div className="mt-6 m-6 sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="bg-white py-8 px-4 rounded-lg shadow sm:px-10">
+            <form
+              className="flex flex-col gap-5"
+              id="signup-form"
+              onSubmit={userResetPassword}
+            >
+              {inputValues.map((fieldValues) => (
+                <AuthFormInput
+                  key={`${fieldValues.name}`}
+                  {...fieldValues}
+                  errors={formErrors[fieldValues.name]}
+                  value={formValues[fieldValues.name]}
+                  onChange={onChange}
+                />
+              ))}
 
-        {/* PASSWORD CONFIRMATION */}
-        <FormInput
-          {...inputValues.passwordConfirmation}
-          errors={formErrors.passwordConfirmation}
-          value={formValues['passwordConfirmation']}
-          onChange={onChange}
-        />
+              <button
+                type="submit"
+                id="signup-user"
+                className="flex w-full justify-center mt-2 rounded-md bg-cyan-700 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600"
+                disabled={!isButtonEnabled}
+              >
+                Reset password
+              </button>
+              {responseError && (
+                <span className="mt-1 text-red-800">{responseError}</span>
+              )}
+            </form>
+          </div>
+        </div>
+      </div>
 
-        {/* SUBMIT BUTTON */}
-        <button
-          type="submit"
-          id="reset-password"
-          className={
-            isButtonEnabled
-              ? styles['submit-btn']
-              : styles['submit-btn-disabled']
-          }
-        >
-          Reset Password
-        </button>
-
-        {responseError && (
-          <span className={styles['response-error-text']}>{responseError}</span>
-        )}
-      </form>
-
-      {/* Password reset confirmation modal */}
+      {/* Email confirmation sent modal */}
       <SimpleConfirmationModal
         isModalOpen={isConfirmationModalOpen}
         closeModal={closeConfirmationModal}
-        message="Password has been reset successfully. Please login."
+        status="OK"
+        title="Password changed"
+        message="Your password has been changed successfully."
+        buttonLabel="OK"
       />
-    </section>
+    </>
   );
 };
 
