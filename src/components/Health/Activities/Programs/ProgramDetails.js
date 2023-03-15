@@ -125,7 +125,7 @@ const ProgramDetails = (props) => {
         confirmDelete={confirmDeleteProgram}
         status="Warning"
         title="Confirm delete"
-        message={`Are you sure you want to delete the program "${program.name}"?`}
+        message={`Are you sure you want to delete the program "${program?.name}"?`}
         mainButtonLabel="Delete"
       />
     </div>

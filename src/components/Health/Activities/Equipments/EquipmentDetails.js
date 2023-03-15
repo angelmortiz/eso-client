@@ -94,7 +94,7 @@ const EquipmentDetails = (props) => {
         confirmDelete={confirmDeleteEquipment}
         status="Warning"
         title="Confirm delete"
-        message={`Are you sure you want to delete the equipment "${equipment.name}"?`}
+        message={`Are you sure you want to delete the equipment "${equipment?.name}"?`}
         mainButtonLabel="Delete"
       />
     </section>

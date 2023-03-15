@@ -155,7 +155,7 @@ const ExerciseDetails = (props) => {
         confirmDelete={confirmDeleteExercise}
         status="Warning"
         title="Confirm delete"
-        message={`Are you sure you want to delete the exercise "${exercise.name}"?`}
+        message={`Are you sure you want to delete the exercise "${exercise?.name}"?`}
         mainButtonLabel="Delete"
       />
     </section>

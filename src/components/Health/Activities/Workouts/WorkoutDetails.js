@@ -132,7 +132,7 @@ const WorkoutDetails = (props) => {
         confirmDelete={confirmDeleteWorkout}
         status="Warning"
         title="Confirm delete"
-        message={`Are you sure you want to delete the workout "${workout.name}"?`}
+        message={`Are you sure you want to delete the workout "${workout?.name}"?`}
         mainButtonLabel="Delete"
       />
     </div>
