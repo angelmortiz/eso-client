@@ -15,7 +15,7 @@ const emailValues = {
 
 const ForgotPassword = (props) => {
   const navigateTo = useNavigate();
-  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(true);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [isButtonEnabled, setButtonStatus] = useState(true);
   const [formValues, setFormValues] = useState({ email: '' });
   const [formErrors, setFormErrors] = useState({ email: [] });
@@ -100,6 +100,7 @@ const ForgotPassword = (props) => {
                 type="submit"
                 id="forgot-password-user"
                 className="flex w-full justify-center rounded-md bg-cyan-700 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600"
+                disabled={!isButtonEnabled}
               >
                 Request reset link
               </button>
