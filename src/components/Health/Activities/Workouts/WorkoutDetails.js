@@ -5,7 +5,7 @@ import {
   fetchWorkoutById,
 } from '../../../../util/apis/activities/workouts/workoutsApis';
 import styles from '../../../UI/General/CSS/Details.module.css';
-import TwoButtonConfirmationModal from '../../../UI/Modals/TwoButtonModals/TwoButtonConfirmationModal';
+import SimpleCancelConfirmationModal from '../../../UI/Modals/TwoButtonModals/SimpleCancelConfirmationModal';
 
 const WorkoutDetails = (props) => {
   const { id } = useParams();
@@ -21,7 +21,7 @@ const WorkoutDetails = (props) => {
     });
   }, [id]);
 
-  const openTwoButtonConfirmationModal = (e) => {
+  const openSimpleCancelConfirmationModal = (e) => {
     e.preventDefault();
     setIsDeleteModalOpen(true);
   };
@@ -119,19 +119,21 @@ const WorkoutDetails = (props) => {
           type="button"
           id="delete-exercise-btn"
           className={styles['bottom-btns']}
-          onClick={openTwoButtonConfirmationModal}
+          onClick={openSimpleCancelConfirmationModal}
         >
           Delete
         </button>
       </div>
 
       {/* Delete Confirmation Modal */}
-      <TwoButtonConfirmationModal
+      <SimpleCancelConfirmationModal
         isModalOpen={isDeleteModalOpen}
         closeModal={closeDeleteModal}
         confirmDelete={confirmDeleteWorkout}
-        info={workout}
-        type="workout"
+        status="Warning"
+        title="Confirm delete"
+        message={`Are you sure you want to delete the workout "${workout.name}"?`}
+        mainButtonLabel="Delete"
       />
     </div>
   );

@@ -42,7 +42,7 @@ const navMenuValues = [
       { label: 'Workout', path: '/activities/add-workout' },
       { label: 'Exercise', path: '/activities/add-exercise' },
       { label: 'Muscle', path: '/activities/add-muscle' },
-      { label: 'Equipment', path: '/activities/add-equipme' },
+      { label: 'Equipment', path: '/activities/add-equipment' },
     ],
   },
   {

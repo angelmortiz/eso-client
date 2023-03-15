@@ -7,7 +7,7 @@ import {
 } from '../../../../util/apis/activities/exercises/exercisesApis';
 import YouTubeEmbed from '../../../UI/VideosEmbed/YouTubeEmbed';
 import styles from '../../../UI/General/CSS/Details.module.css';
-import TwoButtonConfirmationModal from '../../../UI/Modals/TwoButtonModals/TwoButtonConfirmationModal';
+import SimpleCancelConfirmationModal from '../../../UI/Modals/TwoButtonModals/SimpleCancelConfirmationModal';
 
 const ExerciseDetails = (props) => {
   const { id } = useParams();
@@ -33,7 +33,7 @@ const ExerciseDetails = (props) => {
     setShowVideo(!showVideo);
   };
 
-  const openTwoButtonConfirmationModal = (e) => {
+  const openSimpleCancelConfirmationModal = (e) => {
     e.preventDefault();
     setIsDeleteModalOpen(true);
   };
@@ -141,7 +141,7 @@ const ExerciseDetails = (props) => {
               type="button"
               id="delete-exercise-btn"
               className={styles['bottom-btns']}
-              onClick={openTwoButtonConfirmationModal}
+              onClick={openSimpleCancelConfirmationModal}
             >
               Delete
             </button>
@@ -149,12 +149,14 @@ const ExerciseDetails = (props) => {
         </div>
       )}
       {/* Delete Confirmation Modal */}
-      <TwoButtonConfirmationModal
+      <SimpleCancelConfirmationModal
         isModalOpen={isDeleteModalOpen}
         closeModal={closeDeleteModal}
         confirmDelete={confirmDeleteExercise}
-        info={exercise}
-        type="exercise"
+        status="Warning"
+        title="Confirm delete"
+        message={`Are you sure you want to delete the exercise "${exercise.name}"?`}
+        mainButtonLabel="Delete"
       />
     </section>
   );

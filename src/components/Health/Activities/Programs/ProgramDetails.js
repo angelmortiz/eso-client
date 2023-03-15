@@ -5,7 +5,7 @@ import {
   fetchProgramById,
 } from '../../../../util/apis/activities/programs/programsApis';
 import styles from '../../../UI/General/CSS/Details.module.css';
-import TwoButtonConfirmationModal from '../../../UI/Modals/TwoButtonModals/TwoButtonConfirmationModal';
+import SimpleCancelConfirmationModal from '../../../UI/Modals/TwoButtonModals/SimpleCancelConfirmationModal';
 
 const ProgramDetails = (props) => {
   const { id } = useParams();
@@ -21,7 +21,7 @@ const ProgramDetails = (props) => {
     });
   }, [id]);
 
-  const openTwoButtonConfirmationModal = (e) => {
+  const openSimpleCancelConfirmationModal = (e) => {
     e.preventDefault();
     setIsDeleteModalOpen(true);
   };
@@ -112,19 +112,21 @@ const ProgramDetails = (props) => {
           type="button"
           id="delete-program-btn"
           className={styles['bottom-btns']}
-          onClick={openTwoButtonConfirmationModal}
+          onClick={openSimpleCancelConfirmationModal}
         >
           Delete
         </button>
       </div>
 
       {/* Delete Confirmation Modal */}
-      <TwoButtonConfirmationModal
+      <SimpleCancelConfirmationModal
         isModalOpen={isDeleteModalOpen}
         closeModal={closeDeleteModal}
         confirmDelete={confirmDeleteProgram}
-        info={program}
-        type="program"
+        status="Warning"
+        title="Confirm delete"
+        message={`Are you sure you want to delete the program "${program.name}"?`}
+        mainButtonLabel="Delete"
       />
     </div>
   );
