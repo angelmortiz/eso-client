@@ -22,6 +22,7 @@ const ForgotPassword = (props) => {
   const [responseError, setResponseError] = useState('');
 
   const onChange = (e) => {
+    setResponseError('');
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
