@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { forgotPassword } from '../../util/apis/auth/authApis';
-import styles from '../UI/General/CSS/Form.module.css';
-import FormInput from '../UI/Inputs/FormInput';
+import AuthFormInput from '../UI/Inputs/AuthFormInput';
 import OkConfirmationModal from '../UI/Popups/SimpleMessage/OkConfirmationModal';
 
 const emailValues = {
@@ -11,6 +10,7 @@ const emailValues = {
   type: 'text',
   id: 'email',
   placeholder: 'Enter an email',
+  requiredField: true,
 };
 
 const ForgotPassword = (props) => {
@@ -18,7 +18,7 @@ const ForgotPassword = (props) => {
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [isButtonEnabled, setButtonStatus] = useState(true);
   const [formValues, setFormValues] = useState({ email: '' });
-  const [formErrors, setFormErrors] = useState({ email: []});
+  const [formErrors, setFormErrors] = useState({ email: [] });
   const [responseError, setResponseError] = useState('');
 
   const onChange = (e) => {
@@ -35,7 +35,7 @@ const ForgotPassword = (props) => {
       //console.log('Response: ', response);
       if (response && response.isSuccess) {
         setIsConfirmationModalOpen(true);
-      } else if (response && response.message){
+      } else if (response && response.message) {
         setResponseError(response.message);
       }
 
@@ -50,7 +50,7 @@ const ForgotPassword = (props) => {
 
   const isValidationSuccessful = () => {
     const { email } = formValues;
-    let errors = {email: []};
+    let errors = { email: [] };
 
     // email validations
     if (!email) {
@@ -66,47 +66,59 @@ const ForgotPassword = (props) => {
   };
 
   return (
-    <section className={styles['main-section']}>
-      <form
-        id="forgotPassword-form"
-        onSubmit={userForgotPassword}
-        className={styles['main-form']}
-      >
-        <h1 className={styles['form-title']}>Forgot Password</h1>
-        
-        {/* EMAIL */}
-        <FormInput
-          {...emailValues}
-          errors={formErrors.email}
-          value={formValues['email']}
-          onChange={onChange}
-        />
+    <div className="flex flex-col min-h-full justify-center py-6 sm:px-6 lg:px-8">
+      {/* LABEL */}
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-700">
+          Forgot your password
+        </h2>
+        <p className="mt-4 px-12 text-left text-md text-base tracking-tight text-gray-700 md:px-8">
+          Please enter the email address you'd like your password reset
+          information sent to.
+        </p>
+      </div>
 
-        {/* SUBMIT BUTTON */}
-        <button
-          type="submit"
-          id="forgot-password"
-          className={
-            isButtonEnabled
-              ? styles['submit-btn']
-              : styles['submit-btn-disabled']
-          }
-        >
-          Send Email
-        </button>
+      {/* LOG IN CARD */}
+      <div className="mt-4 mx-6 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="bg-white py-6 px-4 rounded-lg shadow sm:px-10">
+          <form
+            className="flex flex-col gap-6"
+            id="forgot-password-form"
+            onSubmit={userForgotPassword}
+          >
+            {/* EMAIL */}
+            <AuthFormInput
+              {...emailValues}
+              errors={formErrors.email}
+              value={formValues['email']}
+              onChange={onChange}
+            />
 
-        {responseError && (
-          <span className={styles['response-error-text']}>{responseError}</span>
-        )}
-      </form>
+            <button
+              type="submit"
+              id="forgot-password-user"
+              className="flex w-full justify-center rounded-md bg-cyan-700 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600"
+            >
+              Request reset link
+            </button>
+            {responseError && (
+              <span className="mt-1 text-red-800">{responseError}</span>
+            )}
+          </form>
 
-      {/* Email sent confirmation modal */}
-      <OkConfirmationModal
-        isModalOpen={isConfirmationModalOpen}
-        closeModal={closeConfirmationModal}
-        message="A link to reset your password was sent to your email."
-      />
-    </section>
+          <div className="mt-5 flex items-center justify-center">
+            <div className="text-sm">
+              <Link
+                to="/auth/login"
+                className="font-medium text-cyan-700 hover:text-cyan-600"
+              >
+                Back to login
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

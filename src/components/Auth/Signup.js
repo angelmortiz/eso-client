@@ -173,7 +173,7 @@ const Signup = (props) => {
         <div className="bg-white py-8 px-4 rounded-lg shadow sm:px-10">
           <form
             className="flex flex-col gap-5"
-            id="login-form"
+            id="signup-form"
             onSubmit={signupUser}
           >
             {inputValues.map((fieldValues) => (
@@ -188,7 +188,7 @@ const Signup = (props) => {
 
             <button
               type="submit"
-              id="login-user"
+              id="signup-user"
               className="flex w-full justify-center mt-2 rounded-md bg-cyan-700 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600"
             >
               Sign up

@@ -15,7 +15,7 @@ const AuthFormInput = (props) => {
         {label}
         {requiredField && <span className="text-red-800">{' *'}</span>}
       </label>
-      <div className="mt-2">
+      <div className="mt-3">
         <input
           {...inputProps}
           onChange={onChange}
@@ -25,7 +25,7 @@ const AuthFormInput = (props) => {
       </div>
       {/* displays all errors associated to the input above */}
       {errors.map((error, index) => 
-        <div key={`${name}-error-${index}`} className="mx-1 mt-1 text-red-800">{error}</div>
+        <div key={`${name}-error-${index}`} className="mx-1 mt-1 text-red-800 text-sm">{error}</div>
       )}
     </div>
   );
