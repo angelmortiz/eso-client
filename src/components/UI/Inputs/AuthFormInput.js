@@ -5,6 +5,7 @@ const AuthFormInput = (props) => {
     errors,
     onChange,
     pattern,
+    requiredField,
     ...inputProps
   } = props;
 
@@ -12,6 +13,7 @@ const AuthFormInput = (props) => {
     <div>
       <label htmlFor={name} className="block text-sm font-medium leading-6 text-gray-900">
         {label}
+        {requiredField && <span className="text-red-800">{' *'}</span>}
       </label>
       <div className="mt-2">
         <input

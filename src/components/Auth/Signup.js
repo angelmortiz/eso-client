@@ -3,52 +3,57 @@ import { Link, useNavigate } from 'react-router-dom';
 import { signup } from '../../util/apis/auth/authApis';
 import AuthFormInput from '../UI/Inputs/AuthFormInput';
 
-const inputValues = {
-  firstName: {
+const inputValues = [
+  {
     name: 'firstName',
     label: 'First name',
     type: 'text',
     id: 'firstName',
     placeholder: 'Enter your first name',
+    requiredField: true,
   },
-  lastName: {
+  {
     name: 'lastName',
     label: 'Last name',
     type: 'text',
     id: 'lastName',
     placeholder: 'Enter your last name',
+    requiredField: true,
   },
-  email: {
+  {
     name: 'email',
     label: 'Email',
     type: 'text',
     id: 'email',
     placeholder: 'Enter an email',
+    requiredField: true,
   },
-  phone: {
-    name: 'phone_number',
+  {
+    name: 'phoneNumber',
     label: 'Phone number',
     type: 'tel',
-    id: 'phone_number',
+    id: 'phoneNumber',
     placeholder: 'Enter a phone number',
-    pattern: "[0-9]{3}-[0-9]{2}-[0-9]{3}"
+    pattern: '[0-9]{3}-[0-9]{2}-[0-9]{3}',
+    requiredField: false,
   },
-  password: {
+  {
     name: 'password',
     label: 'New password',
     type: 'password',
     id: 'newPassword',
     placeholder: 'Enter a password',
-    pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/,
+    requiredField: true,
   },
-  passwordConfirmation: {
+  {
     name: 'passwordConfirmation',
     label: 'Confirm password',
     type: 'password',
     id: 'passwordConfirmation',
     placeholder: 'Re-enter the same password',
+    requiredField: true,
   },
-};
+];
 
 const Signup = (props) => {
   const navigateTo = useNavigate();
@@ -57,6 +62,7 @@ const Signup = (props) => {
     firstName: '',
     lastName: '',
     email: '',
+    phoneNumber: '',
     password: '',
     passwordConfirmation: '',
   });
@@ -64,6 +70,7 @@ const Signup = (props) => {
     firstName: [],
     lastName: [],
     email: [],
+    phoneNumber: [],
     password: [],
     passwordConfirmation: [],
   });
@@ -94,6 +101,7 @@ const Signup = (props) => {
       firstName: [],
       lastName: [],
       email: [],
+      phoneNumber: [],
       password: [],
       passwordConfirmation: [],
     };
@@ -116,9 +124,10 @@ const Signup = (props) => {
     }
 
     //password validations
+    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
     if (!password) {
       errors.password.push('Password is required.');
-    } else if (!inputValues.password.pattern.test(password)) {
+    } else if (!passwordPattern.test(password)) {
       errors.password.push(
         'Password must contain 8-20 characters and include at least one letter, one number, and one special character.'
       );
@@ -167,41 +176,15 @@ const Signup = (props) => {
             id="login-form"
             onSubmit={signupUser}
           >
-            {/* FIRST NAME */}
-            <AuthFormInput
-              {...inputValues.firstName}
-              errors={formErrors.firstName}
-              value={formValues['firstName']}
-              onChange={onChange}
-            />
-            {/* LAST NAME */}
-            <AuthFormInput
-              {...inputValues.lastName}
-              errors={formErrors.lastName}
-              value={formValues['lastName']}
-              onChange={onChange}
-            />
-            {/* EMAIL */}
-            <AuthFormInput
-              {...inputValues.email}
-              errors={formErrors.email}
-              value={formValues['email']}
-              onChange={onChange}
-            />
-            {/* PASSWORD */}
-            <AuthFormInput
-              {...inputValues.password}
-              errors={formErrors.password}
-              value={formValues['password']}
-              onChange={onChange}
-            />
-            {/* PASSWORD CONFIRMATION */}
-            <AuthFormInput
-              {...inputValues.passwordConfirmation}
-              errors={formErrors.passwordConfirmation}
-              value={formValues['passwordConfirmation']}
-              onChange={onChange}
-            />
+            {inputValues.map((fieldValues) => (
+              <AuthFormInput
+                key={`${fieldValues.name}`}
+                {...fieldValues}
+                errors={formErrors[fieldValues.name]}
+                value={formValues[fieldValues.name]}
+                onChange={onChange}
+              />
+            ))}
 
             <button
               type="submit"

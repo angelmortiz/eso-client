@@ -15,6 +15,7 @@ const inputValues = {
     id: 'email',
     autoComplete: 'email',
     placeholder: 'Enter an email',
+    requiredField: true
   },
   password: {
     name: 'password',
@@ -23,6 +24,7 @@ const inputValues = {
     id: 'password',
     autoComplete: 'current-password',
     placeholder: 'Enter a password',
+    requiredField: true
   },
 };
 
