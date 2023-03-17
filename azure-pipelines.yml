@@ -6,8 +6,8 @@
 trigger:
 - main
 
-resources:
-- repo: self
+# resources:
+# - repo: self
 
 variables:
   # Agent VM image name
