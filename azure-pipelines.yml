@@ -11,11 +11,11 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 stages:
-- stage: BuildAndPublish
-  displayName: Build and publish React artifacts
+- stage: BuildAndDeploy
+  displayName: Build, publish, and deploy React artifacts
   jobs:
-  - job: BuildAndPublish
-    displayName: Build and publish React artifacts
+  - job: BuildAndDeploy
+    displayName: Build, publish, and deploy React artifacts
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -43,18 +43,3 @@ stages:
         app_location: '/build'
         skip_app_build: true
         azure_static_web_apps_api_token: $(DEPLOYMENT_TOKEN)
-
-# - stage: Deploy
-#   displayName: Deploy React app to Azure Static Web App
-#   jobs:
-#   - job: Deploy
-#     displayName: Deploy React app to Azure Static Web App
-#     pool:
-#       vmImage: $(vmImageName)
-#     steps:
-#     - task: AzureStaticWebApp@0
-#       displayName: 'Deploy build to Azure Static Web App'
-#       inputs:
-#         app_location: '/build'
-#         skip_app_build: true
-#         azure_static_web_apps_api_token: $(DEPLOYMENT_TOKEN)
