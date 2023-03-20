@@ -38,7 +38,7 @@ const AssignProgramPlan = (props) => {
 
       if (!response || !response.isSuccess) return;
       //adds an empty default option
-      response.body.unshift({ _id: '', name: 'Programs' });
+      response.body.unshift({ _id: '', name: 'Choose a program', disabled: true });
       programOptions.select.options = response.body;
       setPrograms(programOptions);
     });
@@ -50,7 +50,7 @@ const AssignProgramPlan = (props) => {
       if (!response || !response.isSuccess) return;
 
       //adds an empty default option
-      response.body.unshift({ _id: '', fullName: 'Users' });
+      response.body.unshift({ _id: '', fullName: 'Choose an user', disabled: true });
       userOptions.select.options = response.body;
       setUsers(userOptions);
     });
@@ -74,7 +74,7 @@ const AssignProgramPlan = (props) => {
     <form
       id="assign-program"
       onSubmit={assignProgramPlan}
-      className="mt-10 mx-5 pb-6 px-10 lg:mx-auto lg:max-w-[75%] xl:max-w-[60%] space-y-8 divide-y divide-gray-200 bg-white rounded-lg shadow"
+      className="mt-10 mx-5 pb-6 px-10 lg:mx-auto lg:max-w-[75%] xl:max-w-[60%] space-y-6 divide-y divide-gray-200 bg-white rounded-lg shadow"
     >
       <div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
         <div>
@@ -91,11 +91,13 @@ const AssignProgramPlan = (props) => {
             label="Program"
             select={programs?.select}
             setValue={setAssignedProgramPlan}
+            selectedValue=''
           />
           <FormSelectInput
             label="User"
             select={users?.select}
             setValue={setAssignedTo}
+            selectedValue=''
           />
         </div>
       </div>
