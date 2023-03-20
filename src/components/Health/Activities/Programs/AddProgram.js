@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchAllWorkoutNames } from '../../../../util/apis/activities/workouts/workoutsApis';
 import { postProgram } from '../../../../util/apis/activities/programs/programsApis';
-import styles from '../../../UI/General/CSS/Form.module.css';
-import SelectInput from '../../../UI/Selects/SelectInput';
 import AddWorkoutPlan from './AddWorkoutPlan';
 import IncrementalWorkoutPlan from './IncrementalWorkoutPlan';
+import FormSelectInput from '../../../UI/Selects/FormSelectInput';
+import TextFormInput from '../../../UI/Inputs/TextFormInput';
+import TextAreaFormInput from '../../../UI/Inputs/TextAreaFormInput';
 
 //IMPROVE: Consider moving these values to a different file
 const programTypes = {
@@ -13,7 +14,7 @@ const programTypes = {
     id: 'program-type',
     name: 'type',
     options: [
-      { value: '', label: '-- Choose type --' },
+      { value: '', label: 'Choose a type', disabled: true },
       { value: 'Strength', label: 'Strength' },
       { value: 'Hypertrophy', label: 'Hypertrophy' },
       { value: 'Endurance', label: 'Endurance' },
@@ -27,10 +28,45 @@ const programSequence = {
     id: 'program-sequence',
     name: 'sequence',
     options: [
-      { value: '', label: '-- Choose sequence --' },
+      { value: '', label: 'Choose a sequence', disabled: true },
       { value: 'Weekly', label: 'Weekly' },
       { value: 'Cycle', label: 'Cycle' },
     ],
+  },
+};
+
+const textInputValues = {
+  name: {
+    name: 'name',
+    label: 'Name',
+    type: 'text',
+    id: 'program-name',
+    placeholder: 'Enter a name',
+    requiredField: true,
+  },
+  description: {
+    name: 'description',
+    label: 'Description',
+    type: 'text',
+    id: 'program-description',
+    placeholder: 'Enter a description',
+    requiredField: false,
+  },
+  duration: {
+    name: 'duration',
+    label: 'Duration',
+    type: 'number',
+    id: 'program-duration',
+    placeholder: 'Enter a duration in weeks',
+    requiredField: true,
+  },
+  image: {
+    name: 'linkToImage',
+    label: 'Image',
+    type: 'text',
+    id: 'program-image',
+    placeholder: 'Enter an image link',
+    requiredField: true,
   },
 };
 
@@ -65,7 +101,10 @@ const AddProgram = (props) => {
       if (!response || !response.isSuccess) return;
 
       //adds an empty default option
-      response.body.unshift({ _id: '', name: '-- Choose a workout --' });
+      response.body.unshift({
+        _id: '',
+        name: 'Choose a workout',
+      });
       setWorkouts(response.body);
     });
   }, []);
@@ -73,10 +112,10 @@ const AddProgram = (props) => {
   const addProgram = (e) => {
     e.preventDefault();
     const formVals = getFormValues(e.target.elements);
-    //console.log('formVals:  ', formVals);
+    // console.log('formVals:  ', formVals);
 
     postProgram(formVals).then((response) => {
-      //console.log('Response: ', response);
+      // console.log('Response: ', response);
       if (response.isSuccess) {
         //IMPROVE: Navigate to the just added program id
         navigateTo(`/activities/programs`);
@@ -128,7 +167,7 @@ const AddProgram = (props) => {
     daysOfTheWeek.forEach((day, index) => {
       let planVals = {};
       planVals.dayOfTheWeek = day;
-      planVals.workout= workoutIds[index];
+      planVals.workout = workoutIds[index];
 
       workoutPlanValues.push(planVals);
     });
@@ -152,102 +191,90 @@ const AddProgram = (props) => {
   };
 
   return (
-    <section className={styles['main-section']}>
-      <form
-        id="add-program-form"
-        onSubmit={addProgram}
-        className={styles['main-form']}
-      >
-        <h1 className={styles['form-title']}>Add Program</h1>
+    <form
+      id="add-program"
+      onSubmit={addProgram}
+      className="mt-10 mx-5 pb-6 px-10 lg:mx-auto lg:max-w-[75%] xl:max-w-[60%] space-y-6 divide-y divide-gray-200 bg-white rounded-lg shadow"
+    >
+      <div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
+        <div>
+          <h3 className="text-base font-semibold leading-6 text-gray-900">
+            Add Program
+          </h3>
+          <p className="mt-1 max-w-2xl text-sm text-gray-500">
+            Fill out the following form to add a new program to the program
+            library.
+          </p>
+        </div>
+        <div className="space-y-6 sm:space-y-5">
+          <TextFormInput {...textInputValues.name} />
+          <TextAreaFormInput {...textInputValues.description} />
+          <FormSelectInput
+            label="Type"
+            select={programTypes.select}
+            selectedValue=""
+            requiredField={true}
+          />
+          <TextFormInput {...textInputValues.duration} />
+          <TextFormInput {...textInputValues.image} />
+          <FormSelectInput
+            label="Sequence"
+            select={programSequence.select}
+            selectedValue={sequence}
+            setValue={setSequence}
+            requiredField={true}
+          />
+        </div>
+      </div>
 
-        {/* NAME */}
-        <label htmlFor="program-name" className={styles['text-label']}>
-          Name:
-        </label>
-        <input
-          type="text"
-          id="program-name"
-          name="name"
-          placeholder="Enter the program name..."
-          className={styles['select-input']}
-        />
-
-        {/* DESCRIPTION */}
-        <label htmlFor="program-description" className={styles['text-label']}>
-          Description:
-        </label>
-        <input
-          type="text"
-          id="program-description"
-          name="description"
-          placeholder="Enter a description..."
-          className={styles['select-input']}
-        />
-
-        {/* TYPE */}
-        <label htmlFor="program-type" className={styles['text-label']}>
-          Type:
-        </label>
-        <SelectInput select={programTypes.select} />
-
-        {/* DURANTION */}
-        <label htmlFor="program-duration" className={styles['text-label']}>
-          Durantion (weeks):
-        </label>
-        <input
-          type="number"
-          id="program-duration"
-          name="duration"
-          placeholder="Enter duration in weeks..."
-          className={styles['select-input']}
-        />
-        {/* LINK TO IMAGE */}
-        <label htmlFor="programLinkToImage" className={styles['text-label']}>
-          Image:
-        </label>
-        <input
-          type="text"
-          id="program-linkToImage"
-          name="linkToImage"
-          placeholder="Enter a image link..."
-          className={styles['select-input']}
-        />
-        {/* SEQUENCE */}
-        <label htmlFor="program-sequence" className={styles['text-label']}>
-          Sequence:
-        </label>
-        <SelectInput
-          select={programSequence.select}
-          selectedValue={sequence}
-          setValue={setSequence}
-        />
-
-        {/* WEEKLY PLAN */}
-        {workouts &&
-          sequence === 'Weekly' &&
-          daysOfTheWeek.map((day) => (
+      {/* WEEKLY PLAN */}
+      {workouts && sequence === 'Weekly' && (
+        <div>
+          <div className="mt-10">
+            <h3 className="text-base font-semibold leading-6 text-gray-900">
+              Add Workouts
+            </h3>
+            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+              Choose a workout per each day of the week.
+            </p>
+          </div>
+          {daysOfTheWeek.map((day) => (
             <AddWorkoutPlan
               key={`workoutPlan-${day}`}
               workouts={workoutsInfo}
               title={day}
             />
           ))}
+        </div>
+      )}
 
-        {/* CYCLE PLAN */}
-        {workouts && sequence === 'Cycle' && (
+      {/* CYCLE PLAN */}
+      {workouts && sequence === 'Cycle' && (
+        <div>
+          <div className="mt-10">
+            <h3 className="text-base font-semibold leading-6 text-gray-900">
+              Add Workouts
+            </h3>
+            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+              Add all the required workouts for this program.
+            </p>
+          </div>
           <IncrementalWorkoutPlan workoutsInfo={workoutsInfo} />
-        )}
+        </div>
+      )}
 
-        {/* SUBMIT BUTTON */}
-        <button
-          type="submit"
-          id="add-program-btn"
-          className={styles['submit-btn']}
-        >
-          Add program
-        </button>
-      </form>
-    </section>
+      {/* SUBMIT BUTTON */}
+      <div className="pt-5">
+        <div className="flex justify-end gap-x-3">
+          <button
+            type="submit"
+            className="inline-flex justify-center rounded-md bg-cyan-700 py-2 px-5 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </form>
   );
 };
 

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import styles from '../../../UI/General/CSS/Form.module.css';
 import AddWorkoutPlan from './AddWorkoutPlan';
 
 /** This component makes it possible to add new workouts to
@@ -30,18 +29,17 @@ const IncrementalWorkoutPlan = (props) => {
       newCount = index + 1;
       selectedInputs.push(
         <AddWorkoutPlan
-        workouts={workoutsInfo}
-        count={newCount}
-        key={`workout-plan_${newCount}`}
-        title={`Workout #${newCount}`}
-        selectedPlan={plan}
-      />
+          workouts={workoutsInfo}
+          key={`workout-plan_${newCount}`}
+          title={`Workout #${newCount}`}
+          selectedPlan={plan}
+        />
       );
     });
 
     setWorkoutPlanList(selectedInputs);
-    setCount(newCount)
-  },[selectedPlans, workoutsInfo]);
+    setCount(newCount);
+  }, [selectedPlans, workoutsInfo]);
 
   const addWorkout = (e) => {
     e.preventDefault();
@@ -59,25 +57,27 @@ const IncrementalWorkoutPlan = (props) => {
         workouts={workoutsInfo}
         count={newCount}
         key={`workout-plan_${newCount}`}
-        title={`Workout #${newCount}`}
+        title={`Workout ${newCount}`}
       />
     );
   }
 
   return (
-    <div className={styles['plan-list']}>
+    <div className={''}>
       {/* Displays all the workout plans.*/}
       {workoutPlanList}
 
       {/* ADD BUTTON */}
-      <button
-        type="button"
-        id="add-workout-plan"
-        className={styles['add-btn']}
-        onClick={addWorkout}
-      >
-        Add Workout Plan
-      </button>
+      <div className="flex items-center justify-center">
+        <button
+          type="button"
+          id="add-workout-plan"
+          className="inline-flex justify-center text-sm font-semibold text-cyan-700 hover:text-cyan-600"
+          onClick={addWorkout}
+        >
+          Add Workout
+        </button>
+      </div>
     </div>
   );
 };

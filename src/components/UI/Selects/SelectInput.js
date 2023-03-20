@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from '../General/CSS/Form.module.css';
 
+//DELETE: After all components using this inputs have been updated
 const SelectInput = (props) => {
   const [selectValue, setSelectValue] = useState('');
 

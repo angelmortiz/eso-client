@@ -103,12 +103,6 @@ const AssignProgramPlan = (props) => {
       <div className="pt-5">
         <div className="flex justify-end gap-x-3">
           <button
-            type="button"
-            className="rounded-md bg-white py-2 px-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          >
-            Cancel
-          </button>
-          <button
             type="submit"
             className="inline-flex justify-center rounded-md bg-cyan-700 py-2 px-5 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700"
           >

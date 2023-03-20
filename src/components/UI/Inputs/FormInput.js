@@ -1,5 +1,6 @@
 import styles from '../General/CSS/Form.module.css';
 
+// DELETE: After all components have been updated to new inputs
 const FormInput = (props) => {
   const {
     name,

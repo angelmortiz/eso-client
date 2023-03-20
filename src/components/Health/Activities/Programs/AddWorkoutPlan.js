@@ -1,22 +1,14 @@
-import styles from '../../../UI/General/CSS/Form.module.css';
-import SelectInput from '../../../UI/Selects/SelectInput';
+import FormSelectInput from "../../../UI/Selects/FormSelectInput";
 
 const AddWorkoutPlan = (props) => {
   const { workouts, title, selectedPlan } = props;
 
   return (
-    <div className={styles['plan-div']}>
-      <h3 className={styles['plan-title']}>{title}</h3>
-
-      {/* WORKOUT */}
-      <label htmlFor="workoutPlanWorkout" className={styles['text-label']}>
-        Workout:
-      </label>
-      <SelectInput
+    <div className="my-8">
+      <FormSelectInput
         select={workouts.select}
-        value="_id"
-        label="value"
-        selectedValue={selectedPlan?.workout?._id}
+        label={title}
+        selectedValue={selectedPlan?.workout?._id || ""}
       />
     </div>
   );
