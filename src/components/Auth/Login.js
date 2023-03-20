@@ -93,11 +93,11 @@ const Login = (props) => {
       {/* LOGO AND LOG IN LABEL */}
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <img
-          className="mx-auto h-20 w-auto"
-          src="/logo.png"
+          className="hidden sm:block mx-auto h-16 w-auto"
+          src="/icon-logo.png"
           alt="Your Company"
         />
-        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-700">
+        <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-gray-700">
           Log in to your account
         </h2>
       </div>
