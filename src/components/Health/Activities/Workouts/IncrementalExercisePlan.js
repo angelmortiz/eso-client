@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import AddExercisePlan from './AddExercisePlan';
+import { useEffect, useState } from "react";
+import AddExercisePlan from "./AddExercisePlan";
 
 /** This component makes it possible to add new exercises to
  * the workout by clicking the 'add' button.
@@ -63,7 +63,7 @@ const IncrementalExercisePlan = (props) => {
       {exercisePlanList}
 
       {/* ADD BUTTON */}
-      <div className="flex items-center justify-center">
+      <div className="mt-4 -mb-2 flex items-center justify-center">
         <button
           type="button"
           id="add-exercise-plan"
