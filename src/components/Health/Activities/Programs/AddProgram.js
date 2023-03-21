@@ -202,8 +202,7 @@ const AddProgram = (props) => {
             Add Program
           </h3>
           <p className="mt-1 max-w-2xl text-sm text-gray-500">
-            Fill out the following form to add a new program to the program
-            library.
+            Add a new program to the program library by filling out the form below.
           </p>
         </div>
         <div className="space-y-6 sm:space-y-5">

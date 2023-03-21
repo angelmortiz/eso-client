@@ -68,7 +68,7 @@ const IncrementalWorkoutPlan = (props) => {
       {workoutPlanList}
 
       {/* ADD BUTTON */}
-      <div className="flex items-center justify-center">
+      <div className="mt-4 -mb-2 flex items-center justify-center">
         <button
           type="button"
           id="add-workout-plan"

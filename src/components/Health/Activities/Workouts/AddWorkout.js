@@ -66,7 +66,7 @@ const textInputValues = {
     name: "linkToImage",
     label: "Image",
     type: "text",
-    id: "program-image",
+    id: "workout-image",
     placeholder: "Enter an image link",
     requiredField: true,
   },
@@ -100,13 +100,13 @@ const AddWorkout = (props) => {
   const addWorkout = (e) => {
     e.preventDefault();
     let formVals = getFormValues(e.target.elements);
-    console.log('formVals', formVals);
+    // console.log('formVals', formVals);
 
     postWorkout(formVals).then((response) => {
-      console.log('Response: ', response);
+      // console.log('Response: ', response);
       if (response.isSuccess) {
         //IMPROVE: Navigate to the just added workout id
-        // navigateTo(`/activities/workouts`);
+        navigateTo(`/activities/workouts`);
       }
     });
   };
@@ -192,8 +192,8 @@ const AddWorkout = (props) => {
             Add Workout
           </h3>
           <p className="mt-1 max-w-2xl text-sm text-gray-500">
-            Fill out the following form to add a new workout to the workout
-            library.
+            Add a new workout to the workout library by filling out the form
+            below.
           </p>
         </div>
         <div className="space-y-6 sm:space-y-5">
