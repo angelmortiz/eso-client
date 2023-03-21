@@ -113,7 +113,7 @@ const textInputValues = {
     name: "alternativeName",
     label: "Alternative name",
     type: "text",
-    id: "exercise-description",
+    id: "exercise-alternativeName",
     placeholder: "Enter an alternative name",
     requiredField: false,
   },
