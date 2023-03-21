@@ -1,32 +1,32 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { changePassword } from '../../util/apis/auth/authApis';
-import AuthFormInput from '../UI/Inputs/AuthFormInput';
-import SimpleConfirmationModal from '../UI/Modals/OneButtonModals/SimpleConfirmationModal';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { changePassword } from "../../util/apis/auth/authApis";
+import AuthFormInput from "../UI/Inputs/AuthFormInput";
+import SimpleConfirmationModal from "../UI/Modals/OneButtonModals/SimpleConfirmationModal";
 
 const inputValues = [
   {
-    name: 'currentPassword',
-    label: 'Current password',
-    type: 'password',
-    id: 'currentPassword',
-    placeholder: 'Enter the current password',
+    name: "currentPassword",
+    label: "Current password",
+    type: "password",
+    id: "currentPassword",
+    placeholder: "Enter the current password",
     requiredField: true,
   },
   {
-    name: 'newPassword',
-    label: 'New password',
-    type: 'password',
-    id: 'newPassword',
-    placeholder: 'Enter the new password',
+    name: "newPassword",
+    label: "New password",
+    type: "password",
+    id: "newPassword",
+    placeholder: "Enter the new password",
     requiredField: true,
   },
   {
-    name: 'passwordConfirmation',
-    label: 'Confirm password',
-    type: 'password',
-    id: 'passwordConfirmation',
-    placeholder: 'Re-enter the same password',
+    name: "passwordConfirmation",
+    label: "Confirm password",
+    type: "password",
+    id: "passwordConfirmation",
+    placeholder: "Re-enter the same password",
     requiredField: true,
   },
 ];
@@ -35,11 +35,11 @@ const ChangePassword = (props) => {
   const navigateTo = useNavigate();
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [isButtonEnabled, setButtonStatus] = useState(true);
-  const [responseError, setResponseError] = useState('');
+  const [responseError, setResponseError] = useState("");
   const [formValues, setFormValues] = useState({
-    currentPassword: '',
-    newPassword: '',
-    passwordConfirmation: '',
+    currentPassword: "",
+    newPassword: "",
+    passwordConfirmation: "",
   });
   const [formErrors, setFormErrors] = useState({
     currentPassword: [],
@@ -78,24 +78,25 @@ const ChangePassword = (props) => {
 
     //current password validations
     if (!currentPassword) {
-      errors.currentPassword.push('Current password is required.');
+      errors.currentPassword.push("Current password is required.");
     }
 
     //new confirmation validations
-    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
+    const passwordPattern =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
     if (!newPassword) {
-      errors.newPassword.push('New password is required.');
+      errors.newPassword.push("New password is required.");
     } else if (!passwordPattern.test(newPassword)) {
       errors.newPassword.push(
-        'Password must contain 8-20 characters and include at least one letter, one number, and one special character.'
+        "Password must contain 8-20 characters and include at least one letter, one number, and one special character."
       );
     }
 
     //password confirmation validations
     if (!passwordConfirmation) {
-      errors.passwordConfirmation.push('Password confirmation is required.');
+      errors.passwordConfirmation.push("Password confirmation is required.");
     } else if (formValues.passwordConfirmation !== formValues.newPassword) {
-      errors.passwordConfirmation.push('Passwords do not match.');
+      errors.passwordConfirmation.push("Passwords do not match.");
     }
 
     setFormErrors(errors);
@@ -110,12 +111,12 @@ const ChangePassword = (props) => {
 
   const closeConfirmationModal = () => {
     setIsConfirmationModalOpen(false);
-    navigateTo('/auth/login');
+    navigateTo("/auth/login");
   };
 
   return (
     <>
-      <div className="flex flex-col min-h-full justify-center py-6 sm:px-6 sm:py-12 lg:px-8">
+      <div className="flex min-h-full flex-col justify-center py-6 sm:px-6 sm:py-12 lg:px-8">
         {/* LABEL */}
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-700">
@@ -124,8 +125,8 @@ const ChangePassword = (props) => {
         </div>
 
         {/* CHANGE PASSWORD CARD */}
-        <div className="mt-6 m-6 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 rounded-lg shadow sm:px-10">
+        <div className="m-6 mt-6 sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="rounded-lg bg-white py-8 px-4 shadow sm:px-10">
             <form
               className="flex flex-col gap-5"
               id="signup-form"
@@ -144,7 +145,7 @@ const ChangePassword = (props) => {
               <button
                 type="submit"
                 id="signup-user"
-                className="flex w-full justify-center mt-2 rounded-md bg-cyan-700 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600"
+                className="mt-2 flex w-full justify-center rounded-md bg-cyan-700 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600"
                 disabled={!isButtonEnabled}
               >
                 Change password

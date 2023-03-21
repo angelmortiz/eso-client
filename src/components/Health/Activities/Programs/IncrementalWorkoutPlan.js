@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import AddWorkoutPlan from './AddWorkoutPlan';
+import { useEffect, useState } from "react";
+import AddWorkoutPlan from "./AddWorkoutPlan";
 
 /** This component makes it possible to add new workouts to
  * the program by clicking the 'add' button.

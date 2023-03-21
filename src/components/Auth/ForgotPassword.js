@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { forgotPassword } from '../../util/apis/auth/authApis';
-import AuthFormInput from '../UI/Inputs/AuthFormInput';
-import SimpleConfirmationModal from '../UI/Modals/OneButtonModals/SimpleConfirmationModal';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { forgotPassword } from "../../util/apis/auth/authApis";
+import AuthFormInput from "../UI/Inputs/AuthFormInput";
+import SimpleConfirmationModal from "../UI/Modals/OneButtonModals/SimpleConfirmationModal";
 
 const emailValues = {
-  name: 'email',
-  label: 'Email',
-  type: 'text',
-  id: 'email',
-  placeholder: 'Enter an email',
+  name: "email",
+  label: "Email",
+  type: "text",
+  id: "email",
+  placeholder: "Enter an email",
   requiredField: true,
 };
 
@@ -17,12 +17,12 @@ const ForgotPassword = (props) => {
   const navigateTo = useNavigate();
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [isButtonEnabled, setButtonStatus] = useState(true);
-  const [formValues, setFormValues] = useState({ email: '' });
+  const [formValues, setFormValues] = useState({ email: "" });
   const [formErrors, setFormErrors] = useState({ email: [] });
-  const [responseError, setResponseError] = useState('');
+  const [responseError, setResponseError] = useState("");
 
   const onChange = (e) => {
-    setResponseError('');
+    setResponseError("");
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
@@ -46,7 +46,7 @@ const ForgotPassword = (props) => {
 
   const closeConfirmationModal = () => {
     setIsConfirmationModalOpen(false);
-    navigateTo('/auth/login');
+    navigateTo("/auth/login");
   };
 
   const isValidationSuccessful = () => {
@@ -55,8 +55,8 @@ const ForgotPassword = (props) => {
 
     // email validations
     if (!email) {
-      errors.email.push('Email is required.');
-    } else if (email.indexOf('@') === -1) {
+      errors.email.push("Email is required.");
+    } else if (email.indexOf("@") === -1) {
       errors.email.push(`The email must contain a '@' to be valid.`);
     }
 
@@ -68,21 +68,21 @@ const ForgotPassword = (props) => {
 
   return (
     <>
-      <div className="flex flex-col min-h-full justify-center py-6 sm:px-6 lg:px-8">
+      <div className="flex min-h-full flex-col justify-center py-6 sm:px-6 lg:px-8">
         {/* LABEL */}
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-700">
             Forgot your password
           </h2>
-          <p className="mt-4 px-12 text-left text-md text-base tracking-tight text-gray-700 md:px-8">
+          <p className="text-md mt-4 px-12 text-left text-base tracking-tight text-gray-700 md:px-8">
             Please enter the email address you'd like your password reset
             information sent to.
           </p>
         </div>
 
         {/* LOG IN CARD */}
-        <div className="mt-4 mx-6 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-6 px-4 rounded-lg shadow sm:px-10">
+        <div className="mx-6 mt-4 sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="rounded-lg bg-white py-6 px-4 shadow sm:px-10">
             <form
               className="flex flex-col gap-6"
               id="forgot-password-form"
@@ -92,7 +92,7 @@ const ForgotPassword = (props) => {
               <AuthFormInput
                 {...emailValues}
                 errors={formErrors.email}
-                value={formValues['email']}
+                value={formValues["email"]}
                 onChange={onChange}
               />
 

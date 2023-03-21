@@ -1,24 +1,24 @@
-import { resetPassword } from '../../util/apis/auth/authApis';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import SimpleConfirmationModal from '../UI/Modals/OneButtonModals/SimpleConfirmationModal';
-import AuthFormInput from '../UI/Inputs/AuthFormInput';
+import { resetPassword } from "../../util/apis/auth/authApis";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import SimpleConfirmationModal from "../UI/Modals/OneButtonModals/SimpleConfirmationModal";
+import AuthFormInput from "../UI/Inputs/AuthFormInput";
 
 const inputValues = [
   {
-    name: 'password',
-    label: 'New password',
-    type: 'password',
-    id: 'newPassword',
-    placeholder: 'Enter a password',
+    name: "password",
+    label: "New password",
+    type: "password",
+    id: "newPassword",
+    placeholder: "Enter a password",
     requiredField: true,
   },
   {
-    name: 'passwordConfirmation',
-    label: 'Confirm password',
-    type: 'password',
-    id: 'passwordConfirmation',
-    placeholder: 'Re-enter the same password',
+    name: "passwordConfirmation",
+    label: "Confirm password",
+    type: "password",
+    id: "passwordConfirmation",
+    placeholder: "Re-enter the same password",
     requiredField: true,
   },
 ];
@@ -29,10 +29,10 @@ const ResetPassword = (props) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [isButtonEnabled, setButtonStatus] = useState(true);
-  const [responseError, setResponseError] = useState('');
+  const [responseError, setResponseError] = useState("");
   const [formValues, setFormValues] = useState({
-    password: '',
-    passwordConfirmation: '',
+    password: "",
+    passwordConfirmation: "",
   });
   const [formErrors, setFormErrors] = useState({
     password: [],
@@ -43,22 +43,21 @@ const ResetPassword = (props) => {
     extractTokenFromUrl();
   });
 
-
   const onChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
   const extractTokenFromUrl = () => {
-    const token = searchParams.get('token');
+    const token = searchParams.get("token");
     if (!token) {
       if (!resetToken) {
-        console.error('Error: reset token not available.');
-        navigateTo('/auth/login');
+        console.error("Error: reset token not available.");
+        navigateTo("/auth/login");
       }
       return;
     }
 
-    searchParams.delete('token');
+    searchParams.delete("token");
     setResetToken(token);
     setSearchParams(searchParams);
   };
@@ -78,7 +77,7 @@ const ResetPassword = (props) => {
       //console.log('Response: ', response);
       if (response && response.isSuccess) {
         setIsConfirmationModalOpen(true);
-      } else if (response && response.message){
+      } else if (response && response.message) {
         setResponseError(response.message);
       }
 
@@ -94,35 +93,38 @@ const ResetPassword = (props) => {
     };
 
     //password validations
-    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
+    const passwordPattern =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
     if (!password) {
-      errors.password.push('Password is required.');
+      errors.password.push("Password is required.");
     } else if (!passwordPattern.test(password)) {
       errors.password.push(
-        'Password must contain 8-20 characters and include at least one letter, one number, and one special character.'
+        "Password must contain 8-20 characters and include at least one letter, one number, and one special character."
       );
     }
 
     //password confirmation validations
     if (!passwordConfirmation) {
-        errors.passwordConfirmation.push('Password confirmation is required.');
+      errors.passwordConfirmation.push("Password confirmation is required.");
     } else if (formValues.passwordConfirmation !== formValues.password) {
-        errors.passwordConfirmation.push('Passwords do not match.');
+      errors.passwordConfirmation.push("Passwords do not match.");
     }
     setFormErrors(errors);
 
     //true if no errors were found, otherwise, false
-    return errors.password.length === 0 && errors.passwordConfirmation.length === 0;
+    return (
+      errors.password.length === 0 && errors.passwordConfirmation.length === 0
+    );
   };
 
   const closeConfirmationModal = () => {
     setIsConfirmationModalOpen(false);
-    navigateTo('/');
+    navigateTo("/");
   };
 
   return (
     <>
-      <div className="flex flex-col min-h-full justify-center py-6 sm:px-6 sm:py-12 lg:px-8">
+      <div className="flex min-h-full flex-col justify-center py-6 sm:px-6 sm:py-12 lg:px-8">
         {/* LABEL */}
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-700">
@@ -131,8 +133,8 @@ const ResetPassword = (props) => {
         </div>
 
         {/* RESET PASSWORD CARD */}
-        <div className="mt-6 m-6 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 rounded-lg shadow sm:px-10">
+        <div className="m-6 mt-6 sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="rounded-lg bg-white py-8 px-4 shadow sm:px-10">
             <form
               className="flex flex-col gap-5"
               id="signup-form"
@@ -151,7 +153,7 @@ const ResetPassword = (props) => {
               <button
                 type="submit"
                 id="signup-user"
-                className="flex w-full justify-center mt-2 rounded-md bg-cyan-700 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600"
+                className="mt-2 flex w-full justify-center rounded-md bg-cyan-700 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600"
                 disabled={!isButtonEnabled}
               >
                 Reset password
