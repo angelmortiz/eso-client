@@ -76,10 +76,10 @@ const AddMuscle = (props) => {
       <div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
         <div>
           <h3 className="text-base font-semibold leading-6 text-gray-900">
-            Add Exercise
+            Add Muscle
           </h3>
           <p className="mt-1 max-w-2xl text-sm text-gray-500">
-            Add a new exercise to the exercise library by filling out the form
+            Add a new muscle to the muscle library by filling out the form
             below.
           </p>
         </div>
