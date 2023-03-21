@@ -1,70 +1,70 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import {
   Bars3Icon,
   XMarkIcon,
   UserIcon,
   ChevronDownIcon,
   ChevronUpIcon,
-} from '@heroicons/react/24/outline';
-import { Fragment } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { logout } from '../../../util/apis/auth/authApis';
-import { authActions } from '../../../store/authSlice';
-import { userActions } from '../../../store/userSlice';
+} from "@heroicons/react/24/outline";
+import { Fragment } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { logout } from "../../../util/apis/auth/authApis";
+import { authActions } from "../../../store/authSlice";
+import { userActions } from "../../../store/userSlice";
 
 const classNames = (...classes) => {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 };
 
 const navMenuValues = [
   {
-    title: 'My Programs',
+    title: "My Programs",
     items: [
-      { label: 'Assigned', path: '/activities/programplan/assigned' },
-      { label: 'Completed', path: '/activities/programplan/completed' },
+      { label: "Assigned", path: "/activities/programplan/assigned" },
+      { label: "Completed", path: "/activities/programplan/completed" },
     ],
   },
   {
-    title: 'Activites',
+    title: "Activites",
     items: [
-      { label: 'Programs', path: '/activities/programs' },
-      { label: 'Workouts', path: '/activities/workouts' },
-      { label: 'Exercises', path: '/activities/exercises' },
-      { label: 'Muscles', path: '/activities/muscles' },
-      { label: 'Equipments', path: '/activities/equipments' },
+      { label: "Programs", path: "/activities/programs" },
+      { label: "Workouts", path: "/activities/workouts" },
+      { label: "Exercises", path: "/activities/exercises" },
+      { label: "Muscles", path: "/activities/muscles" },
+      { label: "Equipments", path: "/activities/equipments" },
     ],
   },
   {
-    title: 'Add New',
+    title: "Add New",
     items: [
-      { label: 'Program', path: '/activities/add-program' },
-      { label: 'Workout', path: '/activities/add-workout' },
-      { label: 'Exercise', path: '/activities/add-exercise' },
-      { label: 'Muscle', path: '/activities/add-muscle' },
-      { label: 'Equipment', path: '/activities/add-equipment' },
+      { label: "Program", path: "/activities/add-program" },
+      { label: "Workout", path: "/activities/add-workout" },
+      { label: "Exercise", path: "/activities/add-exercise" },
+      { label: "Muscle", path: "/activities/add-muscle" },
+      { label: "Equipment", path: "/activities/add-equipment" },
     ],
   },
   {
-    title: 'Assign',
-    items: [{ label: 'Program', path: '/activities/programplan/assign' }],
+    title: "Assign",
+    items: [{ label: "Program", path: "/activities/programplan/assign" }],
   },
 ];
 
 const navAvatarValues = [
   {
-    label: 'Profile',
-    path: '/user/info',
+    label: "Profile",
+    path: "/user/info",
     requiresAuthentication: true,
   },
   {
-    label: 'Log in',
-    path: '/auth/login',
+    label: "Log in",
+    path: "/auth/login",
     requiresAuthentication: false,
   },
   {
-    label: 'Sign up',
-    path: '/auth/signup',
+    label: "Sign up",
+    path: "/auth/signup",
     requiresAuthentication: false,
   },
 ];
@@ -84,7 +84,7 @@ const NavigationBar = (props) => {
       if (response && response.isSuccess) {
         dispatch(authActions.logout());
         dispatch(userActions.removeUserInfo());
-        navigateTo('/auth/login');
+        navigateTo("/auth/login");
       }
     });
   };
@@ -137,10 +137,10 @@ const NavigationBar = (props) => {
                         >
                           {/* active classes: inline-flex items-center h-full border-b-2 border-cyan-600 px-1 pt-1 text-sm font-medium text-gray-900*/}
                           {/* inactive classe: inline-flex items-center h-full border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700*/}
-                          <Menu.Button className="inline-flex items-center h-full border-b-2 border-transparent px-1 pt-1 text-sm md:text-base font-medium md:font-normal text-gray-500 hover:border-gray-300 hover:text-gray-700">
+                          <Menu.Button className="inline-flex h-full items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 md:text-base md:font-normal">
                             {menu.title}
                             <ChevronDownIcon
-                              className="-mr-1 ml-0.5 h-3 w-3 lg:h-4 lg:w-4 text-gray-400"
+                              className="-mr-1 ml-0.5 h-3 w-3 text-gray-400 lg:h-4 lg:w-4"
                               aria-hidden="true"
                             />
                           </Menu.Button>
@@ -164,9 +164,9 @@ const NavigationBar = (props) => {
                                       to={item.path}
                                       className={classNames(
                                         active
-                                          ? 'bg-gray-100 text-gray-900'
-                                          : 'text-gray-700',
-                                        'block px-4 py-2 text-sm'
+                                          ? "bg-gray-100 text-gray-900"
+                                          : "text-gray-700",
+                                        "block px-4 py-2 text-sm"
                                       )}
                                     >
                                       {item.label}
@@ -217,8 +217,8 @@ const NavigationBar = (props) => {
                                 <Link
                                   to={item.path}
                                   className={classNames(
-                                    active ? 'bg-gray-100' : '',
-                                    'block px-4 py-2 text-sm text-gray-700'
+                                    active ? "bg-gray-100" : "",
+                                    "block px-4 py-2 text-sm text-gray-700"
                                   )}
                                 >
                                   {item.label}
@@ -230,11 +230,9 @@ const NavigationBar = (props) => {
                           //if 'requiresAuthentication' only displays after user has authenticated.
                           //otherwise, only show if user is not authenticated
                           return item.requiresAuthentication ===
-                            isUserAuthenticated ? (
-                            menuItem
-                          ) : (
-                            ''
-                          );
+                            isUserAuthenticated
+                            ? menuItem
+                            : "";
                         })}
                         {/* Log out option */}
                         {isUserAuthenticated && (
@@ -243,8 +241,8 @@ const NavigationBar = (props) => {
                               <button
                                 onClick={userLogout}
                                 className={classNames(
-                                  active ? 'bg-gray-100' : '',
-                                  'block px-4 py-2 text-sm text-gray-700 w-full text-left rounded-md'
+                                  active ? "bg-gray-100" : "",
+                                  "block w-full rounded-md px-4 py-2 text-left text-sm text-gray-700"
                                 )}
                               >
                                 Log out
@@ -263,9 +261,7 @@ const NavigationBar = (props) => {
             <Disclosure.Panel className="sm:hidden">
               {isUserAuthenticated &&
                 navMenuValues.map((menu) => (
-                  <Disclosure
-                    key={`mobile_${menu.title}`}
-                  >
+                  <Disclosure key={`mobile_${menu.title}`}>
                     {({ open }) => (
                       <>
                         {/* cyan bg: flex w-full justify-between border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-cyan-800 hover:bg-cyan-700 hover:opacity-90 hover:text-white*/}
@@ -274,7 +270,7 @@ const NavigationBar = (props) => {
                           <span>{menu.title}</span>
                           <ChevronUpIcon
                             className={`${
-                              open ? 'rotate-180 transform' : ''
+                              open ? "rotate-180 transform" : ""
                             } h-5 w-5 text-gray-700`}
                           />
                         </Disclosure.Button>

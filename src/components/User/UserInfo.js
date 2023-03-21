@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { authActions } from '../../store/authSlice';
-import { userActions } from '../../store/userSlice';
-import { logout } from '../../util/apis/auth/authApis';
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { authActions } from "../../store/authSlice";
+import { userActions } from "../../store/userSlice";
+import { logout } from "../../util/apis/auth/authApis";
 
 const UserInfo = (props) => {
   const navigateTo = useNavigate();
@@ -14,13 +14,13 @@ const UserInfo = (props) => {
       if (response && response.isSuccess) {
         dispatch(authActions.logout());
         dispatch(userActions.removeUserInfo());
-        navigateTo('/auth/login');
+        navigateTo("/auth/login");
       }
     });
   };
 
   return (
-    <div className="mt-10 mx-5 px-4 pb-4 lg:mx-auto lg:max-w-[75%] xl:max-w-[60%] rounded-lg overflow-hidden bg-white shadow">
+    <div className="mx-5 mt-10 overflow-hidden rounded-lg bg-white px-4 pb-4 shadow lg:mx-auto lg:max-w-[75%] xl:max-w-[60%]">
       <div className="sm:flex">
         <div className="px-4 py-5 sm:px-6">
           <h2 className="text-lg font-semibold leading-6 text-gray-900">
@@ -30,7 +30,7 @@ const UserInfo = (props) => {
             User account information and goals.
           </p>
         </div>
-        <div className="border-t border-gray-200 px-4 py-5 sm:p-0 flex-grow">
+        <div className="flex-grow border-t border-gray-200 px-4 py-5 sm:p-0">
           <dl className="divide-y divide-gray-200">
             <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">Full name</dt>
@@ -51,7 +51,7 @@ const UserInfo = (props) => {
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                 <Link
                   to="/auth/changePassword"
-                  className="w-full justify-center text-md font-semibold text-cyan-700 hover:text-cyan-600"
+                  className="text-md w-full justify-center font-semibold text-cyan-700 hover:text-cyan-600"
                 >
                   Change password
                 </Link>
@@ -84,7 +84,7 @@ const UserInfo = (props) => {
           </dl>
         </div>
       </div>
-      <div className="flex pt-4 justify-center items-center border-t">
+      <div className="flex items-center justify-center border-t pt-4">
         <button
           type="button"
           className="text-md font-semibold text-cyan-700 hover:text-cyan-600"
