@@ -1,99 +1,99 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { fetchAllWorkoutNames } from '../../../../util/apis/activities/workouts/workoutsApis';
-import { postProgram } from '../../../../util/apis/activities/programs/programsApis';
-import AddWorkoutPlan from './AddWorkoutPlan';
-import IncrementalWorkoutPlan from './IncrementalWorkoutPlan';
-import FormSelectInput from '../../../UI/Selects/FormSelectInput';
-import TextFormInput from '../../../UI/Inputs/TextFormInput';
-import TextAreaFormInput from '../../../UI/Inputs/TextAreaFormInput';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { fetchAllWorkoutNames } from "../../../../util/apis/activities/workouts/workoutsApis";
+import { postProgram } from "../../../../util/apis/activities/programs/programsApis";
+import AddWorkoutPlan from "./AddWorkoutPlan";
+import IncrementalWorkoutPlan from "./IncrementalWorkoutPlan";
+import FormSelectInput from "../../../UI/Selects/FormSelectInput";
+import TextFormInput from "../../../UI/Inputs/TextFormInput";
+import TextAreaFormInput from "../../../UI/Inputs/TextAreaFormInput";
 
 //IMPROVE: Consider moving these values to a different file
 const programTypes = {
   select: {
-    id: 'program-type',
-    name: 'type',
+    id: "program-type",
+    name: "type",
     options: [
-      { value: '', label: 'Choose a type', disabled: true },
-      { value: 'Strength', label: 'Strength' },
-      { value: 'Hypertrophy', label: 'Hypertrophy' },
-      { value: 'Endurance', label: 'Endurance' },
-      { value: 'Mixed', label: 'Mixed' },
+      { value: "", label: "Choose a type", disabled: true },
+      { value: "Strength", label: "Strength" },
+      { value: "Hypertrophy", label: "Hypertrophy" },
+      { value: "Endurance", label: "Endurance" },
+      { value: "Mixed", label: "Mixed" },
     ],
   },
 };
 
 const programSequence = {
   select: {
-    id: 'program-sequence',
-    name: 'sequence',
+    id: "program-sequence",
+    name: "sequence",
     options: [
-      { value: '', label: 'Choose a sequence', disabled: true },
-      { value: 'Weekly', label: 'Weekly' },
-      { value: 'Cycle', label: 'Cycle' },
+      { value: "", label: "Choose a sequence", disabled: true },
+      { value: "Weekly", label: "Weekly" },
+      { value: "Cycle", label: "Cycle" },
     ],
   },
 };
 
 const textInputValues = {
   name: {
-    name: 'name',
-    label: 'Name',
-    type: 'text',
-    id: 'program-name',
-    placeholder: 'Enter a name',
+    name: "name",
+    label: "Name",
+    type: "text",
+    id: "program-name",
+    placeholder: "Enter a name",
     requiredField: true,
   },
   description: {
-    name: 'description',
-    label: 'Description',
-    type: 'text',
-    id: 'program-description',
-    placeholder: 'Enter a description',
+    name: "description",
+    label: "Description",
+    type: "text",
+    id: "program-description",
+    placeholder: "Enter a description",
     requiredField: false,
   },
   duration: {
-    name: 'duration',
-    label: 'Duration',
-    type: 'number',
-    id: 'program-duration',
-    placeholder: 'Enter a duration in weeks',
+    name: "duration",
+    label: "Duration",
+    type: "number",
+    id: "program-duration",
+    placeholder: "Enter a duration in weeks",
     requiredField: true,
   },
   image: {
-    name: 'linkToImage',
-    label: 'Image',
-    type: 'text',
-    id: 'program-image',
-    placeholder: 'Enter an image link',
+    name: "linkToImage",
+    label: "Image",
+    type: "text",
+    id: "program-image",
+    placeholder: "Enter an image link",
     requiredField: true,
   },
 };
 
 const workoutsInfo = {
   select: {
-    id: 'workoutPlan-workout',
-    name: 'workoutPlanWorkout',
-    value: '_id',
-    label: 'name',
+    id: "workoutPlan-workout",
+    name: "workoutPlanWorkout",
+    value: "_id",
+    label: "name",
     options: [],
   },
 };
 
 const daysOfTheWeek = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thrusday',
-  'Friday',
-  'Saturday',
-  'Sunday',
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thrusday",
+  "Friday",
+  "Saturday",
+  "Sunday",
 ];
 
 const AddProgram = (props) => {
   const navigateTo = useNavigate();
   const [workouts, setWorkouts] = useState(null);
-  const [sequence, setSequence] = useState('');
+  const [sequence, setSequence] = useState("");
   workoutsInfo.select.options = workouts;
 
   useEffect(() => {
@@ -102,8 +102,8 @@ const AddProgram = (props) => {
 
       //adds an empty default option
       response.body.unshift({
-        _id: '',
-        name: 'Choose a workout',
+        _id: "",
+        name: "Choose a workout",
       });
       setWorkouts(response.body);
     });
@@ -139,7 +139,7 @@ const AddProgram = (props) => {
     );
 
     values.workouts =
-      values.sequence === 'Weekly'
+      values.sequence === "Weekly"
         ? extractWeeklyWorkoutPlanValues(values.workouts.workoutIds)
         : extractCycleWorkoutPlanValues(values.workouts.workoutIds);
 
@@ -149,7 +149,7 @@ const AddProgram = (props) => {
   const extractMultiOptionValues = (elements) => {
     //if there is only one select dropdown, it adds the HTMLSelectElement to an array before extracting the value.
     //if there are multiple select dropdowns, converts the RadioNodeList into an array (to later use .map()).
-    elements = Object.prototype.toString.call(elements).includes('HTML', 0)
+    elements = Object.prototype.toString.call(elements).includes("HTML", 0)
       ? [elements]
       : [...elements];
 
@@ -194,7 +194,7 @@ const AddProgram = (props) => {
     <form
       id="add-program"
       onSubmit={addProgram}
-      className="mt-10 mx-5 pb-6 px-10 lg:mx-auto lg:max-w-[75%] xl:max-w-[60%] space-y-6 divide-y divide-gray-200 bg-white rounded-lg shadow"
+      className="mx-5 mt-10 space-y-6 divide-y divide-gray-200 rounded-lg bg-white px-10 pb-6 shadow lg:mx-auto lg:max-w-[75%] xl:max-w-[60%]"
     >
       <div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
         <div>
@@ -228,7 +228,7 @@ const AddProgram = (props) => {
       </div>
 
       {/* WEEKLY PLAN */}
-      {workouts && sequence === 'Weekly' && (
+      {workouts && sequence === "Weekly" && (
         <div>
           <div className="mt-10">
             <h3 className="text-base font-semibold leading-6 text-gray-900">
@@ -249,7 +249,7 @@ const AddProgram = (props) => {
       )}
 
       {/* CYCLE PLAN */}
-      {workouts && sequence === 'Cycle' && (
+      {workouts && sequence === "Cycle" && (
         <div>
           <div className="mt-10">
             <h3 className="text-base font-semibold leading-6 text-gray-900">

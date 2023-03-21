@@ -2,11 +2,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchAllExerciseNames } from '../../../../util/apis/activities/exercises/exercisesApis';
 import { postWorkout } from '../../../../util/apis/activities/workouts/workoutsApis';
-import TextAreaFormInput from '../../../UI/Inputs/TextAreaFormInput';
-import TextFormInput from '../../../UI/Inputs/TextFormInput';
-import FormSelectInput from '../../../UI/Selects/FormSelectInput';
+import styles from '../../../UI/General/CSS/Form.module.css';
 import SelectInput from '../../../UI/Selects/SelectInput';
-import IncrementalExercisePlan from './IncrementalExercisePlan';
+import IncrementalExercisePlanOld from './IncrementalExercisePlanOld';
 
 //IMPROVE: Consider moving these values to a different file
 const workoutTypes = {
@@ -14,7 +12,7 @@ const workoutTypes = {
     id: 'workout-types',
     name: 'type',
     options: [
-      { value: '', label: 'Choose a type', disabled: true },
+      { value: '', label: '-- Choose type --' },
       { value: 'Strength', label: 'Strength' },
       { value: 'Hypertrophy', label: 'Hypertrophy' },
       { value: 'Endurance', label: 'Endurance' },
@@ -27,7 +25,7 @@ const workoutTargets = {
     id: 'workout-targets',
     name: 'target',
     options: [
-      { value: '', label: 'Choose a target', disabled: true },
+      { value: '', label: '-- Choose target --' },
       { value: 'Full Body', label: 'Full Body' },
       { value: 'Upper Body', label: 'Upper Body' },
       { value: 'Lower Body', label: 'Lower Body' },
@@ -35,41 +33,6 @@ const workoutTargets = {
       { value: 'Back Muscles', label: 'Back Muscles' },
       { value: 'Mixed', label: 'Mixed' },
     ],
-  },
-};
-
-const textInputValues = {
-  name: {
-    name: 'name',
-    label: 'Name',
-    type: 'text',
-    id: 'workout-name',
-    placeholder: 'Enter a name',
-    requiredField: true,
-  },
-  description: {
-    name: 'description',
-    label: 'Description',
-    type: 'text',
-    id: 'workout-description',
-    placeholder: 'Enter a description',
-    requiredField: false,
-  },
-  variant: {
-    name: 'variant',
-    label: 'Variant',
-    type: 'text',
-    id: 'workout-variant',
-    placeholder: 'Enter a variant',
-    requiredField: true,
-  },
-  image: {
-    name: 'linkToImage',
-    label: 'Image',
-    type: 'text',
-    id: 'program-image',
-    placeholder: 'Enter an image link',
-    requiredField: true,
   },
 };
 
@@ -83,7 +46,7 @@ const exercisesInfo = {
   },
 };
 
-const AddWorkout = (props) => {
+const AddWorkoutOld = (props) => {
   const navigateTo = useNavigate();
   const [exercises, setExercises] = useState(null);
   exercisesInfo.select.options = exercises;
@@ -93,12 +56,12 @@ const AddWorkout = (props) => {
       if (!response || !response.isSuccess) return;
 
       //adds an empty default option
-      response.body.unshift({ _id: '', name: 'Choose an exercise' });
+      response.body.unshift({ _id: '', name: '-- Choose an exercise --' });
       setExercises(response.body);
     });
   }, []);
 
-  const addWorkout = (e) => {
+  const addWorkoutOld = (e) => {
     e.preventDefault();
     let formVals = getFormValues(e.target.elements);
     //console.log('formVals', formVals);
@@ -181,70 +144,89 @@ const AddWorkout = (props) => {
   };
 
   return (
-    <form
-      id="add-workout-form"
-      onSubmit={addWorkout}
-      className="mt-10 mx-5 pb-6 px-10 lg:mx-auto lg:max-w-[75%] xl:max-w-[60%] space-y-6 divide-y divide-gray-200 bg-white rounded-lg shadow"
-    >
-      <div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
-        <div>
-          <h3 className="text-base font-semibold leading-6 text-gray-900">
-            Add Workout
-          </h3>
-          <p className="mt-1 max-w-2xl text-sm text-gray-500">
-            Fill out the following form to add a new workout to the workout
-            library.
-          </p>
-        </div>
-        <div className="space-y-6 sm:space-y-5">
-          <TextFormInput {...textInputValues.name} />
-          <TextAreaFormInput {...textInputValues.description} />
-          <TextFormInput {...textInputValues.variant} />
-          <FormSelectInput
-            label="Type"
-            select={workoutTypes.select}
-            selectedValue=""
-            requiredField={true}
+    <section className={styles['main-section']}>
+      <form
+        id="add-workout-form"
+        onSubmit={addWorkoutOld}
+        className={styles['main-form']}
+      >
+        <h1 className={styles['form-title']}>Add Workout</h1>
+        {/* NAME */}
+        <label htmlFor="workoutName" className={styles['text-label']}>
+          Name:
+        </label>
+        <input
+          type="text"
+          id="workout-name"
+          name="name"
+          placeholder="Enter the workout name..."
+          className={styles['select-input']}
+        />
+        {/* DESCRIPTION */}
+        <label htmlFor="workoutDescription" className={styles['text-label']}>
+          Description:
+        </label>
+        <input
+          type="text"
+          id="workout-description"
+          name="description"
+          placeholder="Enter a description..."
+          className={styles['select-input']}
+        />
+        {/* VARIANT */}
+        <label htmlFor="workoutVariant" className={styles['text-label']}>
+          Variant:
+        </label>
+        <input
+          type="text"
+          id="workout-variant"
+          name="variant"
+          placeholder="Enter a variant..."
+          className={styles['select-input']}
+        />
+        {/* TYPE */}
+        <label htmlFor="workoutType" className={styles['text-label']}>
+          Type:
+        </label>
+        <SelectInput select={workoutTypes.select} />
+        {/* TARGET */}
+        <label htmlFor="workoutTarget" className={styles['text-label']}>
+          Target:
+        </label>
+        <SelectInput select={workoutTargets.select} />
+        {/* LINK TO IMAGE */}
+        <label htmlFor="workoutLinkToImage" className={styles['text-label']}>
+          Image:
+        </label>
+        <input
+          type="text"
+          id="workout-linkToImage"
+          name="linkToImage"
+          placeholder="Enter a image link..."
+          className={styles['select-input']}
+        />
+        {/* EXERCISES */}
+        {exercises ? (
+          <IncrementalExercisePlanOld exercisesInfo={exercisesInfo} />
+        ) : (
+          <img
+            src="/loading.gif"
+            alt="Loading..."
+            className={styles['loading-img']}
           />
-          <FormSelectInput
-            label="Target"
-            select={workoutTargets.select}
-            selectedValue=""
-            requiredField={true}
-          />
-          <TextFormInput {...textInputValues.image} />
-          
-        </div>
-      </div>
+        )}
 
-      {/* EXERCISE PLANS */}
-      {exercises && (
-        <div>
-          <div className="mt-10">
-            <h3 className="text-base font-semibold leading-6 text-gray-900">
-              Add Exercises
-            </h3>
-            <p className="mt-1 max-w-2xl text-sm text-gray-500">
-              Add all the required exercises for this workout.
-            </p>
-          </div>
-          <IncrementalExercisePlan exercisesInfo={exercisesInfo} />
-        </div>
-      )}
-
-      {/* SUBMIT BUTTON */}
-      <div className="pt-5">
-        <div className="flex justify-end gap-x-3">
-          <button
-            type="submit"
-            className="inline-flex justify-center rounded-md bg-cyan-700 py-2 px-5 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700"
-          >
-            Save
-          </button>
-        </div>
-      </div>
-    </form>
+        {/* SUBMIT BUTTON */}
+        <button
+          type="submit"
+          id="add-workout-btn"
+          className={styles['submit-btn']}
+        >
+          Add workout
+        </button>
+      </form>
+    </section>
   );
 };
 
-export default AddWorkout;
+export default AddWorkoutOld;

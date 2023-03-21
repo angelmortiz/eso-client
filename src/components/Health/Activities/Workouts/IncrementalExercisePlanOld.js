@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import AddExercisePlan from './AddExercisePlan';
+import styles from '../../../UI/General/CSS/Form.module.css';
+import AddExercisePlanOld from './AddExercisePlanOld';
 
 /** This component makes it possible to add new exercises to
  * the workout by clicking the 'add' button.
  * This allows the user to add multiple options without the need
  * of knowing in advanced how  may elements should be added.
  */
-const IncrementalExercisePlan = (props) => {
+const IncrementalExercisePlanOld = (props) => {
   const { exercisesInfo, selectedPlans } = props;
   const [count, setCount] = useState(1);
   const [exercisePlanList, setExercisePlanList] = useState([
@@ -24,7 +25,7 @@ const IncrementalExercisePlan = (props) => {
     selectedPlans.forEach((plan, index) => {
       newCount = index + 1;
       selectedInputs.push(
-        <AddExercisePlan
+        <AddExercisePlanOld
           exercises={exercisesInfo}
           count={newCount}
           key={`exercise-plan_${newCount}`}
@@ -34,8 +35,8 @@ const IncrementalExercisePlan = (props) => {
     });
 
     setExercisePlanList(selectedInputs);
-    setCount(newCount);
-  }, [selectedPlans, exercisesInfo]);
+    setCount(newCount)
+  },[selectedPlans, exercisesInfo]);
 
   const addExercise = (e) => {
     e.preventDefault();
@@ -49,7 +50,7 @@ const IncrementalExercisePlan = (props) => {
 
   function newExercisePlan(newCount) {
     return (
-      <AddExercisePlan
+      <AddExercisePlanOld
         exercises={exercisesInfo}
         count={newCount}
         key={`exercise-plan_${newCount}`}
@@ -58,23 +59,21 @@ const IncrementalExercisePlan = (props) => {
   }
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className={styles['plan-list']}>
       {/* Displays all the exercise plans.*/}
       {exercisePlanList}
 
       {/* ADD BUTTON */}
-      <div className="flex items-center justify-center">
-        <button
-          type="button"
-          id="add-exercise-plan"
-          className="inline-flex justify-center text-sm font-semibold text-cyan-700 hover:text-cyan-600"
-          onClick={addExercise}
-        >
-          Add Exercise
-        </button>
-      </div>
+      <button
+        type="button"
+        id="add-exercise-plan"
+        className={styles['add-btn']}
+        onClick={addExercise}
+      >
+        Add Exercise Plan
+      </button>
     </div>
   );
 };
 
-export default IncrementalExercisePlan;
+export default IncrementalExercisePlanOld;
