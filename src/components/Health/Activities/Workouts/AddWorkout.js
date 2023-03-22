@@ -5,37 +5,8 @@ import { postWorkout } from "../../../../util/apis/activities/workouts/workoutsA
 import TextAreaFormInput from "../../../UI/Inputs/TextAreaFormInput";
 import TextFormInput from "../../../UI/Inputs/TextFormInput";
 import FormSelectInput from "../../../UI/Selects/FormSelectInput";
+import { WorkoutTargets, WorkoutTypes } from "../GlobalValues/WorkoutGlobalValues";
 import IncrementalExercisePlan from "./IncrementalExercisePlan";
-
-//IMPROVE: Consider moving these values to a different file
-const workoutTypes = {
-  select: {
-    id: "workout-types",
-    name: "type",
-    options: [
-      { value: "", label: "Choose a type", disabled: true },
-      { value: "Strength", label: "Strength" },
-      { value: "Hypertrophy", label: "Hypertrophy" },
-      { value: "Endurance", label: "Endurance" },
-    ],
-  },
-};
-
-const workoutTargets = {
-  select: {
-    id: "workout-targets",
-    name: "target",
-    options: [
-      { value: "", label: "Choose a target", disabled: true },
-      { value: "Full Body", label: "Full Body" },
-      { value: "Upper Body", label: "Upper Body" },
-      { value: "Lower Body", label: "Lower Body" },
-      { value: "Front Muscles", label: "Front Muscles" },
-      { value: "Back Muscles", label: "Back Muscles" },
-      { value: "Mixed", label: "Mixed" },
-    ],
-  },
-};
 
 const textInputValues = {
   name: {
@@ -202,13 +173,13 @@ const AddWorkout = (props) => {
           <TextFormInput {...textInputValues.variant} />
           <FormSelectInput
             label="Type"
-            select={workoutTypes.select}
+            select={WorkoutTypes.select}
             selectedValue=""
             requiredField={true}
           />
           <FormSelectInput
             label="Target"
-            select={workoutTargets.select}
+            select={WorkoutTargets.select}
             selectedValue=""
             requiredField={true}
           />

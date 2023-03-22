@@ -1,39 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchAllWorkoutNames } from "../../../../util/apis/activities/workouts/workoutsApis";
+import { ProgramSequence, ProgramTypes } from "../GlobalValues/ProgramGlobalValues";
 import { postProgram } from "../../../../util/apis/activities/programs/programsApis";
+import { DaysOfTheWeek } from "../GlobalValues/General";
 import AddWorkoutPlan from "./AddWorkoutPlan";
 import IncrementalWorkoutPlan from "./IncrementalWorkoutPlan";
 import FormSelectInput from "../../../UI/Selects/FormSelectInput";
 import TextFormInput from "../../../UI/Inputs/TextFormInput";
 import TextAreaFormInput from "../../../UI/Inputs/TextAreaFormInput";
-
-//IMPROVE: Consider moving these values to a different file
-const programTypes = {
-  select: {
-    id: "program-type",
-    name: "type",
-    options: [
-      { value: "", label: "Choose a type", disabled: true },
-      { value: "Strength", label: "Strength" },
-      { value: "Hypertrophy", label: "Hypertrophy" },
-      { value: "Endurance", label: "Endurance" },
-      { value: "Mixed", label: "Mixed" },
-    ],
-  },
-};
-
-const programSequence = {
-  select: {
-    id: "program-sequence",
-    name: "sequence",
-    options: [
-      { value: "", label: "Choose a sequence", disabled: true },
-      { value: "Weekly", label: "Weekly" },
-      { value: "Cycle", label: "Cycle" },
-    ],
-  },
-};
 
 const textInputValues = {
   name: {
@@ -79,16 +54,6 @@ const workoutsInfo = {
     options: [],
   },
 };
-
-const daysOfTheWeek = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thrusday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
 
 const AddProgram = (props) => {
   const navigateTo = useNavigate();
@@ -164,7 +129,7 @@ const AddProgram = (props) => {
     const workoutPlanValues = [];
     if (!workoutIds || workoutIds.length !== 7) return null;
 
-    daysOfTheWeek.forEach((day, index) => {
+    DaysOfTheWeek.forEach((day, index) => {
       let planVals = {};
       planVals.dayOfTheWeek = day;
       planVals.workout = workoutIds[index];
@@ -210,7 +175,7 @@ const AddProgram = (props) => {
           <TextAreaFormInput {...textInputValues.description} />
           <FormSelectInput
             label="Type"
-            select={programTypes.select}
+            select={ProgramTypes.select}
             selectedValue=""
             requiredField={true}
           />
@@ -218,7 +183,7 @@ const AddProgram = (props) => {
           <TextFormInput {...textInputValues.image} />
           <FormSelectInput
             label="Sequence"
-            select={programSequence.select}
+            select={ProgramSequence.select}
             selectedValue={sequence}
             setValue={setSequence}
             requiredField={true}
@@ -237,7 +202,7 @@ const AddProgram = (props) => {
               Choose a workout per each day of the week.
             </p>
           </div>
-          {daysOfTheWeek.map((day) => (
+          {DaysOfTheWeek.map((day) => (
             <AddWorkoutPlan
               key={`workoutPlan-${day}`}
               workouts={workoutsInfo}

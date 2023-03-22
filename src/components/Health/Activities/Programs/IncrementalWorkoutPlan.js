@@ -31,7 +31,7 @@ const IncrementalWorkoutPlan = (props) => {
         <AddWorkoutPlan
           workouts={workoutsInfo}
           key={`workout-plan_${newCount}`}
-          title={`Workout #${newCount}`}
+          title={`Workout ${newCount}`}
           selectedPlan={plan}
         />
       );
