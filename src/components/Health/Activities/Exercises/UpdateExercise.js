@@ -182,7 +182,6 @@ const UpdateExercise = (props) => {
     putExercise(id, formVals).then((response) => {
       //console.log('Response: ', response);
       if (response && response.isSuccess) {
-        //Navigate to the just updated exercise id
         navigateTo(`/activities/exercise/${id}`);
       }
     });

@@ -115,7 +115,6 @@ const UpdateWorkout = (props) => {
     putWorkout(id, formVals).then((response) => {
       //console.log('Response: ', response);
       if (response && response.isSuccess) {
-        //Navigate to the just updated workout id
         navigateTo(`/activities/workout/${id}`);
       }
     });

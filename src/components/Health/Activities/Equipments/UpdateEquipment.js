@@ -80,7 +80,6 @@ const UpdateEquipment = (props) => {
     putEquipment(id, formVals).then((response) => {
       //console.log('Response: ', response);
       if (response.isSuccess) {
-        //IMPROVE: Navigate to the just added equipment id
         navigateTo(`/activities/equipment/${id}`);
       }
     });

@@ -73,7 +73,6 @@ const UpdateMuscle = (props) => {
     putMuscle(id, formVals).then((response) => {
       //console.log('Response: ', response);
       if (response.isSuccess) {
-        //IMPROVE: Navigate to the just added muscle id
         navigateTo(`/activities/muscle/${id}`);
       }
     });
