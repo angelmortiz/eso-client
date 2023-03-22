@@ -1,3 +1,4 @@
+import { WorkoutTargets, WorkoutTypes } from "../GlobalValues/WorkoutGlobalValues";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchAllExerciseNames } from "../../../../util/apis/activities/exercises/exercisesApis";
@@ -5,7 +6,6 @@ import { postWorkout } from "../../../../util/apis/activities/workouts/workoutsA
 import TextAreaFormInput from "../../../UI/Inputs/TextAreaFormInput";
 import TextFormInput from "../../../UI/Inputs/TextFormInput";
 import FormSelectInput from "../../../UI/Selects/FormSelectInput";
-import { WorkoutTargets, WorkoutTypes } from "../GlobalValues/WorkoutGlobalValues";
 import IncrementalExercisePlan from "./IncrementalExercisePlan";
 
 const textInputValues = {
