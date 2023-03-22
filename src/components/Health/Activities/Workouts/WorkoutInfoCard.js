@@ -1,35 +1,62 @@
-import { Link } from 'react-router-dom';
-import styles from '../../../UI/General/CSS/InfoCard.module.css';
+import { useNavigate } from "react-router-dom";
+
+const classNames = (...classes) => {
+  return classes.filter(Boolean).join(" ");
+};
 
 const WorkoutInfoCard = (props) => {
+  const navigateTo = useNavigate();
   const { info } = props;
 
+  const navigateToWorkout = () => {
+    navigateTo(`/activities/workout/${info._id}`);
+  };
+
   return (
-    <div className={styles['card']}>
-      <img src={info.linkToImage} alt={info.name} className={styles['img']} />
-      <div className={styles['workout-info']}>
-        <div className={styles['names']}>
-          <h1 className={styles['name']}>{info.name}</h1>
-        </div>
-        <div className={styles['general-info']}>
-          <div className={styles['info-block']}>
-            <p className={styles['label']}>Variant:</p>
-            <p className={styles['value']}>{info.variant}</p>
-          </div>
-          <div className={styles['info-block']}>
-            <p className={styles['label']}>Type:</p>
-            <p className={styles['value']}>{info.type}</p>
-          </div>
-          <div className={styles['info-block']}>
-            <p className={styles['label']}>Target:</p>
-            <p className={styles['value']}>{info.target}</p>
-          </div>
+    <li
+      className="col-span-1 flex cursor-pointer flex-col items-start justify-center divide-y divide-gray-200 rounded-lg bg-white text-center shadow"
+      onClick={navigateToWorkout}
+    >
+      <div className="flex items-center justify-center gap-6 px-6 py-4">
+        <img
+          className="mx-auto h-24 w-24 flex-shrink-0 rounded-full border shadow"
+          src={info.linkToImage}
+          alt={info.name}
+        />
+        <div className="flex flex-1 flex-col text-left">
+          <h3 className="text-md font-medium text-gray-900">{info.name}</h3>
+
+          <dl className="mt-1 flex flex-grow flex-col justify-between">
+            <dt className="sr-only">Variant</dt>
+            <dd className="text-sm text-gray-500">
+              Variant {info.variant}
+            </dd>
+            <dt className="sr-only">Target</dt>
+            <dd className="text-sm text-gray-500">
+              {info.target}
+            </dd>
+            <dt className="sr-only">Type</dt>
+            <dd className="mt-3">
+              {/* changes tag color based on program type */}
+              <span
+                className={classNames(
+                  "rounded-lg  px-2 py-1 text-xs font-medium",
+                  info.type === "Strength"
+                    ? "bg-teal-100 text-teal-800"
+                    : info.type === "Hypertrophy"
+                    ? "bg-cyan-100 text-cyan-800"
+                    : info.type === "Endurance"
+                    ? "bg-green-100 text-green-800"
+                    : "bg-indigo-100 text-indigo-800"
+                )}
+              >
+                {info.type}
+              </span>
+            </dd>
+          </dl>
         </div>
       </div>
-      <Link to={`/activities/workout/${info._id}`} className={styles['link']}>
-        Details
-      </Link>
-    </div>
+    </li>
   );
 };
 

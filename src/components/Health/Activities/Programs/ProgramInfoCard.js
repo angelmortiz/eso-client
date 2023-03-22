@@ -19,7 +19,7 @@ const ProgramInfoCard = (props) => {
     >
       <div className="flex items-center justify-center gap-6 px-6 py-4">
         <img
-          className="mx-auto h-24 w-24 flex-shrink-0 rounded-full shadow border"
+          className="mx-auto h-24 w-24 flex-shrink-0 rounded-full border shadow"
           src={info.linkToImage}
           alt={info.name}
         />
