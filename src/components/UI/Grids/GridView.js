@@ -1,20 +1,19 @@
-import styles from './GridView.module.css';
-
 const GridView = (props) => {
   return (
-    <div className={styles['grid']}>
-      <h1 className={styles['title']}>{props.title}</h1>
-
-      {/* CONTENT */}
-      {props.children && props.children.length ? (
-        props.children
-      ) : (
+    <div className="my-6 flex flex-col px-8 sm:my-10 sm:px-10">
+      <h1 className="mx-auto mb-5 text-2xl font-semibold leading-6 text-gray-900 sm:mb-8">
+        {props.title}
+      </h1>
+      {!props.children && (
         <img
           src="/loading.gif"
           alt="Loading..."
-          className={styles['loading-img']}
+          className="mx-auto h-10 w-10"
         />
       )}
+      <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        {props.children && props.children}
+      </ul>
     </div>
   );
 };
