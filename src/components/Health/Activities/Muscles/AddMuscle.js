@@ -2,18 +2,7 @@ import { postMuscle } from "../../../../util/apis/activities/muscles/musclesApis
 import { useNavigate } from "react-router-dom";
 import TextFormInput from "../../../UI/Inputs/TextFormInput";
 import FormSelectInput from "../../../UI/Selects/FormSelectInput";
-
-const typesInfo = {
-  select: {
-    id: "muscles-type",
-    name: "type",
-    options: [
-      { value: "", label: "-- Choose a type --" },
-      { value: "Big", label: "Big" },
-      { value: "Small", label: "Small" },
-    ],
-  },
-};
+import { MuscleTypes } from "../GlobalValues/MuscleGlobalValues";
 
 const textInputValues = {
   name: {
@@ -88,7 +77,7 @@ const AddMuscle = (props) => {
           <TextFormInput {...textInputValues.alternativeName} />
           <FormSelectInput
             label="Type"
-            select={typesInfo.select}
+            select={MuscleTypes.select}
             selectedValue=""
             requiredField={true}
           />

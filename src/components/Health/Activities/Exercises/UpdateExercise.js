@@ -229,7 +229,7 @@ const UpdateExercise = (props) => {
   /** Render */
   return (
     <form
-      id="add-exercise-form"
+      id="update-exercise-form"
       onSubmit={updateExercise}
       className="mx-5 mt-10 space-y-6 divide-y divide-gray-200 rounded-lg bg-white px-10 pb-6 shadow lg:mx-auto lg:max-w-[75%] xl:max-w-[60%]"
     >

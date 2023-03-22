@@ -197,7 +197,7 @@ const UpdateWorkout = (props) => {
 
   return (
     <form
-      id="add-workout-form"
+      id="update-workout-form"
       onSubmit={updateWorkout}
       className="mx-5 mt-10 space-y-6 divide-y divide-gray-200 rounded-lg bg-white px-10 pb-6 shadow lg:mx-auto lg:max-w-[75%] xl:max-w-[60%]"
     >
