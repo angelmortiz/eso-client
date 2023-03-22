@@ -35,6 +35,7 @@ export const ExerciseTypes = {
       { value: "", label: "Choose a type" },
       { value: "HIIT", label: "HIIT" },
       { value: "Strength", label: "Strength" },
+      { value: "Cardio", label: "Cardio" },
     ],
   },
   button: {
