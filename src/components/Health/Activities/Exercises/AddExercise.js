@@ -1,58 +1,18 @@
-import TextFormInput from "../../../UI/Inputs/TextFormInput";
-import FormSelectInput from "../../../UI/Selects/FormSelectInput";
-import FormIncrementalSelect from "../../../UI/Selects/FormIncrementalSelect";
 import { postExercise } from "../../../../util/apis/activities/exercises/exercisesApis";
 import { useEffect, useState } from "react";
 import { fetchAllEquipmentNames } from "../../../../util/apis/activities/equipments/equipmentsApis";
 import { fetchAllMuscleNames } from "../../../../util/apis/activities/muscles/musclesApis";
 import { useNavigate } from "react-router-dom";
+import TextFormInput from "../../../UI/Inputs/TextFormInput";
+import FormSelectInput from "../../../UI/Selects/FormSelectInput";
+import FormIncrementalSelect from "../../../UI/Selects/FormIncrementalSelect";
+import {
+  ExerciseCompoundMovement,
+  ExerciseDifficulty,
+  ExerciseTypes,
+} from "../GlobalValues/ExerciseGlobalValues";
 
 /** FIELDS DATA */
-const difficultyInfo = {
-  select: {
-    id: "exercise-difficulty",
-    name: "difficulty",
-    options: [
-      { value: "", label: "Choose a difficulty", disabled: true },
-      { value: "Easy", label: "Easy" },
-      { value: "Intermediate", label: "Intermediate" },
-      { value: "Advanced", label: "Advanced" },
-    ],
-  },
-};
-
-const compoundMovementInfo = {
-  select: {
-    id: "exercise-compoundMovement",
-    name: "compoundMovement",
-    options: [
-      { value: "", label: "Choose an option", disabled: true },
-      { value: "yes", label: "Yes" },
-      { value: "no", label: "No" },
-    ],
-  },
-};
-
-const typesInfo = {
-  label: {
-    label: "Type",
-  },
-  select: {
-    id: "exercise-types",
-    name: "types",
-    options: [
-      // TODO: Pull values from backend
-      { value: "", label: "Choose a type" },
-      { value: "HIIT", label: "HIIT" },
-      { value: "Strength", label: "Strength" },
-    ],
-  },
-  button: {
-    id: "add-type-btn",
-    label: "Add type",
-  },
-};
-
 const selectInputValues = {
   mainMuscleInfo: {
     label: {
@@ -239,13 +199,13 @@ const AddExercise = (props) => {
           <TextFormInput {...textInputValues.alternativeName} />
           <FormSelectInput
             label="Difficulty"
-            select={difficultyInfo.select}
+            select={ExerciseDifficulty.select}
             selectedValue=""
             requiredField={true}
           />
           <FormSelectInput
             label="Compound?"
-            select={compoundMovementInfo.select}
+            select={ExerciseCompoundMovement.select}
             selectedValue=""
             requiredField={true}
           />
@@ -287,7 +247,7 @@ const AddExercise = (props) => {
             Add all the types associated to this exercise.
           </p>
         </div>
-        <FormIncrementalSelect info={typesInfo} />
+        <FormIncrementalSelect info={ExerciseTypes} />
       </div>
 
       {/* EQUIPMENTS */}
