@@ -23,7 +23,11 @@ const Equipments = (props) => {
     return infoCards;
   };
 
-  return <GridView title="Equipments">{addInfoCards()}</GridView>;
+  return (
+    <GridView title="Equipments" gridSize="md">
+      {addInfoCards()}
+    </GridView>
+  );
 };
 
 export default Equipments;
