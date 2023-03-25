@@ -16,7 +16,7 @@ const ProgramDetails = (props) => {
     if (!id) console.error(`Error: program id not found in the url.`);
     fetchProgramById(id).then((response) => {
       if (!response || !response.isSuccess) return;
-      console.log("response: ", response);
+      // console.log("response: ", response);
       setProgram(response.body);
     });
   }, [id]);
