@@ -27,12 +27,10 @@ const ExerciseInfoCard = (props) => {
           <h3 className="text-md font-medium text-gray-900">{info.name}</h3>
 
           <dl className="mt-1 flex flex-grow flex-col justify-between">
-            <dt className="sr-only">Alternative </dt>
-            <dd className="text-sm text-gray-500">{info.alternativeName}</dd>
             <dt className="sr-only">Muscle</dt>
-            <dd className="text-sm text-gray-500">Target: {info.mainMuscle.name}</dd>
+            <dd className="text-sm text-gray-500">For: {info.mainMuscle.name}</dd>
             <dt className="sr-only">Equipment</dt>
-            <dd className="text-sm text-gray-500">Equipment: {info.equipments[0]?.name}</dd>
+            <dd className="text-sm text-gray-500">Using: {info.equipments[0]?.name}</dd>
             <dt className="sr-only">Type</dt>
             <dd className="mt-3">
               {/* changes tag color based on program type */}
