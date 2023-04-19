@@ -1,76 +1,80 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { fetchAllWorkoutNames } from '../../../../util/apis/activities/workouts/workoutsApis';
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { fetchAllWorkoutNames } from "../../../../util/apis/activities/workouts/workoutsApis";
 import {
   fetchProgramById,
   putProgram,
-} from '../../../../util/apis/activities/programs/programsApis';
-import styles from '../../../UI/General/CSS/Form.module.css';
-import SelectInput from '../../../UI/Selects/SelectInput';
-import AddWorkoutPlan from './AddWorkoutPlan';
-import IncrementalWorkoutPlan from './IncrementalWorkoutPlan';
+} from "../../../../util/apis/activities/programs/programsApis";
+import {
+  ProgramSequence,
+  ProgramTypes,
+} from "../GlobalValues/ProgramGlobalValues";
+import { DaysOfTheWeek } from "../GlobalValues/General";
+import AddWorkoutPlan from "./AddWorkoutPlan";
+import IncrementalWorkoutPlan from "./IncrementalWorkoutPlan";
+import TextFormInput from "../../../UI/Inputs/TextFormInput";
+import TextAreaFormInput from "../../../UI/Inputs/TextAreaFormInput";
+import FormSelectInput from "../../../UI/Selects/FormSelectInput";
 
-//IMPROVE: Consider moving these values to a different file
-const programTypes = {
-  select: {
-    id: 'program-type',
-    name: 'type',
-    options: [
-      { value: '', label: '-- Choose type --' },
-      { value: 'Strength', label: 'Strength' },
-      { value: 'Hypertrophy', label: 'Hypertrophy' },
-      { value: 'Endurance', label: 'Endurance' },
-      { value: 'Mixed', label: 'Mixed' },
-    ],
+const textInputValues = {
+  name: {
+    name: "name",
+    label: "Name",
+    type: "text",
+    id: "program-name",
+    placeholder: "Enter a name",
+    requiredField: true,
   },
-};
-
-const programSequence = {
-  select: {
-    id: 'program-sequence',
-    name: 'sequence',
-    options: [
-      { value: '', label: '-- Choose sequence --' },
-      { value: 'Weekly', label: 'Weekly' },
-      { value: 'Cycle', label: 'Cycle' },
-    ],
+  description: {
+    name: "description",
+    label: "Description",
+    type: "text",
+    id: "program-description",
+    placeholder: "Enter a description",
+    requiredField: false,
+  },
+  duration: {
+    name: "duration",
+    label: "Duration",
+    type: "number",
+    id: "program-duration",
+    placeholder: "Enter a duration in weeks",
+    requiredField: true,
+  },
+  image: {
+    name: "linkToImage",
+    label: "Image",
+    type: "text",
+    id: "program-image",
+    placeholder: "Enter an image link",
+    requiredField: true,
   },
 };
 
 const workoutsInfo = {
   select: {
-    id: 'workoutPlan-workout',
-    name: 'workoutPlanWorkout',
-    value: '_id',
-    label: 'name',
+    id: "workoutPlan-workout",
+    name: "workoutPlanWorkout",
+    value: "_id",
+    label: "name",
     options: [],
   },
 };
-
-const daysOfTheWeek = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thrusday',
-  'Friday',
-  'Saturday',
-  'Sunday',
-];
 
 const UpdateProgram = (props) => {
   const navigateTo = useNavigate();
   const { id } = useParams();
   const [program, setProgram] = useState();
   const [workouts, setWorkouts] = useState(null);
-  const [sequence, setSequence] = useState('');
+  const [sequence, setSequence] = useState("");
   workoutsInfo.select.options = workouts;
 
   /** INPUT VALUES */
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [type, setType] = useState('');
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [type, setType] = useState("");
   const [duration, setDuration] = useState(0);
-  const [linkToImage, setLinkToImage] = useState('');
+  const [linkToImage, setLinkToImage] = useState("");
   const [workoutPlans, setWorkoutPlans] = useState([]);
   /** */
 
@@ -100,12 +104,12 @@ const UpdateProgram = (props) => {
       if (!response || !response.isSuccess) return;
 
       //adds an empty default option
-      response.body.unshift({ _id: '', name: '-- Choose a workout --' });
+      response.body.unshift({ _id: "", name: "Choose a workout" });
       setWorkouts(response.body);
     });
   }, []);
 
-  const UpdateProgram = (e) => {
+  const updateProgram = (e) => {
     e.preventDefault();
     const formVals = getFormValues(e.target.elements);
     //console.log('formVals:  ', formVals);
@@ -113,8 +117,7 @@ const UpdateProgram = (props) => {
     putProgram(id, formVals).then((response) => {
       //console.log('Response: ', response);
       if (response.isSuccess) {
-        //IMPROVE: Navigate to the just added program id
-        navigateTo(`/activities/programs`);
+        navigateTo(`/activities/program/${id}`);
       }
     });
   };
@@ -136,7 +139,7 @@ const UpdateProgram = (props) => {
     );
 
     values.workouts =
-      values.sequence === 'Weekly'
+      values.sequence === "Weekly"
         ? extractWeeklyWorkoutPlanValues(values.workouts.workoutIds)
         : extractCycleWorkoutPlanValues(values.workouts.workoutIds);
 
@@ -146,7 +149,7 @@ const UpdateProgram = (props) => {
   const extractMultiOptionValues = (elements) => {
     //if there is only one select dropdown, it adds the HTMLSelectElement to an array before extracting the value.
     //if there are multiple select dropdowns, converts the RadioNodeList into an array (to later use .map()).
-    elements = Object.prototype.toString.call(elements).includes('HTML', 0)
+    elements = Object.prototype.toString.call(elements).includes("HTML", 0)
       ? [elements]
       : [...elements];
 
@@ -161,7 +164,7 @@ const UpdateProgram = (props) => {
     const workoutPlanValues = [];
     if (!workoutIds || workoutIds.length !== 7) return null;
 
-    daysOfTheWeek.forEach((day, index) => {
+    DaysOfTheWeek.forEach((day, index) => {
       let planVals = {};
       planVals.dayOfTheWeek = day;
       planVals.workout = workoutIds[index];
@@ -188,90 +191,69 @@ const UpdateProgram = (props) => {
   };
 
   return (
-    <section className={styles['main-section']}>
-      <form
-        id="update-program-form"
-        onSubmit={UpdateProgram}
-        className={styles['main-form']}
-      >
-        <h1 className={styles['form-title']}>Update Program</h1>
+    <form
+      id="update-program"
+      onSubmit={updateProgram}
+      className="mx-5 mt-10 space-y-6 divide-y divide-gray-200 rounded-lg bg-white px-10 pb-6 shadow lg:mx-auto lg:max-w-[75%] xl:max-w-[60%]"
+    >
+      <div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
+        <div>
+          <h3 className="text-base font-semibold leading-6 text-gray-900">
+            Update Program
+          </h3>
+          <p className="mt-1 max-w-2xl text-sm text-gray-500">
+            Update the values of the current program by editing the form below.
+          </p>
+        </div>
+        <div className="space-y-6 sm:space-y-5">
+          <TextFormInput
+            {...textInputValues.name}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <TextAreaFormInput
+            {...textInputValues.description}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <FormSelectInput
+            label="Type"
+            select={ProgramTypes.select}
+            selectedValue={type}
+            requiredField={true}
+          />
+          <TextFormInput
+            {...textInputValues.duration}
+            value={duration}
+            onChange={(e) => setDuration(e.target.value)}
+          />
+          <TextFormInput
+            {...textInputValues.image}
+            value={linkToImage}
+            onChange={(e) => setLinkToImage(e.target.value)}
+          />
+          <FormSelectInput
+            label="Sequence"
+            select={ProgramSequence.select}
+            selectedValue={sequence}
+            setValue={setSequence}
+            requiredField={true}
+          />
+        </div>
+      </div>
 
-        {/* NAME */}
-        <label htmlFor="program-name" className={styles['text-label']}>
-          Name:
-        </label>
-        <input
-          type="text"
-          id="program-name"
-          name="name"
-          placeholder="Enter the program name..."
-          className={styles['select-input']}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-
-        {/* DESCRIPTION */}
-        <label htmlFor="program-description" className={styles['text-label']}>
-          Description:
-        </label>
-        <input
-          type="text"
-          id="program-description"
-          name="description"
-          placeholder="Enter a description..."
-          className={styles['select-input']}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-
-        {/* TYPE */}
-        <label htmlFor="program-type" className={styles['text-label']}>
-          Type:
-        </label>
-        <SelectInput select={programTypes.select} selectedValue={type} />
-
-        {/* DURANTION */}
-        <label htmlFor="program-duration" className={styles['text-label']}>
-          Durantion (weeks):
-        </label>
-        <input
-          type="number"
-          id="program-duration"
-          name="duration"
-          placeholder="Enter duration in weeks..."
-          className={styles['select-input']}
-          value={duration}
-          onChange={(e) => setDuration(e.target.value)}
-        />
-
-        {/* LINK TO IMAGE */}
-        <label htmlFor="programLinkToImage" className={styles['text-label']}>
-          Image:
-        </label>
-        <input
-          type="text"
-          id="program-linkToImage"
-          name="linkToImage"
-          placeholder="Enter a image link..."
-          className={styles['select-input']}
-          value={linkToImage}
-          onChange={(e) => setLinkToImage(e.target.value)}
-        />
-
-        {/* SEQUENCE */}
-        <label htmlFor="program-sequence" className={styles['text-label']}>
-          Sequence:
-        </label>
-        <SelectInput
-          select={programSequence.select}
-          selectedValue={sequence}
-          setValue={setSequence}
-        />
-
-        {/* WEEKLY PLAN */}
-        {workouts &&
-          sequence === 'Weekly' &&
-          daysOfTheWeek.map((day) => (
+      {/* WEEKLY PLAN */}
+      {workouts && sequence === "Weekly" && (
+        <div>
+          <div className="mt-10">
+            <h3 className="text-base font-semibold leading-6 text-gray-900">
+              Update Workouts
+            </h3>
+            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+              Choose a workout per each day of the week.
+            </p>
+          </div>
+          {DaysOfTheWeek.map((day) => (
             <AddWorkoutPlan
               key={`workoutPlan-${day}`}
               workouts={workoutsInfo}
@@ -279,25 +261,45 @@ const UpdateProgram = (props) => {
               selectedPlan={workoutPlans.find((wo) => wo.dayOfTheWeek === day)}
             />
           ))}
+        </div>
+      )}
 
-        {/* CYCLE PLAN */}
-        {workouts && sequence === 'Cycle' && (
+      {/* CYCLE PLAN */}
+      {workouts && sequence === "Cycle" && (
+        <div>
+          <div className="mt-10">
+            <h3 className="text-base font-semibold leading-6 text-gray-900">
+              Update Workouts
+            </h3>
+            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+              Add all the required workouts for this program.
+            </p>
+          </div>
           <IncrementalWorkoutPlan
             workoutsInfo={workoutsInfo}
             selectedPlans={workoutPlans}
           />
-        )}
+        </div>
+      )}
 
-        {/* SUBMIT BUTTON */}
-        <button
-          type="submit"
-          id="update-program-btn"
-          className={styles['submit-btn']}
-        >
-          Update program
-        </button>
-      </form>
-    </section>
+      {/* SUBMIT BUTTON */}
+      <div className="pt-5">
+        <div className="flex justify-center gap-5 md:justify-end md:gap-3">
+          <Link
+            to={`/activities/program/${id}`}
+            className="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 md:mt-0 md:w-auto"
+          >
+            Cancel
+          </Link>
+          <button
+            type="submit"
+            className="inline-flex w-full justify-center rounded-md bg-cyan-700 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700 md:w-auto md:px-5"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </form>
   );
 };
 

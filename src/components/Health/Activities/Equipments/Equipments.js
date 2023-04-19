@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { fetchAllEquipments } from '../../../../util/apis/activities/equipments/equipmentsApis';
-import GridView from '../../../UI/Grids/GridView';
-import EquipmentInfoCard from './EquipmentInfoCard';
+import { useEffect, useState } from "react";
+import { fetchAllEquipments } from "../../../../util/apis/activities/equipments/equipmentsApis";
+import GridView from "../../../UI/Grids/GridView";
+import EquipmentInfoCard from "./EquipmentInfoCard";
 
 const Equipments = (props) => {
   const [equipments, setEquipments] = useState([]);
@@ -23,7 +23,11 @@ const Equipments = (props) => {
     return infoCards;
   };
 
-  return <GridView title="Equipments">{addInfoCards()}</GridView>;
+  return (
+    <GridView title="Equipments" gridSize="md">
+      {addInfoCards()}
+    </GridView>
+  );
 };
 
 export default Equipments;

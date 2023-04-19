@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react';
-import styles from '../General/CSS/Form.module.css';
-import SelectInput from './SelectInput';
+import { useEffect, useState } from "react";
+import FormSelectInput from "./FormSelectInput";
 
 /** This component makes it possible to add new select inputs by clicking the 'add' button.
  * This allows the user to add multiple options without knowing in advanced how
  * may elements should be added from the beginning.
  */
-//DELETE: After all components have been moved to FormIncrementalSelect
 const IncrementalSelect = (props) => {
   const { info, selectedValues } = props;
   const [count, setCount] = useState(1);
@@ -24,10 +22,10 @@ const IncrementalSelect = (props) => {
 
   function newSelectInput(newCount, value = undefined) {
     return (
-      <SelectInput
-        select={info.select}
-        count={newCount}
+      <FormSelectInput
+        label={`${info.label.label} ${newCount}`}
         key={`select_${info.select.name}_${newCount}`}
+        select={info.select}
         selectedValue={value}
       />
     );
@@ -46,10 +44,10 @@ const IncrementalSelect = (props) => {
     selectedValues.forEach((value, index) => {
       newCount = index + 1;
       selectedInputs.push(
-        <SelectInput
-          select={info.select}
-          count={newCount}
+        <FormSelectInput
+          label={`${info.label.label} ${newCount}`}
           key={`select_${info.select.name}_${newCount}`}
+          select={info.select}
           selectedValue={value}
         />
       );
@@ -60,20 +58,22 @@ const IncrementalSelect = (props) => {
   }, [selectedValues, info]);
 
   return (
-    <>
+    <div className="mt-6 sm:mt-4 flex flex-col justify-center gap-5">
       {/* Displays all the selects, including the selects being added through btn clicked. */}
       {selectList}
 
       {/* ADD BUTTON */}
-      <button
-        type="button"
-        id={info.button.id}
-        className={styles['add-btn']}
-        onClick={addSelect}
-      >
-        {info.button.label}
-      </button>
-    </>
+      <div className="mt-4 -mb-2 flex items-center justify-center">
+        <button
+          type="button"
+          id={info.button.id}
+          className="inline-flex justify-center text-sm font-semibold text-cyan-700 hover:text-cyan-600"
+          onClick={addSelect}
+        >
+          {info.button.label}
+        </button>
+      </div>
+    </div>
   );
 };
 

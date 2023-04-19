@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
-import styles from '../../../UI/General/CSS/Form.module.css';
-import AddExercisePlan from './AddExercisePlan';
+import { useEffect, useState } from "react";
+import AddExercisePlan from "./AddExercisePlan";
 
 /** This component makes it possible to add new exercises to
  * the workout by clicking the 'add' button.
@@ -35,8 +34,8 @@ const IncrementalExercisePlan = (props) => {
     });
 
     setExercisePlanList(selectedInputs);
-    setCount(newCount)
-  },[selectedPlans, exercisesInfo]);
+    setCount(newCount);
+  }, [selectedPlans, exercisesInfo]);
 
   const addExercise = (e) => {
     e.preventDefault();
@@ -59,19 +58,21 @@ const IncrementalExercisePlan = (props) => {
   }
 
   return (
-    <div className={styles['plan-list']}>
+    <div className="flex flex-col justify-center">
       {/* Displays all the exercise plans.*/}
       {exercisePlanList}
 
       {/* ADD BUTTON */}
-      <button
-        type="button"
-        id="add-exercise-plan"
-        className={styles['add-btn']}
-        onClick={addExercise}
-      >
-        Add Exercise Plan
-      </button>
+      <div className="mt-4 -mb-2 flex items-center justify-center">
+        <button
+          type="button"
+          id="add-exercise-plan"
+          className="inline-flex justify-center text-sm font-semibold text-cyan-700 hover:text-cyan-600"
+          onClick={addExercise}
+        >
+          Add Exercise
+        </button>
+      </div>
     </div>
   );
 };

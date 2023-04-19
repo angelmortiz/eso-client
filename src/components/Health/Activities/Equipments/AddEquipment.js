@@ -1,6 +1,42 @@
-import styles from '../../../UI/General/CSS/Form.module.css';
 import { postEquipment } from '../../../../util/apis/activities/equipments/equipmentsApis';
 import { useNavigate } from 'react-router-dom';
+import TextFormInput from '../../../UI/Inputs/TextFormInput';
+import TextAreaFormInput from '../../../UI/Inputs/TextAreaFormInput';
+
+const textInputValues = {
+  name: {
+    name: "name",
+    label: "Name",
+    type: "text",
+    id: "equipment-name",
+    placeholder: "Enter a name",
+    requiredField: true,
+  },
+  alternativeName: {
+    name: "alternativeName",
+    label: "Alternative name",
+    type: "text",
+    id: "equipment-alternativeName",
+    placeholder: "Enter an alternative name",
+    requiredField: false,
+  },
+  description: {
+    name: "description",
+    label: "Description",
+    type: "text",
+    id: "equipment-description",
+    placeholder: "Enter description",
+    requiredField: false,
+  },
+  image: {
+    name: "linkToImage",
+    label: "Image link",
+    type: "text",
+    id: "equipment-image",
+    placeholder: "Enter an image link",
+    requiredField: true,
+  }
+};
 
 const AddEquipment = (props) => {
   const navigateTo = useNavigate();
@@ -25,77 +61,42 @@ const AddEquipment = (props) => {
     return values;
   };
 
-  /** Render */
   return (
-    <section className={styles['main-section']}>
-      <form
-        id="add-equipment-form"
-        onSubmit={addEquipment}
-        className={styles['main-form']}
-      >
-        <h1 className={styles['form-title']}>Add Equipment</h1>
+    <form
+      id="add-equipment-form"
+      onSubmit={addEquipment}
+      className="mx-5 mt-10 space-y-6 divide-y divide-gray-200 rounded-lg bg-white px-10 pb-6 shadow lg:mx-auto lg:max-w-[75%] xl:max-w-[60%]"
+    >
+      <div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
+        <div>
+          <h3 className="text-base font-semibold leading-6 text-gray-900">
+            Add Equipment
+          </h3>
+          <p className="mt-1 max-w-2xl text-sm text-gray-500">
+            Add a new equipment to the equipment library by filling out the form
+            below.
+          </p>
+        </div>
+        <div className="space-y-6 sm:space-y-5">
+          <TextFormInput {...textInputValues.name} />
+          <TextFormInput {...textInputValues.alternativeName} />
+          <TextAreaFormInput {...textInputValues.description} />
+          <TextFormInput {...textInputValues.image} />
+        </div>
+      </div>
 
-        {/* NAME */}
-        <label htmlFor="equipment-name" className={styles['text-label']}>
-          Name:
-        </label>
-        <input
-          type="text"
-          id="equipment-name"
-          name="name"
-          placeholder="Enter the equipment name..."
-          className={styles['select-input']}
-        />
-
-        {/* ALTERNATIVE NAME */}
-        <label
-          htmlFor="equipment-alternativeName"
-          className={styles['text-label']}
-        >
-          Alternative name:
-        </label>
-        <input
-          type="text"
-          id="equipment-alternativeName"
-          name="alternativeName"
-          placeholder="Enter an alternative name..."
-          className={styles['select-input']}
-        />
-
-        {/* DESCRIPTION */}
-        <label htmlFor="equipment-description" className={styles['text-label']}>
-          Description:
-        </label>
-        <input
-          type="text"
-          id="equipment-description"
-          name="description"
-          placeholder="Enter the equipment description..."
-          className={styles['select-input']}
-        />
-
-        {/* IMAGE */}
-        <label htmlFor="equipment-image" className={styles['text-label']}>
-          Image:
-        </label>
-        <input
-          type="text"
-          id="equipment-image"
-          name="linkToImage"
-          placeholder="Enter the link for the image..."
-          className={styles['select-input']}
-        />
-
-        {/* SUBMIT BUTTON */}
-        <button
-          type="submit"
-          id="add-equipment-btn"
-          className={styles['submit-btn']}
-        >
-          Add equipment
-        </button>
-      </form>
-    </section>
+      {/* SUBMIT BUTTON */}
+      <div className="pt-5">
+        <div className="flex justify-end gap-x-3">
+          <button
+            type="submit"
+            className="inline-flex justify-center rounded-md bg-cyan-700 py-2 px-5 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </form>
   );
 };
 

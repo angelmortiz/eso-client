@@ -5,7 +5,7 @@ import {
   fetchMuscleById,
 } from '../../../../util/apis/activities/muscles/musclesApis';
 import styles from '../../../UI/General/CSS/Details.module.css';
-import DeleteConfirmationModal from '../../../UI/Popups/Delete/DeleteConfirmationModal';
+import SimpleCancelConfirmationModal from '../../../UI/Modals/TwoButtonModals/SimpleCancelConfirmationModal';
 
 const MuscleDetails = (props) => {
   const { id } = useParams();
@@ -21,7 +21,7 @@ const MuscleDetails = (props) => {
     });
   }, [id]);
 
-  const openDeleteConfirmationModal = (e) => {
+  const openSimpleCancelConfirmationModal = (e) => {
     e.preventDefault();
     setIsDeleteModalOpen(true);
   };
@@ -80,7 +80,7 @@ const MuscleDetails = (props) => {
               type="button"
               id="delete-muscle-btn"
               className={styles['bottom-btns']}
-              onClick={openDeleteConfirmationModal}
+              onClick={openSimpleCancelConfirmationModal}
             >
               Delete
             </button>
@@ -88,12 +88,14 @@ const MuscleDetails = (props) => {
         </div>
       )}
       {/* Delete Confirmation Modal */}
-      <DeleteConfirmationModal
+      <SimpleCancelConfirmationModal
         isModalOpen={isDeleteModalOpen}
         closeModal={closeDeleteModal}
         confirmDelete={confirmDeleteMuscle}
-        info={muscle}
-        type="muscle"
+        status="Warning"
+        title="Confirm delete"
+        message={`Are you sure you want to delete the muscle "${muscle?.name}"?`}
+        mainButtonLabel="Delete"
       />
     </section>
   );

@@ -5,7 +5,7 @@ import {
   fetchEquipmentById,
 } from '../../../../util/apis/activities/equipments/equipmentsApis';
 import styles from '../../../UI/General/CSS/Details.module.css';
-import DeleteConfirmationModal from '../../../UI/Popups/Delete/DeleteConfirmationModal';
+import SimpleCancelConfirmationModal from '../../../UI/Modals/TwoButtonModals/SimpleCancelConfirmationModal';
 
 const EquipmentDetails = (props) => {
   const { id } = useParams();
@@ -21,7 +21,7 @@ const EquipmentDetails = (props) => {
     });
   }, [id]);
 
-  const openDeleteConfirmationModal = (e) => {
+  const openSimpleCancelConfirmationModal = (e) => {
     e.preventDefault();
     setIsDeleteModalOpen(true);
   };
@@ -80,7 +80,7 @@ const EquipmentDetails = (props) => {
               type="button"
               id="delete-equipment-btn"
               className={styles['bottom-btns']}
-              onClick={openDeleteConfirmationModal}
+              onClick={openSimpleCancelConfirmationModal}
             >
               Delete
             </button>
@@ -88,12 +88,14 @@ const EquipmentDetails = (props) => {
         </div>
       )}
       {/* Delete Confirmation Modal */}
-      <DeleteConfirmationModal
+      <SimpleCancelConfirmationModal
         isModalOpen={isDeleteModalOpen}
         closeModal={closeDeleteModal}
         confirmDelete={confirmDeleteEquipment}
-        info={equipment}
-        type="equipment"
+        status="Warning"
+        title="Confirm delete"
+        message={`Are you sure you want to delete the equipment "${equipment?.name}"?`}
+        mainButtonLabel="Delete"
       />
     </section>
   );
