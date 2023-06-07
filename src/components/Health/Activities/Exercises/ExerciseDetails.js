@@ -78,7 +78,7 @@ const ExerciseDetails = (props) => {
             {/* Exercise info */}
             <div className="mt-4 lg:flex">
               {/* Image */}
-              <div class="aspect-video rounded-lg lg:flex lg:w-1/2 lg:items-center lg:justify-center 2xl:w-1/3">
+              <div className="aspect-video rounded-lg lg:flex lg:w-1/2 lg:items-center lg:justify-center 2xl:w-1/3">
                 <img
                   src={exercise.linkToImage}
                   alt={exercise.name}
@@ -98,7 +98,7 @@ const ExerciseDetails = (props) => {
                   Exercise properties:
                 </h3>
                 <div className="prose prose-sm mt-4 text-gray-500">
-                  <ul className="pl-4 flex flex-col gap-1 lg:gap-0">
+                  <ul className="flex flex-col gap-1 pl-4 lg:gap-0">
                     <li>
                       <strong>• Difficulty:</strong> {exercise.difficulty}
                     </li>
