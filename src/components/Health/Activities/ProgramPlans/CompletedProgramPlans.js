@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchProgramPlansAssignedToUser } from '../../../../util/apis/activities/programPlans/programPlansApis';
-import styles from '../../../UI/General/CSS/ProgramPlan.module.css';
 import ProgramPlanInfoCard from './ProgramPlanInfoCard';
+import ProgramPlansGridView from '../../../UI/Grids/ProgramPlansGridView';
 
 const CompletedProgramPlans = (props) => {
   const [completedProgramPlans, setCompletedProgramPlans] = useState();
@@ -15,32 +15,24 @@ const CompletedProgramPlans = (props) => {
     });
   }, []);
 
-  return (
-    <div className={styles['grid']}>
-      <h1 className={styles['page-title']}>Completed Plans</h1>
-
-      {/* LOADING  IMAGE... */}
-      {!completedProgramPlans && (
-        <img
-          src="/loading.gif"
-          alt="Loading..."
-          className={styles['loading-img']}
+  const addInfoCards = () => {
+    let infoCards = [];
+    infoCards = completedProgramPlans?.map((program) => {
+      return (
+        <ProgramPlanInfoCard
+          programPlan={program}
+          activateStart={true}
+          key={`program-plan_completed_${program._id}`}
         />
-      )}
+      );
+    });
+    return infoCards;
+  };
 
-      {/* COMPLETED PROGRAMS */}
-      {completedProgramPlans && (
-        <section id="pending" className={styles['programPlan-section']}>
-          <h3 className={styles['section-label']}>Completed Plans</h3>
-          {completedProgramPlans.map((programPlan, index) => (
-            <ProgramPlanInfoCard
-              key={`program-plan_completed_${index}`}
-              programPlan={programPlan}
-            />
-          ))}
-        </section>
-      )}
-    </div>
+  return (
+    <ProgramPlansGridView title="Completed Plans">
+      {addInfoCards()}
+    </ProgramPlansGridView>
   );
 };
 

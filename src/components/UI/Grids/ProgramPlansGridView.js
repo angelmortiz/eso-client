@@ -3,7 +3,7 @@ const ProgramPlansGridView = (props) => {
 
   return (
     <div className="my-6 flex flex-col px-6 sm:my-8 sm:px-8">
-      <h1 className="mx-auto mb-5 text-2xl font-semibold leading-6 text-gray-900 ">
+      <h1 className="mx-auto mb-8 text-2xl font-semibold leading-6 text-gray-900 ">
         {title}
       </h1>
       {!children ? (

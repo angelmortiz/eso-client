@@ -23,7 +23,7 @@ const AssignedProgramPlans = (props) => {
         <ProgramPlanInfoCard
           programPlan={program}
           activateStart={true}
-          key={`program-plan_next_${program._id}`}
+          key={`program-plan_assigned_${program._id}`}
         />
       );
     });
