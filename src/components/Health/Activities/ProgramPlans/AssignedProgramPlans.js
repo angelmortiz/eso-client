@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchProgramPlansAssignedToUser } from "../../../../util/apis/activities/programPlans/programPlansApis";
 import ProgramPlanInfoCard from "./ProgramPlanInfoCard";
-import ProgramsGridView from "../../../UI/Grids/ProgramsGridView";
+import ProgramPlansGridView from "../../../UI/Grids/ProgramPlansGridView";
 
 const AssignedProgramPlans = (props) => {
   const [assignedProgramPlans, setAssignedProgramPlans] = useState();
@@ -31,7 +31,9 @@ const AssignedProgramPlans = (props) => {
   };
 
   return (
-    <ProgramsGridView title="Assigned Plans">{addInfoCards()}</ProgramsGridView>
+    <ProgramPlansGridView title="Assigned Plans">
+      {addInfoCards()}
+    </ProgramPlansGridView>
   );
 };
 
