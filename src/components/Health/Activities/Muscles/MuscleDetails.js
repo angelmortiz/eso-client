@@ -49,19 +49,17 @@ const MuscleDetails = (props) => {
       ) : (
         <main className="mx-5 my-10 space-y-6 divide-y divide-gray-200 rounded-lg bg-white px-10 py-5 shadow lg:mx-auto lg:max-w-[75%] xl:max-w-[70%]">
           {/* Muscle */}
-          <div className="lg:flex lg:flex-col">
+          <div>
             {/* Title */}
             <div>
-              <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+              <p className="text-sm text-gray-500">Muscle Details</p>
+              <h1 className="mt-2 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
                 {muscle.name}
               </h1>
-
               <h2 id="information-heading" className="sr-only">
                 Muscle information
               </h2>
-              <p className="text-md mt-2 text-gray-500">
-                {muscle.alternativeName}
-              </p>
+              <p className="text-md text-gray-500">{muscle.alternativeName}</p>
             </div>
 
             {/* Muscle info */}
@@ -71,7 +69,7 @@ const MuscleDetails = (props) => {
                 <img
                   src={muscle.linkToImage}
                   alt={muscle.name}
-                  className="mx-auto w-max max-h-96 rounded-lg object-cover border"
+                  className="mx-auto max-h-96 w-max rounded-lg border object-cover"
                 />
               </div>
 
@@ -79,7 +77,9 @@ const MuscleDetails = (props) => {
               <div className="mt-4 lg:my-auto lg:ml-5 lg:w-1/2 2xl:w-2/3">
                 {/* //TODO: Add description */}
                 <p className="text-gray-500">
-                Group of three muscles located at the back of the thigh. The primary function of the hamstrings is to bend the knee and extend the hip.{" "}
+                  Group of three muscles located at the back of the thigh. The
+                  primary function of the hamstrings is to bend the knee and
+                  extend the hip.{" "}
                 </p>
                 <h3 className="text-md mt-4 font-medium text-gray-900">
                   Muscle properties:
@@ -87,8 +87,7 @@ const MuscleDetails = (props) => {
                 <div className="prose prose-sm mt-4 text-gray-500">
                   <ul className="flex flex-col gap-1 pl-4 lg:gap-0">
                     <li>
-                      <strong>• Type:</strong>
-                      {' '}{muscle.type}{' '} muscle
+                      <strong>• Type:</strong> {muscle.type} muscle
                     </li>
                   </ul>
                 </div>

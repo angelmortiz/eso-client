@@ -63,14 +63,14 @@ const ExerciseDetails = (props) => {
           <div className="lg:flex lg:flex-col">
             {/* Title */}
             <div>
-              <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+              <p className="text-sm text-gray-500">Exercise Details</p>
+              <h1 className="mt-2 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
                 {exercise.name}
               </h1>
-
               <h2 id="information-heading" className="sr-only">
                 Exercise information
               </h2>
-              <p className="text-md mt-2 text-gray-500">
+              <p className="text-lg text-gray-500">
                 {exercise.alternativeName}
               </p>
             </div>

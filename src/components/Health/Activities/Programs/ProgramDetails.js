@@ -49,6 +49,7 @@ const ProgramDetails = (props) => {
               alt={program?.name}
             />
             <div className="text-center md:text-left">
+              <p className="text-xs text-gray-700">Program Details</p>
               <h1 className="font-semibold leading-6 text-gray-900 md:text-lg">
                 {program?.name}
               </h1>

@@ -50,6 +50,7 @@ const WorkoutDetails = (props) => {
               alt={workout?.name}
             />
             <div className="text-center md:text-left">
+              <p className="text-xs text-gray-700">Workout Details</p>
               <div className="flex items-center justify-center gap-2 md:justify-start">
                 <h1 className="font-semibold leading-6 text-gray-900 md:text-lg">
                   {workout?.name}
