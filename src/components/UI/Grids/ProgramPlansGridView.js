@@ -10,7 +10,7 @@ const ProgramPlansGridView = (props) => {
         <img
           src="/loading.gif"
           alt="Loading..."
-          className="mx-auto h-10 w-10"
+          className="mt-10 mx-auto h-10 w-10"
         />
       ) : (
         <ul className="grid grid-cols-1 gap-6 lg:grid-cols-2 2xl:grid-cols-3">
