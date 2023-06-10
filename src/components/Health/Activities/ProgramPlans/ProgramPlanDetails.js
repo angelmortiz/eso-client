@@ -43,16 +43,26 @@ const ProgramPlanDetails = (props) => {
                   </p>
                 </div>
               </div>
-              <div className="mt-2 flex gap-2 md:mt-0">
-                <span className="rounded-lg bg-teal-100 px-2 py-1 text-right text-xs font-medium text-teal-800">
-                  {programPlan.program?.type}
-                </span>
-                <span className="rounded-lg bg-cyan-100 px-2 py-1 text-right text-xs font-medium text-cyan-800">
-                  {programPlan.program?.sequence}
-                </span>
-                <span className="rounded-lg bg-sky-100 px-2 py-1 text-right text-xs font-medium text-sky-800">
-                  {programPlan.program?.duration} weeks
-                </span>
+              <div className="flex h-full flex-col justify-between gap-2 md:mt-0">
+                <div className="flex gap-2">
+                  <span className="rounded-lg bg-teal-100 px-2 py-1 text-right text-xs font-medium text-teal-800">
+                    {programPlan.program?.type}
+                  </span>
+                  <span className="rounded-lg bg-cyan-100 px-2 py-1 text-right text-xs font-medium text-cyan-800">
+                    {programPlan.program?.sequence}
+                  </span>
+                  <span className="rounded-lg bg-sky-100 px-2 py-1 text-right text-xs font-medium text-sky-800">
+                    {programPlan.program?.duration} weeks
+                  </span>
+                </div>
+                <div className="mt-4 flex justify-center md:mt-2 md:justify-end md:pr-2">
+                  <Link
+                    to={`/activities/programplan/logs/${id}`}
+                    className="text-md inline-flex font-semibold text-cyan-700 underline underline-offset-4 hover:text-cyan-600"
+                  >
+                    Access Logs
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="-mx-4 mt-4 md:-mx-0">
@@ -100,50 +110,48 @@ const ProgramPlanDetails = (props) => {
                           </th>
                         </tr>
                         {/* Program Plan Breakdown */}
-                        {weekPlan.workouts?.map(
-                          (workout, index) => (
-                            <tr key={`workout_${index}`}>
-                              <td className="w-1/3 max-w-0 py-4 pl-3 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-0">
-                                {programPlan.program.sequence === "Weekly"
-                                  ? workout.dayOfTheWeek
-                                  : workout.dayNumber}
-                              </td>
-                              <td className="px-3 py-4 text-sm text-gray-800">
-                                <Link
-                                  to={`/activities/workout/${workout.workout?._id}`}
-                                  className="underline underline-offset-4"
-                                >
-                                  {workout.workout?.name}
-                                </Link>
-                                <dl className="font-normal lg:hidden">
-                                  <dt className="sr-only">Variant</dt>
-                                  <dd className="mt-1 truncate text-gray-500">
-                                    <Link
-                                      to={`/activities/workout/${workout.workout?._id}`}
-                                      className="underline underline-offset-4"
-                                    >
-                                      {workout.workout.variant}
-                                    </Link>
-                                  </dd>
-                                  <dt className="sr-only lg:hidden">Type</dt>
-                                  <dd className="mt-1 truncate text-gray-500 md:hidden">
-                                    {workout.workout.type}
-                                  </dd>
-                                  <dt className="sr-only sm:hidden">Target</dt>
-                                  <dd className="mt-1 truncate text-gray-500 sm:hidden">
-                                    {workout.workout.target}
-                                  </dd>
-                                </dl>
-                              </td>
-                              <td className="hidden px-3 py-4 text-sm text-gray-500 md:table-cell">
-                                {workout.workout.type}
-                              </td>
-                              <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
-                                {workout.workout.target}
-                              </td>
-                            </tr>
-                          )
-                        )}
+                        {weekPlan.workouts?.map((workout, index) => (
+                          <tr key={`workout_${index}`}>
+                            <td className="w-1/3 max-w-0 py-4 pl-3 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-0">
+                              {programPlan.program.sequence === "Weekly"
+                                ? workout.dayOfTheWeek
+                                : workout.dayNumber}
+                            </td>
+                            <td className="px-3 py-4 text-sm text-gray-800">
+                              <Link
+                                to={`/activities/workout/${workout.workout?._id}`}
+                                className="underline underline-offset-4"
+                              >
+                                {workout.workout?.name}
+                              </Link>
+                              <dl className="font-normal lg:hidden">
+                                <dt className="sr-only">Variant</dt>
+                                <dd className="mt-1 truncate text-gray-500">
+                                  <Link
+                                    to={`/activities/workout/${workout.workout?._id}`}
+                                    className="underline underline-offset-4"
+                                  >
+                                    {workout.workout.variant}
+                                  </Link>
+                                </dd>
+                                <dt className="sr-only lg:hidden">Type</dt>
+                                <dd className="mt-1 truncate text-gray-500 md:hidden">
+                                  {workout.workout.type}
+                                </dd>
+                                <dt className="sr-only sm:hidden">Target</dt>
+                                <dd className="mt-1 truncate text-gray-500 sm:hidden">
+                                  {workout.workout.target}
+                                </dd>
+                              </dl>
+                            </td>
+                            <td className="hidden px-3 py-4 text-sm text-gray-500 md:table-cell">
+                              {workout.workout.type}
+                            </td>
+                            <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
+                              {workout.workout.target}
+                            </td>
+                          </tr>
+                        ))}
                       </Fragment>
                     ))}
                 </tbody>
