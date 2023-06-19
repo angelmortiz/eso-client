@@ -55,7 +55,7 @@ const ProgramPlanDetails = (props) => {
                     {programPlan.program?.duration} weeks
                   </span>
                 </div>
-                <div className="mt-4 flex justify-center md:mt-2 md:justify-end md:pr-2">
+                <div className="mt-2 flex justify-center md:justify-end md:pr-2">
                   <Link
                     to={`/activities/programplan/logs/${id}`}
                     className="text-md inline-flex font-semibold text-cyan-700 underline underline-offset-4 hover:text-cyan-600"
