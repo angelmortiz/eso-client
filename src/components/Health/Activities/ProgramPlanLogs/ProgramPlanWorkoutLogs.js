@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { fetchWorkoutPlanLogsById } from '../../../../util/apis/activities/programPlanLogs/programPlanLogsApis';
-import styles from '../../../UI/General/CSS/Details.module.css';
-import IncrementalSetLogs from '../ProgramPlanLogs/IncrementalSetLogs';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { fetchWorkoutPlanLogsById } from "../../../../util/apis/activities/programPlanLogs/programPlanLogsApis";
+import IncrementalSetLogs from "../ProgramPlanLogs/IncrementalSetLogs";
 
 const ProgramPlanWorkoutLogs = (props) => {
   const { programPlanId, weekNumber, workoutPlanId } = useParams();
@@ -35,73 +34,100 @@ const ProgramPlanWorkoutLogs = (props) => {
   };
 
   return (
-    <div className={styles['card']}>
+    <>
       {!workoutLogs ? (
         <img
           src="/loading.gif"
           alt="Loading..."
-          className={styles['loading-img']}
+          className="mx-auto mt-10 h-10 w-10"
         />
       ) : (
-        <div className={styles['main-section']}>
-          {/* NAME */}
-          <h1 className={styles['name']}>Logs: {workoutLogs.workout.name}</h1>
-          <div className={styles['general-info']}>
-            {/* DESCRIPTION */}
-            <div className={styles['info-block']}>
-              <p className={styles['label']}>Description: </p>
-              <p className={styles['value']}>
-                {workoutLogs.workout.description}
-              </p>
+        <div className="mx-5 mt-10 overflow-hidden rounded-lg bg-white px-4 py-6 shadow lg:mx-auto lg:max-w-[75%]">
+          <div className="px-4 md:px-6 lg:px-8">
+            <div className="flex flex-col items-center gap-2 md:flex-row md:justify-between">
+              <div className="flex flex-col items-center gap-2 md:w-2/3 md:flex-row md:gap-4">
+                <img
+                  className="h-16 w-16 flex-shrink-0 rounded-full border shadow"
+                  src={workoutLogs.workout.linkToImage}
+                  alt={workoutLogs.workout.name}
+                />
+                <div className="text-center md:text-left">
+                  <p className="text-xs text-gray-700">Workout Logs</p>
+                  <div className="flex items-center justify-center gap-2 md:justify-start">
+                    <h1 className="font-semibold leading-6 text-gray-900 md:text-lg">
+                      {workoutLogs.workout.name}
+                    </h1>
+                    <span className="rounded-lg bg-teal-100 px-1.5 py-0.5 text-right text-sm font-medium text-teal-800">
+                      {workoutLogs.workout.variant}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-sm text-gray-700">
+                    {workoutLogs.workout.description}
+                  </p>
+                </div>
+              </div>
+              <div className="mt-2 flex gap-2 md:mt-0">
+                <span className="rounded-lg bg-cyan-100 px-2 py-1 text-right text-xs font-medium text-cyan-800">
+                  {workoutLogs.workout.type}
+                </span>
+                <span className="rounded-lg bg-sky-100 px-2 py-1 text-right text-xs font-medium text-sky-800">
+                  {workoutLogs.workout.target}
+                </span>
+              </div>
             </div>
-            {/* VARIANT */}
-            <div className={styles['info-block']}>
-              <p className={styles['label']}>Variant: </p>
-              <p className={styles['value']}>{workoutLogs.workout.variant}</p>
-            </div>
-            {/* TYPE */}
-            <div className={styles['info-block']}>
-              <p className={styles['label']}>Type: </p>
-              <p className={styles['value']}>{workoutLogs.workout.type}</p>
-            </div>
-            {/* TARGET */}
-            <div className={styles['info-block']}>
-              <p className={styles['label']}>Target: </p>
-              <p className={styles['value']}>{workoutLogs.workout.target}</p>
+
+            <div id="add-workout-form">
+              {/* EXERCISES LOGS */}
+              {workoutLogs.exercises.map((exercise, index) => {
+                const recommendations =
+                  extractExerciseRecommendations(exercise);
+                return (
+                  <div
+                    key={`exercise_${exercise.exercise.name}`}
+                    className="mt-10"
+                  >
+                    <h3 className="text-base font-semibold leading-6 text-gray-900">
+                      {exercise.exercise.name}
+                    </h3>
+                    {/* Exercise properties */}
+                    <div className="mt-1 flex max-w-2xl flex-wrap gap-2 text-sm text-gray-600">
+                      <span>
+                        Sets: {recommendations.sets[0]}-
+                        {recommendations.sets[1]}
+                      </span>
+                      <span className="text-gray-300">|</span>
+                      <span>
+                        Reps: {recommendations.reps[0]}-
+                        {recommendations.reps[1]}
+                      </span>
+                      <span className="text-gray-300">|</span>
+                      <span>
+                        Tempo: {recommendations.tempo[0]}-
+                        {recommendations.tempo[1]}-{recommendations.tempo[2]}-
+                        {recommendations.tempo[3]}
+                      </span>
+                      <span className="text-gray-300">|</span>
+                      <span>
+                        RIR: {recommendations.rir[0]}-{recommendations.rir[1]}
+                      </span>
+                      <span className="text-gray-300">|</span>
+                      <span>
+                        Rest: {recommendations.rest[0]}-
+                        {recommendations.rest[1]}
+                      </span>
+                    </div>
+                    {/* INCREMENT SETS LOGS */}
+                    {/* setLogsIds = programPlanId, weekId, workoutPlanId, exercisePlanId */}
+                    <div className="my-2 border-t border-gray-200"></div>
+                    <IncrementalSetLogs exercise={exercise} />
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       )}
-
-      {/* EXERCISES LOGS */}
-      {workoutLogs?.exercises.map((exercise, index) => {
-        const recommendations = extractExerciseRecommendations(exercise);
-        return (
-          <section
-            id="active"
-            className={styles['programPlan-section']}
-            key={`exercise_${index}`}
-          >
-            <h3 className={styles['section-label']}>
-              Exercise: {exercise.exercise.name}
-            </h3>
-            <h4 className={styles['section-label']}>
-              Recommendations: Sets: {recommendations.sets[0]}-
-              {recommendations.sets[1]} | Reps: {recommendations.reps[0]}-
-              {recommendations.reps[1]} | Tempo: {recommendations.tempo[0]}-
-              {recommendations.tempo[1]}-{recommendations.tempo[2]}-
-              {recommendations.tempo[3]} | RIR:{recommendations.rir[0]}-
-              {recommendations.rir[1]} | Rest:{recommendations.rest[0]}-
-              {recommendations.rest[1]}
-            </h4>
-            {/* INCREMENT SETS LOGS */}
-            {/* setLogsIds = programPlanId, weekId, workoutPlanId, exercisePlanId */}
-            <IncrementalSetLogs exercise={exercise}/>
-          </section>
-        );
-      })}
-    </div>
+    </>
   );
 };
-
 export default ProgramPlanWorkoutLogs;

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import styles from '../../../UI/General/CSS/Form.module.css';
 import AddSetLog from './AddSetLog';
 
 /** This component makes it possible to add new set logs to
@@ -103,7 +102,7 @@ const IncrementalSetLogs = (props) => {
   };
 
   return (
-    <div className={styles['plan-list']}>
+    <div>
       {/* Displays all the set logs */}
       {setLogsList}
 
@@ -113,7 +112,6 @@ const IncrementalSetLogs = (props) => {
         <button
           type="button"
           id="save-set-log"
-          className={styles['add-btn-medium']}
           onClick={addSetToDOM}
         >
           Add Set
