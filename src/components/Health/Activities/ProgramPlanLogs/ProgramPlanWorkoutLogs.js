@@ -42,8 +42,8 @@ const ProgramPlanWorkoutLogs = (props) => {
           className="mx-auto mt-10 h-10 w-10"
         />
       ) : (
-        <div className="mx-5 mt-10 overflow-hidden rounded-lg bg-white px-4 py-6 shadow lg:mx-auto lg:max-w-[75%]">
-          <div className="px-4 md:px-6 lg:px-8">
+        <div className="mx-5 mt-5 overflow-hidden rounded-lg bg-white px-4 py-6 shadow lg:mx-auto lg:mt-10 lg:max-w-[75%]">
+          <div className="px-2 sm:px-4 md:px-6 lg:px-8">
             <div className="flex flex-col items-center gap-2 md:flex-row md:justify-between">
               <div className="flex flex-col items-center gap-2 md:w-2/3 md:flex-row md:gap-4">
                 <img

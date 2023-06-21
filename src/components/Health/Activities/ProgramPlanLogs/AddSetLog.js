@@ -87,16 +87,16 @@ const AddSetLog = (props) => {
   return (
     <form onSubmit={saveSetLog}>
       {/* SET LOG */}
-      <div className="my-5 flex justify-between gap-4 sm:items-center">
+      <div className="mt-5 mb-10 flex justify-between gap-4 md:mb-6 md:items-center">
         <label
           htmlFor="setlog-info"
-          className="text-md text-right font-bold leading-6 text-gray-900"
+          className="text-md w-20 font-bold leading-6 text-gray-900"
         >
           Set {setNumber}:
         </label>
-        <div className="flex flex-grow flex-col items-center justify-center gap-4 sm:flex-row">
-          <div className="flex items-center gap-2">
-            <label className="text-md text-right font-medium leading-6 text-gray-900">
+        <div className="grid w-full grid-cols-1 items-center gap-2 sm:gap-4 md:grid-cols-3">
+          <div className="grid grid-cols-4 items-center gap-2 sm:gap-4 md:grid-cols-3">
+            <label className="text-md text-left font-medium leading-6 text-gray-900">
               Weight:
             </label>
             <input
@@ -110,11 +110,12 @@ const AddSetLog = (props) => {
                 setWeightTouched(true);
                 setEditingSet(setNumber, true);
               }}
-              className="w-24 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6 justify-end"
+              className="col-span-4 justify-end rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:col-span-3 sm:text-sm sm:leading-6 md:col-span-2"
             />
           </div>
-          <div className="flex items-center gap-2">
-            <label className="text-md text-right font-medium leading-6 text-gray-900">
+
+          <div className="grid grid-cols-4 items-center gap-2 sm:gap-4 md:grid-cols-3">
+            <label className="text-md text-left font-medium leading-6 text-gray-900">
               Reps:
             </label>
             <input
@@ -128,11 +129,12 @@ const AddSetLog = (props) => {
                 setRepsTouched(true);
                 setEditingSet(setNumber, true);
               }}
-              className="w-24 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
+              className="col-span-4 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:col-span-3 sm:text-sm sm:leading-6 md:col-span-2"
             />
           </div>
-          <div className="flex items-center gap-2">
-            <label className="text-md text-right font-medium leading-6 text-gray-900">
+
+          <div className="grid grid-cols-4 items-center gap-2 sm:gap-4 md:grid-cols-3">
+            <label className="text-md text-left font-medium leading-6 text-gray-900">
               RIR:
             </label>
             <input
@@ -146,15 +148,16 @@ const AddSetLog = (props) => {
                 setRIRTouched(true);
                 setEditingSet(setNumber, true);
               }}
-              className="w-24 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
+              className="col-span-4 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:col-span-3 sm:text-sm sm:leading-6 md:col-span-2"
             />
           </div>
         </div>
+
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 512 512"
           onClick={deleteCurrentSetLog}
-          className="h-6 text-red-700"
+          className="h-8 w-20 text-center text-red-700"
         >
           <title>Close</title>
           <path
@@ -171,7 +174,11 @@ const AddSetLog = (props) => {
       {/*//IMPROVE: Disable btn while no values have been added  */}
       {/* SAVE BUTTON */}
       {(weightTouched || repsTouched || rirTouched) && (
-        <button type="submit" id="save-set-log">
+        <button
+          type="submit"
+          id="save-set-log"
+          className="inline-flex w-full justify-center rounded-md bg-cyan-700 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700 sm:w-48 md:mt-2"
+        >
           Save Set
         </button>
       )}
