@@ -24,6 +24,7 @@ const Notifications = (props) => {
     <ToastNotification
       ref={toastNotification}
       type={toastNotificationInfo.type}
+      title={toastNotificationInfo.title}
       message={toastNotificationInfo.message}
     />
   );
