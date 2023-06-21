@@ -7,7 +7,7 @@ const Home = (props) => {
   );
 
   return (
-    <div className="-mt-10 flex min-h-screen flex-col items-center justify-center gap-8 px-8 sm:px-10 sm:gap-12">
+    <div className="-mt-10 flex min-h-screen flex-col items-center justify-center gap-8 px-8 sm:gap-12 sm:px-10">
       <div className="flex flex-col items-center gap-3">
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-5xl">
           Welcome to
@@ -17,8 +17,7 @@ const Home = (props) => {
         </h1>
       </div>
       <p className="text-center text-lg leading-8 text-gray-600">
-        Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem
-        cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
+        Welcome to your personal fitness journey. Customized workout programs to guide you toward optimal health.
       </p>
       <div className="flex items-center justify-center gap-x-6">
         {!isUserAuthenticated && (
@@ -26,7 +25,7 @@ const Home = (props) => {
             to="/auth/login"
             className="text-md inline-flex font-semibold text-cyan-700 underline-offset-4 hover:text-cyan-600"
           >
-            <h2>Please login</h2>
+            <h2>Login</h2>
           </Link>
         )}
       </div>
