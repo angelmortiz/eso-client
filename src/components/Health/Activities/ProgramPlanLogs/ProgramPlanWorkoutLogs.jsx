@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchWorkoutPlanLogsById } from "../../../../util/apis/activities/programPlanLogs/programPlanLogsApis";
-import IncrementalSetLogs from "../ProgramPlanLogs/IncrementalSetLogs";
+import IncrementalSetLogs from "./IncrementalSetLogs";
 
 const ProgramPlanWorkoutLogs = (props) => {
   const { programPlanId, weekNumber, workoutPlanId } = useParams();
