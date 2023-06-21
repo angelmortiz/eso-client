@@ -3,22 +3,22 @@ import { createSlice } from "@reduxjs/toolkit";
 /**
  * FOR TESTING PURPOSES
  */
-const initialState = {
-    notificationInfo: {
-        show: true,
-        type: 'warning',
-        title: 'Successfully saved!',
-        message: 'This is a test of the toast notifications'
-    }
-}
-
 // const initialState = {
 //     notificationInfo: {
-//         show: false,
-//         type: '',
-//         message: ''
+//         show: true,
+//         type: 'warning',
+//         title: 'Successfully saved!',
+//         message: 'This is a test of the toast notifications'
 //     }
 // }
+
+const initialState = {
+    notificationInfo: {
+        show: false,
+        type: '',
+        message: ''
+    }
+}
 
 const toastNotificationSlice = createSlice({
     name: 'toastNotification',
