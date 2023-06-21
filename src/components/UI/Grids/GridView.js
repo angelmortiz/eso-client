@@ -14,7 +14,7 @@ const GridView = (props) => {
         <img
           src="/loading.gif"
           alt="Loading..."
-          className="mx-auto h-10 w-10"
+          className="mt-10 mx-auto h-10 w-10"
         />
       )}
 

@@ -1,122 +1,113 @@
-import { forwardRef, useImperativeHandle, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { toastNotificationActions } from '../../../store/toastNotificationSlice';
-import styles from './ToastNotification.module.css';
+import { Fragment, forwardRef, useImperativeHandle, useState } from "react";
+import { useDispatch } from "react-redux";
+import { toastNotificationActions } from "../../../store/toastNotificationSlice";
+import { Transition } from "@headlessui/react";
+import {
+  CheckCircleIcon,
+  ExclamationTriangleIcon,
+  ExclamationCircleIcon,
+} from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/20/solid";
 
 const types = {
-  success: 'success',
-  fail: 'fail',
-  warning: 'warning',
+  success: "success",
+  fail: "fail",
+  warning: "warning",
 };
 
 const ToastNotification = forwardRef((props, ref) => {
   const dispatch = useDispatch();
-  const [notificationState, setNotificationState] = useState('hide');
-  const { type, message } = props;
+  const [notificationState, setNotificationState] = useState("hide");
+  const { type, title, message } = props;
 
   //shows the toast notification for a few seconds before hiding back
   useImperativeHandle(ref, () => ({
     show() {
-      setNotificationState('show');
+      setNotificationState("show");
       setTimeout(() => {
-        setNotificationState('hide');
-
-        //clears the notification info from the Redux store
-        dispatch(toastNotificationActions.clearUpNotification());
+        closeNotification();
       }, 3800);
     },
   }));
 
+  const closeNotification = () => {
+    setNotificationState("hide");
+
+    //clears the notification info from the Redux store
+    dispatch(toastNotificationActions.clearUpNotification());
+  };
+
   return (
-    <div
-      className={`${styles['notification']} ${styles[type]} ${styles[notificationState]}`}
-    >
-      {/* ICON */}
-      <div className={styles['icon']}>
-        {/* SUCCESSFUL ICON */}
-        {type === types.success && (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className={styles['svg-icon']}
-            viewBox="0 0 512 512"
+    <>
+      {/* Global notification live region, render this permanently at the end of the document */}
+      <div
+        aria-live="assertive"
+        className="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6 z-10"
+      >
+        <div className="flex w-full flex-col items-center space-y-4 sm:items-end">
+          {/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
+          <Transition
+            show={notificationState === "show"}
+            as={Fragment}
+            enter="transform ease-out duration-300 transition"
+            enterFrom="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+            enterTo="translate-y-0 opacity-100 sm:translate-x-0"
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
           >
-            <title>Checkmark Circle</title>
-            <path
-              d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"
-              fill="none"
-              stroke="currentColor"
-              strokeMiterlimit="10"
-              strokeWidth="32"
-            />
-            <path
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="32"
-              d="M352 176L217.6 336 160 272"
-            />
-          </svg>
-        )}
-
-        {/* WARNING ICON */}
-        {type === types.warning && (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className={styles['svg-icon']}
-            viewBox="0 0 512 512"
-          >
-            <title>Warning</title>
-            <path
-              d="M85.57 446.25h340.86a32 32 0 0028.17-47.17L284.18 82.58c-12.09-22.44-44.27-22.44-56.36 0L57.4 399.08a32 32 0 0028.17 47.17z"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="32"
-            />
-            <path
-              d="M250.26 195.39l5.74 122 5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 5.95z"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="32"
-            />
-            <path d="M256 397.25a20 20 0 1120-20 20 20 0 01-20 20z" />
-          </svg>
-        )}
-
-        {/* FAIL ICON */}
-        {type === types.fail && (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className={styles['svg-icon']}
-            viewBox="0 0 512 512"
-          >
-            <title>Close Circle</title>
-            <path
-              d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"
-              fill="none"
-              stroke="currentColor"
-              strokeMiterlimit="10"
-              strokeWidth="32"
-            />
-            <path
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="32"
-              d="M320 320L192 192M192 320l128-128"
-            />
-          </svg>
-        )}
+            <div className="roupointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black  ring-opacity-10">
+              <div className="p-4">
+                <div className="flex items-start">
+                  <div className="flex-shrink-0">
+                    {/* SUCCESS */}
+                    {type === types.success && (
+                      <CheckCircleIcon
+                        className="h-6 w-6 text-green-500"
+                        aria-hidden="true"
+                      />
+                    )}
+                    {/* WARNING */}
+                    {type === types.warning && (
+                      <ExclamationTriangleIcon
+                        className="h-6 w-6 text-yellow-500"
+                        aria-hidden="true"
+                      />
+                    )}
+                    {/* FAIL */}
+                    {type === types.fail && (
+                      <ExclamationCircleIcon
+                        className="h-6 w-6 text-red-600"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </div>
+                  <div className="ml-3 w-0 flex-1 pt-0.5">
+                    <p className="text-sm font-medium text-gray-900">{title}</p>
+                    <p className="mt-1 text-sm text-gray-500">{message}</p>
+                  </div>
+                  {/* TODO: Implement a close button
+                    Note: I tried this before, but there was a conflict between the "pointer-events-none" property in the parent div and the actions on the screen. When "pointer-events-none" is used, the x mark cannot be clicked, but when the "pointer-events-none" is removed, the overlay blocks the actions on the entire page
+                  */}
+                  {/* <div className="ml-4 flex flex-shrink-0">
+                    <button
+                      type="button"
+                      className="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500"
+                      onClick={() => {
+                        closeNotification();
+                      }}
+                    >
+                      <span className="sr-only">Close</span>
+                      <XMarkIcon className="h-5 w-5" aria-hidden="true" />
+                    </button>
+                  </div> */}
+                </div>
+              </div>
+            </div>
+          </Transition>
+        </div>
       </div>
-
-      {/* MESSAGE */}
-      <div className={styles['message']}>{message}</div>
-    </div>
+    </>
   );
 });
 
