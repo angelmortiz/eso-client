@@ -1,39 +1,39 @@
-import { Route, Routes } from 'react-router-dom';
-import Home from './Home/Home';
-import AddExercise from './Health/Activities/Exercises/AddExercise';
-import AddMuscle from './Health/Activities/Muscles/AddMuscle';
-import AddEquipment from './Health/Activities/Equipments/AddEquipment';
-import ExerciseDetails from './Health/Activities/Exercises/ExerciseDetails';
-import Exercises from './Health/Activities/Exercises/Exercises';
-import UpdateExercise from './Health/Activities/Exercises/UpdateExercise';
-import Muscles from './Health/Activities/Muscles/Muscles';
-import Signup from './Auth/Signup';
-import Login from './Auth/Login';
-import ForgotPassword from './Auth/ForgotPassword';
-import ResetPassword from './Auth/ResetPassword';
-import ChangePassword from './Auth/ChangePassword';
-import UserInfo from './User/UserInfo';
-import AuthProtected from './Auth/ProtectedRoutes/AuthProtected';
-import PrivateRoute from './Auth/ProtectedRoutes/PrivateRoute';
-import AddWorkout from './Health/Activities/Workouts/AddWorkout';
-import AddProgram from './Health/Activities/Programs/AddProgram';
-import Programs from './Health/Activities/Programs/Programs';
-import Workouts from './Health/Activities/Workouts/Workouts';
-import WorkoutDetails from './Health/Activities/Workouts/WorkoutDetails';
-import UpdateWorkout from './Health/Activities/Workouts/UpdateWorkout';
-import ProgramDetails from './Health/Activities/Programs/ProgramDetails';
-import UpdateProgram from './Health/Activities/Programs/UpdateProgram';
-import MuscleDetails from './Health/Activities/Muscles/MuscleDetails';
-import UpdateMuscle from './Health/Activities/Muscles/UpdateMuscle';
-import UpdateEquipment from './Health/Activities/Equipments/UpdateEquipment';
-import EquipmentDetails from './Health/Activities/Equipments/EquipmentDetails';
-import Equipments from './Health/Activities/Equipments/Equipments';
-import ProgramPlanDetails from './Health/Activities/ProgramPlans/ProgramPlanDetails';
-import AssignedProgramPlans from './Health/Activities/ProgramPlans/AssignedProgramPlans';
-import AssignProgramPlan from './Health/Activities/ProgramPlans/AssignProgramPlan';
-import CompletedProgramPlans from './Health/Activities/ProgramPlans/CompletedProgramPlans';
-import ProgramPlanWorkoutLogs from './Health/Activities/ProgramPlanLogs/ProgramPlanWorkoutLogs';
-import ProgramPlanLogs from './Health/Activities/ProgramPlanLogs/ProgramPlanLogs';
+import { Route, Routes } from "react-router-dom";
+import Home from "./Home/Home";
+import AddExercise from "./Health/Activities/Exercises/AddExercise";
+import AddMuscle from "./Health/Activities/Muscles/AddMuscle";
+import AddEquipment from "./Health/Activities/Equipments/AddEquipment";
+import ExerciseDetails from "./Health/Activities/Exercises/ExerciseDetails";
+import Exercises from "./Health/Activities/Exercises/Exercises";
+import UpdateExercise from "./Health/Activities/Exercises/UpdateExercise";
+import Muscles from "./Health/Activities/Muscles/Muscles";
+import Signup from "./Auth/Signup";
+import Login from "./Auth/Login";
+import ForgotPassword from "./Auth/ForgotPassword";
+import ResetPassword from "./Auth/ResetPassword";
+import ChangePassword from "./Auth/ChangePassword";
+import UserInfo from "./User/UserInfo";
+import AuthProtected from "./Auth/ProtectedRoutes/AuthProtected";
+import PrivateRoute from "./Auth/ProtectedRoutes/PrivateRoute";
+import AddWorkout from "./Health/Activities/Workouts/AddWorkout";
+import AddProgram from "./Health/Activities/Programs/AddProgram";
+import Programs from "./Health/Activities/Programs/Programs";
+import Workouts from "./Health/Activities/Workouts/Workouts";
+import WorkoutDetails from "./Health/Activities/Workouts/WorkoutDetails";
+import UpdateWorkout from "./Health/Activities/Workouts/UpdateWorkout";
+import ProgramDetails from "./Health/Activities/Programs/ProgramDetails";
+import UpdateProgram from "./Health/Activities/Programs/UpdateProgram";
+import MuscleDetails from "./Health/Activities/Muscles/MuscleDetails";
+import UpdateMuscle from "./Health/Activities/Muscles/UpdateMuscle";
+import UpdateEquipment from "./Health/Activities/Equipments/UpdateEquipment";
+import EquipmentDetails from "./Health/Activities/Equipments/EquipmentDetails";
+import Equipments from "./Health/Activities/Equipments/Equipments";
+import ProgramPlanDetails from "./Health/Activities/ProgramPlans/ProgramPlanDetails";
+import AssignedProgramPlans from "./Health/Activities/ProgramPlans/AssignedProgramPlans";
+import AssignProgramPlan from "./Health/Activities/ProgramPlans/AssignProgramPlan";
+import CompletedProgramPlans from "./Health/Activities/ProgramPlans/CompletedProgramPlans";
+import ProgramPlanWorkoutLogs from "./Health/Activities/ProgramPlanLogs/ProgramPlanWorkoutLogs";
+import ProgramPlanLogs from "./Health/Activities/ProgramPlanLogs/ProgramPlanLogs";
 
 //IMPROVE: Consider breaking down the routes into different files to make it more readable
 const Router = (props) => {
@@ -136,15 +136,32 @@ const Router = (props) => {
       />
 
       {/* Programs Plans */}
-      <Route path="/activities/programplan/assign" element={<AssignProgramPlan />} />
-      <Route path="/activities/programplan/assigned" element={<AssignedProgramPlans />} />
-      <Route path="/activities/programplan/completed" element={<CompletedProgramPlans />} />
-      <Route path="/activities/programplan/:id" element={<ProgramPlanDetails />} />
+      <Route
+        path="/activities/programplan/assign"
+        element={<AssignProgramPlan />}
+      />
+      <Route
+        path="/activities/programplan/assigned"
+        element={<AssignedProgramPlans />}
+      />
+      <Route
+        path="/activities/programplan/completed"
+        element={<CompletedProgramPlans />}
+      />
+      <Route
+        path="/activities/programplan/:id"
+        element={<ProgramPlanDetails />}
+      />
 
       {/* Logs */}
-      <Route path="/activities/programplan/logs/:id" element={<ProgramPlanLogs />} />
-      <Route path="/activities/programplan/logs/:programPlanId/weekId/:weekId/week/:weekNumber/workoutplan/:workoutPlanId" element={<ProgramPlanWorkoutLogs />} />
-
+      <Route
+        path="/activities/programplan/logs/:id"
+        element={<ProgramPlanLogs />}
+      />
+      <Route
+        path="/activities/programplan/logs/:programPlanId/weekId/:weekId/week/:weekNumber/workoutplan/:workoutPlanId"
+        element={<ProgramPlanWorkoutLogs />}
+      />
     </Routes>
   );
 };
