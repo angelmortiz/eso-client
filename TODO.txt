@@ -1,4 +1,5 @@
 //IMPROVE: Consider changing the 'elements.values' for useRef
+//IMPROVE: Consider creating reusable components for add and update cards
 
 /* AUTH */
 //TODO: Create an option to change the password of a logged in user

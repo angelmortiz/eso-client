@@ -2,7 +2,6 @@ import store from '../../store/index';
 import { toastNotificationActions } from '../../store/toastNotificationSlice';
 
 const APP_API = process.env.REACT_APP_API_URL;
-console.log("APP_API: ", APP_API);
 
 export const apiGet = (path) => {
   const requestOptions = {
