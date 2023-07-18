@@ -34,6 +34,7 @@ import AssignProgramPlan from "./Health/Activities/ProgramPlans/AssignProgramPla
 import CompletedProgramPlans from "./Health/Activities/ProgramPlans/CompletedProgramPlans";
 import ProgramPlanWorkoutLogs from "./Health/Activities/ProgramPlanLogs/ProgramPlanWorkoutLogs";
 import ProgramPlanLogs from "./Health/Activities/ProgramPlanLogs/ProgramPlanLogs";
+import BetaUserRegistration from "./Auth/BetaUserRegistration";
 
 //IMPROVE: Consider breaking down the routes into different files to make it more readable
 const Router = (props) => {
@@ -56,6 +57,14 @@ const Router = (props) => {
         element={
           <AuthProtected>
             <Login />
+          </AuthProtected>
+        }
+      />
+      <Route
+        path="/auth/beta-user-registration"
+        element={
+          <AuthProtected>
+            <BetaUserRegistration />
           </AuthProtected>
         }
       />
