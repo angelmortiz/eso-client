@@ -22,7 +22,6 @@ const CheckAuth = (props) => {
     isAuthenticationValid()
       .then((response) => {
         if (!response || !response.body.isUserAuthenticated) {
-          //console.error(response?.message);
           return;
         }
 

@@ -50,6 +50,11 @@ const Login = (props) => {
         return;
       }
 
+      if (response.body.requiresBetaRegistration) {
+        navigateTo("/auth/beta-user-registration");
+        return;
+      }
+
       dispatch(authActions.login());
       navigateTo("/");
       getCurrentUserInfo();
