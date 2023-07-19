@@ -56,7 +56,7 @@ const BetaUserRegistration = (props) => {
     if (!code) {
       errors.code.push("Code is required.");
     } else if (code.indexOf("-") === -1) {
-      errors.code.push(`The code must contain at least one '-' to be valid.`);
+      errors.code.push(`Invalid code format.`);
     }
 
     setFormErrors(errors);
