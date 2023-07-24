@@ -254,7 +254,7 @@ const UpdateWorkout = (props) => {
             onChange={(e) => setLinkToImage(e.target.value)}
           />
           <TextFormInput
-            {...textInputValues.image}
+            {...textInputValues.thumbnail}
             value={linkToThumbnail}
             onChange={(e) => setLinkToThumbnail(e.target.value)}
           />

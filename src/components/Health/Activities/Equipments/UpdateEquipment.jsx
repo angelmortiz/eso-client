@@ -34,7 +34,7 @@ const textInputValues = {
   },
   image: {
     name: "linkToImage",
-    label: "Image link",
+    label: "Image",
     type: "text",
     id: "equipment-image",
     placeholder: "Enter an image link",
@@ -144,7 +144,7 @@ const UpdateEquipment = (props) => {
             onChange={(e) => setLinkToImage(e.target.value)}
           />
           <TextFormInput
-            {...textInputValues.image}
+            {...textInputValues.thumbnail}
             value={linkToThumbnail}
             onChange={(e) => setLinkToThumbnail(e.target.value)}
           />

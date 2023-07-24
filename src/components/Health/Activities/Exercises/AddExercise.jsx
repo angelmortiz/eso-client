@@ -79,7 +79,7 @@ const textInputValues = {
   },
   image: {
     name: "linkToImage",
-    label: "Image link",
+    label: "Image",
     type: "text",
     id: "exercise-image",
     placeholder: "Enter an image link",
@@ -95,7 +95,7 @@ const textInputValues = {
   },
   video: {
     name: "linkToVideo",
-    label: "Video link",
+    label: "Video",
     type: "text",
     id: "exercise-video",
     placeholder: "Enter a video link",
@@ -225,6 +225,7 @@ const AddExercise = (props) => {
             requiredField={true}
           />
           <TextFormInput {...textInputValues.image} />
+          <TextFormInput {...textInputValues.thumbnail} />
           <TextFormInput {...textInputValues.video} />
         </div>
       </div>

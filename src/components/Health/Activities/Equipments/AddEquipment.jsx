@@ -30,7 +30,7 @@ const textInputValues = {
   },
   image: {
     name: "linkToImage",
-    label: "Image link",
+    label: "Image",
     type: "text",
     id: "equipment-image",
     placeholder: "Enter an image link",
@@ -91,6 +91,7 @@ const AddEquipment = (props) => {
           <TextFormInput {...textInputValues.alternativeName} />
           <TextAreaFormInput {...textInputValues.description} />
           <TextFormInput {...textInputValues.image} />
+          <TextFormInput {...textInputValues.thumbnail} />
         </div>
       </div>
 

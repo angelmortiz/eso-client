@@ -23,7 +23,7 @@ const textInputValues = {
   },
   image: {
     name: "linkToImage",
-    label: "Image link",
+    label: "Image",
     type: "text",
     id: "muscle-image",
     placeholder: "Enter an image link",
@@ -91,6 +91,7 @@ const AddMuscle = (props) => {
             requiredField={true}
           />
           <TextFormInput {...textInputValues.image} />
+          <TextFormInput {...textInputValues.thumbnail} />
         </div>
       </div>
 

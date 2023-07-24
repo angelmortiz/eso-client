@@ -196,6 +196,7 @@ const AddWorkout = (props) => {
             requiredField={true}
           />
           <TextFormInput {...textInputValues.image} />
+          <TextFormInput {...textInputValues.thumbnail} />
         </div>
       </div>
 

@@ -190,6 +190,7 @@ const AddProgram = (props) => {
           />
           <TextFormInput {...textInputValues.duration} />
           <TextFormInput {...textInputValues.image} />
+          <TextFormInput {...textInputValues.thumbnail} />
           <FormSelectInput
             label="Sequence"
             select={ProgramSequence.select}

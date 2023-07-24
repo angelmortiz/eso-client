@@ -16,7 +16,7 @@ const WorkoutDetails = (props) => {
     if (!id) console.error(`Error: workout id not found in the url.`);
     fetchWorkoutById(id).then((response) => {
       if (!response || !response.isSuccess) return;
-      console.log("response: ", response);
+      // console.log("response: ", response);
       setWorkout(response.body);
     });
   }, [id]);
