@@ -40,6 +40,14 @@ const textInputValues = {
     placeholder: "Enter an image link",
     requiredField: true,
   },
+  thumbnail: {
+    name: "linkToThumbnail",
+    label: "Thumbnail",
+    type: "text",
+    id: "equipment-thumbnail",
+    placeholder: "Enter a thumbnail link",
+    requiredField: true,
+  }
 };
 
 const UpdateEquipment = (props) => {
@@ -52,6 +60,7 @@ const UpdateEquipment = (props) => {
   const [alternativeName, setAlternativeName] = useState("");
   const [description, setDescription] = useState("");
   const [linkToImage, setLinkToImage] = useState("");
+  const [linkToThumbnail, setLinkToThumbnail] = useState("");
   /** */
 
   //Gets the most updated info from current equipment
@@ -70,6 +79,7 @@ const UpdateEquipment = (props) => {
     setAlternativeName(equipment.alternativeName);
     setDescription(equipment.description);
     setLinkToImage(equipment.linkToImage);
+    setLinkToThumbnail(equipment.linkToThumbnail);
   }, [equipment]);
 
   const updateEquipment = (e) => {
@@ -92,6 +102,7 @@ const UpdateEquipment = (props) => {
     values.alternativeName = elements.alternativeName.value;
     values.description = elements.description.value;
     values.linkToImage = elements.linkToImage.value;
+    values.linkToThumbnail = elements.linkToThumbnail.value;
     return values;
   };
 
@@ -131,6 +142,11 @@ const UpdateEquipment = (props) => {
             {...textInputValues.image}
             value={linkToImage}
             onChange={(e) => setLinkToImage(e.target.value)}
+          />
+          <TextFormInput
+            {...textInputValues.image}
+            value={linkToThumbnail}
+            onChange={(e) => setLinkToThumbnail(e.target.value)}
           />
         </div>
       </div>

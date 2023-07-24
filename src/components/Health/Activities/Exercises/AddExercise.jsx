@@ -85,6 +85,14 @@ const textInputValues = {
     placeholder: "Enter an image link",
     requiredField: true,
   },
+  thumbnail: {
+    name: "linkToThumbnail",
+    label: "Thumbnail",
+    type: "text",
+    id: "exercise-thumbnail",
+    placeholder: "Enter a thumbnail link",
+    requiredField: true,
+  },
   video: {
     name: "linkToVideo",
     label: "Video link",
@@ -148,6 +156,7 @@ const AddExercise = (props) => {
     values.difficulty = elements.difficulty.value;
     values.compoundMovement = elements.compoundMovement.value === "yes";
     values.linkToImage = elements.linkToImage.value;
+    values.linkToThumbnail = elements.linkToThumbnail.value;
     values.linkToVideo = elements.linkToVideo.value;
     values.mainMuscle = elements.mainMuscle.value;
 

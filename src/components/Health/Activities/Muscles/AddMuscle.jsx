@@ -28,7 +28,15 @@ const textInputValues = {
     id: "muscle-image",
     placeholder: "Enter an image link",
     requiredField: true,
-  }
+  },
+  thumbnail: {
+    name: "linkToThumbnail",
+    label: "Thumbnail",
+    type: "text",
+    id: "muscle-thumbnail",
+    placeholder: "Enter a thumbnail link",
+    requiredField: true,
+  },
 };
 
 const AddMuscle = (props) => {
@@ -53,6 +61,7 @@ const AddMuscle = (props) => {
     values.alternativeName = elements.alternativeName.value;
     values.type = elements.type.value;
     values.linkToImage = elements.linkToImage.value;
+    values.linkToThumbnail = elements.linkToThumbnail.value;
     return values;
   };
 
@@ -90,7 +99,7 @@ const AddMuscle = (props) => {
         <div className="flex justify-end gap-x-3">
           <button
             type="submit"
-            className="inline-flex justify-center rounded-md bg-cyan-700 py-2 px-5 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700"
+            className="inline-flex justify-center rounded-md bg-cyan-700 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700"
           >
             Save
           </button>

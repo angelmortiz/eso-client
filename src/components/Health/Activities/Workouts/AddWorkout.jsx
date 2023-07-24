@@ -1,4 +1,7 @@
-import { WorkoutTargets, WorkoutTypes } from "../GlobalValues/WorkoutGlobalValues";
+import {
+  WorkoutTargets,
+  WorkoutTypes,
+} from "../GlobalValues/WorkoutGlobalValues";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchAllExerciseNames } from "../../../../util/apis/activities/exercises/exercisesApis";
@@ -39,6 +42,14 @@ const textInputValues = {
     type: "text",
     id: "workout-image",
     placeholder: "Enter an image link",
+    requiredField: true,
+  },
+  thumbnail: {
+    name: "linkToThumbnail",
+    label: "Thumbnail",
+    type: "text",
+    id: "workout-thumbnail",
+    placeholder: "Enter a thumbnail link",
     requiredField: true,
   },
 };
@@ -90,6 +101,7 @@ const AddWorkout = (props) => {
     values.type = elements.type.value;
     values.target = elements.target.value;
     values.linkToImage = elements.linkToImage.value;
+    values.linkToThumbnail = elements.linkToThumbnail.value;
     values.exercises = {};
 
     //extracting exercise plans info
@@ -207,7 +219,7 @@ const AddWorkout = (props) => {
         <div className="flex justify-end gap-x-3">
           <button
             type="submit"
-            className="inline-flex justify-center rounded-md bg-cyan-700 py-2 px-5 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700"
+            className="inline-flex justify-center rounded-md bg-cyan-700 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700"
           >
             Save
           </button>
