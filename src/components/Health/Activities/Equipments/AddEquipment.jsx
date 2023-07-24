@@ -30,10 +30,18 @@ const textInputValues = {
   },
   image: {
     name: "linkToImage",
-    label: "Image link",
+    label: "Image",
     type: "text",
     id: "equipment-image",
     placeholder: "Enter an image link",
+    requiredField: true,
+  },
+  thumbnail: {
+    name: "linkToThumbnail",
+    label: "Thumbnail",
+    type: "text",
+    id: "equipment-thumbnail",
+    placeholder: "Enter a thumbnail link",
     requiredField: true,
   }
 };
@@ -58,6 +66,7 @@ const AddEquipment = (props) => {
     values.alternativeName = elements.alternativeName.value;
     values.description = elements.description.value;
     values.linkToImage = elements.linkToImage.value;
+    values.linkToThumbnail = elements.linkToThumbnail.value;
     return values;
   };
 
@@ -82,6 +91,7 @@ const AddEquipment = (props) => {
           <TextFormInput {...textInputValues.alternativeName} />
           <TextAreaFormInput {...textInputValues.description} />
           <TextFormInput {...textInputValues.image} />
+          <TextFormInput {...textInputValues.thumbnail} />
         </div>
       </div>
 

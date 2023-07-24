@@ -79,15 +79,23 @@ const textInputValues = {
   },
   image: {
     name: "linkToImage",
-    label: "Image link",
+    label: "Image",
     type: "text",
     id: "exercise-image",
     placeholder: "Enter an image link",
     requiredField: true,
   },
+  thumbnail: {
+    name: "linkToThumbnail",
+    label: "Thumbnail",
+    type: "text",
+    id: "exercise-thumbnail",
+    placeholder: "Enter a thumbnail link",
+    requiredField: true,
+  },
   video: {
     name: "linkToVideo",
-    label: "Video link",
+    label: "Video",
     type: "text",
     id: "exercise-video",
     placeholder: "Enter a video link",
@@ -148,6 +156,7 @@ const AddExercise = (props) => {
     values.difficulty = elements.difficulty.value;
     values.compoundMovement = elements.compoundMovement.value === "yes";
     values.linkToImage = elements.linkToImage.value;
+    values.linkToThumbnail = elements.linkToThumbnail.value;
     values.linkToVideo = elements.linkToVideo.value;
     values.mainMuscle = elements.mainMuscle.value;
 
@@ -216,6 +225,7 @@ const AddExercise = (props) => {
             requiredField={true}
           />
           <TextFormInput {...textInputValues.image} />
+          <TextFormInput {...textInputValues.thumbnail} />
           <TextFormInput {...textInputValues.video} />
         </div>
       </div>

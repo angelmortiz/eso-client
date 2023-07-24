@@ -43,6 +43,14 @@ const textInputValues = {
     placeholder: "Enter an image link",
     requiredField: true,
   },
+  thumbnail: {
+    name: "linkToThumbnail",
+    label: "Thumbnail",
+    type: "text",
+    id: "program-thumbnail",
+    placeholder: "Enter a thumbnail link",
+    requiredField: true,
+  },
 };
 
 const workoutsInfo = {
@@ -96,6 +104,7 @@ const AddProgram = (props) => {
     values.duration = elements.duration.value;
     values.sequence = elements.sequence.value;
     values.linkToImage = elements.linkToImage.value;
+    values.linkToThumbnail = elements.linkToThumbnail.value;
     values.workouts = {};
 
     //extracting workout plans info
@@ -181,6 +190,7 @@ const AddProgram = (props) => {
           />
           <TextFormInput {...textInputValues.duration} />
           <TextFormInput {...textInputValues.image} />
+          <TextFormInput {...textInputValues.thumbnail} />
           <FormSelectInput
             label="Sequence"
             select={ProgramSequence.select}

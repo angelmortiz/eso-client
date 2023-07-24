@@ -30,7 +30,7 @@ const ProgramPlanDetails = (props) => {
               <div className="flex flex-col items-center gap-2 md:flex-row md:gap-4">
                 <img
                   className="h-16 w-16 flex-shrink-0 rounded-full border shadow"
-                  src={programPlan.program?.linkToImage}
+                  src={programPlan.program?.linkToThumbnail}
                   alt={programPlan.program?.name}
                 />
                 <div className="text-center md:text-left">

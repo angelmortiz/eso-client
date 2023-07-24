@@ -27,10 +27,18 @@ const textInputValues = {
   },
   image: {
     name: "linkToImage",
-    label: "Image link",
+    label: "Image",
     type: "text",
     id: "muscle-image",
     placeholder: "Enter an image link",
+    requiredField: true,
+  },
+  thumbnail: {
+    name: "linkToThumbnail",
+    label: "Thumbnail",
+    type: "text",
+    id: "muscle-thumbnail",
+    placeholder: "Enter a thumbnail link",
     requiredField: true,
   },
 };
@@ -45,6 +53,7 @@ const UpdateMuscle = (props) => {
   const [alternativeName, setAlternativeName] = useState("");
   const [type, setType] = useState("");
   const [linkToImage, setLinkToImage] = useState("");
+  const [linkToThumbnail, setLinkToThumbnail] = useState("");
   /** */
 
   //Gets the most updated info from current muscle
@@ -63,6 +72,7 @@ const UpdateMuscle = (props) => {
     setAlternativeName(muscle.alternativeName);
     setType(muscle.type);
     setLinkToImage(muscle.linkToImage);
+    setLinkToThumbnail(muscle.linkToThumbnail);
   }, [muscle]);
 
   const updateMuscle = (e) => {
@@ -85,6 +95,7 @@ const UpdateMuscle = (props) => {
     values.alternativeName = elements.alternativeName.value;
     values.type = elements.type.value;
     values.linkToImage = elements.linkToImage.value;
+    values.linkToThumbnail = elements.linkToThumbnail.value;
 
     return values;
   };
@@ -125,6 +136,11 @@ const UpdateMuscle = (props) => {
             {...textInputValues.image}
             value={linkToImage}
             onChange={(e) => setLinkToImage(e.target.value)}
+          />
+          <TextFormInput
+            {...textInputValues.thumbnail}
+            value={linkToThumbnail}
+            onChange={(e) => setLinkToThumbnail(e.target.value)}
           />
         </div>
       </div>
