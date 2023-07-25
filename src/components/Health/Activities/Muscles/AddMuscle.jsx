@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import TextFormInput from "../../../UI/Inputs/TextFormInput";
 import FormSelectInput from "../../../UI/Selects/FormSelectInput";
 import { MuscleTypes } from "../GlobalValues/MuscleGlobalValues";
+import TextAreaFormInput from "../../../UI/Inputs/TextAreaFormInput";
 
 const textInputValues = {
   name: {
@@ -19,6 +20,14 @@ const textInputValues = {
     type: "text",
     id: "muscle-alternativeName",
     placeholder: "Enter an alternative name",
+    requiredField: false,
+  },
+  description: {
+    name: "description",
+    label: "Description",
+    type: "text",
+    id: "muscle-description",
+    placeholder: "Enter description",
     requiredField: false,
   },
   image: {
@@ -59,6 +68,7 @@ const AddMuscle = (props) => {
     const values = {};
     values.name = elements.name.value;
     values.alternativeName = elements.alternativeName.value;
+    values.description = elements.description.value;
     values.type = elements.type.value;
     values.linkToImage = elements.linkToImage.value;
     values.linkToThumbnail = elements.linkToThumbnail.value;
@@ -84,6 +94,7 @@ const AddMuscle = (props) => {
         <div className="space-y-6 sm:space-y-5">
           <TextFormInput {...textInputValues.name} />
           <TextFormInput {...textInputValues.alternativeName} />
+          <TextAreaFormInput {...textInputValues.description} />
           <FormSelectInput
             label="Type"
             select={MuscleTypes.select}

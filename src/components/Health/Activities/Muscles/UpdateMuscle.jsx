@@ -7,6 +7,7 @@ import {
 import TextFormInput from "../../../UI/Inputs/TextFormInput";
 import FormSelectInput from "../../../UI/Selects/FormSelectInput";
 import { MuscleTypes } from "../GlobalValues/MuscleGlobalValues";
+import TextAreaFormInput from "../../../UI/Inputs/TextAreaFormInput";
 
 const textInputValues = {
   name: {
@@ -23,6 +24,14 @@ const textInputValues = {
     type: "text",
     id: "muscle-alternativeName",
     placeholder: "Enter an alternative name",
+    requiredField: false,
+  },
+  description: {
+    name: "description",
+    label: "Description",
+    type: "text",
+    id: "muscle-description",
+    placeholder: "Enter description",
     requiredField: false,
   },
   image: {
@@ -51,6 +60,7 @@ const UpdateMuscle = (props) => {
   /** INPUT VALUES */
   const [name, setName] = useState("");
   const [alternativeName, setAlternativeName] = useState("");
+  const [description, setDescription] = useState("");
   const [type, setType] = useState("");
   const [linkToImage, setLinkToImage] = useState("");
   const [linkToThumbnail, setLinkToThumbnail] = useState("");
@@ -70,6 +80,7 @@ const UpdateMuscle = (props) => {
     if (!muscle) return;
     setName(muscle.name);
     setAlternativeName(muscle.alternativeName);
+    setDescription(muscle.description);
     setType(muscle.type);
     setLinkToImage(muscle.linkToImage);
     setLinkToThumbnail(muscle.linkToThumbnail);
@@ -93,6 +104,7 @@ const UpdateMuscle = (props) => {
     values.id = id;
     values.name = elements.name.value;
     values.alternativeName = elements.alternativeName.value;
+    values.description = elements.description.value;
     values.type = elements.type.value;
     values.linkToImage = elements.linkToImage.value;
     values.linkToThumbnail = elements.linkToThumbnail.value;
@@ -125,6 +137,11 @@ const UpdateMuscle = (props) => {
             {...textInputValues.alternativeName}
             value={alternativeName}
             onChange={(e) => setAlternativeName(e.target.value)}
+          />
+          <TextAreaFormInput
+            {...textInputValues.description}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
           <FormSelectInput
             label="Type"

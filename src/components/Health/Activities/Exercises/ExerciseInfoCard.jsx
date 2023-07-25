@@ -28,7 +28,7 @@ const ExerciseInfoCard = (props) => {
 
           <dl className="mt-1 flex flex-grow flex-col justify-between">
             <dt className="sr-only">Muscle</dt>
-            <dd className="text-sm text-gray-500">For: {info.mainMuscle.name}</dd>
+            <dd className="text-sm text-gray-500">For: {info.mainMuscle?.name}</dd>
             <dt className="sr-only">Equipment</dt>
             <dd className="text-sm text-gray-500">Using: {info.equipments[0]?.name}</dd>
             <dt className="sr-only">Type</dt>
