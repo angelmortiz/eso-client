@@ -107,7 +107,7 @@ const ExerciseDetails = (props) => {
                       {exercise.compoundMovement ? "Yes" : "No"}
                     </li>
                     <li>
-                      <strong>• Main muscle:</strong> {exercise.mainMuscle.name}
+                      <strong>• Main muscle:</strong> {exercise.mainMuscle?.name}
                     </li>
                     <li>
                       <strong>• Secondary muscles:</strong>
