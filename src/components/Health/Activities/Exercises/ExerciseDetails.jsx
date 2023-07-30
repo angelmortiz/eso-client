@@ -4,8 +4,8 @@ import {
   deleteExercise,
   fetchExerciseById,
 } from "../../../../util/apis/activities/exercises/exercisesApis";
-import YouTubeEmbed from "../../../UI/VideosEmbed/YouTubeEmbed";
 import SimpleCancelConfirmationModal from "../../../UI/Modals/TwoButtonModals/SimpleCancelConfirmationModal";
+import VideoPlayer from "../../../UI/EmbeddedVideo/VideoPlayer";
 
 const ExerciseDetails = (props) => {
   const { id } = useParams();
@@ -107,7 +107,8 @@ const ExerciseDetails = (props) => {
                       {exercise.compoundMovement ? "Yes" : "No"}
                     </li>
                     <li>
-                      <strong>• Main muscle:</strong> {exercise.mainMuscle?.name}
+                      <strong>• Main muscle:</strong>{" "}
+                      {exercise.mainMuscle?.name}
                     </li>
                     <li>
                       <strong>• Secondary muscles:</strong>
@@ -129,7 +130,8 @@ const ExerciseDetails = (props) => {
                 </div>
               </div>
             </div>
-            <div className="mt-8 flex flex-col gap-4 md:flex-row md:justify-center md:gap-10 md:border-t md:pt-5">
+            <VideoPlayer url={exercise.linkToVideo} />
+            <div className="mt-8 flex flex-col gap-4 md:flex-row md:justify-center md:gap-10 border-t pt-5">
               <Link
                 to={`/activities/update-exercise/${id}`}
                 className="inline-flex w-full justify-center rounded-md bg-cyan-700 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700 md:w-auto md:px-16"
