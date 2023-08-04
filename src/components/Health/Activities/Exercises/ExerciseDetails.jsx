@@ -4,14 +4,13 @@ import {
   deleteExercise,
   fetchExerciseById,
 } from "../../../../util/apis/activities/exercises/exercisesApis";
-import YouTubeEmbed from "../../../UI/VideosEmbed/YouTubeEmbed";
 import SimpleCancelConfirmationModal from "../../../UI/Modals/TwoButtonModals/SimpleCancelConfirmationModal";
+import VideoPlayer from "../../../UI/EmbeddedVideo/VideoPlayer";
 
 const ExerciseDetails = (props) => {
   const { id } = useParams();
   const navigateTo = useNavigate();
   const [exercise, setExercise] = useState(null);
-  const [videoId, setVideoExercise] = useState(null);
   const [showVideo, setShowVideo] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -19,15 +18,11 @@ const ExerciseDetails = (props) => {
     if (!id) console.error(`Error: exercise id not found in the url.`);
     fetchExerciseById(id).then((response) => {
       if (!response || !response.isSuccess) return;
-
-      const vidId = response.body.linkToVideo?.substr(16); //extracts the video id from YT link
       setExercise(response.body);
-      setVideoExercise(vidId);
     });
   }, [id]);
 
-  const toggleShowVideo = (e) => {
-    e.preventDefault();
+  const toggleShowVideo = () => {
     setShowVideo(!showVideo);
   };
 
@@ -107,7 +102,8 @@ const ExerciseDetails = (props) => {
                       {exercise.compoundMovement ? "Yes" : "No"}
                     </li>
                     <li>
-                      <strong>• Main muscle:</strong> {exercise.mainMuscle?.name}
+                      <strong>• Main muscle:</strong>{" "}
+                      {exercise.mainMuscle?.name}
                     </li>
                     <li>
                       <strong>• Secondary muscles:</strong>
@@ -129,20 +125,37 @@ const ExerciseDetails = (props) => {
                 </div>
               </div>
             </div>
-            <div className="mt-8 flex flex-col gap-4 md:flex-row md:justify-center md:gap-10 md:border-t md:pt-5">
-              <Link
-                to={`/activities/update-exercise/${id}`}
-                className="inline-flex w-full justify-center rounded-md bg-cyan-700 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700 md:w-auto md:px-16"
-              >
-                Update
-              </Link>
+
+            {/* VIDEO PLAYER */}
+            {showVideo && (
+              <div className="mt-5 border-t md:mt-8">
+                <VideoPlayer url={exercise.linkToVideo} />
+              </div>
+            )}
+
+            <div className="mt-5 flex flex-col gap-6 border-t pt-5 md:mt-8 md:flex-row md:justify-between md:gap-10  md:px-2">
               <button
                 type="button"
-                onClick={openSimpleCancelConfirmationModal}
-                className="inline-flex w-full justify-center rounded-md border border-red-700 py-2 text-sm font-semibold text-red-700 hover:border-red-600 hover:text-red-600 md:w-auto md:px-16"
+                onClick={toggleShowVideo}
+                className="inline-flex w-full justify-center rounded-md border border-cyan-700 py-2 text-sm font-semibold text-cyan-700 hover:border-cyan-600 hover:text-cyan-600 md:w-auto md:px-16"
               >
-                Delete
+                {showVideo ? "Hide " : "Show "} Video
               </button>
+              <div className="flex flex-col gap-2 md:flex-row md:justify-between md:gap-10">
+                <Link
+                  to={`/activities/update-exercise/${id}`}
+                  className="inline-flex w-full justify-center rounded-md bg-cyan-700 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700 md:w-auto md:px-16"
+                >
+                  Update
+                </Link>
+                <button
+                  type="button"
+                  onClick={openSimpleCancelConfirmationModal}
+                  className="inline-flex w-full justify-center rounded-md border border-red-700 py-2 text-sm font-semibold text-red-700 hover:border-red-600 hover:text-red-600 md:w-auto md:px-16"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
 
