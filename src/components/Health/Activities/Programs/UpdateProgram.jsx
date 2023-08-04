@@ -49,6 +49,14 @@ const textInputValues = {
     placeholder: "Enter an image link",
     requiredField: true,
   },
+  thumbnail: {
+    name: "linkToThumbnail",
+    label: "Thumbnail",
+    type: "text",
+    id: "program-thumbnail",
+    placeholder: "Enter a thumbnail link",
+    requiredField: true,
+  },
 };
 
 const workoutsInfo = {
@@ -75,6 +83,7 @@ const UpdateProgram = (props) => {
   const [type, setType] = useState("");
   const [duration, setDuration] = useState(0);
   const [linkToImage, setLinkToImage] = useState("");
+  const [linkToThumbnail, setLinkToThumbnail] = useState("");
   const [workoutPlans, setWorkoutPlans] = useState([]);
   /** */
 
@@ -95,6 +104,7 @@ const UpdateProgram = (props) => {
     setType(program.type);
     setDuration(program.duration);
     setLinkToImage(program.linkToImage);
+    setLinkToThumbnail(program.linkToThumbnail);
     setSequence(program.sequence);
     setWorkoutPlans(program.workouts);
   }, [program]);
@@ -131,6 +141,7 @@ const UpdateProgram = (props) => {
     values.duration = elements.duration.value;
     values.sequence = elements.sequence.value;
     values.linkToImage = elements.linkToImage.value;
+    values.linkToThumbnail = elements.linkToThumbnail.value;
     values.workouts = {};
 
     //extracting workout plans info
@@ -231,6 +242,11 @@ const UpdateProgram = (props) => {
             {...textInputValues.image}
             value={linkToImage}
             onChange={(e) => setLinkToImage(e.target.value)}
+          />
+          <TextFormInput
+            {...textInputValues.thumbnail}
+            value={linkToThumbnail}
+            onChange={(e) => setLinkToThumbnail(e.target.value)}
           />
           <FormSelectInput
             label="Sequence"

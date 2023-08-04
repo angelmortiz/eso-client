@@ -20,7 +20,7 @@ const ExerciseInfoCard = (props) => {
       <div className="flex items-center justify-center gap-6 px-6 py-4">
         <img
           className="mx-auto h-24 w-24 flex-shrink-0 rounded-full border shadow"
-          src={info.linkToImage}
+          src={info.linkToThumbnail}
           alt={info.name}
         />
         <div className="flex flex-1 flex-col text-left">
@@ -28,7 +28,7 @@ const ExerciseInfoCard = (props) => {
 
           <dl className="mt-1 flex flex-grow flex-col justify-between">
             <dt className="sr-only">Muscle</dt>
-            <dd className="text-sm text-gray-500">For: {info.mainMuscle.name}</dd>
+            <dd className="text-sm text-gray-500">For: {info.mainMuscle?.name}</dd>
             <dt className="sr-only">Equipment</dt>
             <dd className="text-sm text-gray-500">Using: {info.equipments[0]?.name}</dd>
             <dt className="sr-only">Type</dt>

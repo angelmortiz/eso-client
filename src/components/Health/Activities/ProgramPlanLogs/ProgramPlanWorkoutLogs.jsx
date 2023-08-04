@@ -48,7 +48,7 @@ const ProgramPlanWorkoutLogs = (props) => {
               <div className="flex flex-col items-center gap-2 md:w-2/3 md:flex-row md:gap-4">
                 <img
                   className="h-16 w-16 flex-shrink-0 rounded-full border shadow"
-                  src={workoutLogs.workout.linkToImage}
+                  src={workoutLogs.workout.linkToThumbnail}
                   alt={workoutLogs.workout.name}
                 />
                 <div className="text-center md:text-left">

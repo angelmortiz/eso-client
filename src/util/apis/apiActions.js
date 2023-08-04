@@ -1,5 +1,6 @@
 import store from '../../store/index';
 import { toastNotificationActions } from '../../store/toastNotificationSlice';
+import { logout } from './auth/authApis';
 
 const APP_API = process.env.REACT_APP_API_URL;
 console.log(`API requests sent to address: '${APP_API}'`);
@@ -69,6 +70,10 @@ const fetchAction = async (path, requestOptions, actionName) => {
           message: response.message,
         })
       );
+
+      //TODO: Implement a better strategy to identify when the user has not JWT
+      // if (response && response.message === "No authorization token found."){
+      // }
     }
 
     return response;

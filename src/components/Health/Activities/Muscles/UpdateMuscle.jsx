@@ -7,6 +7,7 @@ import {
 import TextFormInput from "../../../UI/Inputs/TextFormInput";
 import FormSelectInput from "../../../UI/Selects/FormSelectInput";
 import { MuscleTypes } from "../GlobalValues/MuscleGlobalValues";
+import TextAreaFormInput from "../../../UI/Inputs/TextAreaFormInput";
 
 const textInputValues = {
   name: {
@@ -25,12 +26,28 @@ const textInputValues = {
     placeholder: "Enter an alternative name",
     requiredField: false,
   },
+  description: {
+    name: "description",
+    label: "Description",
+    type: "text",
+    id: "muscle-description",
+    placeholder: "Enter description",
+    requiredField: false,
+  },
   image: {
     name: "linkToImage",
-    label: "Image link",
+    label: "Image",
     type: "text",
     id: "muscle-image",
     placeholder: "Enter an image link",
+    requiredField: true,
+  },
+  thumbnail: {
+    name: "linkToThumbnail",
+    label: "Thumbnail",
+    type: "text",
+    id: "muscle-thumbnail",
+    placeholder: "Enter a thumbnail link",
     requiredField: true,
   },
 };
@@ -43,8 +60,10 @@ const UpdateMuscle = (props) => {
   /** INPUT VALUES */
   const [name, setName] = useState("");
   const [alternativeName, setAlternativeName] = useState("");
+  const [description, setDescription] = useState("");
   const [type, setType] = useState("");
   const [linkToImage, setLinkToImage] = useState("");
+  const [linkToThumbnail, setLinkToThumbnail] = useState("");
   /** */
 
   //Gets the most updated info from current muscle
@@ -61,8 +80,10 @@ const UpdateMuscle = (props) => {
     if (!muscle) return;
     setName(muscle.name);
     setAlternativeName(muscle.alternativeName);
+    setDescription(muscle.description);
     setType(muscle.type);
     setLinkToImage(muscle.linkToImage);
+    setLinkToThumbnail(muscle.linkToThumbnail);
   }, [muscle]);
 
   const updateMuscle = (e) => {
@@ -83,8 +104,10 @@ const UpdateMuscle = (props) => {
     values.id = id;
     values.name = elements.name.value;
     values.alternativeName = elements.alternativeName.value;
+    values.description = elements.description.value;
     values.type = elements.type.value;
     values.linkToImage = elements.linkToImage.value;
+    values.linkToThumbnail = elements.linkToThumbnail.value;
 
     return values;
   };
@@ -115,6 +138,11 @@ const UpdateMuscle = (props) => {
             value={alternativeName}
             onChange={(e) => setAlternativeName(e.target.value)}
           />
+          <TextAreaFormInput
+            {...textInputValues.description}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
           <FormSelectInput
             label="Type"
             select={MuscleTypes.select}
@@ -125,6 +153,11 @@ const UpdateMuscle = (props) => {
             {...textInputValues.image}
             value={linkToImage}
             onChange={(e) => setLinkToImage(e.target.value)}
+          />
+          <TextFormInput
+            {...textInputValues.thumbnail}
+            value={linkToThumbnail}
+            onChange={(e) => setLinkToThumbnail(e.target.value)}
           />
         </div>
       </div>

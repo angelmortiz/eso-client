@@ -75,12 +75,7 @@ const MuscleDetails = (props) => {
 
               {/* Muscle details */}
               <div className="mt-4 lg:my-auto lg:ml-5 lg:w-1/2 2xl:w-2/3">
-                {/* //TODO: Add description */}
-                <p className="text-gray-500">
-                  Group of three muscles located at the back of the thigh. The
-                  primary function of the hamstrings is to bend the knee and
-                  extend the hip.{" "}
-                </p>
+                <p className="text-gray-500">{muscle.description}</p>
                 <h3 className="text-md mt-4 font-medium text-gray-900">
                   Muscle properties:
                 </h3>

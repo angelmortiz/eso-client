@@ -16,7 +16,7 @@ const WorkoutDetails = (props) => {
     if (!id) console.error(`Error: workout id not found in the url.`);
     fetchWorkoutById(id).then((response) => {
       if (!response || !response.isSuccess) return;
-      console.log("response: ", response);
+      // console.log("response: ", response);
       setWorkout(response.body);
     });
   }, [id]);
@@ -54,7 +54,7 @@ const WorkoutDetails = (props) => {
               <div className="flex flex-col items-center gap-2 md:w-2/3 md:flex-row md:gap-4">
                 <img
                   className="h-16 w-16 flex-shrink-0 rounded-full border shadow"
-                  src={workout?.linkToImage}
+                  src={workout?.linkToThumbnail}
                   alt={workout?.name}
                 />
                 <div className="text-center md:text-left">
